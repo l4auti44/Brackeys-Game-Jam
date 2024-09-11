@@ -47,6 +47,13 @@ public class AsteroidSpawner : MonoBehaviour
         float randomScale = Random.Range(minSize, maxSize);
         asteroid.transform.localScale = new Vector3(randomScale, randomScale, 1f);
 
+        // Randomize rotation speed
+        AsteroidMovement asteroidRotation = asteroid.GetComponent<AsteroidMovement>();
+        if (asteroidRotation != null)
+        {
+            asteroidRotation.rotationSpeed = Random.Range(minRotationSpeed, maxRotationSpeed);
+        }
+
         // Adjust the collider size to match the new scale
         AdjustColliderSize(asteroid);
 
@@ -63,12 +70,7 @@ public class AsteroidSpawner : MonoBehaviour
             rb.velocity = movementDirection * moveSpeed;
         }
 
-        // Randomize rotation speed
-        AsteroidMovement asteroidRotation = asteroid.GetComponent<AsteroidMovement>();
-        if (asteroidRotation != null)
-        {
-            asteroidRotation.rotationSpeed = Random.Range(minRotationSpeed, maxRotationSpeed);
-        }
+        
     }
 
     // Function to adjust the collider size after scaling the asteroid
