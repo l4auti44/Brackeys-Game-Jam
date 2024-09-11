@@ -4,43 +4,57 @@ using UnityEngine;
 
 public class ShipMovement : MonoBehaviour
 {
-    private Rigidbody2D _rb;
-    [SerializeField] private float speedForce = 100f;
-    [HideInInspector] public int movementControler = 1;
-    // Start is called before the first frame update
-    void Start()
-    {
-        _rb = GetComponent<Rigidbody2D>();
-    }
+    public float speed = 10f; // Speed of the ship
+    public GameObject missilePrefab; // Missile prefab to shoot
+    public Transform missileSpawnPoint; // Spawn point for the missile
+
+    public float minX; // Minimum X boundary
+    public float maxX;  // Maximum X boundary
+
+    public float moveAmount = 5f; // Amount to move the ship vertically
+    public float moveSpeed = 5f; // Speed at which to move the ship
+    private Vector3 targetPosition; // The target position for vertical movement
+    private bool isMoving = false; // Whether the ship is currently moving
 
     // Update is called once per frame
     void Update()
     {
-        //TODO: Add new Input System
-        if (Input.GetKey(KeyCode.A))
+        // Get horizontal input (left/right arrows or A/D keys)
+        float move = Input.GetAxis("Horizontal");
+
+        // Move the ship horizontally
+        transform.Translate(Vector2.right * move * speed * Time.deltaTime);
+
+        // Clamp the ship's X position to stay within the bounds
+        float clampedX = Mathf.Clamp(transform.position.x, minX, maxX);
+        transform.position = new Vector2(clampedX, transform.position.y);
+
+        if (isMoving)
         {
-            _rb.AddForce(Vector2.left * speedForce * Time.deltaTime);
+            // Move the ship towards the target position
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+
+            // Check if the ship has reached the target position
+            if (transform.position == targetPosition)
+            {
+                isMoving = false;
+            }
         }
-        if (Input.GetKey(KeyCode.D))
-        {
-            _rb.AddForce(Vector2.right * speedForce * Time.deltaTime * movementControler);
-        }
+
     }
 
-    public void IncreaseMovement()
+    // Function to shoot a missile
+    public void ShootMissile()
     {
-        if (movementControler < 3)
-        {
-            movementControler++;
-        }
-        
+        Instantiate(missilePrefab, missileSpawnPoint.position, Quaternion.identity);
     }
-    public void DecreaseMovement()
+
+    public void AccelerateShip()
     {
-        if (movementControler > 0)
-        {
-            movementControler--;
-        }
+        // Calculate the new target position
+        targetPosition = transform.position + new Vector3(0, moveAmount, 0);
+        isMoving = true;
     }
+
 
 }
