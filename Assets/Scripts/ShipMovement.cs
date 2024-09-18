@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShipMovement : MonoBehaviour
 {
     public float speed = 10f; // Speed of the ship
     public GameObject missilePrefab; // Missile prefab to shoot
     public Transform missileSpawnPoint; // Spawn point for the missile
+
+    public float energyMissile; //Cost of energy per missile
 
     public float minX; // Minimum X boundary
     public float maxX;  // Maximum X boundary
@@ -16,7 +19,18 @@ public class ShipMovement : MonoBehaviour
     private Vector3 targetPosition; // The target position for vertical movement
     private bool isMoving = false; // Whether the ship is currently moving
 
-    // Update is called once per frame
+    public float energy; // Amount of energy
+    public GameObject energySlider;
+
+
+
+    private void Start()
+    {
+        
+        
+    }
+
+
     void Update()
     {
         // Get horizontal input (left/right arrows or A/D keys)
@@ -41,12 +55,26 @@ public class ShipMovement : MonoBehaviour
             }
         }
 
+        //Update the energy value of the slider
+        energySlider.GetComponent<Slider>().value = energy * 0.01f;
+
     }
 
     // Function to shoot a missile
     public void ShootMissile()
     {
-        Instantiate(missilePrefab, missileSpawnPoint.position, Quaternion.identity);
+        if (energy > 0)
+        {
+            Instantiate(missilePrefab, missileSpawnPoint.position, Quaternion.identity);
+ 
+            DecreaseEnergy (energyMissile);
+        }
+
+        else
+        {
+            //Negative feedback to the player that they are doing something without energy
+        }
+        
     }
 
     public void AccelerateShip()
@@ -55,6 +83,14 @@ public class ShipMovement : MonoBehaviour
         targetPosition = transform.position + new Vector3(0, moveAmount, 0);
         isMoving = true;
     }
+
+
+    public void DecreaseEnergy (float energyToDecrease)
+    {
+            energy -= energyToDecrease;
+    }
+
+
 
 
 }
