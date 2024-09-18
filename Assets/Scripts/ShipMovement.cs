@@ -10,6 +10,11 @@ public class ShipMovement : MonoBehaviour
     public Transform missileSpawnPoint; // Spawn point for the missile
 
     public float energyMissile; //Cost of energy per missile
+    public float energyCollectable; //Energy replenished when collects an energy collectable
+    public float energy; // Amount of total energy at any time
+    public GameObject energySlider;
+
+    public float energyDecreaseEnemyHit; //Amount of energy lost when hitting an enemy
 
     public float minX; // Minimum X boundary
     public float maxX;  // Maximum X boundary
@@ -19,8 +24,7 @@ public class ShipMovement : MonoBehaviour
     private Vector3 targetPosition; // The target position for vertical movement
     private bool isMoving = false; // Whether the ship is currently moving
 
-    public float energy; // Amount of energy
-    public GameObject energySlider;
+
 
 
 
@@ -60,6 +64,27 @@ public class ShipMovement : MonoBehaviour
 
     }
 
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("EnergyCollectable"))
+        {
+            IncreaseEnergy(energyCollectable);
+
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            DecreaseEnergy(energyDecreaseEnemyHit);
+
+            Destroy(collision.gameObject);
+        }
+
+    }
+
+
+
     // Function to shoot a missile
     public void ShootMissile()
     {
@@ -90,7 +115,10 @@ public class ShipMovement : MonoBehaviour
             energy -= energyToDecrease;
     }
 
-
+    public void IncreaseEnergy(float energyToIncrease)
+    {
+        energy += energyToIncrease;
+    }
 
 
 }

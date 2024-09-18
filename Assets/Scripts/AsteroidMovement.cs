@@ -39,12 +39,6 @@ public class AsteroidMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
-        {
-            // Handle player collision (e.g., reduce player health)
-            Destroy(gameObject); // Destroy the asteroid upon collision with the player
-        }
-
         if (collision.CompareTag("Wall"))
         {
             Destroy(gameObject); // Destroy the asteroid upon collision 

@@ -10,11 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 8087137118967947083}
   - component: {fileID: 4798092295429558586}
-  - component: {fileID: 298796677765461067}
   - component: {fileID: 3422233627552412450}
+  - component: {fileID: 6007830761918410752}
+  - component: {fileID: 1623125616346364226}
   m_Layer: 0
   m_Name: energyCollectable
-  m_TagString: Untagged
+  m_TagString: EnergyCollectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -86,24 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &298796677765461067
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6855771246143582453}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79429ea137707944f99ee61f21e4d26f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  energyCollectablePrefab: {fileID: 6855771246143582453}
-  minInterval: 0
-  maxInterval: 2
-  minX: -8
-  maxX: 8
-  spawnY: 5
 --- !u!60 &3422233627552412450
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -153,3 +136,46 @@ PolygonCollider2D:
       - {x: 0, y: -0.25}
       - {x: 0.5, y: 0}
   m_UseDelaunayMesh: 0
+--- !u!50 &6007830761918410752
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6855771246143582453}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &1623125616346364226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6855771246143582453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68783ccea76aa11429c79a1012ea1f1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minSpeed: 2
+  maxSpeed: 5
+  minRotationSpeed: 20
+  maxRotationSpeed: 100
