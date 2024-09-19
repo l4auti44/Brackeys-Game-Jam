@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 public class ShipMovement : MonoBehaviour
 {
-    public float speed = 10f; // Speed of the ship
+    public float speed; // Speed of the ship
     public GameObject missilePrefab; // Missile prefab to shoot
+    public float energyMissile; //Cost of energy per missile
+    public GameObject gameManager; //Game manager reference
     public Transform missileSpawnPoint; // Spawn point for the missile
 
-    public float energyMissile; //Cost of energy per missile
     public float energyCollectable; //Energy replenished when collects an energy collectable
-    public float energy; // Amount of total energy at any time
-    public GameObject energySlider;
+    private float energy;
 
     public float energyDecreaseEnemyHit; //Amount of energy lost when hitting an enemy
 
@@ -26,17 +26,18 @@ public class ShipMovement : MonoBehaviour
 
 
 
-
-
     private void Start()
     {
-        
         
     }
 
 
     void Update()
     {
+        //Get updated speed and energy from game manager
+        speed = gameManager.GetComponent<GameManager>().shipSpeed;
+        energy = gameManager.GetComponent<GameManager>().energy;
+        
         // Get horizontal input (left/right arrows or A/D keys)
         float move = Input.GetAxis("Horizontal");
 
@@ -59,30 +60,25 @@ public class ShipMovement : MonoBehaviour
             }
         }
 
-        //Update the energy value of the slider
-        energySlider.GetComponent<Slider>().value = energy * 0.01f;
-
     }
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("EnergyCollectable"))
         {
-            IncreaseEnergy(energyCollectable);
+            gameManager.GetComponent<GameManager>().IncreaseEnergy(energyCollectable);
 
             Destroy(collision.gameObject);
         }
 
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            DecreaseEnergy(energyDecreaseEnemyHit);
+            gameManager.GetComponent<GameManager>().DecreaseEnergy(energyDecreaseEnemyHit);
 
             Destroy(collision.gameObject);
         }
 
     }
-
 
 
     // Function to shoot a missile
@@ -91,8 +87,6 @@ public class ShipMovement : MonoBehaviour
         if (energy > 0)
         {
             Instantiate(missilePrefab, missileSpawnPoint.position, Quaternion.identity);
- 
-            DecreaseEnergy (energyMissile);
         }
 
         else
@@ -102,23 +96,7 @@ public class ShipMovement : MonoBehaviour
         
     }
 
-    public void AccelerateShip()
-    {
-        // Calculate the new target position
-        targetPosition = transform.position + new Vector3(0, moveAmount, 0);
-        isMoving = true;
-    }
 
-
-    public void DecreaseEnergy (float energyToDecrease)
-    {
-            energy -= energyToDecrease;
-    }
-
-    public void IncreaseEnergy(float energyToIncrease)
-    {
-        energy += energyToIncrease;
-    }
 
 
 }
