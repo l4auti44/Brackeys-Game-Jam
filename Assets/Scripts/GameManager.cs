@@ -9,14 +9,21 @@ public class GameManager : MonoBehaviour
     public float gameProgress, gameProgressSpeed;
     public GameObject gameProgressSlider;
     public GameObject ship;
-    public GameObject engineModule, engineModuleSpriteLV1, engineModuleSpriteLV2, engineModuleSpriteLV3;
-    public float shipSpeed;
+    public GameObject engineModuleSpriteLV1, engineModuleSpriteLV2, engineModuleSpriteLV3;
+    public GameObject lightModuleSpriteLV1, lightModuleSpriteLV2, lightModuleSpriteLV3;
+    public float shipSpeed, radarLV;
     public float speedLV0, speedLV1, speedLV2, speedLV3; //Speed variations for each module level
+    public GameObject lightPlayerLV1, lightPlayerLV2; //Radar light variations for each module level
 
     public float energy = 100f; // Amount of total energy at any time
     public float energyDecreaseSpeed; //Speed at which the energy is depleted
+
     public float engineModEnergyDecreaseLV1, engineModEnergyDecreaseLV2, engineModEnergyDecreaseLV3;
     private float engineModuleEnergyDecreaseLV1_original, engineModuleEnergyDecreaseLV2_original, engineModuleEnergyDecreaseLV3_original;
+
+    public float lightModEnergyDecreaseLV1, lightModEnergyDecreaseLV2, lightModEnergyDecreaseLV3;
+    private float lightModuleEnergyDecreaseLV1_original, lightModuleEnergyDecreaseLV2_original, lightModuleEnergyDecreaseLV3_original;
+
     public GameObject energySlider;
 
 
@@ -30,15 +37,32 @@ public class GameManager : MonoBehaviour
         engineModuleEnergyDecreaseLV2_original = engineModEnergyDecreaseLV2;
         engineModuleEnergyDecreaseLV3_original = engineModEnergyDecreaseLV3;
 
-        //set all energy decrease mods at 0
+        lightModuleEnergyDecreaseLV1_original = lightModEnergyDecreaseLV1;
+        lightModuleEnergyDecreaseLV2_original = lightModEnergyDecreaseLV2;
+        lightModuleEnergyDecreaseLV3_original = lightModEnergyDecreaseLV3;
+
+
+        //set all energy decrease mods at 0 after storing their values
         engineModEnergyDecreaseLV1 = 0;
         engineModEnergyDecreaseLV2 = 0;
         engineModEnergyDecreaseLV3 = 0;
+
+        lightModEnergyDecreaseLV1 = 0;
+        lightModEnergyDecreaseLV2 = 0;
+        lightModEnergyDecreaseLV3 = 0;
+
 
         //start game with engine module speed LV1
         shipSpeed = speedLV1;
         engineModuleSpriteLV1.GetComponent<Image>().color = Color.green;
         engineModEnergyDecreaseLV1 = engineModuleEnergyDecreaseLV1_original;
+
+        //start game with light module LV1
+        radarLV = 1;
+        lightPlayerLV1.SetActive(true);
+        lightPlayerLV2.SetActive(false);
+        lightModEnergyDecreaseLV1 = lightModuleEnergyDecreaseLV1_original;
+        lightModuleSpriteLV1.GetComponent<Image>().color = Color.green;
 
     }
 
@@ -56,7 +80,13 @@ public class GameManager : MonoBehaviour
         energyDecreaseSpeed =
             engineModEnergyDecreaseLV1 +
             engineModEnergyDecreaseLV2 +
-            engineModEnergyDecreaseLV3;
+            engineModEnergyDecreaseLV3 +
+
+            lightModEnergyDecreaseLV1 +
+            lightModEnergyDecreaseLV2 +
+            lightModEnergyDecreaseLV3 
+
+        ;
 
         //Decrease energy over time
         energy -= energyDecreaseSpeed * 0.01f;
@@ -68,6 +98,7 @@ public class GameManager : MonoBehaviour
         if (energy < 0)
         {
             shipSpeed = 0;
+            radarLV = 0;
         }
     }
 
@@ -165,12 +196,77 @@ public class GameManager : MonoBehaviour
 
     public void IncreaseRadar()
     {
+        //Increase radar LV
+        if (radarLV == 2)
+        {
+            //Update the radar LV and sprite
+            radarLV = 3;
+            lightModuleSpriteLV3.GetComponent<Image>().color = Color.green;
 
+            //Action for LV3
+            //
+            lightModEnergyDecreaseLV3 = lightModuleEnergyDecreaseLV3_original;
+            //
+        }
+
+        else if (radarLV == 1)
+        {
+            radarLV = 2;
+            lightModuleSpriteLV2.GetComponent<Image>().color = Color.green;
+
+            lightPlayerLV1.SetActive(true);
+            lightPlayerLV2.SetActive(true);
+
+            lightModEnergyDecreaseLV2 = lightModuleEnergyDecreaseLV2_original;
+        }
+
+        else if (radarLV == 0)
+        {
+            radarLV = 1;
+            lightModuleSpriteLV1.GetComponent<Image>().color = Color.green;
+
+            lightPlayerLV1.SetActive(true);
+            lightPlayerLV2.SetActive(false);
+
+            lightModEnergyDecreaseLV1 = lightModuleEnergyDecreaseLV1_original;
+        }
     }
 
     public void DecreaseRadar()
     {
+        //Decrease radar LV
+        if (radarLV == 1)
+        {
+            radarLV = 0;
+            lightModuleSpriteLV1.GetComponent<Image>().color = Color.white;
 
+            lightPlayerLV1.SetActive(false);
+            lightPlayerLV2.SetActive(false);
+
+            lightModEnergyDecreaseLV1 = 0;
+        }
+
+        else if (radarLV == 2)
+        {
+            radarLV = 1;
+            lightModuleSpriteLV2.GetComponent<Image>().color = Color.white;
+
+            lightPlayerLV1.SetActive(true);
+            lightPlayerLV2.SetActive(false);
+
+            lightModEnergyDecreaseLV1 = lightModuleEnergyDecreaseLV1_original;
+        }
+
+        else if (radarLV == 3)
+        {
+            radarLV = 2;
+            lightModuleSpriteLV3.GetComponent<Image>().color = Color.white;
+
+            lightPlayerLV1.SetActive(true);
+            lightPlayerLV2.SetActive(true);
+
+            lightModEnergyDecreaseLV2 = lightModuleEnergyDecreaseLV2_original;
+        }
     }
 
 

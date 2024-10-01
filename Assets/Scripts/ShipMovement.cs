@@ -10,6 +10,8 @@ public class ShipMovement : MonoBehaviour
     public float energyMissile; //Cost of energy per missile
     public GameObject gameManager; //Game manager reference
     public Transform missileSpawnPoint; // Spawn point for the missile
+    public GameFeelManager gameFeelManager; //reference to the script for game feel elements
+    public float timeStopWhenHitEnemy, shakeAmountWhenHitEnemy, shakeTimeWhenHitEnemy;
 
     public float energyCollectable; //Energy replenished when collects an energy collectable
     private float energy;
@@ -23,6 +25,7 @@ public class ShipMovement : MonoBehaviour
     public float moveSpeed = 5f; // Speed at which to move the ship
     private Vector3 targetPosition; // The target position for vertical movement
     private bool isMoving = false; // Whether the ship is currently moving
+
 
 
 
@@ -76,6 +79,13 @@ public class ShipMovement : MonoBehaviour
             gameManager.GetComponent<GameManager>().DecreaseEnergy(energyDecreaseEnemyHit);
 
             Destroy(collision.gameObject);
+
+            //Trigger screen shake
+            gameFeelManager.StartShake(shakeTimeWhenHitEnemy, shakeAmountWhenHitEnemy);
+
+            //Trigger time stop
+            gameFeelManager.StopFrame(timeStopWhenHitEnemy);
+
         }
 
     }
