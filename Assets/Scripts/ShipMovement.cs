@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class ShipMovement : MonoBehaviour
 {
@@ -21,19 +22,11 @@ public class ShipMovement : MonoBehaviour
     public float minX; // Minimum X boundary
     public float maxX;  // Maximum X boundary
 
-    public float moveAmount = 5f; // Amount to move the ship vertically
-    public float moveSpeed = 5f; // Speed at which to move the ship
+    public float moveSpeed = 5f; // Speed at which to move the ship horizontally
+
+    public bool isMoving = false; // Whether the ship is currently moving
     private Vector3 targetPosition; // The target position for vertical movement
-    private bool isMoving = false; // Whether the ship is currently moving
-
-
-
-
-    private void Start()
-    {
-        
-    }
-
+    public float moveSpeedVertical = 5f; // Speed at which to move the ship vertically
 
     void Update()
     {
@@ -51,15 +44,17 @@ public class ShipMovement : MonoBehaviour
         float clampedX = Mathf.Clamp(transform.position.x, minX, maxX);
         transform.position = new Vector2(clampedX, transform.position.y);
 
+        // Move the ship vertically towards the target position if it is moving
         if (isMoving)
         {
-            // Move the ship towards the target position
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
 
-            // Check if the ship has reached the target position
-            if (transform.position == targetPosition)
+            // Check if the ship has reached the target position within a small threshold
+            if (Mathf.Abs(transform.position.y - targetPosition.y) < 0.01f)
             {
-                isMoving = false;
+                // Snap to the target position to avoid precision issues
+                transform.position = new Vector3(transform.position.x, targetPosition.y, transform.position.z);
+                isMoving = false; // Stop moving when reached
             }
         }
 
@@ -85,9 +80,7 @@ public class ShipMovement : MonoBehaviour
 
             //Trigger time stop
             gameFeelManager.StopFrame(timeStopWhenHitEnemy);
-
         }
-
     }
 
 
@@ -103,10 +96,17 @@ public class ShipMovement : MonoBehaviour
         {
             //Negative feedback to the player that they are doing something without energy
         }
-        
     }
 
 
+
+    // Method to move the player to the specified Y position based on level
+    public void MoveToLevel(Transform targetPositionObject)
+    {
+        float targetY = targetPositionObject.position.y;
+        targetPosition = new Vector3(transform.position.x, targetY, transform.position.z);
+        isMoving = true; // Set the flag to start moving
+    }
 
 
 }

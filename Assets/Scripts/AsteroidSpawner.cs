@@ -4,91 +4,109 @@ using UnityEngine;
 
 public class AsteroidSpawner : MonoBehaviour
 {
-    public GameObject asteroidPrefab; // The asteroid prefab
-    public Sprite[] asteroidSprites; // Array of asteroid sprites
-    public float spawnRate = 1f; // Time between spawns
-    public float minX, maxX; // Horizontal range for spawning asteroids
-    public float spawnY = 6f; // Y position where asteroids spawn
-    public float minSize = 0.5f; // Minimum asteroid scale
-    public float maxSize = 1.5f; // Maximum asteroid scale
+    public Transform pos1;
+    public Transform pos2;
+    public GameObject[] asteroidPrefabs;
+    public GameObject arrow1Prefab;
+    public GameObject arrow2Prefab;
+    public GameObject arrow3Prefab;
+    public bool spawnArrow = true;
+    public float moveSpeed = 2f;
+    public float minSpawnInterval = 1f;  // Minimum spawn interval
+    public float maxSpawnInterval = 5f;  // Maximum spawn interval
+    public float minAsteroidSpeed = 0.1f;
+    public float maxAsteroidSpeed = 5f;
+    public float minRotationSpeed = 10f;
+    public float maxRotationSpeed = 100f;
+    public float arrowYOffset = 1f;
 
-    public float minSpeed = 2f; // Minimum speed for asteroid movement
-    public float maxSpeed = 5f; // Maximum speed for asteroid movement
-    public float minRotationSpeed = 20f; // Minimum rotation speed
-    public float maxRotationSpeed = 100f; // Maximum rotation speed
-    public float minDirectionAngle = 20f; // Minimum direction angle
-    public float maxDirectionAngle = 100f; // Maximum direction angle
+    private Vector3 pos1Value;
+    private Vector3 pos2Value;
+    private Vector3 targetPos;
+    private float spawnTimer;
 
-    // Start is called before the first frame update
     void Start()
     {
-        // Start spawning asteroids repeatedly
-        InvokeRepeating("SpawnAsteroid", 0f, spawnRate);
+        pos1Value = pos1.position;
+        pos2Value = pos2.position;
+        targetPos = pos2Value;
+
+        // Randomize the initial spawn timer
+        spawnTimer = Random.Range(minSpawnInterval, maxSpawnInterval);
     }
 
-    // Function to spawn an asteroid
+    void Update()
+    {
+        MoveBetweenPositions();
+        HandleAsteroidSpawning();
+    }
+
+    void MoveBetweenPositions()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+
+        if (Vector3.Distance(transform.position, targetPos) < 0.1f)
+        {
+            targetPos = targetPos == pos1Value ? pos2Value : pos1Value;
+        }
+    }
+
+    void HandleAsteroidSpawning()
+    {
+        spawnTimer -= Time.deltaTime;
+
+        if (spawnTimer <= 0f)
+        {
+            SpawnAsteroid();
+            spawnTimer = Random.Range(minSpawnInterval, maxSpawnInterval); // Randomize the next spawn timer
+        }
+    }
+
     void SpawnAsteroid()
     {
-        // Randomize the spawn position within horizontal limits
-        float spawnX = Random.Range(minX, maxX);
-        Vector2 spawnPosition = new Vector2(spawnX, spawnY);
+        GameObject randomAsteroid = asteroidPrefabs[Random.Range(0, asteroidPrefabs.Length)];
+        GameObject asteroid = Instantiate(randomAsteroid, transform.position, Quaternion.identity);
 
-        // Instantiate the asteroid
-        GameObject asteroid = Instantiate(asteroidPrefab, spawnPosition, Quaternion.identity);
-
-        // Randomly assign a sprite to the asteroid
-        SpriteRenderer spriteRenderer = asteroid.GetComponent<SpriteRenderer>();
-        if (spriteRenderer != null)
-        {
-            spriteRenderer.sprite = asteroidSprites[Random.Range(0, asteroidSprites.Length)];
-        }
-
-        // Randomize asteroid size (scale)
-        float randomScale = Random.Range(minSize, maxSize);
-        asteroid.transform.localScale = new Vector3(randomScale, randomScale, 1f);
-
-        // Randomize rotation speed
-        AsteroidMovement asteroidRotation = asteroid.GetComponent<AsteroidMovement>();
-        if (asteroidRotation != null)
-        {
-            asteroidRotation.rotationSpeed = Random.Range(minRotationSpeed, maxRotationSpeed);
-        }
-
-        // Adjust the collider size to match the new scale
-        AdjustColliderSize(asteroid);
-
-        // Apply random movement direction and speed
+        float randomSpeed = Random.Range(minAsteroidSpeed, maxAsteroidSpeed);
         Rigidbody2D rb = asteroid.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
-            // Randomize direction (e.g., between -45 and +45 degrees from downwards)
-            float randomAngle = Random.Range(minDirectionAngle, maxDirectionAngle);
-            Vector2 movementDirection = Quaternion.Euler(0, 0, randomAngle) * Vector2.down;
-
-            // Randomize speed between minSpeed and maxSpeed
-            float moveSpeed = Random.Range(minSpeed, maxSpeed);
-            rb.velocity = movementDirection * moveSpeed;
+            rb.velocity = Vector2.down * randomSpeed;
         }
 
-        
-    }
+        float randomRotationSpeed = Random.Range(minRotationSpeed, maxRotationSpeed);
+        rb.angularVelocity = randomRotationSpeed;
 
-    // Function to adjust the collider size after scaling the asteroid
-    void AdjustColliderSize(GameObject asteroid)
-    {
-        BoxCollider2D boxCollider = asteroid.GetComponent<BoxCollider2D>();
-        CircleCollider2D circleCollider = asteroid.GetComponent<CircleCollider2D>();
+        if (spawnArrow)
+        {
+            float speedRange = maxAsteroidSpeed - minAsteroidSpeed;
+            GameObject selectedArrowPrefab;
 
-        if (boxCollider != null)
-        {
-            // Adjust BoxCollider2D size based on the asteroid's scale and sprite size
-            boxCollider.size = asteroid.GetComponent<SpriteRenderer>().bounds.size;
-        }
-        else if (circleCollider != null)
-        {
-            // Adjust CircleCollider2D radius based on the asteroid's scale
-            float maxSize = Mathf.Max(asteroid.GetComponent<SpriteRenderer>().bounds.extents.x, asteroid.GetComponent<SpriteRenderer>().bounds.extents.y);
-            circleCollider.radius = maxSize;
+            if (randomSpeed > minAsteroidSpeed + (2f / 3f) * speedRange)
+            {
+                selectedArrowPrefab = arrow3Prefab;
+            }
+            else if (randomSpeed > minAsteroidSpeed + (1f / 3f) * speedRange)
+            {
+                selectedArrowPrefab = arrow2Prefab;
+            }
+            else
+            {
+                selectedArrowPrefab = arrow1Prefab;
+            }
+
+            Vector3 arrowPosition = asteroid.transform.position + new Vector3(0, arrowYOffset, 0);
+            GameObject arrow = Instantiate(selectedArrowPrefab, arrowPosition, Quaternion.identity);
+
+            float distance = Mathf.Abs(arrowYOffset);
+            float lifetime = distance / randomSpeed;
+            lifetime = Mathf.Clamp(lifetime, 0.5f, 10f);
+
+            ArrowController arrowController = arrow.GetComponent<ArrowController>();
+            if (arrowController != null)
+            {
+                arrowController.SetLifetime(lifetime);
+            }
         }
     }
 }

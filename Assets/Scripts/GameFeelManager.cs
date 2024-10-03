@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class GameFeelManager : MonoBehaviour
 {
+    [HideInInspector]
     public Transform cameraTransform; // The camera that will shake
     public float shakeDuration = 0.5f; // How long the camera shakes
     public float shakeMagnitude = 0.2f; // How intense the shake is
+    public List<Transform> unaffectedObjects; // List of objects that should not shake
 
     private Vector3 originalPosition; // Store the camera's original position
+    private Dictionary<Transform, Vector3> originalObjectPositions; // Store the unaffected objects' original positions
 
     void Start()
     {
@@ -17,6 +20,18 @@ public class GameFeelManager : MonoBehaviour
             cameraTransform = Camera.main.transform; // Default to the main camera if not set
         }
         originalPosition = cameraTransform.localPosition; // Save the camera's initial position
+
+        // Initialize the dictionary for original positions
+        originalObjectPositions = new Dictionary<Transform, Vector3>();
+
+        // Store the original positions for unaffected objects
+        foreach (var obj in unaffectedObjects)
+        {
+            if (obj != null)
+            {
+                originalObjectPositions[obj] = obj.position; // Save each object's initial position
+            }
+        }
     }
 
     // Call this function to start the screen shake
@@ -37,7 +52,19 @@ public class GameFeelManager : MonoBehaviour
             float offsetX = Random.Range(-1f, 1f) * shakeMagnitude;
             float offsetY = Random.Range(-1f, 1f) * shakeMagnitude;
 
-            cameraTransform.localPosition = originalPosition + new Vector3(offsetX, offsetY, 0);
+            Vector3 shakeOffset = new Vector3(offsetX, offsetY, 0);
+
+            // Apply shake to the camera
+            cameraTransform.localPosition = originalPosition + shakeOffset;
+
+            // Counteract shake for unaffected objects
+            foreach (var obj in unaffectedObjects)
+            {
+                if (obj != null)
+                {
+                    obj.position = originalObjectPositions[obj] - shakeOffset; // Use the stored original position
+                }
+            }
 
             // Increase the elapsed time
             elapsed += Time.deltaTime;
@@ -46,11 +73,28 @@ public class GameFeelManager : MonoBehaviour
             yield return null;
         }
 
-        // Reset the camera to its original position after shaking
+        // Reset the camera to its original position
         cameraTransform.localPosition = originalPosition;
+
+        // Reset unaffected objects to their original positions
+        foreach (var obj in unaffectedObjects)
+        {
+            if (obj != null)
+            {
+                obj.position = originalObjectPositions[obj]; // Use the stored original position
+            }
+        }
     }
 
-
+    // Method to add an object to the unaffected list
+    public void AddUnaffectedObject(Transform obj)
+    {
+        if (!unaffectedObjects.Contains(obj))
+        {
+            unaffectedObjects.Add(obj);
+            originalObjectPositions[obj] = obj.position; // Save the original position
+        }
+    }
 
     public void StopFrame(float duration)
     {

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6855771246143582453
+--- !u!1 &5586743574098997687
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8087137118967947083}
-  - component: {fileID: 4798092295429558586}
-  - component: {fileID: 3422233627552412450}
-  - component: {fileID: 6007830761918410752}
+  - component: {fileID: 1571173819948164574}
+  - component: {fileID: 5129406828234002766}
+  - component: {fileID: 1989628760393272296}
+  - component: {fileID: -6841359119581135835}
   m_Layer: 0
-  m_Name: energyCollectable
-  m_TagString: EnergyCollectable
+  m_Name: AsteroidV04
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8087137118967947083
+--- !u!4 &1571173819948164574
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6855771246143582453}
+  m_GameObject: {fileID: 5586743574098997687}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.91, y: 1.92, z: 0}
-  m_LocalScale: {x: 0.52867776, y: 1.3016, z: 1}
+  m_LocalPosition: {x: -3.5305977, y: 1.5203867, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &4798092295429558586
+--- !u!212 &5129406828234002766
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6855771246143582453}
+  m_GameObject: {fileID: 5586743574098997687}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -75,24 +75,24 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3625043607559282579, guid: 19fb86013d8c24d6cb8410c0aadf30fa, type: 3}
-  m_Color: {r: 0.29196337, g: 0.764151, b: 0.38931185, a: 1}
+  m_Sprite: {fileID: 99743693, guid: ce98792ab34b7854ab6031d4372a608b, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 0.5}
+  m_Size: {x: 0.36, y: 0.42}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &3422233627552412450
+--- !u!60 &1989628760393272296
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6855771246143582453}
+  m_GameObject: {fileID: 5586743574098997687}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -122,27 +122,32 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 0.5}
-    newSize: {x: 1, y: 0.5}
+    oldSize: {x: 0.36, y: 0.42}
+    newSize: {x: 0.36, y: 0.42}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.25}
-      - {x: -0.5, y: 0}
-      - {x: 0, y: -0.25}
-      - {x: 0.5, y: 0}
+    - - {x: -0.03241627, y: 0.17514558}
+      - {x: -0.14514534, y: 0.04407209}
+      - {x: -0.11395995, y: -0.015615433}
+      - {x: -0.07798657, y: -0.07241638}
+      - {x: -0.024093509, y: -0.11460872}
+      - {x: 0.089284346, y: -0.16917208}
+      - {x: 0.08644335, y: -0.08449658}
+      - {x: 0.091946766, y: -0.014451459}
+      - {x: 0.13586125, y: 0.11460872}
   m_UseDelaunayMesh: 0
---- !u!50 &6007830761918410752
+--- !u!50 &-6841359119581135835
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6855771246143582453}
+  m_GameObject: {fileID: 5586743574098997687}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0

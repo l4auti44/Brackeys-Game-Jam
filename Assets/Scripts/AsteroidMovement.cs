@@ -27,9 +27,6 @@ public class AsteroidMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Rotate the asteroid at the specified speed
-        transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
-
         // Destroy the asteroid if it goes off the screen
         if (transform.position.y < screenBottomY - 1f) // Adding some margin
         {
