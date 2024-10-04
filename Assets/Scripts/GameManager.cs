@@ -17,8 +17,9 @@ public class GameManager : MonoBehaviour
     public Transform positionLV1, positionLV2, positionLV3; //Position variations for each module level
     public GameObject lightPlayerLV1, lightPlayerLV2; //Radar light variations for each module level
 
-    public float energy = 100f; // Amount of total energy at any time
+    public float energy = 100f; // Amount of energy at any time
     public float energyDecreaseSpeed; //Speed at which the energy is depleted
+    public float totalEnergy = 100f; // Amount of total energy
 
     public float engineModEnergyDecreaseLV1, engineModEnergyDecreaseLV2, engineModEnergyDecreaseLV3;
     private float engineModEnergyDecreaseLV1_original, engineMoEnergyDecreaseLV2_original, engineModEnergyDecreaseLV3_original;
@@ -34,6 +35,10 @@ public class GameManager : MonoBehaviour
     private float positionModEnergyDecreaseLV1_original, positionModEnergyDecreaseLV2_original, positionModEnergyDecreaseLV3_original;
 
     public GameObject energySlider;
+
+    public bool isOverload = false;  // Tracks overload state
+    public float overloadDuration = 5f;  // Duration of the overload state
+    private float numberOfKeyOverloadPressed = 0;
 
 
     // Start is called before the first frame update
@@ -378,13 +383,37 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void RadarTrigger()
+
+    public void TriggerOverload()
     {
+        numberOfKeyShieldPressed += 1;
 
+        if (numberOfKeyShieldPressed % 2f != 0)
+        {
+            isOverload = true; // Set the overload state to true
+            StartCoroutine(OverloadCountdown()); // Start the countdown
+        }
 
+        else
+        {
+            isOverload = false; // Set the overload state to false
+        }
+    }
 
+    // Coroutine to handle the overload countdown
+    private IEnumerator OverloadCountdown()
+    {
+        // Optional: Add any visual or gameplay effect for overload state
+        Debug.Log("Overload started!");
 
+        // Wait for the overload duration
+        yield return new WaitForSeconds(overloadDuration);
 
+        // Reset overload state to false after the countdown
+        isOverload = false;
+
+        // Optional: Add any effect when overload ends
+        Debug.Log("Overload ended.");
     }
 
 }
