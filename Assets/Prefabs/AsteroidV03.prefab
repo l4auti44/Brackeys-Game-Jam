@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4646163036078533296}
   - component: {fileID: 8982675196482966693}
   - component: {fileID: 2022193873954819001}
+  - component: {fileID: 4004920804292268940}
   m_Layer: 0
   m_Name: AsteroidV03
   m_TagString: Enemy
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 444091473
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: -267263456, guid: ce98792ab34b7854ab6031d4372a608b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -180,6 +181,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLightIntensity: 1
+--- !u!114 &4004920804292268940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 544173343427672791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6b67294b57f987479f4b1402674c3d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  asteroid2Prefab: {fileID: 3800204725182184565, guid: 0732211df1a52b3418d0dc5902e1ce13, type: 3}
+  asteroid3Prefab: {fileID: 544173343427672791}
+  asteroid4Prefab: {fileID: 5586743574098997687, guid: 711ebed223c5f194e9b0bc44a5fcea00, type: 3}
+  energyDropPrefab: {fileID: 6855771246143582453, guid: a0ebb70010c8dd8429d9071d604f2bc0, type: 3}
+  asteroidType: 3
+  spawnForce: 5
+  energyDropForce: 2
 --- !u!1 &6071923066662556812
 GameObject:
   m_ObjectHideFlags: 0

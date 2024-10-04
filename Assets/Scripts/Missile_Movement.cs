@@ -27,7 +27,9 @@ public class Missile_Movement : MonoBehaviour
         // If the missile hits an enemy (tagged as "Enemy"), destroy both the missile and the enemy
         if (collision.CompareTag("Enemy"))
         {
-            Destroy(collision.gameObject); // Destroy the enemy
+            //Trigger the destruction of asteroid
+            collision.gameObject.GetComponent<AsteroidMovement>().BreakAsteroid(collision.gameObject.GetComponent<AsteroidMovement>().asteroidType);
+
             Destroy(gameObject); // Destroy the missile
         }
     }

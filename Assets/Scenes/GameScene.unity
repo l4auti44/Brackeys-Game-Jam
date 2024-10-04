@@ -338,14 +338,14 @@ Transform:
   m_GameObject: {fileID: 87005117}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -754.6124, y: -688.631, z: 1.7703894}
+  m_LocalPosition: {x: 1.647583, y: -2.1809692, z: -0.112657785}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2125261609}
   - {fileID: 300244156}
   - {fileID: 200715443}
-  m_Father: {fileID: 987228016}
+  m_Father: {fileID: 1232595330}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &97317729
 GameObject:
@@ -2295,7 +2295,6 @@ Transform:
   - {fileID: 1970598915}
   - {fileID: 1232595330}
   - {fileID: 1749899203}
-  - {fileID: 87005118}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1004026300
@@ -2475,7 +2474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameProgress: 0
-  gameProgressSpeed: 2
+  gameProgressSpeed: 1
   gameProgressSlider: {fileID: 1988926708}
   ship: {fileID: 1257503198}
   asteroidSpawner: {fileID: 1970598913}
@@ -2883,7 +2882,8 @@ Transform:
   m_LocalPosition: {x: -756.26, y: -686.45, z: 1.8830472}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 87005118}
   m_Father: {fileID: 987228016}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1232595331
@@ -2912,9 +2912,9 @@ MonoBehaviour:
   minEnergySpeed: 1
   maxEnergySpeed: 3
   arrowXOffset: 5
-  pos1Probability: 0.33
-  pos2Probability: 0.33
-  pos3Probability: 0.34
+  pos1Probability: 20
+  pos2Probability: 40
+  pos3Probability: 40
 --- !u!212 &1232595332
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3204,7 +3204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wavePrefab: {fileID: 7727764252220735630, guid: efbf8b276aa11544f8085e5dc38856f4, type: 3}
   maxSize: 5
-  waveInterval: 3
+  waveInterval: 1
   scaleSpeed: 5
 --- !u!1 &1270160455
 GameObject:
@@ -4850,7 +4850,7 @@ MonoBehaviour:
   canvas: {fileID: 1555946524}
   wavePrefab: {fileID: 9178481822147046770, guid: bced0b2ff6742854e870cec690f2b95e, type: 3}
   maxSize: 80
-  waveInterval: 3
+  waveInterval: 1
   scaleSpeed: 100
 --- !u!114 &1699942374
 MonoBehaviour:
@@ -5987,7 +5987,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1966944727
 Transform:
   m_ObjectHideFlags: 0
@@ -6232,7 +6232,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2005871904
 Transform:
   m_ObjectHideFlags: 0
