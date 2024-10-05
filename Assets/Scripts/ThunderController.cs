@@ -10,7 +10,7 @@ public class ThunderController : MonoBehaviour
     public float timeToYellow = 5f;  // Time to switch to ThunderYellow
     public float timeToRed = 3f;     // Time to switch to ThunderRed after ThunderYellow
     public float timeToIdle = 4f;    // Time to switch back to Idle from ThunderRed
-    public float energyToIncrease;
+    public float energyToDecrease = 10f;
 
     public Sprite idleSprite;        // Sprite for the idle state
     public Sprite yellowSprite;      // Sprite for the ThunderYellow state
@@ -68,10 +68,21 @@ public class ThunderController : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         // Check if the player collided with the thunder
-        if (collision.CompareTag("Player") && currentState == ThunderState.ThunderRed && gameManager.isOverload)
+        if (collision.CompareTag("Player") && currentState == ThunderState.ThunderRed && gameManager.isShieldActive)
         {
             // Increase the energy of the game manager
-            gameManager.IncreaseEnergy(energyToIncrease); // Adjust the value as needed
+            gameManager.energy = gameManager.maxEnergy;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        // Check if the player collided with the thunder
+        if (collision.CompareTag("Player") && !gameManager.isShieldActive)
+        {
+            Debug.Log("Decrease enegy");
+            // Increase the energy of the game manager
+            gameManager.energy -= energyToDecrease;
         }
     }
 }

@@ -109,10 +109,4 @@ public class AsteroidSpawner : MonoBehaviour
             }
         }
     }
-
-    public void ToggleSpawnArrows()
-    {
-        spawnArrow = !spawnArrow;
-    }
-
 }

@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     //public GameObject engineModuleSpriteLV1, engineModuleSpriteLV2, engineModuleSpriteLV3;
     public GameObject radarModuleSpriteLV1, radarModuleSpriteLV2, radarModuleSpriteLV3;
     public GameObject positionModuleSpriteLV1, positionModuleSpriteLV2, positionModuleSpriteLV3, positionModuleSpriteLV4, positionModuleSpriteLV5;
+    public GameObject arrowUI, shieldUI;
     public float shipSpeed, radarLV, positionLV;
     public float speedLV0, speedLV1, speedLV2, speedLV3, speedLV4, speedLV5; //Speed variations for each module level
     public float minAsteroidSpeedLV1, minAsteroidSpeedLV2, minAsteroidSpeedLV3, minAsteroidSpeedLV4, minAsteroidSpeedLV5; //Speed variations for each module level
@@ -20,11 +21,11 @@ public class GameManager : MonoBehaviour
     public float maxRotationSpeedLV1, maxRotationSpeedLV2, maxRotationSpeedLV3, maxRotationSpeedLV4, maxRotationSpeedLV5; //Speed variations for each module level
     public float radarWaveIntervalLV3, radarWaveIntervalLV2, radarWaveIntervalLV1, radarWaveIntervalLV0;
     public Transform positionLV1, positionLV2, positionLV3, positionLV4, positionLV5; //Position variations for each module level
-    public GameObject lightPlayerLV1, lightPlayerLV2; //Radar light variations for each module level
+    //public GameObject lightPlayerLV1, lightPlayerLV2; //Radar light variations for each module level
 
     public float energy = 100f; // Amount of energy at any time
     public float energyDecreaseSpeed; //Speed at which the energy is depleted
-    public float totalEnergy = 100f; // Amount of total energy
+    public float maxEnergy = 100f; // Amount of total energy
 
     //public float engineModEnergyDecreaseLV1, engineModEnergyDecreaseLV2, engineModEnergyDecreaseLV3;
     //private float engineModEnergyDecreaseLV1_original, engineMoEnergyDecreaseLV2_original, engineModEnergyDecreaseLV3_original;
@@ -34,16 +35,25 @@ public class GameManager : MonoBehaviour
 
     public float shieldModEnergyDecrease;
     private float shieldModEnergyDecrease_original;
-    private float numberOfKeyShieldPressed = 0;
 
     public float positionModEnergyDecreaseLV1, positionModEnergyDecreaseLV2, positionModEnergyDecreaseLV3, positionModEnergyDecreaseLV4, positionModEnergyDecreaseLV5;
     private float positionModEnergyDecreaseLV1_original, positionModEnergyDecreaseLV2_original, positionModEnergyDecreaseLV3_original, positionModEnergyDecreaseLV4_original, positionModEnergyDecreaseLV5_original;
+
+    public float arrowModEnergyDecrease;
+    private float arrowModEnergyDecrease_original;
 
     public GameObject energySlider;
 
     public bool isOverload = false;  // Tracks overload state
     public float overloadDuration = 5f;  // Duration of the overload state
-    private float numberOfKeyOverloadPressed = 0;
+
+    public GameObject shieldObject;      // The shield GameObject
+    public float shieldDuration = 5f;    // How long the shield stays active
+    public float shieldCooldown = 10f;   // Cooldown before shield can be reactivated
+    public bool isShieldActive = false;
+    public bool isShieldCooldown = false;
+
+
 
 
     // Start is called before the first frame update
@@ -53,10 +63,6 @@ public class GameManager : MonoBehaviour
         ship.GetComponent<ShipMovement>().speed = shipSpeed;
 
         //store values for all energy decrease mods
-        //engineModEnergyDecreaseLV1_original = engineModEnergyDecreaseLV1;
-        //engineMoEnergyDecreaseLV2_original = engineModEnergyDecreaseLV2;
-        //engineModEnergyDecreaseLV3_original = engineModEnergyDecreaseLV3;
-
         radarModEnergyDecreaseLV1_original = radarModEnergyDecreaseLV1;
         radarModEnergyDecreaseLV2_original = radarModEnergyDecreaseLV2;
         radarModEnergyDecreaseLV3_original = radarModEnergyDecreaseLV3;
@@ -69,12 +75,10 @@ public class GameManager : MonoBehaviour
         positionModEnergyDecreaseLV4_original = positionModEnergyDecreaseLV4;
         positionModEnergyDecreaseLV5_original = positionModEnergyDecreaseLV5;
 
+        arrowModEnergyDecrease_original = arrowModEnergyDecrease;
+
 
         //set all energy decrease mods at 0 after storing their values
-        //engineModEnergyDecreaseLV1 = 0;
-        //engineModEnergyDecreaseLV2 = 0;
-        //engineModEnergyDecreaseLV3 = 0;
-
         radarModEnergyDecreaseLV1 = 0;
         radarModEnergyDecreaseLV2 = 0;
         radarModEnergyDecreaseLV3 = 0;
@@ -87,17 +91,14 @@ public class GameManager : MonoBehaviour
         positionModEnergyDecreaseLV4 = 0;
         positionModEnergyDecreaseLV5 = 0;
 
+        arrowModEnergyDecrease = 0;
+
 
         //Start game with energy equals to total
-        energy = totalEnergy;
+        energy = maxEnergy;
         
         //start game with engine module speed LV1
         shipSpeed = speedLV1;
-        //engineModuleSpriteLV1.GetComponent<Image>().color = Color.green;
-        //engineModEnergyDecreaseLV1 = engineModEnergyDecreaseLV1_original;
-
-        //start game with light module LV1
-        
 
         //start game with position LV1
         positionLV = 1;
@@ -107,6 +108,7 @@ public class GameManager : MonoBehaviour
         //Start level with radar LV1
         radarLV = 1;
         ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV1;
+        radarUI.GetComponent<RadarControllerUI>().waveInterval = radarWaveIntervalLV1;
         radarModEnergyDecreaseLV1 = radarModEnergyDecreaseLV1_original;
         radarModuleSpriteLV1.GetComponent<Image>().color = Color.green;
 
@@ -124,21 +126,20 @@ public class GameManager : MonoBehaviour
         
         //Determination of energy decrease speed
         energyDecreaseSpeed =
-            //engineModEnergyDecreaseLV1 +
-            //engineModEnergyDecreaseLV2 +
-            //engineModEnergyDecreaseLV3 +
 
-            radarModEnergyDecreaseLV1 +
-            radarModEnergyDecreaseLV2 +
-            radarModEnergyDecreaseLV3 +
+        radarModEnergyDecreaseLV1 +
+        radarModEnergyDecreaseLV2 +
+        radarModEnergyDecreaseLV3 +
 
-            shieldModEnergyDecrease +
+        shieldModEnergyDecrease +
 
-            positionModEnergyDecreaseLV1 +
-            positionModEnergyDecreaseLV2 +
-            positionModEnergyDecreaseLV3 +
-            positionModEnergyDecreaseLV4 +
-            positionModEnergyDecreaseLV5
+        positionModEnergyDecreaseLV1 +
+        positionModEnergyDecreaseLV2 +
+        positionModEnergyDecreaseLV3 +
+        positionModEnergyDecreaseLV4 +
+        positionModEnergyDecreaseLV5 +
+
+        arrowModEnergyDecrease_original
 
         ;
 
@@ -154,6 +155,10 @@ public class GameManager : MonoBehaviour
             shipSpeed = 0;
             radarLV = 0;
         }
+
+        //Clamp energy
+        energy = Mathf.Max(maxEnergy, 0);
+
     }
 
 
@@ -296,6 +301,7 @@ public class GameManager : MonoBehaviour
 
             //Activate radar LV3
             ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV3;
+            radarUI.GetComponent<RadarControllerUI>().waveInterval = radarWaveIntervalLV3;
 
             //Decrease energy
             radarModEnergyDecreaseLV3 = radarModEnergyDecreaseLV3_original;
@@ -310,6 +316,7 @@ public class GameManager : MonoBehaviour
 
             //Activate radar LV2
             ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV2;
+            radarUI.GetComponent<RadarControllerUI>().waveInterval = radarWaveIntervalLV2;
 
             //Decrease energy
             radarModEnergyDecreaseLV2 = radarModEnergyDecreaseLV2_original;
@@ -323,6 +330,7 @@ public class GameManager : MonoBehaviour
 
             //Activate radar LV1
             ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV1;
+            radarUI.GetComponent<RadarControllerUI>().waveInterval = radarWaveIntervalLV1;
 
             //Decrease energy
             radarModEnergyDecreaseLV1 = radarModEnergyDecreaseLV1_original;
@@ -340,6 +348,7 @@ public class GameManager : MonoBehaviour
 
             //Activate radar LV0
             ship.GetComponent<RadarController>().waveInterval = 0;
+            radarUI.GetComponent<RadarControllerUI>().waveInterval = 0;
 
             //Decrease energy
             radarModEnergyDecreaseLV1 = 0;
@@ -354,6 +363,7 @@ public class GameManager : MonoBehaviour
 
             //Activate radar LV1
             ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV1;
+            radarUI.GetComponent<RadarControllerUI>().waveInterval = radarWaveIntervalLV1;
 
             //Decrease energy
             radarModEnergyDecreaseLV2 = 0;
@@ -368,6 +378,7 @@ public class GameManager : MonoBehaviour
 
             //Activate radar LV2
             ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV2;
+            radarUI.GetComponent<RadarControllerUI>().waveInterval = radarWaveIntervalLV2;
 
             //Decrease energy
             radarModEnergyDecreaseLV3 = 0;
@@ -376,24 +387,61 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void ActivateShield()
+    private void ActivateShield()
     {
-        numberOfKeyShieldPressed += 1;
-
-        if (numberOfKeyShieldPressed % 2f != 0)
+        if (!isShieldCooldown)
         {
-            //if the number of tumes that the key was pressed is an odd number, the shield will be activated.
-            //the count starts with 0, so the first hit will be a 1 => odd number => activate shield. Next press is 2 => even number => inactivate
-            shield.SetActive(true);
+            StartCoroutine(ShieldRoutine());
+        }
+    }
 
-            shieldModEnergyDecrease = shieldModEnergyDecrease_original;
+    private IEnumerator ShieldRoutine()
+    {
+        isShieldActive = true;
+        isShieldCooldown = true;
+
+        // Activate the shield
+        shieldObject.GetComponent<CapsuleCollider2D>().enabled = true;
+        shieldObject.GetComponent<SpriteRenderer>().enabled = true;
+
+        shieldModEnergyDecrease = shieldModEnergyDecrease_original;
+        shieldUI.GetComponent<Image>().color = Color.green;
+
+        // Wait for the shield duration
+        yield return new WaitForSeconds(shieldDuration);
+
+        // Deactivate the shield
+        shieldObject.GetComponent<CapsuleCollider2D>().enabled = false;
+        shieldObject.GetComponent<SpriteRenderer>().enabled = false;
+
+        isShieldActive = false;
+        shieldModEnergyDecrease = 0;
+        shieldUI.GetComponent<Image>().color = Color.red;
+
+        // Start the cooldown
+        yield return new WaitForSeconds(shieldCooldown);
+
+        // Allow shield to be reactivated after cooldown
+        isShieldCooldown = false;
+        shieldUI.GetComponent<Image>().color = Color.white;
+    }
+
+    public void ToggleArrows()
+    {
+        //if the number of tumes that the key was pressed is an odd number, the shield will be activated.
+        //the count starts with 0, so the first hit will be a 1 => odd number => activate shield. Next press is 2 => even number => inactivate
+        asteroidSpawner.GetComponent<AsteroidSpawner>().spawnArrow = !asteroidSpawner.GetComponent<AsteroidSpawner>().spawnArrow;
+
+        if (asteroidSpawner.GetComponent<AsteroidSpawner>().spawnArrow)
+        {
+            arrowModEnergyDecrease = arrowModEnergyDecrease_original;
+            arrowUI.GetComponent<Image>().color = Color.green;
         }
 
         else
         {
-            shield.SetActive(false);
-
-            shieldModEnergyDecrease = 0;
+            arrowModEnergyDecrease = 0;
+            arrowUI.GetComponent<Image>().color = Color.white;
         }
         
     }
@@ -549,21 +597,9 @@ public class GameManager : MonoBehaviour
 
     public void TriggerOverload()
     {
-        numberOfKeyOverloadPressed += 1;
-
-        if (numberOfKeyOverloadPressed % 2f != 0)
-        {
-            isOverload = true; // Set the overload state to true
-            StartCoroutine(OverloadCountdown()); // Start the countdown
-        }
-
-        else
-        {
-            isOverload = false; // Set the overload state to false
-        }
+      
     }
 
-    // Coroutine to handle the overload countdown
     private IEnumerator OverloadCountdown()
     {
         // Optional: Add any visual or gameplay effect for overload state
