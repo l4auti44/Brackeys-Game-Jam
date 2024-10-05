@@ -8,31 +8,36 @@ public class GameManager : MonoBehaviour
 {
     public float gameProgress, gameProgressSpeed;
     public GameObject gameProgressSlider;
-    public GameObject ship, asteroidSpawner, shield;
-    public GameObject engineModuleSpriteLV1, engineModuleSpriteLV2, engineModuleSpriteLV3;
-    public GameObject lightModuleSpriteLV1, lightModuleSpriteLV2, lightModuleSpriteLV3;
-    public GameObject positionModuleSpriteLV1, positionModuleSpriteLV2, positionModuleSpriteLV3;
+    public GameObject ship, asteroidSpawner, shield, radar, radarUI;
+    //public GameObject engineModuleSpriteLV1, engineModuleSpriteLV2, engineModuleSpriteLV3;
+    public GameObject radarModuleSpriteLV1, radarModuleSpriteLV2, radarModuleSpriteLV3;
+    public GameObject positionModuleSpriteLV1, positionModuleSpriteLV2, positionModuleSpriteLV3, positionModuleSpriteLV4, positionModuleSpriteLV5;
     public float shipSpeed, radarLV, positionLV;
-    public float speedLV0, speedLV1, speedLV2, speedLV3; //Speed variations for each module level
-    public Transform positionLV1, positionLV2, positionLV3; //Position variations for each module level
+    public float speedLV0, speedLV1, speedLV2, speedLV3, speedLV4, speedLV5; //Speed variations for each module level
+    public float minAsteroidSpeedLV1, minAsteroidSpeedLV2, minAsteroidSpeedLV3, minAsteroidSpeedLV4, minAsteroidSpeedLV5; //Speed variations for each module level
+    public float maxAsteroidSpeedLV1, maxAsteroidSpeedLV2, maxAsteroidSpeedLV3, maxAsteroidSpeedLV4, maxAsteroidSpeedLV5; //Speed variations for each module level
+    public float minRotationSpeedLV1, minRotationSpeedLV2, minRotationSpeedLV3, minRotationSpeedLV4, minRotationSpeedLV5; //Speed variations for each module level
+    public float maxRotationSpeedLV1, maxRotationSpeedLV2, maxRotationSpeedLV3, maxRotationSpeedLV4, maxRotationSpeedLV5; //Speed variations for each module level
+    public float radarWaveIntervalLV3, radarWaveIntervalLV2, radarWaveIntervalLV1, radarWaveIntervalLV0;
+    public Transform positionLV1, positionLV2, positionLV3, positionLV4, positionLV5; //Position variations for each module level
     public GameObject lightPlayerLV1, lightPlayerLV2; //Radar light variations for each module level
 
     public float energy = 100f; // Amount of energy at any time
     public float energyDecreaseSpeed; //Speed at which the energy is depleted
     public float totalEnergy = 100f; // Amount of total energy
 
-    public float engineModEnergyDecreaseLV1, engineModEnergyDecreaseLV2, engineModEnergyDecreaseLV3;
-    private float engineModEnergyDecreaseLV1_original, engineMoEnergyDecreaseLV2_original, engineModEnergyDecreaseLV3_original;
+    //public float engineModEnergyDecreaseLV1, engineModEnergyDecreaseLV2, engineModEnergyDecreaseLV3;
+    //private float engineModEnergyDecreaseLV1_original, engineMoEnergyDecreaseLV2_original, engineModEnergyDecreaseLV3_original;
 
-    public float lightModEnergyDecreaseLV1, lightModEnergyDecreaseLV2, lightModEnergyDecreaseLV3;
-    private float lightModEnergyDecreaseLV1_original, lightModEnergyDecreaseLV2_original, lightModEnergyDecreaseLV3_original;
+    public float radarModEnergyDecreaseLV1, radarModEnergyDecreaseLV2, radarModEnergyDecreaseLV3;
+    private float radarModEnergyDecreaseLV1_original, radarModEnergyDecreaseLV2_original, radarModEnergyDecreaseLV3_original;
 
     public float shieldModEnergyDecrease;
     private float shieldModEnergyDecrease_original;
     private float numberOfKeyShieldPressed = 0;
 
-    public float positionModEnergyDecreaseLV1, positionModEnergyDecreaseLV2, positionModEnergyDecreaseLV3;
-    private float positionModEnergyDecreaseLV1_original, positionModEnergyDecreaseLV2_original, positionModEnergyDecreaseLV3_original;
+    public float positionModEnergyDecreaseLV1, positionModEnergyDecreaseLV2, positionModEnergyDecreaseLV3, positionModEnergyDecreaseLV4, positionModEnergyDecreaseLV5;
+    private float positionModEnergyDecreaseLV1_original, positionModEnergyDecreaseLV2_original, positionModEnergyDecreaseLV3_original, positionModEnergyDecreaseLV4_original, positionModEnergyDecreaseLV5_original;
 
     public GameObject energySlider;
 
@@ -44,56 +49,67 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Get ship speed
         ship.GetComponent<ShipMovement>().speed = shipSpeed;
 
         //store values for all energy decrease mods
-        engineModEnergyDecreaseLV1_original = engineModEnergyDecreaseLV1;
-        engineMoEnergyDecreaseLV2_original = engineModEnergyDecreaseLV2;
-        engineModEnergyDecreaseLV3_original = engineModEnergyDecreaseLV3;
+        //engineModEnergyDecreaseLV1_original = engineModEnergyDecreaseLV1;
+        //engineMoEnergyDecreaseLV2_original = engineModEnergyDecreaseLV2;
+        //engineModEnergyDecreaseLV3_original = engineModEnergyDecreaseLV3;
 
-        lightModEnergyDecreaseLV1_original = lightModEnergyDecreaseLV1;
-        lightModEnergyDecreaseLV2_original = lightModEnergyDecreaseLV2;
-        lightModEnergyDecreaseLV3_original = lightModEnergyDecreaseLV3;
+        radarModEnergyDecreaseLV1_original = radarModEnergyDecreaseLV1;
+        radarModEnergyDecreaseLV2_original = radarModEnergyDecreaseLV2;
+        radarModEnergyDecreaseLV3_original = radarModEnergyDecreaseLV3;
 
         shieldModEnergyDecrease_original = shieldModEnergyDecrease;
 
         positionModEnergyDecreaseLV1_original = positionModEnergyDecreaseLV1;
         positionModEnergyDecreaseLV2_original = positionModEnergyDecreaseLV2;
         positionModEnergyDecreaseLV3_original = positionModEnergyDecreaseLV3;
+        positionModEnergyDecreaseLV4_original = positionModEnergyDecreaseLV4;
+        positionModEnergyDecreaseLV5_original = positionModEnergyDecreaseLV5;
 
 
         //set all energy decrease mods at 0 after storing their values
-        engineModEnergyDecreaseLV1 = 0;
-        engineModEnergyDecreaseLV2 = 0;
-        engineModEnergyDecreaseLV3 = 0;
+        //engineModEnergyDecreaseLV1 = 0;
+        //engineModEnergyDecreaseLV2 = 0;
+        //engineModEnergyDecreaseLV3 = 0;
 
-        lightModEnergyDecreaseLV1 = 0;
-        lightModEnergyDecreaseLV2 = 0;
-        lightModEnergyDecreaseLV3 = 0;
+        radarModEnergyDecreaseLV1 = 0;
+        radarModEnergyDecreaseLV2 = 0;
+        radarModEnergyDecreaseLV3 = 0;
 
         shieldModEnergyDecrease = 0;
 
         positionModEnergyDecreaseLV1 = 0;
         positionModEnergyDecreaseLV2 = 0;
         positionModEnergyDecreaseLV3 = 0;
+        positionModEnergyDecreaseLV4 = 0;
+        positionModEnergyDecreaseLV5 = 0;
 
 
+        //Start game with energy equals to total
+        energy = totalEnergy;
+        
         //start game with engine module speed LV1
         shipSpeed = speedLV1;
-        engineModuleSpriteLV1.GetComponent<Image>().color = Color.green;
-        engineModEnergyDecreaseLV1 = engineModEnergyDecreaseLV1_original;
+        //engineModuleSpriteLV1.GetComponent<Image>().color = Color.green;
+        //engineModEnergyDecreaseLV1 = engineModEnergyDecreaseLV1_original;
 
         //start game with light module LV1
-        radarLV = 1;
-        lightPlayerLV1.SetActive(true);
-        lightPlayerLV2.SetActive(false);
-        lightModEnergyDecreaseLV1 = lightModEnergyDecreaseLV1_original;
-        lightModuleSpriteLV1.GetComponent<Image>().color = Color.green;
+        
 
         //start game with position LV1
         positionLV = 1;
         positionModuleSpriteLV1.GetComponent<Image>().color = Color.green;
         positionModEnergyDecreaseLV1 = positionModEnergyDecreaseLV1_original;
+
+        //Start level with radar LV1
+        radarLV = 1;
+        ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV1;
+        radarModEnergyDecreaseLV1 = radarModEnergyDecreaseLV1_original;
+        radarModuleSpriteLV1.GetComponent<Image>().color = Color.green;
+
     }
 
     // Update is called once per frame
@@ -108,19 +124,21 @@ public class GameManager : MonoBehaviour
         
         //Determination of energy decrease speed
         energyDecreaseSpeed =
-            engineModEnergyDecreaseLV1 +
-            engineModEnergyDecreaseLV2 +
-            engineModEnergyDecreaseLV3 +
+            //engineModEnergyDecreaseLV1 +
+            //engineModEnergyDecreaseLV2 +
+            //engineModEnergyDecreaseLV3 +
 
-            lightModEnergyDecreaseLV1 +
-            lightModEnergyDecreaseLV2 +
-            lightModEnergyDecreaseLV3 +
+            radarModEnergyDecreaseLV1 +
+            radarModEnergyDecreaseLV2 +
+            radarModEnergyDecreaseLV3 +
 
             shieldModEnergyDecrease +
 
             positionModEnergyDecreaseLV1 +
             positionModEnergyDecreaseLV2 +
-            positionModEnergyDecreaseLV3
+            positionModEnergyDecreaseLV3 +
+            positionModEnergyDecreaseLV4 +
+            positionModEnergyDecreaseLV5
 
         ;
 
@@ -152,34 +170,54 @@ public class GameManager : MonoBehaviour
     public void AccelerateShip()
     {
         //Increase speed movement
-        if (shipSpeed == speedLV2)
+        if (shipSpeed == speedLV4)
+        {
+            //modify horizontal ship movment
+            shipSpeed = speedLV5;
+            //engineModuleSpriteLV3.GetComponent<Image>().color = Color.green;
+
+            //modify the energy decrease speed and reset the rest
+            //engineModEnergyDecreaseLV3 = engineModEnergyDecreaseLV3_original;
+        }
+
+        else if (shipSpeed == speedLV3)
+        {
+            //modify horizontal ship movment
+            shipSpeed = speedLV4;
+            //engineModuleSpriteLV3.GetComponent<Image>().color = Color.green;
+
+            //modify the energy decrease speed and reset the rest
+            //engineModEnergyDecreaseLV3 = engineModEnergyDecreaseLV3_original;
+        }
+
+        else if (shipSpeed == speedLV2)
         {
             //modify horizontal ship movment
             shipSpeed = speedLV3;
-            engineModuleSpriteLV3.GetComponent<Image>().color = Color.green;
+            //engineModuleSpriteLV3.GetComponent<Image>().color = Color.green;
 
             //modify the energy decrease speed and reset the rest
-            engineModEnergyDecreaseLV3 = engineModEnergyDecreaseLV3_original;
+            //engineModEnergyDecreaseLV3 = engineModEnergyDecreaseLV3_original;
         }
 
         else if (shipSpeed == speedLV1)
         {
             //modify horizontal ship movment
             shipSpeed = speedLV2;
-            engineModuleSpriteLV2.GetComponent<Image>().color = Color.green;
+            //engineModuleSpriteLV2.GetComponent<Image>().color = Color.green;
 
             //modify the energy decrease speed and reset the rest
-            engineModEnergyDecreaseLV2 = engineMoEnergyDecreaseLV2_original;
+            //engineModEnergyDecreaseLV2 = engineMoEnergyDecreaseLV2_original;
         }
 
         else if (shipSpeed == speedLV0)
         {
             //modify horizontal ship movment
             shipSpeed = speedLV1;
-            engineModuleSpriteLV1.GetComponent<Image>().color = Color.green;
+            //engineModuleSpriteLV1.GetComponent<Image>().color = Color.green;
 
             //modify the energy decrease speed and reset the rest
-            engineModEnergyDecreaseLV1 = engineModEnergyDecreaseLV1_original;
+            //engineModEnergyDecreaseLV1 = engineModEnergyDecreaseLV1_original;
         }
     }
 
@@ -190,34 +228,58 @@ public class GameManager : MonoBehaviour
         {
             //modify horizontal ship movment
             shipSpeed = speedLV0;
-            engineModuleSpriteLV1.GetComponent<Image>().color = Color.white;
+            //engineModuleSpriteLV1.GetComponent<Image>().color = Color.white;
 
             //modify the energy decrease speed and reset the rest
-            engineModEnergyDecreaseLV3 = 0;
-            engineModEnergyDecreaseLV2 = 0;
-            engineModEnergyDecreaseLV1 = 0;
+            //engineModEnergyDecreaseLV3 = 0;
+            //engineModEnergyDecreaseLV2 = 0;
+            //engineModEnergyDecreaseLV1 = 0;
         }
 
         else if (shipSpeed == speedLV2)
         {
             //modify horizontal ship movment
             shipSpeed = speedLV1;
-            engineModuleSpriteLV2.GetComponent<Image>().color = Color.white;
+            //engineModuleSpriteLV1.GetComponent<Image>().color = Color.white;
 
             //modify the energy decrease speed and reset the rest
-            engineModEnergyDecreaseLV2 = 0;
-            engineModEnergyDecreaseLV1 = engineModEnergyDecreaseLV1_original;
+            //engineModEnergyDecreaseLV3 = 0;
+            //engineModEnergyDecreaseLV2 = 0;
+            //engineModEnergyDecreaseLV1 = 0;
         }
 
         else if (shipSpeed == speedLV3)
         {
             //modify horizontal ship movment
             shipSpeed = speedLV2;
-            engineModuleSpriteLV3.GetComponent<Image>().color = Color.white;
+            //engineModuleSpriteLV1.GetComponent<Image>().color = Color.white;
 
             //modify the energy decrease speed and reset the rest
-            engineModEnergyDecreaseLV3 = 0;
-            engineModEnergyDecreaseLV2 = engineMoEnergyDecreaseLV2_original;
+            //engineModEnergyDecreaseLV3 = 0;
+            //engineModEnergyDecreaseLV2 = 0;
+            //engineModEnergyDecreaseLV1 = 0;
+        }
+
+        else if (shipSpeed == speedLV4)
+        {
+            //modify horizontal ship movment
+            shipSpeed = speedLV3;
+            //engineModuleSpriteLV2.GetComponent<Image>().color = Color.white;
+
+            //modify the energy decrease speed and reset the rest
+            //engineModEnergyDecreaseLV2 = 0;
+            //engineModEnergyDecreaseLV1 = engineModEnergyDecreaseLV1_original;
+        }
+
+        else if (shipSpeed == speedLV5)
+        {
+            //modify horizontal ship movment
+            shipSpeed = speedLV4;
+            //engineModuleSpriteLV3.GetComponent<Image>().color = Color.white;
+
+            //modify the energy decrease speed and reset the rest
+            //engineModEnergyDecreaseLV3 = 0;
+            //engineModEnergyDecreaseLV2 = engineMoEnergyDecreaseLV2_original;
         }
 
     }
@@ -230,34 +292,40 @@ public class GameManager : MonoBehaviour
         {
             //Update the radar LV and sprite
             radarLV = 3;
-            lightModuleSpriteLV3.GetComponent<Image>().color = Color.green;
+            radarModuleSpriteLV3.GetComponent<Image>().color = Color.green;
 
-            //Activate arrow spawning for LV3
-            lightModEnergyDecreaseLV3 = lightModEnergyDecreaseLV3_original;
-            asteroidSpawner.GetComponent<AsteroidSpawner>().spawnArrow = true;
+            //Activate radar LV3
+            ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV3;
+
+            //Decrease energy
+            radarModEnergyDecreaseLV3 = radarModEnergyDecreaseLV3_original;
 
         }
 
         else if (radarLV == 1)
         {
+            //Update the radar LV and sprite
             radarLV = 2;
-            lightModuleSpriteLV2.GetComponent<Image>().color = Color.green;
+            radarModuleSpriteLV2.GetComponent<Image>().color = Color.green;
 
-            lightPlayerLV1.SetActive(true);
-            lightPlayerLV2.SetActive(true);
+            //Activate radar LV2
+            ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV2;
 
-            lightModEnergyDecreaseLV2 = lightModEnergyDecreaseLV2_original;
+            //Decrease energy
+            radarModEnergyDecreaseLV2 = radarModEnergyDecreaseLV2_original;
         }
 
         else if (radarLV == 0)
         {
+            //Update the radar LV and sprite
             radarLV = 1;
-            lightModuleSpriteLV1.GetComponent<Image>().color = Color.green;
+            radarModuleSpriteLV1.GetComponent<Image>().color = Color.green;
 
-            lightPlayerLV1.SetActive(true);
-            lightPlayerLV2.SetActive(false);
+            //Activate radar LV1
+            ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV1;
 
-            lightModEnergyDecreaseLV1 = lightModEnergyDecreaseLV1_original;
+            //Decrease energy
+            radarModEnergyDecreaseLV1 = radarModEnergyDecreaseLV1_original;
         }
     }
 
@@ -266,40 +334,44 @@ public class GameManager : MonoBehaviour
         //Decrease radar LV
         if (radarLV == 1)
         {
+            //Update the radar LV and sprite
             radarLV = 0;
-            lightModuleSpriteLV1.GetComponent<Image>().color = Color.white;
+            radarModuleSpriteLV1.GetComponent<Image>().color = Color.white;
 
-            lightPlayerLV1.SetActive(false);
-            lightPlayerLV2.SetActive(false);
+            //Activate radar LV0
+            ship.GetComponent<RadarController>().waveInterval = 0;
 
-            lightModEnergyDecreaseLV1 = 0;
+            //Decrease energy
+            radarModEnergyDecreaseLV1 = 0;
+
         }
 
         else if (radarLV == 2)
         {
+            //Update the radar LV and sprite
             radarLV = 1;
-            lightModuleSpriteLV2.GetComponent<Image>().color = Color.white;
+            radarModuleSpriteLV2.GetComponent<Image>().color = Color.white;
 
-            lightPlayerLV1.SetActive(true);
-            lightPlayerLV2.SetActive(false);
+            //Activate radar LV1
+            ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV1;
 
-            lightModEnergyDecreaseLV2 = 0;
-            lightModEnergyDecreaseLV1 = lightModEnergyDecreaseLV1_original;
+            //Decrease energy
+            radarModEnergyDecreaseLV2 = 0;
+            radarModEnergyDecreaseLV1 = radarModEnergyDecreaseLV1_original;
         }
 
         else if (radarLV == 3)
         {
+            //Update the radar LV and sprite
             radarLV = 2;
-            lightModuleSpriteLV3.GetComponent<Image>().color = Color.white;
+            radarModuleSpriteLV3.GetComponent<Image>().color = Color.white;
 
-            lightPlayerLV1.SetActive(true);
-            lightPlayerLV2.SetActive(true);
+            //Activate radar LV2
+            ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV2;
 
-            lightModEnergyDecreaseLV3 = 0;
-            lightModEnergyDecreaseLV2 = lightModEnergyDecreaseLV2_original;
-
-            //Deactivate arrow spawn
-            asteroidSpawner.GetComponent<AsteroidSpawner>().spawnArrow = false;
+            //Decrease energy
+            radarModEnergyDecreaseLV3 = 0;
+            radarModEnergyDecreaseLV2 = radarModEnergyDecreaseLV1_original;
         }
     }
 
@@ -330,7 +402,29 @@ public class GameManager : MonoBehaviour
     public void IncreasePositionShip ()
     {
         //Increase position
-        if (positionLV == 2)
+        if (positionLV == 4)
+        {
+            //Update the position LV and sprite
+            positionLV = 5;
+            positionModuleSpriteLV5.GetComponent<Image>().color = Color.green;
+
+            ship.GetComponent<ShipMovement>().MoveToLevel(positionLV5);
+
+            positionModEnergyDecreaseLV5 = positionModEnergyDecreaseLV5_original;
+        }
+
+        else if (positionLV == 3)
+        {
+            //Update the position LV and sprite
+            positionLV = 4;
+            positionModuleSpriteLV4.GetComponent<Image>().color = Color.green;
+
+            ship.GetComponent<ShipMovement>().MoveToLevel(positionLV4);
+
+            positionModEnergyDecreaseLV4 = positionModEnergyDecreaseLV4_original;
+        }
+
+        else if (positionLV == 2)
         {
             //Update the position LV and sprite
             positionLV = 3;
@@ -357,7 +451,31 @@ public class GameManager : MonoBehaviour
     public void DecreasePositionShip()
     {
         //Decrease position
-        if (positionLV == 3)
+        if (positionLV == 5)
+        {
+            //Update the position LV and sprite
+            positionLV = 4;
+            positionModuleSpriteLV5.GetComponent<Image>().color = Color.white;
+
+            ship.GetComponent<ShipMovement>().MoveToLevel(positionLV4);
+
+            positionModEnergyDecreaseLV5 = 0;
+            positionModEnergyDecreaseLV4 = positionModEnergyDecreaseLV4_original;
+        }
+
+        else if (positionLV == 4)
+        {
+            //Update the position LV and sprite
+            positionLV = 3;
+            positionModuleSpriteLV4.GetComponent<Image>().color = Color.white;
+
+            ship.GetComponent<ShipMovement>().MoveToLevel(positionLV3);
+
+            positionModEnergyDecreaseLV4 = 0;
+            positionModEnergyDecreaseLV3 = positionModEnergyDecreaseLV3_original;
+        }
+
+        else if (positionLV == 3)
         {
             //Update the position LV and sprite
             positionLV = 2;
@@ -366,7 +484,7 @@ public class GameManager : MonoBehaviour
             ship.GetComponent<ShipMovement>().MoveToLevel(positionLV2);
 
             positionModEnergyDecreaseLV3 = 0;
-            positionModEnergyDecreaseLV2 = positionModEnergyDecreaseLV1_original;
+            positionModEnergyDecreaseLV2 = positionModEnergyDecreaseLV2_original;
         }
 
         else if (positionLV == 2)
@@ -384,11 +502,56 @@ public class GameManager : MonoBehaviour
     }
 
 
+    public void ToggleAsteroidSpeed()
+    {
+        //Increase speed movement
+        if (positionLV == 5)
+        {
+            asteroidSpawner.GetComponent<AsteroidSpawner>().minAsteroidSpeed = minAsteroidSpeedLV5;
+            asteroidSpawner.GetComponent<AsteroidSpawner>().maxAsteroidSpeed = minAsteroidSpeedLV5;
+            asteroidSpawner.GetComponent<AsteroidSpawner>().minRotationSpeed = minRotationSpeedLV5;
+            asteroidSpawner.GetComponent<AsteroidSpawner>().maxRotationSpeed = maxRotationSpeedLV5;
+        }
+
+        else if (positionLV == 4)
+        {
+            asteroidSpawner.GetComponent<AsteroidSpawner>().minAsteroidSpeed = minAsteroidSpeedLV4;
+            asteroidSpawner.GetComponent<AsteroidSpawner>().maxAsteroidSpeed = maxAsteroidSpeedLV4;
+            asteroidSpawner.GetComponent<AsteroidSpawner>().minRotationSpeed = minRotationSpeedLV4;
+            asteroidSpawner.GetComponent<AsteroidSpawner>().maxRotationSpeed = maxRotationSpeedLV4;
+        }
+
+        else if (positionLV == 3)
+        {
+            asteroidSpawner.GetComponent<AsteroidSpawner>().minAsteroidSpeed = minAsteroidSpeedLV3;
+            asteroidSpawner.GetComponent<AsteroidSpawner>().maxAsteroidSpeed = maxAsteroidSpeedLV3;
+            asteroidSpawner.GetComponent<AsteroidSpawner>().minRotationSpeed = minRotationSpeedLV3;
+            asteroidSpawner.GetComponent<AsteroidSpawner>().maxRotationSpeed = maxRotationSpeedLV3;
+        }
+
+        else if (positionLV == 2)
+        {
+            asteroidSpawner.GetComponent<AsteroidSpawner>().minAsteroidSpeed = minAsteroidSpeedLV2;
+            asteroidSpawner.GetComponent<AsteroidSpawner>().maxAsteroidSpeed = maxAsteroidSpeedLV2;
+            asteroidSpawner.GetComponent<AsteroidSpawner>().minRotationSpeed = minRotationSpeedLV2;
+            asteroidSpawner.GetComponent<AsteroidSpawner>().maxRotationSpeed = maxRotationSpeedLV2;
+        }
+
+        else if (positionLV == 1)
+        {
+            asteroidSpawner.GetComponent<AsteroidSpawner>().minAsteroidSpeed = minAsteroidSpeedLV1;
+            asteroidSpawner.GetComponent<AsteroidSpawner>().maxAsteroidSpeed = maxAsteroidSpeedLV1;
+            asteroidSpawner.GetComponent<AsteroidSpawner>().minRotationSpeed = minRotationSpeedLV1;
+            asteroidSpawner.GetComponent<AsteroidSpawner>().maxRotationSpeed = maxRotationSpeedLV1;
+        }
+    }
+
+
     public void TriggerOverload()
     {
-        numberOfKeyShieldPressed += 1;
+        numberOfKeyOverloadPressed += 1;
 
-        if (numberOfKeyShieldPressed % 2f != 0)
+        if (numberOfKeyOverloadPressed % 2f != 0)
         {
             isOverload = true; // Set the overload state to true
             StartCoroutine(OverloadCountdown()); // Start the countdown

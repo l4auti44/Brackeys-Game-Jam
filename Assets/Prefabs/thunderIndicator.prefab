@@ -101,9 +101,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   timeToYellow: 2
-  timeToRed: 2
-  timeToIdle: 0.5
-  energyToIncrease: 100
+  timeToRed: 1
+  timeToIdle: 0.2
+  energyToIncrease: 50
   idleSprite: {fileID: 21300000, guid: 8c619d7b0763a7b41ba41591580fe8b8, type: 3}
   yellowSprite: {fileID: 21300000, guid: 2cffae154cda0574eb7ed19764fb8114, type: 3}
   redSprite: {fileID: 21300000, guid: 0fe4cadc7e7028d4aabee6eec3badf9d, type: 3}
