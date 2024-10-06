@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public float gameProgress, gameProgressSpeed;
     public GameObject gameProgressSlider;
-    public GameObject ship, asteroidSpawner, shield, radar, radarUI;
+    public GameObject ship, asteroidSpawner, energySpawner, shield, radar, radarUI;
     //public GameObject engineModuleSpriteLV1, engineModuleSpriteLV2, engineModuleSpriteLV3;
     public GameObject radarModuleSpriteLV1, radarModuleSpriteLV2, radarModuleSpriteLV3;
     public GameObject positionModuleSpriteLV1, positionModuleSpriteLV2, positionModuleSpriteLV3, positionModuleSpriteLV4, positionModuleSpriteLV5;
@@ -112,6 +112,9 @@ public class GameManager : MonoBehaviour
         radarModEnergyDecreaseLV1 = radarModEnergyDecreaseLV1_original;
         radarModuleSpriteLV1.GetComponent<Image>().color = Color.green;
 
+        //Start game with no arrow spawn
+        asteroidSpawner.GetComponent<AsteroidSpawner>().spawnArrow = false;
+
     }
 
     // Update is called once per frame
@@ -127,7 +130,7 @@ public class GameManager : MonoBehaviour
         //Determination of energy decrease speed
         energyDecreaseSpeed =
 
-        radarModEnergyDecreaseLV1 +
+        (radarModEnergyDecreaseLV1 +
         radarModEnergyDecreaseLV2 +
         radarModEnergyDecreaseLV3 +
 
@@ -140,7 +143,8 @@ public class GameManager : MonoBehaviour
         positionModEnergyDecreaseLV5 +
 
         arrowModEnergyDecrease_original
-
+        )
+        * 0.1f
         ;
 
         //Decrease energy over time
@@ -157,7 +161,8 @@ public class GameManager : MonoBehaviour
         }
 
         //Clamp energy
-        energy = Mathf.Max(maxEnergy, 0);
+        energy = Mathf.Max(energy, 0);
+        energy = Mathf.Min(energy, maxEnergy);
 
     }
 
@@ -183,6 +188,7 @@ public class GameManager : MonoBehaviour
 
             //modify the energy decrease speed and reset the rest
             //engineModEnergyDecreaseLV3 = engineModEnergyDecreaseLV3_original;
+            gameProgressSpeed += 1;
         }
 
         else if (shipSpeed == speedLV3)
@@ -193,6 +199,7 @@ public class GameManager : MonoBehaviour
 
             //modify the energy decrease speed and reset the rest
             //engineModEnergyDecreaseLV3 = engineModEnergyDecreaseLV3_original;
+            gameProgressSpeed += 1;
         }
 
         else if (shipSpeed == speedLV2)
@@ -203,6 +210,7 @@ public class GameManager : MonoBehaviour
 
             //modify the energy decrease speed and reset the rest
             //engineModEnergyDecreaseLV3 = engineModEnergyDecreaseLV3_original;
+            gameProgressSpeed += 1;
         }
 
         else if (shipSpeed == speedLV1)
@@ -213,35 +221,14 @@ public class GameManager : MonoBehaviour
 
             //modify the energy decrease speed and reset the rest
             //engineModEnergyDecreaseLV2 = engineMoEnergyDecreaseLV2_original;
-        }
-
-        else if (shipSpeed == speedLV0)
-        {
-            //modify horizontal ship movment
-            shipSpeed = speedLV1;
-            //engineModuleSpriteLV1.GetComponent<Image>().color = Color.green;
-
-            //modify the energy decrease speed and reset the rest
-            //engineModEnergyDecreaseLV1 = engineModEnergyDecreaseLV1_original;
+            gameProgressSpeed += 1;
         }
     }
 
     public void DecelerateShip()
     {
         //Decrease speed movement
-        if (shipSpeed == speedLV1)
-        {
-            //modify horizontal ship movment
-            shipSpeed = speedLV0;
-            //engineModuleSpriteLV1.GetComponent<Image>().color = Color.white;
-
-            //modify the energy decrease speed and reset the rest
-            //engineModEnergyDecreaseLV3 = 0;
-            //engineModEnergyDecreaseLV2 = 0;
-            //engineModEnergyDecreaseLV1 = 0;
-        }
-
-        else if (shipSpeed == speedLV2)
+        if (shipSpeed == speedLV2)
         {
             //modify horizontal ship movment
             shipSpeed = speedLV1;
@@ -251,6 +238,7 @@ public class GameManager : MonoBehaviour
             //engineModEnergyDecreaseLV3 = 0;
             //engineModEnergyDecreaseLV2 = 0;
             //engineModEnergyDecreaseLV1 = 0;
+            gameProgressSpeed -= 1;
         }
 
         else if (shipSpeed == speedLV3)
@@ -263,6 +251,7 @@ public class GameManager : MonoBehaviour
             //engineModEnergyDecreaseLV3 = 0;
             //engineModEnergyDecreaseLV2 = 0;
             //engineModEnergyDecreaseLV1 = 0;
+            gameProgressSpeed -= 1;
         }
 
         else if (shipSpeed == speedLV4)
@@ -274,6 +263,7 @@ public class GameManager : MonoBehaviour
             //modify the energy decrease speed and reset the rest
             //engineModEnergyDecreaseLV2 = 0;
             //engineModEnergyDecreaseLV1 = engineModEnergyDecreaseLV1_original;
+            gameProgressSpeed -= 1;
         }
 
         else if (shipSpeed == speedLV5)
@@ -285,6 +275,7 @@ public class GameManager : MonoBehaviour
             //modify the energy decrease speed and reset the rest
             //engineModEnergyDecreaseLV3 = 0;
             //engineModEnergyDecreaseLV2 = engineMoEnergyDecreaseLV2_original;
+            gameProgressSpeed -= 1;
         }
 
     }
@@ -431,6 +422,7 @@ public class GameManager : MonoBehaviour
         //if the number of tumes that the key was pressed is an odd number, the shield will be activated.
         //the count starts with 0, so the first hit will be a 1 => odd number => activate shield. Next press is 2 => even number => inactivate
         asteroidSpawner.GetComponent<AsteroidSpawner>().spawnArrow = !asteroidSpawner.GetComponent<AsteroidSpawner>().spawnArrow;
+        energySpawner.GetComponent<EnergySpawner>().spawnArrow = !energySpawner.GetComponent<EnergySpawner>().spawnArrow;
 
         if (asteroidSpawner.GetComponent<AsteroidSpawner>().spawnArrow)
         {

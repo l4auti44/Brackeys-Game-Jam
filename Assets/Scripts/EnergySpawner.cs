@@ -22,6 +22,7 @@ public class EnergySpawner : MonoBehaviour
 
     private float spawnTimer;
     private bool spawnOnRight = true; // Bool to toggle between right and left spawns
+    public bool spawnArrow = false; //bool to toggle between on and off for spawning arrows
 
     void Start()
     {
@@ -87,8 +88,11 @@ public class EnergySpawner : MonoBehaviour
             }
         }
 
-        // Determine which arrow to spawn based on the speed of the energy drop
-        SpawnArrow(randomSpeed, newEnergyDrop.transform.position, spawnOnRight);
+        if (spawnArrow)
+        {
+            // Determine which arrow to spawn based on the speed of the energy drop
+            SpawnArrow(randomSpeed, newEnergyDrop.transform.position, spawnOnRight);
+        }
     }
 
     void SpawnArrow(float speed, Vector3 energyDropPosition, bool isOnRight)

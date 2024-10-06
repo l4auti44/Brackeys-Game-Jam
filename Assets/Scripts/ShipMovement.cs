@@ -10,6 +10,7 @@ public class ShipMovement : MonoBehaviour
     public GameObject missilePrefab; // Missile prefab to shoot
     public float energyMissile; //Cost of energy per missile
     public GameObject gameManager; //Game manager reference
+    public GameObject shipMovementSlider;
     public Transform missileSpawnPoint; // Spawn point for the missile
     public GameFeelManager gameFeelManager; //reference to the script for game feel elements
     public float timeStopWhenHitEnemy, shakeAmountWhenHitEnemy, shakeTimeWhenHitEnemy;
@@ -21,6 +22,9 @@ public class ShipMovement : MonoBehaviour
 
     public float minX; // Minimum X boundary
     public float maxX;  // Maximum X boundary
+    private float moveXTowards;
+    private Vector3 moveTowards;
+    private float moveSpeedB = 50;
 
     public float moveSpeed = 5f; // Speed at which to move the ship horizontally
 
@@ -57,6 +61,9 @@ public class ShipMovement : MonoBehaviour
                 isMoving = false; // Stop moving when reached
             }
         }
+        //moveXTowards = shipMovementSlider.GetComponent<Slider>().value * (maxX - minX);
+        //moveTowards = new Vector3(moveXTowards, transform.position.y, transform.position.z);
+        //transform.position = Vector3.MoveTowards(transform.position, moveTowards, moveSpeedB * Time.deltaTime);
 
     }
 
