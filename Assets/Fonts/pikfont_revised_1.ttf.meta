@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 39adec2fe02b82c48ad17cbd6997f928
+guid: 592e297ebdd3305428017987b859859a
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - pikfont_unified
+  - pikfont_revised
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
