@@ -8,7 +8,8 @@ public class GameManager : MonoBehaviour
 {
     public float gameProgress, gameProgressSpeed;
     public GameObject gameProgressSlider;
-    public GameObject ship, asteroidSpawner, energySpawner, shield, radar, radarUI;
+    public GameObject ship, asteroidSpawner, energySpawner, shield, radar, radarUI, parallax;
+    public Camera mainCamera;
     //public GameObject engineModuleSpriteLV1, engineModuleSpriteLV2, engineModuleSpriteLV3;
     public GameObject radarModuleSpriteLV1, radarModuleSpriteLV2, radarModuleSpriteLV3;
     public GameObject positionModuleSpriteLV1, positionModuleSpriteLV2, positionModuleSpriteLV3, positionModuleSpriteLV4, positionModuleSpriteLV5;
@@ -21,6 +22,12 @@ public class GameManager : MonoBehaviour
     public float maxRotationSpeedLV1, maxRotationSpeedLV2, maxRotationSpeedLV3, maxRotationSpeedLV4, maxRotationSpeedLV5; //Speed variations for each module level
     public float radarWaveIntervalLV3, radarWaveIntervalLV2, radarWaveIntervalLV1, radarWaveIntervalLV0;
     public Transform positionLV1, positionLV2, positionLV3, positionLV4, positionLV5; //Position variations for each module level
+    public float durationToPosition5, durationToPosition4, durationToPosition3, durationToPosition2, durationToPosition1; //Speed variations for each module level when moving to another position
+    public float speedParallaxLV0, speedParallaxLV1, speedParallaxLV2, speedParallaxLV3, speedParallaxLV4, speedParallaxLV5; //Speed variations for each module level
+    public float cameraPosLV0, cameraPosLV1, cameraPosLV2, cameraPosLV3, cameraPosLV4, cameraPosLV5;
+    public float cameraZoomOutSpeed = 2;
+    private float targetZoom;        // Target orthographic size
+
     //public GameObject lightPlayerLV1, lightPlayerLV2; //Radar light variations for each module level
 
     public float energy = 100f; // Amount of energy at any time
@@ -53,7 +60,7 @@ public class GameManager : MonoBehaviour
     public bool isShieldActive = false;
     public bool isShieldCooldown = false;
 
-
+    
 
 
     // Start is called before the first frame update
@@ -115,6 +122,13 @@ public class GameManager : MonoBehaviour
         //Start game with no arrow spawn
         asteroidSpawner.GetComponent<AsteroidSpawner>().spawnArrow = false;
 
+        //Start game with parallax effect LV1
+        parallax.GetComponent<ParallarEffect>().IncreaseSpeed(speedParallaxLV1);
+
+        //Reference to the main camera
+        mainCamera = Camera.main;
+        targetZoom = mainCamera.orthographicSize; // Set initial target to current zoom level
+
     }
 
     // Update is called once per frame
@@ -163,6 +177,10 @@ public class GameManager : MonoBehaviour
         //Clamp energy
         energy = Mathf.Max(energy, 0);
         energy = Mathf.Min(energy, maxEnergy);
+
+        //Move the camera when needed
+        // Smoothly adjust the orthographic size towards the target zoom value
+        mainCamera.orthographicSize = Mathf.MoveTowards(mainCamera.orthographicSize, targetZoom, cameraZoomOutSpeed * Time.deltaTime);
 
     }
 
@@ -451,6 +469,15 @@ public class GameManager : MonoBehaviour
             ship.GetComponent<ShipMovement>().MoveToLevel(positionLV5);
 
             positionModEnergyDecreaseLV5 = positionModEnergyDecreaseLV5_original;
+
+            //Increase parallax
+            parallax.GetComponent<ParallarEffect>().IncreaseSpeed(speedParallaxLV5);
+
+            //Increase speed when transitioning to the next position
+            ship.GetComponent<ShipMovement>().moveDuration = durationToPosition5;
+
+            //Zoom out camera
+            ZoomOut(cameraPosLV5);
         }
 
         else if (positionLV == 3)
@@ -462,6 +489,15 @@ public class GameManager : MonoBehaviour
             ship.GetComponent<ShipMovement>().MoveToLevel(positionLV4);
 
             positionModEnergyDecreaseLV4 = positionModEnergyDecreaseLV4_original;
+
+            //Increase parallax
+            parallax.GetComponent<ParallarEffect>().IncreaseSpeed(speedParallaxLV4);
+
+            //Increase speed when transitioning to the next position
+            ship.GetComponent<ShipMovement>().moveDuration = durationToPosition4;
+
+            //Zoom out camera
+            ZoomOut(cameraPosLV4);
         }
 
         else if (positionLV == 2)
@@ -473,6 +509,15 @@ public class GameManager : MonoBehaviour
             ship.GetComponent<ShipMovement>().MoveToLevel(positionLV3);
 
             positionModEnergyDecreaseLV3 = positionModEnergyDecreaseLV3_original;
+
+            //Increase parallax
+            parallax.GetComponent<ParallarEffect>().IncreaseSpeed(speedParallaxLV3);
+
+            //Increase speed when transitioning to the next position
+            ship.GetComponent<ShipMovement>().moveDuration = durationToPosition3;
+
+            //Zoom out camera
+            ZoomOut(cameraPosLV3);
         }
 
         else if (positionLV == 1)
@@ -484,6 +529,14 @@ public class GameManager : MonoBehaviour
 
             positionModEnergyDecreaseLV2 = positionModEnergyDecreaseLV2_original;
 
+            //Increase parallax
+            parallax.GetComponent<ParallarEffect>().IncreaseSpeed(speedParallaxLV2);
+
+            //Increase speed when transitioning to the next position
+            ship.GetComponent<ShipMovement>().moveDuration = durationToPosition2;
+
+            //Zoom out camera
+            ZoomOut(cameraPosLV2);
         }
 
     }
@@ -501,6 +554,15 @@ public class GameManager : MonoBehaviour
 
             positionModEnergyDecreaseLV5 = 0;
             positionModEnergyDecreaseLV4 = positionModEnergyDecreaseLV4_original;
+
+            //Decrease parallax speed
+            parallax.GetComponent<ParallarEffect>().IncreaseSpeed(speedParallaxLV4);
+
+            //Increase speed when transitioning to the next position
+            ship.GetComponent<ShipMovement>().moveDuration = durationToPosition4;
+
+            //Zoom out camera
+            ZoomOut(cameraPosLV4);
         }
 
         else if (positionLV == 4)
@@ -513,6 +575,15 @@ public class GameManager : MonoBehaviour
 
             positionModEnergyDecreaseLV4 = 0;
             positionModEnergyDecreaseLV3 = positionModEnergyDecreaseLV3_original;
+
+            //Decrease parallax speed
+            parallax.GetComponent<ParallarEffect>().IncreaseSpeed(speedParallaxLV3);
+
+            //Increase speed when transitioning to the next position
+            ship.GetComponent<ShipMovement>().moveDuration = durationToPosition3;
+
+            //Zoom out camera
+            ZoomOut(cameraPosLV3);
         }
 
         else if (positionLV == 3)
@@ -525,6 +596,15 @@ public class GameManager : MonoBehaviour
 
             positionModEnergyDecreaseLV3 = 0;
             positionModEnergyDecreaseLV2 = positionModEnergyDecreaseLV2_original;
+
+            //Decrease parallax speed
+            parallax.GetComponent<ParallarEffect>().IncreaseSpeed(speedParallaxLV2);
+
+            //Increase speed when transitioning to the next position
+            ship.GetComponent<ShipMovement>().moveDuration = durationToPosition2;
+
+            //Zoom out camera
+            ZoomOut(cameraPosLV2);
         }
 
         else if (positionLV == 2)
@@ -537,8 +617,15 @@ public class GameManager : MonoBehaviour
             positionModEnergyDecreaseLV2 = 0;
             positionModEnergyDecreaseLV1 = positionModEnergyDecreaseLV1_original;
 
-        }
+            //Decrease parallax spee1
+            parallax.GetComponent<ParallarEffect>().IncreaseSpeed(speedParallaxLV1);
 
+            //Increase speed when transitioning to the next position
+            ship.GetComponent<ShipMovement>().moveDuration = durationToPosition1;
+
+            //Zoom out camera
+            ZoomOut(cameraPosLV1);
+        }
     }
 
 
@@ -551,6 +638,9 @@ public class GameManager : MonoBehaviour
             asteroidSpawner.GetComponent<AsteroidSpawner>().maxAsteroidSpeed = minAsteroidSpeedLV5;
             asteroidSpawner.GetComponent<AsteroidSpawner>().minRotationSpeed = minRotationSpeedLV5;
             asteroidSpawner.GetComponent<AsteroidSpawner>().maxRotationSpeed = maxRotationSpeedLV5;
+
+            //Change speed of all spawned asteroids in the scene to the average number of the range in that level
+            ChangeAsteroidSpeeds(maxAsteroidSpeedLV5 - minAsteroidSpeedLV5);
         }
 
         else if (positionLV == 4)
@@ -559,6 +649,9 @@ public class GameManager : MonoBehaviour
             asteroidSpawner.GetComponent<AsteroidSpawner>().maxAsteroidSpeed = maxAsteroidSpeedLV4;
             asteroidSpawner.GetComponent<AsteroidSpawner>().minRotationSpeed = minRotationSpeedLV4;
             asteroidSpawner.GetComponent<AsteroidSpawner>().maxRotationSpeed = maxRotationSpeedLV4;
+
+            //Change speed of all spawned asteroids in the scene to the average number of the range in that level
+            ChangeAsteroidSpeeds(maxAsteroidSpeedLV5 - minAsteroidSpeedLV4);
         }
 
         else if (positionLV == 3)
@@ -567,6 +660,9 @@ public class GameManager : MonoBehaviour
             asteroidSpawner.GetComponent<AsteroidSpawner>().maxAsteroidSpeed = maxAsteroidSpeedLV3;
             asteroidSpawner.GetComponent<AsteroidSpawner>().minRotationSpeed = minRotationSpeedLV3;
             asteroidSpawner.GetComponent<AsteroidSpawner>().maxRotationSpeed = maxRotationSpeedLV3;
+
+            //Change speed of all spawned asteroids in the scene to the average number of the range in that level
+            ChangeAsteroidSpeeds(maxAsteroidSpeedLV5 - minAsteroidSpeedLV3);
         }
 
         else if (positionLV == 2)
@@ -575,6 +671,9 @@ public class GameManager : MonoBehaviour
             asteroidSpawner.GetComponent<AsteroidSpawner>().maxAsteroidSpeed = maxAsteroidSpeedLV2;
             asteroidSpawner.GetComponent<AsteroidSpawner>().minRotationSpeed = minRotationSpeedLV2;
             asteroidSpawner.GetComponent<AsteroidSpawner>().maxRotationSpeed = maxRotationSpeedLV2;
+
+            //Change speed of all spawned asteroids in the scene to the average number of the range in that level
+            ChangeAsteroidSpeeds(maxAsteroidSpeedLV5 - minAsteroidSpeedLV2);
         }
 
         else if (positionLV == 1)
@@ -583,9 +682,40 @@ public class GameManager : MonoBehaviour
             asteroidSpawner.GetComponent<AsteroidSpawner>().maxAsteroidSpeed = maxAsteroidSpeedLV1;
             asteroidSpawner.GetComponent<AsteroidSpawner>().minRotationSpeed = minRotationSpeedLV1;
             asteroidSpawner.GetComponent<AsteroidSpawner>().maxRotationSpeed = maxRotationSpeedLV1;
+
+            //Change speed of all spawned asteroids in the scene to the average number of the range in that level
+            ChangeAsteroidSpeeds(maxAsteroidSpeedLV5 - minAsteroidSpeedLV1);
         }
     }
 
+    public void ChangeAsteroidSpeeds(float speed)
+    {
+        // Find all asteroids in the scene
+        AsteroidMovement[] asteroids = FindObjectsOfType<AsteroidMovement>();
+
+        // Change the speed of each asteroid
+        foreach (AsteroidMovement asteroid in asteroids)
+        {
+            Rigidbody2D rb = asteroid.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                // Calculate the direction of the current movement
+                Vector2 currentDirection = rb.velocity.normalized;
+
+                // Apply force in the current direction
+                rb.AddForce(currentDirection * speed, ForceMode2D.Impulse);
+            }
+        }
+    }
+
+    // Method to zoom out
+    public void ZoomOut(float newZoom)
+    {
+        if (mainCamera != null)
+        {
+            targetZoom = newZoom; // Set the target orthographic size
+        }
+    }
 
     public void TriggerOverload()
     {

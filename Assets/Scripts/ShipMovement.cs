@@ -22,15 +22,19 @@ public class ShipMovement : MonoBehaviour
 
     public float minX; // Minimum X boundary
     public float maxX;  // Maximum X boundary
-    private float moveXTowards;
-    private Vector3 moveTowards;
-    private float moveSpeedB = 50;
+    //private float moveXTowards;
+    //private Vector3 moveTowards;
+    //private float moveSpeedB = 50;
 
     public float moveSpeed = 5f; // Speed at which to move the ship horizontally
 
+    public float moveDuration = 2f; // Time it takes to complete the movement
+    private float moveTimer = 0f;
+    private Vector3 initialPosition; // Starting position for the movement
+    private bool isMovingToLevel = false;
+
     public bool isMoving = false; // Whether the ship is currently moving
     private Vector3 targetPosition; // The target position for vertical movement
-    public float moveSpeedVertical = 5f; // Speed at which to move the ship vertically
 
     void Update()
     {
@@ -49,18 +53,28 @@ public class ShipMovement : MonoBehaviour
         transform.position = new Vector2(clampedX, transform.position.y);
 
         // Move the ship vertically towards the target position if it is moving
-        if (isMoving)
+        if (isMovingToLevel)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+            moveTimer += Time.deltaTime;
 
-            // Check if the ship has reached the target position within a small threshold
-            if (Mathf.Abs(transform.position.y - targetPosition.y) < 0.01f)
+            // Calculate how far we are through the movement
+            float t = moveTimer / moveDuration;
+
+            // Apply an S-curve easing function to the time variable 't'
+            t = EaseInFastOutSlow(t);
+
+            // Interpolate between the initial position and the target position based on 't'
+            transform.position = Vector3.Lerp(initialPosition, targetPosition, t);
+
+            // Stop moving when we reach the target position
+            if (t >= 1f)
             {
-                // Snap to the target position to avoid precision issues
-                transform.position = new Vector3(transform.position.x, targetPosition.y, transform.position.z);
-                isMoving = false; // Stop moving when reached
+                isMovingToLevel = false;
             }
         }
+
+
+        //Slider movement
         //moveXTowards = shipMovementSlider.GetComponent<Slider>().value * (maxX - minX);
         //moveTowards = new Vector3(moveXTowards, transform.position.y, transform.position.z);
         //transform.position = Vector3.MoveTowards(transform.position, moveTowards, moveSpeedB * Time.deltaTime);
@@ -107,12 +121,24 @@ public class ShipMovement : MonoBehaviour
 
 
 
-    // Method to move the player to the specified Y position based on level
+    // Method to move the player to the specified Y position based on level with S-curve
     public void MoveToLevel(Transform targetPositionObject)
     {
         float targetY = targetPositionObject.position.y;
         targetPosition = new Vector3(transform.position.x, targetY, transform.position.z);
-        isMoving = true; // Set the flag to start moving
+
+        initialPosition = transform.position; // Store the starting position
+        moveTimer = 0f; // Reset the timer
+        isMovingToLevel = true; // Start moving
+    }
+
+    // Custom easing function: fast initial growth, slower end
+    float EaseInFastOutSlow(float t)
+    {
+        // Cubic ease in-out, with adjustments to make initial part faster and the final part slower
+        return t < 0.5f
+            ? 5 * t * t * t  // Faster growth in the first half
+            : 1 - Mathf.Pow(-2 * t + 2, 3) / 2; // Slower growth in the second half
     }
 
 
