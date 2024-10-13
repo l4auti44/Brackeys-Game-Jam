@@ -5776,8 +5776,8 @@ Transform:
   m_GameObject: {fileID: 1198210112}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -737.87, y: -680.9, z: -0.24079502}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -731.59, y: -680.9, z: -0.24079502}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1154525216}
@@ -10043,7 +10043,7 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
+    x: -0.45
     y: 0
     width: 1
     height: 1
@@ -10051,7 +10051,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7
+  orthographic size: 7.45
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -10076,7 +10076,7 @@ Transform:
   m_GameObject: {fileID: 1760420529}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.517578, y: 0, z: -10}
+  m_LocalPosition: {x: 6.6, y: 0.35, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11619,7 +11619,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 5.96
-  m_PointLightOuterRadius: 6.79
+  m_PointLightOuterRadius: 101.92
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
