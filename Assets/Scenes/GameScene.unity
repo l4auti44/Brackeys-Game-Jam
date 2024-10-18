@@ -5064,7 +5064,7 @@ GameObject:
   - component: {fileID: 969605001}
   - component: {fileID: 969605000}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: HAL_test_sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5078,13 +5078,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 969604998}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.15, y: -1.98, z: 7.44}
-  m_LocalScale: {x: 4.82, y: 4.95, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 28.8, y: -7.5, z: 13.236996}
+  m_LocalScale: {x: 8.74, y: 9.19, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 448063870}
-  m_Father: {fileID: 2048412030}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &969605000
 Animator:
@@ -13105,8 +13105,8 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.7
-    y: 0.05
+    x: 0.627
+    y: -0.09
     width: 0.26
     height: 0.54
   near clip plane: 0.3
@@ -13141,8 +13141,7 @@ Transform:
   m_LocalPosition: {x: 28.53, y: -7.14, z: 5.796996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 969604999}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2069746203
@@ -14805,3 +14804,4 @@ SceneRoots:
   - {fileID: 1017901626}
   - {fileID: 1396376256}
   - {fileID: 2048412030}
+  - {fileID: 969604999}
