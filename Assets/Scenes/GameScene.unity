@@ -1177,7 +1177,7 @@ Transform:
   m_GameObject: {fileID: 200715442}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.4399707, z: 0}
+  m_LocalPosition: {x: 0, y: 2.1600025, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1675,7 +1675,7 @@ Transform:
   m_GameObject: {fileID: 300244155}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.1299707, z: 0}
+  m_LocalPosition: {x: 0, y: 0.8999902, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2185,7 +2185,7 @@ Transform:
   m_GameObject: {fileID: 379365697}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.640015, y: 2.4399707, z: 0}
+  m_LocalPosition: {x: 18.640015, y: 2.1600025, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3322,7 +3322,7 @@ Transform:
   m_GameObject: {fileID: 711992171}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.68, z: 0}
+  m_LocalPosition: {x: 0, y: 4.32, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5710,10 +5710,10 @@ MonoBehaviour:
   minAsteroidSpeedLV4: 7
   minAsteroidSpeedLV5: 9
   maxAsteroidSpeedLV1: 3
-  maxAsteroidSpeedLV2: 5
-  maxAsteroidSpeedLV3: 7
-  maxAsteroidSpeedLV4: 9
-  maxAsteroidSpeedLV5: 11
+  maxAsteroidSpeedLV2: 4
+  maxAsteroidSpeedLV3: 5
+  maxAsteroidSpeedLV4: 7
+  maxAsteroidSpeedLV5: 9
   minRotationSpeedLV1: 20
   minRotationSpeedLV2: 100
   minRotationSpeedLV3: 200
@@ -5740,10 +5740,10 @@ MonoBehaviour:
   durationToPosition1: 1
   speedParallaxLV0: 0
   speedParallaxLV1: 1
-  speedParallaxLV2: 2.2
-  speedParallaxLV3: 3.5
-  speedParallaxLV4: 4.6
-  speedParallaxLV5: 5.8
+  speedParallaxLV2: 2
+  speedParallaxLV3: 3.1
+  speedParallaxLV4: 4.3
+  speedParallaxLV5: 4.9
   cameraPosLV0: 0
   cameraPosLV1: 7
   cameraPosLV2: 7.5
@@ -7545,7 +7545,7 @@ Transform:
   m_GameObject: {fileID: 1362426635}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.640015, y: 1.1299707, z: 0}
+  m_LocalPosition: {x: 18.640015, y: 0.8999902, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9195,7 +9195,7 @@ Transform:
   m_GameObject: {fileID: 1580754184}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.6899705, z: 0}
+  m_LocalPosition: {x: 0, y: 3.3299851, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11787,7 +11787,7 @@ Transform:
   m_GameObject: {fileID: 1895894980}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.640015, y: 3.6899705, z: 0}
+  m_LocalPosition: {x: 18.640015, y: 3.3299851, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12194,8 +12194,8 @@ MonoBehaviour:
   arrow3Prefab: {fileID: 1768615014423082408, guid: 2ca49f1c6c6b4d2458c56b41889ad5a1, type: 3}
   spawnArrow: 0
   moveSpeed: 2
-  minSpawnInterval: 0.8
-  maxSpawnInterval: 5
+  minSpawnInterval: 0.7
+  maxSpawnInterval: 2.8
   minAsteroidSpeed: 1
   maxAsteroidSpeed: 3
   minRotationSpeed: 20
@@ -13775,7 +13775,7 @@ Transform:
   m_GameObject: {fileID: 2142999050}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.64, y: 4.6799707, z: 0}
+  m_LocalPosition: {x: 18.64, y: 4.3199854, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
