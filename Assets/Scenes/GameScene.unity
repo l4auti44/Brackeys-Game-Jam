@@ -12194,8 +12194,8 @@ MonoBehaviour:
   arrow3Prefab: {fileID: 1768615014423082408, guid: 2ca49f1c6c6b4d2458c56b41889ad5a1, type: 3}
   spawnArrow: 0
   moveSpeed: 2
-  minSpawnInterval: 0.7
-  maxSpawnInterval: 2.8
+  minSpawnInterval: 0.65
+  maxSpawnInterval: 2.4
   minAsteroidSpeed: 1
   maxAsteroidSpeed: 3
   minRotationSpeed: 20
