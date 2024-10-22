@@ -299,7 +299,7 @@ Transform:
   m_GameObject: {fileID: 32938072}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.77, y: 0, z: 0}
+  m_LocalPosition: {x: 6.97, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2567,7 +2567,7 @@ Transform:
   m_GameObject: {fileID: 456080112}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.34, y: 0, z: 0}
+  m_LocalPosition: {x: -7.59, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5705,15 +5705,15 @@ MonoBehaviour:
   speedLV4: 3.5
   speedLV5: 4
   minAsteroidSpeedLV1: 1
-  minAsteroidSpeedLV2: 3
-  minAsteroidSpeedLV3: 5
-  minAsteroidSpeedLV4: 7
-  minAsteroidSpeedLV5: 9
+  minAsteroidSpeedLV2: 2
+  minAsteroidSpeedLV3: 3.3
+  minAsteroidSpeedLV4: 4.4
+  minAsteroidSpeedLV5: 5.5
   maxAsteroidSpeedLV1: 3
-  maxAsteroidSpeedLV2: 4
-  maxAsteroidSpeedLV3: 5
-  maxAsteroidSpeedLV4: 7
-  maxAsteroidSpeedLV5: 9
+  maxAsteroidSpeedLV2: 3.5
+  maxAsteroidSpeedLV3: 4.5
+  maxAsteroidSpeedLV4: 5.5
+  maxAsteroidSpeedLV5: 6.5
   minRotationSpeedLV1: 20
   minRotationSpeedLV2: 100
   minRotationSpeedLV3: 200
@@ -5755,14 +5755,14 @@ MonoBehaviour:
   energyDecreaseSpeed: 0
   maxEnergy: 100
   radarModEnergyDecreaseLV1: 2
-  radarModEnergyDecreaseLV2: 2
-  radarModEnergyDecreaseLV3: 2
+  radarModEnergyDecreaseLV2: 15
+  radarModEnergyDecreaseLV3: 30
   shieldModEnergyDecrease: 2
-  positionModEnergyDecreaseLV1: 2
-  positionModEnergyDecreaseLV2: 2
-  positionModEnergyDecreaseLV3: 2
-  positionModEnergyDecreaseLV4: 2
-  positionModEnergyDecreaseLV5: 2
+  positionModEnergyDecreaseLV1: 5
+  positionModEnergyDecreaseLV2: 10
+  positionModEnergyDecreaseLV3: 15
+  positionModEnergyDecreaseLV4: 25
+  positionModEnergyDecreaseLV5: 35
   arrowModEnergyDecrease: 2
   energySlider: {fileID: 1053437753}
   isOverload: 0
@@ -12194,8 +12194,8 @@ MonoBehaviour:
   arrow3Prefab: {fileID: 1768615014423082408, guid: 2ca49f1c6c6b4d2458c56b41889ad5a1, type: 3}
   spawnArrow: 0
   moveSpeed: 2
-  minSpawnInterval: 0.65
-  maxSpawnInterval: 2.4
+  minSpawnInterval: 0.39
+  maxSpawnInterval: 1.1
   minAsteroidSpeed: 1
   maxAsteroidSpeed: 3
   minRotationSpeed: 20
