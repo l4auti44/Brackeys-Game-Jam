@@ -158,10 +158,10 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 444091473
-  m_SortingLayer: 1
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 99743693, guid: ce98792ab34b7854ab6031d4372a608b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -264,7 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc5c0c3239ac23b4786a48adf0e693f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLightIntensity: 1
+  fadeSpeed: 1
 --- !u!114 &658208553761751452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,5 +282,4 @@ MonoBehaviour:
   asteroid4Prefab: {fileID: 5586743574098997687}
   energyDropPrefab: {fileID: 6855771246143582453, guid: a0ebb70010c8dd8429d9071d604f2bc0, type: 3}
   asteroidType: 4
-  spawnForce: 2
   energyDropSpeed: 2

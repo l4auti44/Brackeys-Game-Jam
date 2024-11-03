@@ -38,21 +38,18 @@ public class ShipMovement : MonoBehaviour
 
     void Update()
     {
-        //Get updated speed and energy from game manager
+        // Get updated speed and energy from game manager
         speed = gameManager.GetComponent<GameManager>().shipSpeed;
         energy = gameManager.GetComponent<GameManager>().energy;
-        
+
         // Get horizontal input (left/right arrows or A/D keys)
         float move = Input.GetAxis("Horizontal");
 
-        // Move the ship horizontally
-        transform.Translate(Vector2.right * move * speed * Time.deltaTime);
+        // Calculate new horizontal position but do not apply it directly
+        float newX = Mathf.Clamp(transform.position.x + move * speed * Time.deltaTime, minX, maxX);
 
-        // Clamp the ship's X position to stay within the bounds
-        float clampedX = Mathf.Clamp(transform.position.x, minX, maxX);
-        transform.position = new Vector2(clampedX, transform.position.y);
-
-        // Move the ship vertically towards the target position if it is moving
+        // If moving to level, update only the vertical position
+        float newY = transform.position.y;
         if (isMovingToLevel)
         {
             moveTimer += Time.deltaTime;
@@ -63,8 +60,8 @@ public class ShipMovement : MonoBehaviour
             // Apply an S-curve easing function to the time variable 't'
             t = EaseInFastOutSlow(t);
 
-            // Interpolate between the initial position and the target position based on 't'
-            transform.position = Vector3.Lerp(initialPosition, targetPosition, t);
+            // Interpolate only the Y-axis between initial and target positions
+            newY = Mathf.Lerp(initialPosition.y, targetPosition.y, t);
 
             // Stop moving when we reach the target position
             if (t >= 1f)
@@ -72,6 +69,9 @@ public class ShipMovement : MonoBehaviour
                 isMovingToLevel = false;
             }
         }
+
+        // Update the transform position with the new X and Y values
+        transform.position = new Vector2(newX, newY);
 
 
         //Slider movement

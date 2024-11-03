@@ -11,7 +11,6 @@ public class ArrowController : MonoBehaviour
     {
         gameManager = GameObject.Find("GameManager");
         Transform objectToAdd = this.transform; // Replace with the actual Transform you want to add
-        gameManager.GetComponent<GameFeelManager>().AddUnaffectedObject(objectToAdd);
 
         // Destroy the arrow after 'lifetime' seconds
         Destroy(gameObject, lifetime);

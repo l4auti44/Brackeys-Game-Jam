@@ -43,7 +43,6 @@ public class RadarController : MonoBehaviour
             yield return null; // Wait for the next frame
         }
 
-        // Optionally destroy the wave instance after reaching max size
         Destroy(waveInstance); // Destroy the wave after it has finished expanding
     }
 }

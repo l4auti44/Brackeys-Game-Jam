@@ -5852,7 +5852,7 @@ MonoBehaviour:
   cameraPosLV3: 8
   cameraPosLV4: 8.5
   cameraPosLV5: 9
-  cameraZoomOutSpeed: 0
+  cameraZoomOutSpeed: 1
   energy: 0
   energyDecreaseSpeed: 0
   maxEnergy: 1000
@@ -5904,7 +5904,6 @@ MonoBehaviour:
   cameraTransform: {fileID: 0}
   shakeDuration: 0.5
   shakeMagnitude: 0.2
-  unaffectedObjects: []
 --- !u!1 &1053437753
 GameObject:
   m_ObjectHideFlags: 0
@@ -6359,7 +6358,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00000047683716, y: -0.30016816}
+  m_Offset: {x: -0.00000047683716, y: -0.30717635}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -6370,7 +6369,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2973833, y: 0.50639033}
+  m_Size: {x: 0.2973833, y: 0.49237394}
   m_EdgeRadius: 0
 --- !u!1 &1198210112
 GameObject:
@@ -6882,7 +6881,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wavePrefab: {fileID: 7727764252220735630, guid: efbf8b276aa11544f8085e5dc38856f4, type: 3}
-  maxSize: 5
+  maxSize: 7
   waveInterval: 1
   scaleSpeed: 5
 --- !u!1 &1267023258
@@ -9946,9 +9945,9 @@ MonoBehaviour:
   radarUI: {fileID: 1699942372}
   canvas: {fileID: 1555946524}
   wavePrefab: {fileID: 9178481822147046770, guid: bced0b2ff6742854e870cec690f2b95e, type: 3}
-  maxSize: 80
+  maxSize: 175
   waveInterval: 1
-  scaleSpeed: 100
+  scaleSpeed: 130
 --- !u!114 &1699942374
 MonoBehaviour:
   m_ObjectHideFlags: 0

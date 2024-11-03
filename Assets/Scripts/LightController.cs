@@ -5,20 +5,14 @@ using UnityEngine.Rendering.Universal;
 
 public class LightController : MonoBehaviour
 {
-    private float fadeSpeed = 0.5f;   // Speed at which the light fades
-    public float maxLightIntensity = 1f; // The maximum intensity of the light
-
-    private Light2D childLight;    // Reference to the Light2D component
+    public float fadeSpeed = 0.5f;   // Speed at which the light fades
+    private SpriteRenderer spriteRenderer; // Reference to the SpriteRenderer
     private bool isFading = false; // Flag to control the fading process
 
     void Start()
     {
         // Automatically find the Light2D component in the child object
-        childLight = GetComponentInChildren<Light2D>();
-        if (childLight == null)
-        {
-            Debug.LogError("No Light2D component found in children.");
-        }
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         isFading = true;
     }
@@ -26,24 +20,20 @@ public class LightController : MonoBehaviour
     void Update()
     {
         // If fading is activated, reduce the light intensity over time
-        if (isFading && childLight != null)
+        if (isFading)
         {
-            childLight.intensity = Mathf.Max(0, childLight.intensity - fadeSpeed * Time.deltaTime);
+            Color color = spriteRenderer.color; // Get the current color
+            color.a -= fadeSpeed * 0.01f; // Set the alpha to 1
+            spriteRenderer.color = color; // Apply the updated color back to the SpriteRenderer
         }
-    }
-
-    // Method to activate the light fading
-    public void StartFading()
-    {
-        
     }
 
     // Method to reset the light intensity to the maximum
     public void IncreaseLightToMax()
     {
-        if (childLight != null)
-        {
-            childLight.intensity = maxLightIntensity;
-        }
+        Color color = spriteRenderer.color; // Get the current color
+        color.a = 1f; // Set the alpha to 1
+        spriteRenderer.color = color; // Apply the updated color back to the SpriteRenderer
+
     }
 }
