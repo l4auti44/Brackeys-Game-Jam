@@ -23,5 +23,6 @@ public class GameAssets : MonoBehaviour
     {
         public SoundManager.Sound sound;
         public AudioClip audioClip;
+        [Range(0, 1)]public float volume = 1;
     }
 }

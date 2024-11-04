@@ -172,6 +172,7 @@ public class GameManager : MonoBehaviour
         {
             shipSpeed = 0;
             radarLV = 0;
+            SoundManager.PlaySound(SoundManager.Sound.EnergyAtZeroWarning);
         }
 
         //Clamp energy
@@ -396,7 +397,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private void ActivateShield()
+    public void ActivateShield()
     {
         if (!isShieldCooldown)
         {

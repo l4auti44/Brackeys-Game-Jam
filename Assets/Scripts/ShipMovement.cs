@@ -35,6 +35,9 @@ public class ShipMovement : MonoBehaviour
     public bool isMoving = false; // Whether the ship is currently moving
     private Vector3 targetPosition; // The target position for vertical movement
 
+    private SoundManager.Sound[] collectSoundsFX = { SoundManager.Sound.Collect1, SoundManager.Sound.Collect2 }; //List of possible sounds for a collected energy
+
+
     void Update()
     {
         // Get updated speed and energy from game manager
@@ -85,13 +88,15 @@ public class ShipMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("EnergyCollectable"))
         {
             gameManager.GetComponent<GameManager>().IncreaseEnergy(energyCollectable);
-
+            SoundManager.PlaySound(collectSoundsFX);
             Destroy(collision.gameObject);
         }
 
         if (collision.gameObject.CompareTag("Enemy"))
         {
             gameManager.GetComponent<GameManager>().DecreaseEnergy(energyDecreaseEnemyHit);
+
+            SoundManager.PlaySound(SoundManager.Sound.HitByAsteroid);
 
             Destroy(collision.gameObject);
 

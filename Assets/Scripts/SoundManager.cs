@@ -14,14 +14,20 @@ public static class SoundManager
     //All projects sounds
     public enum Sound
     {
-        Alarm1,
-        Alarm2,
-        Repair,
-        Speaking,
-        Death,
-        Impact,
-        ButtonOver,
-        ButtonClick
+        EnergyAtZeroWarning,
+        StormImminent,
+        RepairDone,
+        HitByAsteroid,
+        GameOver,
+        DestinationReached,
+        SpeakingCalm,
+        SpeakingAngry,
+        ButtonHover,
+        ButtonClick,
+        Hello,
+        Destruct,
+        Collect1,
+        Collect2
     }
 
 
@@ -31,6 +37,7 @@ public static class SoundManager
     private static GameObject OneShotGameObject;
     private static AudioSource oneShotAudioSource;
 
+    private static float audioClipVolume;
 
     //NEED to be called in an Awake function (like in the gameManager.cs)
     public static void Initialize()
@@ -57,8 +64,25 @@ public static class SoundManager
         }
     }
 
-        public static void PlaySound(Sound sound)
+    public static void PlaySound(Sound sound)
     {
+        if (CanPlaySound(sound))
+        {
+            if (OneShotGameObject == null)
+            {
+                OneShotGameObject = new GameObject("One Shot Sound");
+                oneShotAudioSource = OneShotGameObject.AddComponent<AudioSource>();
+            }
+            AudioClip audioClip = GetAudioClip(sound);
+            oneShotAudioSource.volume = audioClipVolume;
+            oneShotAudioSource.PlayOneShot(audioClip);
+        }
+    }
+
+    //Random choose a sound from a given list
+    public static void PlaySound(Sound[] sounds)
+    {
+        Sound sound = sounds[Random.Range(0, sounds.Length)];
         if (CanPlaySound(sound))
         {
             if (OneShotGameObject == null)
@@ -70,29 +94,34 @@ public static class SoundManager
         }
     }
 
+
     //This is an EXTENSION from Button class.
     //NEED to be called from every button that needs this behaviour. EX: GameObject.Find("ButtonUPtest").GetComponent<Button>().AddButtonSounds();
     public static void AddButtonSounds(this Button button)
     {
         button.onClick.AddListener(() => SoundManager.PlaySound(Sound.ButtonClick));
-        
+ 
     }
 
 
     //Add here Sounds that need timer between each PlaySound()
-    /*EXAMPLE:
-             * case Sound.PlayerMove:
-             * if (soundTimerDictionary.ContainsKey(sound)){
-             *    float lastTimePlayed = soundTimerDictionary[sound];
-             *    float playerMoveTimerMax = .05f;  THIS IS THE DELAY THAT WE WANT
-             *    if (lastTimePlayer + playerMoveTimerMax < Time.time) {
-             *          soundTimerDictionary[sound] = Time.time;
-             *          return true;
-             *    } else {
-             *          return false;
-             *    }
-             * }
-             */
+    ///<example>
+    ///<code>
+    /// <![CDATA[
+    ///          case Sound.PlayerMove:
+    ///          if (soundTimerDictionary.ContainsKey(sound)){
+    ///             float lastTimePlayed = soundTimerDictionary[sound];
+    ///             float playerMoveTimerMax = .05f;  THIS IS THE DELAY THAT WE WANT
+    ///             if (lastTimePlayer + playerMoveTimerMax < Time.time) {
+    ///                   soundTimerDictionary[sound] = Time.time;
+    ///                   return true;
+    ///             } else {
+    ///                   return false;
+    ///             }
+    ///          }
+    /// ]]>
+    ///</code>
+    ///</example>
     private static bool CanPlaySound(Sound sound)
     {
         switch (sound)
@@ -109,6 +138,7 @@ public static class SoundManager
         {
             if (soundAudioClip.sound == sound)
             {
+                audioClipVolume = soundAudioClip.volume;
                 return soundAudioClip.audioClip;
             }
         }
