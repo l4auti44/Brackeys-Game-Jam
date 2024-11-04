@@ -12957,7 +12957,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2048412030}
   - component: {fileID: 2048412029}
-  - component: {fileID: 2048412028}
   - component: {fileID: 2048412027}
   m_Layer: 0
   m_Name: HAL Camera
@@ -13010,14 +13009,6 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!81 &2048412028
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2048412026}
-  m_Enabled: 1
 --- !u!20 &2048412029
 Camera:
   m_ObjectHideFlags: 0
