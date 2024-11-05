@@ -8,6 +8,7 @@ public class RadarController : MonoBehaviour
     public float maxSize = 5f;            // Maximum size of the sonar waves
     public float waveInterval = 2f;       // Time between sonar waves
     public float scaleSpeed = 1f;         // Speed multiplier for scaling
+    public bool isSpawning = true;       // Control whether waves should spawn
 
     private void Start()
     {
@@ -19,17 +20,20 @@ public class RadarController : MonoBehaviour
     {
         while (true)
         {
-            // Start a new expansion wave
-            StartCoroutine(ExpandWave());
+            if (isSpawning)
+            {
+                // Start a new expansion wave
+                StartCoroutine(ExpandWave());
+            }
 
-            // Wait for the specified interval before triggering the next wave
+            // Wait for the specified interval before checking again
             yield return new WaitForSeconds(waveInterval);
         }
     }
 
     private IEnumerator ExpandWave()
     {
-        // Instantiate the wave prefab at the sonar's position
+        /// Instantiate the wave prefab at the sonar's position
         GameObject waveInstance = Instantiate(wavePrefab, transform.position, Quaternion.identity);
         Transform waveTransform = waveInstance.transform;
 

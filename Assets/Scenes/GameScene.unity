@@ -5520,6 +5520,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1760420532}
   - {fileID: 1198210113}
   - {fileID: 894911561}
   - {fileID: 1970598915}
@@ -6898,6 +6899,7 @@ MonoBehaviour:
   maxSize: 7
   waveInterval: 1
   scaleSpeed: 5
+  isSpawning: 1
 --- !u!1 &1267023258
 GameObject:
   m_ObjectHideFlags: 0
@@ -9962,6 +9964,7 @@ MonoBehaviour:
   maxSize: 175
   waveInterval: 1
   scaleSpeed: 130
+  isSpawning: 1
 --- !u!114 &1699942374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10400,7 +10403,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7.45
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -10424,12 +10427,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1760420529}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.6, y: 0.35, z: -10}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -748.74, y: -685.15, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 987228016}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1760420533
 MonoBehaviour:
@@ -14957,7 +14960,6 @@ GameObject:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1760420532}
   - {fileID: 987228016}
   - {fileID: 448720314}
   - {fileID: 1555946525}

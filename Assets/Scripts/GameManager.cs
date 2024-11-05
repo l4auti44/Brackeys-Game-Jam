@@ -339,6 +339,8 @@ public class GameManager : MonoBehaviour
             radarModuleSpriteLV1.GetComponent<Image>().color = Color.green;
 
             //Activate radar LV1
+            ship.GetComponent<RadarController>().isSpawning = true;
+            radarUI.GetComponent<RadarControllerUI>().isSpawning = true;
             ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV1;
             radarUI.GetComponent<RadarControllerUI>().waveInterval = radarWaveIntervalLV1;
 
@@ -357,8 +359,8 @@ public class GameManager : MonoBehaviour
             radarModuleSpriteLV1.GetComponent<Image>().color = Color.white;
 
             //Activate radar LV0
-            ship.GetComponent<RadarController>().waveInterval = 0;
-            radarUI.GetComponent<RadarControllerUI>().waveInterval = 0;
+            ship.GetComponent<RadarController>().isSpawning = false;
+            radarUI.GetComponent<RadarControllerUI>().isSpawning = false;
 
             //Decrease energy
             radarModEnergyDecreaseLV1 = 0;
@@ -709,7 +711,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Method to zoom out
     public void ZoomOut(float newZoom)
     {
         if (mainCamera != null)
