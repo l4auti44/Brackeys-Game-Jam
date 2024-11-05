@@ -62,6 +62,7 @@ public class GameFeelManager : MonoBehaviour
 
     public void StopFrame(float duration)
     {
+        Time.timeScale = 1f;
         StartCoroutine(DoFrameStop(duration));
     }
 
