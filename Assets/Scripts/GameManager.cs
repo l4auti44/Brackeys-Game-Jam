@@ -60,8 +60,10 @@ public class GameManager : MonoBehaviour
     public bool isShieldActive = false;
     public bool isShieldCooldown = false;
 
-
+    
     private float timerForGameOver = 10f;
+
+    private float timer = 10f;
 
     // Start is called before the first frame update
     void Start()
@@ -136,6 +138,12 @@ public class GameManager : MonoBehaviour
     {
         if (!SceneController.isGamePaused)
         {
+            timer -= Time.deltaTime;
+            if (timer <= 0)
+            {
+                timer = 99999;
+                EventManager.Game.OnDialog.Invoke(DialogSystem.DialogEvents.Event1);
+            }
             //Increae the game progress over time
             gameProgress += gameProgressSpeed * 0.01f;
 
