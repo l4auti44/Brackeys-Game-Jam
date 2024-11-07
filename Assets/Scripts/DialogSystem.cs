@@ -30,11 +30,13 @@ public class DialogSystem : MonoBehaviour
     private void OnEnable()
     {
         EventManager.Game.OnDialog += StartDialog;
+        EventManager.Game.OnTaskDialogCompleted += TaskDialogCompleted;
     }
 
     private void OnDisable()
     {
         EventManager.Game.OnDialog -= StartDialog;
+        EventManager.Game.OnTaskDialogCompleted -= TaskDialogCompleted;
     }
 
     private void StartDialog(DialogEvents dialog)
@@ -60,7 +62,14 @@ public class DialogSystem : MonoBehaviour
         return null;
     }
 
-
+    private void TaskDialogCompleted(Component comp)
+    {
+        if (textComponent.text.Length != 0)
+        {
+            StopAllCoroutines();
+            textComponent.text = "";
+        }
+    }
 
     private IEnumerator TypeText(string message)
     {
