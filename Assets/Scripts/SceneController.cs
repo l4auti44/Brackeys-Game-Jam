@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class SceneController : MonoBehaviour
 {
     public static SceneController Instance;
-
+    public static bool isGamePaused = false;
 
     private void Awake()
     {
@@ -31,6 +31,8 @@ public class SceneController : MonoBehaviour
 
     public static void SceneLoader(string name)
     {
+        isGamePaused = false;
+        Time.timeScale = 1f;
         SceneManager.LoadScene(name);
     }
 

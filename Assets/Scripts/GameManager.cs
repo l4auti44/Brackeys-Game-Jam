@@ -60,8 +60,8 @@ public class GameManager : MonoBehaviour
     public bool isShieldActive = false;
     public bool isShieldCooldown = false;
 
-    
 
+    private float timerForGameOver = 10f;
 
     // Start is called before the first frame update
     void Start()
@@ -134,54 +134,71 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Increae the game progress over time
-        gameProgress += gameProgressSpeed * 0.01f;
-
-        //Update the slider filler
-        gameProgressSlider.GetComponent<Slider>().value = gameProgress * 0.01f;
-
-        
-        //Determination of energy decrease speed
-        energyDecreaseSpeed =
-
-        (radarModEnergyDecreaseLV1 +
-        radarModEnergyDecreaseLV2 +
-        radarModEnergyDecreaseLV3 +
-
-        shieldModEnergyDecrease +
-
-        positionModEnergyDecreaseLV1 +
-        positionModEnergyDecreaseLV2 +
-        positionModEnergyDecreaseLV3 +
-        positionModEnergyDecreaseLV4 +
-        positionModEnergyDecreaseLV5 +
-
-        arrowModEnergyDecrease_original
-        )
-        * 0.1f
-        ;
-
-        //Decrease energy over time
-        energy -= energyDecreaseSpeed * 0.01f;
-
-        //Update the energy value of the slider
-        energySlider.GetComponent<Slider>().value = energy * 0.01f;
-
-        //Deactivate all modules if energy is 0
-        if (energy < 0)
+        if (!SceneController.isGamePaused)
         {
-            shipSpeed = 0;
-            radarLV = 0;
-            SoundManager.PlaySound(SoundManager.Sound.EnergyAtZeroWarning);
+            //Increae the game progress over time
+            gameProgress += gameProgressSpeed * 0.01f;
+
+            //Update the slider filler
+            gameProgressSlider.GetComponent<Slider>().value = gameProgress * 0.01f;
+
+
+            //Determination of energy decrease speed
+            energyDecreaseSpeed =
+
+            (radarModEnergyDecreaseLV1 +
+            radarModEnergyDecreaseLV2 +
+            radarModEnergyDecreaseLV3 +
+
+            shieldModEnergyDecrease +
+
+            positionModEnergyDecreaseLV1 +
+            positionModEnergyDecreaseLV2 +
+            positionModEnergyDecreaseLV3 +
+            positionModEnergyDecreaseLV4 +
+            positionModEnergyDecreaseLV5 +
+
+            arrowModEnergyDecrease_original
+            )
+            * 0.1f
+            ;
+
+            //Decrease energy over time
+            energy -= energyDecreaseSpeed * 0.01f;
+
+            //Update the energy value of the slider
+            energySlider.GetComponent<Slider>().value = energy * 0.01f;
+
+            //Deactivate all modules if energy is 0
+            if (energy < 0)
+            {
+                shipSpeed = 0;
+                radarLV = 0;
+                SoundManager.PlaySound(SoundManager.Sound.EnergyAtZeroWarning);
+
+                timerForGameOver -= Time.deltaTime;
+                if (timerForGameOver <= 0f)
+                {
+
+                    timerForGameOver = 99999;
+                    EventManager.Game.OnDie.Invoke(this);
+                }
+            }
+            else
+            {
+                timerForGameOver = 10f;
+            }
+
+
+            //Clamp energy
+            energy = Mathf.Max(energy, 0);
+            energy = Mathf.Min(energy, maxEnergy);
+
+            //Move the camera when needed
+            // Smoothly adjust the orthographic size towards the target zoom value
+            mainCamera.orthographicSize = Mathf.MoveTowards(mainCamera.orthographicSize, targetZoom, cameraZoomOutSpeed * Time.deltaTime);
         }
-
-        //Clamp energy
-        energy = Mathf.Max(energy, 0);
-        energy = Mathf.Min(energy, maxEnergy);
-
-        //Move the camera when needed
-        // Smoothly adjust the orthographic size towards the target zoom value
-        mainCamera.orthographicSize = Mathf.MoveTowards(mainCamera.orthographicSize, targetZoom, cameraZoomOutSpeed * Time.deltaTime);
+        
 
     }
 
