@@ -149,6 +149,10 @@ public class GameManager : MonoBehaviour
 
             //Update the slider filler
             gameProgressSlider.GetComponent<Slider>().value = gameProgress * 0.01f;
+            if (gameProgress * 0.01f >= 1f)   
+            {
+                EventManager.Game.OnWin.Invoke(this);
+            }
 
 
             //Determination of energy decrease speed
