@@ -7,7 +7,7 @@ public class DialogSystem : MonoBehaviour
     public float timeForEachCharacter = 0.2f;
     public enum DialogEvents
     {
-        Event1,
+        NoGetHit,
         Event2,
     }
 
@@ -24,11 +24,14 @@ public class DialogSystem : MonoBehaviour
     public class DialogEventsList
     {
         public DialogEvents dialogEvent;
-        [TextArea]
-        public string text;
         public DialogPool dialogPool;
+        [TextArea]
+        public string taskText, failText, goodText;
+        public float timeForTask = 30f;
         private bool isDone = false;
     }
+
+    private DialogEventsList currentDialog;
 
     private bool isWritting = false;
 
@@ -40,32 +43,42 @@ public class DialogSystem : MonoBehaviour
         textComponent = GetComponent<TMPro.TMP_Text>();
     }
 
+    private void Update()
+    {
+        if (currentDialog != null)
+        {
+            switch (currentDialog.dialogEvent)
+            {
+                case DialogEvents.NoGetHit:
+                    break;
+            }
+        }
+    }
+
     private void OnEnable()
     {
         EventManager.Game.OnDialog += StartDialog;
-        EventManager.Game.OnTaskDialogCompleted += TaskDialogCompleted;
+        EventManager.Player.OnImpact += CheckOnImpactTask;
     }
 
     private void OnDisable()
     {
         EventManager.Game.OnDialog -= StartDialog;
-        EventManager.Game.OnTaskDialogCompleted -= TaskDialogCompleted;
+        EventManager.Player.OnImpact -= CheckOnImpactTask;
     }
 
     private void StartDialog(DialogEvents dialog)
     {
         if (isWritting)
         {
-            StopAllCoroutines();
-            isWritting = false;
-            SoundManager.StopDialogueSound();
+            StopWritting();
         }
-        var dialogEventClass = GetDialog(dialog);
-        if (dialogEventClass != null)
+        currentDialog = GetDialog(dialog);
+        if (currentDialog != null)
         {
-            StartCoroutine(TypeText(dialogEventClass.text));
+            StartCoroutine(TypeText(currentDialog.taskText));
         }
-        SoundManager.PlayDialogueSound(dialogEventClass.dialogPool);
+        StartCoroutine(WaitingForAction());
     }
 
     private DialogEventsList GetDialog(DialogEvents dialogEvent)
@@ -81,23 +94,73 @@ public class DialogSystem : MonoBehaviour
         Debug.LogError("Dialog Event not found!");
         return null;
     }
-
-    private void TaskDialogCompleted(Component comp)
+    private void StopWritting()
     {
-        if (textComponent.text.Length != 0)
+        StopAllCoroutines();
+        
+        textComponent.text = "";
+        isWritting = false;
+        SoundManager.StopDialogueSound();
+    }
+    private void TaskCompleted()
+    {
+        StopWritting();
+        StartCoroutine(TypeText(currentDialog.goodText));
+        StartCoroutine(WaitToDeleteText());
+        currentDialog = null;
+    }
+
+    public void TaskFailed()
+    {
+        StopWritting();
+        StartCoroutine(TypeText(currentDialog.failText));
+        StartCoroutine(WaitToDeleteText());
+        currentDialog = null;
+    }
+
+
+    private void CheckOnImpactTask(Component comp)
+    {
+        if (currentDialog != null)
         {
-            StopAllCoroutines();
-            textComponent.text = "";
+            if (currentDialog.dialogEvent == DialogEvents.NoGetHit)
+            {
+                StopCoroutine("WaitingForAction");
+                TaskFailed();
+            }
         }
+        
     }
 
     public void TestEvent()
     {
         StartDialog(dialogTEST);
     }
+    private IEnumerator WaitingForAction()
+    {
+        float time = currentDialog.timeForTask;
 
+        switch (currentDialog.dialogEvent)
+        {
+            case DialogEvents.NoGetHit:
+                yield return new WaitForSeconds(time);
+                TaskCompleted();
+                break;
+            default:
+                yield return new WaitForSeconds(time);
+                TaskFailed();
+                break;
+        }
+        
+    }
+    private IEnumerator WaitToDeleteText()
+    {
+        yield return new WaitForSeconds(10f);
+        StopWritting();
+    }
     private IEnumerator TypeText(string message)
     {
+        SoundManager.PlayDialogueSound(currentDialog.dialogPool);
         isWritting = true;
         textComponent.text = "";
         foreach (char letter in message)

@@ -441,9 +441,11 @@ MonoBehaviour:
   timeForEachCharacter: 0.1
   dialogEventsList:
   - dialogEvent: 0
-    text: 'Event  1  is  currently  being  executed.  I  hope  this  went  well . 
-      .  . '
     dialogPool: 0
+    taskText: Don't get hit for 15 seconds!!!!!
+    failText: you failed lol
+    goodText: Good, now continue this way...
+    timeForTask: 15
   dialogTEST: 0
 --- !u!114 &47947461
 MonoBehaviour:

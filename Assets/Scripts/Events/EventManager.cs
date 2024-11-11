@@ -15,7 +15,8 @@ public static class EventManager
         public UnityAction<Component> OnWin;
         public UnityAction<Component> OnDie;
         public UnityAction<DialogSystem.DialogEvents> OnDialog;
-        public UnityAction<Component> OnTaskDialogCompleted;
+        public UnityAction<DialogSystem.DialogEvents> OnTaskDialogCompleted;
+        public UnityAction<DialogSystem.DialogEvents> OnTaskDialogFailed;
         
     }
     
