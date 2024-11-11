@@ -24,6 +24,7 @@ public class DialogSystem : MonoBehaviour
     public class DialogEventsList
     {
         public DialogEvents dialogEvent;
+        [TextArea]
         public string text;
         public DialogPool dialogPool;
         private bool isDone = false;
