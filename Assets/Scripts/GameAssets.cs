@@ -25,4 +25,14 @@ public class GameAssets : MonoBehaviour
         public AudioClip audioClip;
         [Range(0, 1)]public float volume = 1;
     }
+
+
+    public DialogueAudioPool[] dialogueAudioPools;
+    [System.Serializable]
+    public class DialogueAudioPool
+    {
+        public DialogSystem.DialogPool dialogPool;
+        public AudioClip[] audios;
+        [Range(0, 1)] public float volume = 1;
+    }
 }

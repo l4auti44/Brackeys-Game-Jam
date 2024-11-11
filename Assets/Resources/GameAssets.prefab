@@ -66,3 +66,12 @@ MonoBehaviour:
   - sound: 15
     audioClip: {fileID: 8300000, guid: 95bfb0c7cccd78844b0a6cfdbf009d57, type: 3}
     volume: 0.543
+  dialogueAudioPools:
+  - dialogPool: 0
+    audios:
+    - {fileID: 8300000, guid: 117b3334051630a4aa758462623cd99d, type: 3}
+    - {fileID: 8300000, guid: f6e15947a6121c049873cab6a249a8c9, type: 3}
+    - {fileID: 8300000, guid: b70c14c0396904f43897572f3bfba356, type: 3}
+    - {fileID: 8300000, guid: b08dc3ffca0c31441bc8ce1f3a89282c, type: 3}
+    - {fileID: 8300000, guid: 6fdbe0e9ef8c99848866919cab4a7157, type: 3}
+    volume: 0.25

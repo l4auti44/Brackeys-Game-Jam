@@ -10,6 +10,12 @@ public class DialogSystem : MonoBehaviour
         Event1,
         Event2,
     }
+
+    public enum DialogPool
+    {
+        Calm,
+        Angry
+    }
     private TMPro.TMP_Text textComponent;
 
     public DialogEventsList[] dialogEventsList;
@@ -19,6 +25,7 @@ public class DialogSystem : MonoBehaviour
     {
         public DialogEvents dialogEvent;
         public string text;
+        public DialogPool dialogPool;
         private bool isDone = false;
     }
 
@@ -46,6 +53,7 @@ public class DialogSystem : MonoBehaviour
         {
             StartCoroutine(TypeText(dialogEventClass.text));
         }
+        SoundManager.PlayDialogueSound(dialogEventClass.dialogPool);
     }
 
     private DialogEventsList GetDialog(DialogEvents dialogEvent)
@@ -79,5 +87,6 @@ public class DialogSystem : MonoBehaviour
             textComponent.text += letter;
             yield return new WaitForSeconds(timeForEachCharacter);
         }
+        SoundManager.StopDialogueSound();
     }
 }

@@ -32,10 +32,10 @@ public static class SoundManager
         Music2
     }
 
-    private static GameObject OneShotGameObject, musicGameObject;
-    private static AudioSource oneShotAudioSource, musicAudioSource;
+    private static GameObject OneShotGameObject, musicGameObject, dialogueGameObject;
+    private static AudioSource oneShotAudioSource, musicAudioSource, dialogueAudioSource;
 
-    private static float audioClipVolume;
+    private static float audioClipVolume, DialogueVolume;
 
 
 
@@ -164,6 +164,47 @@ public static class SoundManager
         }
     }
 
+    public static void PlayDialogueSound(DialogSystem.DialogPool pool)
+    {
+        if (dialogueGameObject == null)
+        {
+            dialogueGameObject = new GameObject("Dialogue Sound");
+            dialogueAudioSource = dialogueGameObject.AddComponent<AudioSource>();
+        }
+
+        //Get dialoguePool
+        var poolAudios = GetDialogueAudios(pool);
+        List<AudioClip> audioList = new List<AudioClip>(poolAudios);
+        dialogueAudioSource.volume = DialogueVolume;
+        dialogueGameObject.AddComponent<MonoBehaviourHelper>().StartCoroutine(WaitUntilDialogueFinish(audioList, dialogueAudioSource));
+
+    }
+    public static void StopDialogueSound()
+    {
+        if (dialogueGameObject != null && dialogueAudioSource != null)
+        {
+            if (dialogueAudioSource.isPlaying)
+            {
+                dialogueGameObject.GetComponent<MonoBehaviourHelper>().StopAllCoroutines();
+            }
+        }
+    }
+
+    private static IEnumerator WaitUntilDialogueFinish(List<AudioClip> soundsLeft, AudioSource audioSource)
+    {
+        while (soundsLeft.Count > 0)
+        {
+            int randomChoice = Random.Range(0, soundsLeft.Count);
+
+            AudioClip selectedClip = soundsLeft[randomChoice];
+            audioSource.PlayOneShot(selectedClip);
+
+            yield return new WaitForSeconds(selectedClip.length);
+
+            soundsLeft.RemoveAt(randomChoice);
+        }
+    }
+
 
     //This is an EXTENSION from Button class.
     //NEED to be called from every button that needs this behaviour. EX: GameObject.Find("ButtonUPtest").GetComponent<Button>().AddButtonSounds();
@@ -214,6 +255,21 @@ public static class SoundManager
         }
 
         Debug.LogError("Sound " + sound + " not found!");
+        return null;
+    }
+
+    private static AudioClip[] GetDialogueAudios(DialogSystem.DialogPool pool)
+    {
+        foreach (GameAssets.DialogueAudioPool dialogueAudioPool in GameAssets.i.dialogueAudioPools)
+        {
+            if (dialogueAudioPool.dialogPool == pool)
+            {
+                DialogueVolume = dialogueAudioPool.volume;
+                return dialogueAudioPool.audios;
+            }
+        }
+
+        Debug.LogError("Dialogue pool " + pool + " not found!");
         return null;
     }
 
