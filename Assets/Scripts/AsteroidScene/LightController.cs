@@ -5,14 +5,21 @@ using UnityEngine.Rendering.Universal;
 
 public class LightController : MonoBehaviour
 {
-    public float fadeSpeed = 0.5f;   // Speed at which the light fades
+    private float fadeSpeed;   // Speed at which the light fades
     private SpriteRenderer spriteRenderer; // Reference to the SpriteRenderer
     private bool isFading = false; // Flag to control the fading process
+    private GameManager gameManager;
 
     void Start()
     {
         // Automatically find the Light2D component in the child object
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        // Find the Game Manager by name
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        //Get the light fade speed from the game manager
+        fadeSpeed = gameManager.asteroidFadeLightSpeed;
 
         isFading = true;
     }

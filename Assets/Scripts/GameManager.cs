@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public GameObject positionModuleSpriteLV1, positionModuleSpriteLV2, positionModuleSpriteLV3, positionModuleSpriteLV4, positionModuleSpriteLV5;
     public GameObject arrowUI, shieldUI;
     public float shipSpeed, radarLV, positionLV;
+    public float minX, maxX; // Minimum and maximum X boundary for player movement
+    public float asteroidFadeLightSpeed; //Asteroid light face speed
     public float speedLV0, speedLV1, speedLV2, speedLV3, speedLV4, speedLV5; //Speed variations for each module level
     public float minAsteroidSpeedLV1, minAsteroidSpeedLV2, minAsteroidSpeedLV3, minAsteroidSpeedLV4, minAsteroidSpeedLV5; //Speed variations for each module level
     public float maxAsteroidSpeedLV1, maxAsteroidSpeedLV2, maxAsteroidSpeedLV3, maxAsteroidSpeedLV4, maxAsteroidSpeedLV5; //Speed variations for each module level

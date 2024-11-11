@@ -4,27 +4,36 @@ using UnityEngine;
 
 public class AsteroidMovement : MonoBehaviour
 {
+    public enum AsteroidSize { Big, Medium, Small }
+
+    [Header("Asteroid Settings")]
+    public AsteroidSize asteroidCategory; // Dropdown to set the category (Big, Medium, Small)
+    public GameObject energyDropPrefab;   // The energy drop prefab
+    private float spawnSeparationAngle = 120f; // Angle separation for spawned objects
+    private float spawnForce = 5f; // Force applied to spawned asteroids
+    private float collisionActivationDelay = 0.2f; // Delay before asteroids can collide with each other
+    public float asteroidLifespan = 10f; // Lifespan of the asteroid in seconds
+
+    [Header("Asteroid Prefabs")]
+    public List<GameObject> bigAsteroids;    // Pool of big asteroids
+    public List<GameObject> mediumAsteroids; // Pool of medium asteroids
+    public List<GameObject> smallAsteroids;  // Pool of small asteroids
+
+    private Rigidbody2D rb;
+    private bool canCollideWithAsteroids = false; // Track if the asteroid can collide with others
     private float screenBottomY; // Y position of the bottom of the screen
+    private float energyDropSpeed = 2f; // Force applied to energy drop
 
-    public GameObject asteroid2Prefab;
-    public GameObject asteroid3Prefab;
-    public GameObject asteroid4Prefab;
-    public GameObject energyDropPrefab;
-    public int asteroidType;
-    private float spawnForce = 2f; // Force applied to spawned asteroids
-    public float energyDropSpeed = 2f; // Force applied to energy drop
-
-    // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
+
         // Get the screen bottom Y position
         screenBottomY = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0)).y;
 
-    }
+        // Initialize delay for asteroid collision
+        StartCoroutine(EnableAsteroidCollision());
 
-    // Update is called once per frame
-    void Update()
-    {
         // Destroy the asteroid if it goes off the screen
         if (transform.position.y < screenBottomY - 1f) // Adding some margin
         {
@@ -32,67 +41,72 @@ public class AsteroidMovement : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void Update()
     {
-        if (collision.CompareTag("Wall"))
+        // Any code for asteroid movement or rotation can go here
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        // Check if the asteroid collided with something that should trigger its destruction
+        if (other.CompareTag("Player") || other.CompareTag("Missile"))
         {
-            Destroy(gameObject); // Destroy the asteroid upon collision 
+            DestroyAsteroid();
+        }
+        // Check if the asteroid collided with another asteroid after the delay
+        else if (canCollideWithAsteroids && other.CompareTag("Enemy"))
+        {
+            DestroyAsteroid();
         }
     }
 
-    
-
-    // This function is called when the asteroid is destroyed
-    public void BreakAsteroid(int asteroidType)
+    private IEnumerator EnableAsteroidCollision()
     {
-        switch (asteroidType)
-        {
-            case 1:
-                // Break asteroid1
-                SpawnAsteroids(asteroid2Prefab, 2, 180f); // Spawn 2 asteroid2
-                SpawnEnergyDrop();
-                break;
-            case 2:
-                // Break asteroid2
-                SpawnAsteroids(asteroid3Prefab, 2, 120f); // Spawn 2 asteroid3
-                SpawnAsteroids(asteroid4Prefab, 1, 120f); // Spawn 1 asteroid4
-                SpawnEnergyDrop();
-                break;
-            default:
-                break;
-        }
-        Destroy(gameObject); // Destroy the current asteroid
+        yield return new WaitForSeconds(collisionActivationDelay);
+        canCollideWithAsteroids = true; // Enable collision with other asteroids
     }
 
-    // Spawns a specified number of asteroids, with a given angle offset for separation
-    private void SpawnAsteroids(GameObject asteroidPrefab, int count, float angleOffset)
+    public void DestroyAsteroid()
     {
-        float startAngle = Random.Range(0f, 360f); // Randomize initial angle
+        SpawnOnDestruction();
+        Destroy(gameObject);
+    }
 
-        for (int i = 0; i < count; i++)
+    private void SpawnOnDestruction()
+    {
+        List<GameObject> selectedPool = null;
+        int spawnCount = 0;
+
+        // Determine what to spawn based on asteroid category
+        if (asteroidCategory == AsteroidSize.Big)
         {
-            GameObject newAsteroid = Instantiate(asteroidPrefab, transform.position, Quaternion.identity);
-            Rigidbody2D rb = newAsteroid.GetComponent<Rigidbody2D>();
+            selectedPool = mediumAsteroids; // Use the pool of medium asteroids
+            spawnCount = 2;
+            SpawnEnergyDrop();
+        }
+        else if (asteroidCategory == AsteroidSize.Medium)
+        {
+            selectedPool = smallAsteroids; // Use the pool of small asteroids
+            spawnCount = 2;
+            SpawnEnergyDrop();
+        }
+        else if (asteroidCategory == AsteroidSize.Small)
+        {
+            SpawnEnergyDrop(); // Only spawn energy drop for small asteroids
+            return;
+        }
 
-            float angle;
+        // Spawn asteroids separated by a certain angle
+        for (int i = 0; i < spawnCount; i++)
+        {
+            GameObject asteroidPrefab = selectedPool[Random.Range(0, selectedPool.Count)];
+            GameObject spawnedAsteroid = Instantiate(asteroidPrefab, transform.position, Quaternion.identity);
 
-            // If there's more than one asteroid, calculate the angle
-            if (count > 1)
-            {
-                float angleStep = angleOffset / (count - 1); // Calculate angle between asteroids
-                angle = startAngle + (i * angleStep); // Separate them by angleStep
-            }
-            else
-            {
-                angle = startAngle; // If only one asteroid, no need for angleStep
-            }
-
-            Vector2 forceDirection = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
-
-            if (rb != null)
-            {
-                rb.AddForce(forceDirection * spawnForce, ForceMode2D.Impulse); // Apply force in the calculated direction
-            }
+            // Set the direction and apply force for each spawned asteroid
+            float angle = i * spawnSeparationAngle;
+            Vector2 direction = Quaternion.Euler(0, 0, angle) * Vector2.right; // Rotate right vector
+            Rigidbody2D asteroidRb = spawnedAsteroid.GetComponent<Rigidbody2D>();
+            asteroidRb.AddForce(direction.normalized * spawnForce, ForceMode2D.Impulse); // Apply force as impulse
         }
     }
 
@@ -100,6 +114,7 @@ public class AsteroidMovement : MonoBehaviour
     private void SpawnEnergyDrop()
     {
         GameObject energyDrop = Instantiate(energyDropPrefab, transform.position, Quaternion.identity);
+
 
         // Find the player's position
         GameObject player = GameObject.FindWithTag("Player");
@@ -114,10 +129,14 @@ public class AsteroidMovement : MonoBehaviour
             {
                 rb.velocity = directionToPlayer * energyDropSpeed;
             }
+
         }
     }
 
-
-
+    private IEnumerator DestroyAfterLifespan()
+    {
+        yield return new WaitForSeconds(asteroidLifespan);
+        DestroyAsteroid(); // Automatically destroy asteroid after lifespan ends
+    }
 }
 

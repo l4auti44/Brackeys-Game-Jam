@@ -21,8 +21,8 @@ public class ShipMovement : MonoBehaviour
 
     public float energyDecreaseEnemyHit; //Amount of energy lost when hitting an enemy
 
-    public float minX; // Minimum X boundary
-    public float maxX;  // Maximum X boundary
+    private float minX; // Minimum X boundary
+    private float maxX;  // Maximum X boundary
     //private float moveXTowards;
     //private Vector3 moveTowards;
     //private float moveSpeedB = 50;
@@ -38,6 +38,12 @@ public class ShipMovement : MonoBehaviour
     private Vector3 targetPosition; // The target position for vertical movement
 
     private SoundManager.Sound[] collectSoundsFX = { SoundManager.Sound.Collect1, SoundManager.Sound.Collect2 }; //List of possible sounds for a collected energy
+
+    private void Start()
+    {
+        minX = gameManager.GetComponent<GameManager>().minX;
+        maxX = gameManager.GetComponent<GameManager>().maxX;
+    }
 
 
     void Update()
@@ -108,9 +114,7 @@ public class ShipMovement : MonoBehaviour
 
             //Trigger screen shake
             gameFeelManager.StartShake(shakeTimeWhenHitEnemy, shakeAmountWhenHitEnemy);
-
             gameFeelManager.ShakeObjectUI(cabinUI_gameObject, shakeAmountWhenHitEnemy, shakeTimeWhenHitEnemy);
-
             gameFeelManager.ShakeObjectUI(frame_asteriodsUI, shakeAmountWhenHitEnemy, shakeTimeWhenHitEnemy);
 
 

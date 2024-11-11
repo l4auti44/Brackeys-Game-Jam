@@ -299,7 +299,7 @@ Transform:
   m_GameObject: {fileID: 32938072}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.97, y: 0, z: 0}
+  m_LocalPosition: {x: 4.87, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2733,7 +2733,7 @@ Transform:
   m_GameObject: {fileID: 456080112}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.59, y: 0, z: 0}
+  m_LocalPosition: {x: -6.92, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6005,6 +6005,9 @@ MonoBehaviour:
   shipSpeed: 0
   radarLV: 0
   positionLV: 0
+  minX: 0
+  maxX: 11
+  asteroidFadeLightSpeed: 1
   speedLV0: 0
   speedLV1: 1.5
   speedLV2: 2.3
@@ -7058,8 +7061,6 @@ MonoBehaviour:
   frame_asteriodsUI: {fileID: 670505312}
   energyCollectable: 5
   energyDecreaseEnemyHit: 10
-  minX: 0
-  maxX: 12
   moveSpeed: 7
   moveDuration: 1
   isMoving: 0
@@ -12475,16 +12476,21 @@ MonoBehaviour:
   pos2: {fileID: 32938073}
   asteroidPrefabs:
   - {fileID: 4322952684289949040, guid: f53e4ededb996b34ca5f248369c2edef, type: 3}
+  - {fileID: 7337570320974620987, guid: e97665691d225cc49ac67c5e0a8d5927, type: 3}
+  - {fileID: 1507209511132809867, guid: 975583c9515f4e4438ab137911de237c, type: 3}
+  - {fileID: 3578305188542722971, guid: 7470c1b9a559d5143af6c3e16ba07852, type: 3}
   - {fileID: 3800204725182184565, guid: 0732211df1a52b3418d0dc5902e1ce13, type: 3}
-  - {fileID: 544173343427672791, guid: 97ec031fc877beb49b5045c70d637981, type: 3}
+  - {fileID: 4390671318925620015, guid: 38c1368d47336ba4eab77ee02662332c, type: 3}
+  - {fileID: 3050639962028678484, guid: 33d5dbea90131724d9ef9f9b669911e5, type: 3}
   - {fileID: 5586743574098997687, guid: 711ebed223c5f194e9b0bc44a5fcea00, type: 3}
+  - {fileID: 544173343427672791, guid: 97ec031fc877beb49b5045c70d637981, type: 3}
   arrow1Prefab: {fileID: 5157793076503233759, guid: 663da662e6e5e4b44bf31793cad20ecf, type: 3}
   arrow2Prefab: {fileID: 5412882603925449778, guid: 27ed9a05f897fd843942bc8a248c7d19, type: 3}
   arrow3Prefab: {fileID: 1768615014423082408, guid: 2ca49f1c6c6b4d2458c56b41889ad5a1, type: 3}
   spawnArrow: 0
   moveSpeed: 2
-  minSpawnInterval: 0.39
-  maxSpawnInterval: 1.1
+  minSpawnInterval: 1
+  maxSpawnInterval: 3
   minAsteroidSpeed: 1
   maxAsteroidSpeed: 3
   minRotationSpeed: 20
@@ -12499,7 +12505,7 @@ Transform:
   m_GameObject: {fileID: 1970598913}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -747.85, y: -674.95, z: 1.8830472}
+  m_LocalPosition: {x: -747.96, y: -674.95, z: 1.8830472}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

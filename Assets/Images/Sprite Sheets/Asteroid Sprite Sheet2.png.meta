@@ -93,11 +93,24 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Asteroid Sprite Sheet2_0
+      name: Asteroid Sprite Sheet2_big1
       rect:
         serializedVersion: 2
         x: 328
@@ -105,7 +118,7 @@ TextureImporter:
         width: 130
         height: 91
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -118,7 +131,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Asteroid Sprite Sheet2_1
+      name: Asteroid Sprite Sheet2_small4
       rect:
         serializedVersion: 2
         x: 513
@@ -126,7 +139,7 @@ TextureImporter:
         width: 29
         height: 35
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -139,7 +152,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Asteroid Sprite Sheet2_2
+      name: Asteroid Sprite Sheet2_big2
       rect:
         serializedVersion: 2
         x: 322
@@ -147,7 +160,7 @@ TextureImporter:
         width: 127
         height: 85
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -160,7 +173,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Asteroid Sprite Sheet2_3
+      name: Asteroid Sprite Sheet2_med1
       rect:
         serializedVersion: 2
         x: 482
@@ -168,7 +181,7 @@ TextureImporter:
         width: 88
         height: 73
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -181,7 +194,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Asteroid Sprite Sheet2_4
+      name: Asteroid Sprite Sheet2_small2
       rect:
         serializedVersion: 2
         x: 266
@@ -189,7 +202,7 @@ TextureImporter:
         width: 35
         height: 42
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -202,7 +215,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Asteroid Sprite Sheet2_5
+      name: Asteroid Sprite Sheet2_med2
       rect:
         serializedVersion: 2
         x: 370
@@ -210,7 +223,7 @@ TextureImporter:
         width: 70
         height: 74
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -223,7 +236,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Asteroid Sprite Sheet2_6
+      name: Asteroid Sprite Sheet2_small3
       rect:
         serializedVersion: 2
         x: 478
@@ -231,7 +244,7 @@ TextureImporter:
         width: 25
         height: 28
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -244,7 +257,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Asteroid Sprite Sheet2_7
+      name: Asteroid Sprite Sheet2_small1
       rect:
         serializedVersion: 2
         x: 152
@@ -252,7 +265,7 @@ TextureImporter:
         width: 54
         height: 41
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -265,7 +278,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Asteroid Sprite Sheet2_8
+      name: Asteroid Sprite Sheet2_med3
       rect:
         serializedVersion: 2
         x: 56
@@ -273,7 +286,7 @@ TextureImporter:
         width: 57
         height: 62
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -296,15 +309,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Asteroid Sprite Sheet2_0: 1808606121
-      Asteroid Sprite Sheet2_1: -2124838143
-      Asteroid Sprite Sheet2_2: 539424680
-      Asteroid Sprite Sheet2_3: 779744939
-      Asteroid Sprite Sheet2_4: -1984463351
-      Asteroid Sprite Sheet2_5: 1291318896
-      Asteroid Sprite Sheet2_6: 1770816809
-      Asteroid Sprite Sheet2_7: -603336541
-      Asteroid Sprite Sheet2_8: -2105048778
+      Asteroid Sprite Sheet2_big1: 1808606121
+      Asteroid Sprite Sheet2_big2: 539424680
+      Asteroid Sprite Sheet2_med1: 779744939
+      Asteroid Sprite Sheet2_med2: 1291318896
+      Asteroid Sprite Sheet2_med3: -2105048778
+      Asteroid Sprite Sheet2_small1: -603336541
+      Asteroid Sprite Sheet2_small2: -1984463351
+      Asteroid Sprite Sheet2_small3: 1770816809
+      Asteroid Sprite Sheet2_small4: -2124838143
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

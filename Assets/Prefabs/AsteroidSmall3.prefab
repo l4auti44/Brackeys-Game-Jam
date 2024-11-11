@@ -1,87 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2624714914484403908
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2346941988107140238}
-  - component: {fileID: 8601603563359141359}
-  m_Layer: 0
-  m_Name: Light 2D (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2346941988107140238
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2624714914484403908}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1571173819948164574}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8601603563359141359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2624714914484403908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ComponentVersion: 1
-  m_LightType: 3
-  m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.5
-  m_Color: {r: 0.25516194, g: 0.8867924, b: 0.3487693, a: 1}
-  m_Intensity: 0
-  m_LightVolumeIntensity: 1
-  m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 514c781a
-  m_LightCookieSprite: {fileID: 0}
-  m_DeprecatedPointLightCookieSprite: {fileID: 0}
-  m_LightOrder: 0
-  m_AlphaBlendOnOverlap: 0
-  m_OverlapOperation: 0
-  m_NormalMapDistance: 3
-  m_NormalMapQuality: 2
-  m_UseNormalMap: 0
-  m_ShadowIntensityEnabled: 0
-  m_ShadowIntensity: 0.75
-  m_ShadowVolumeIntensityEnabled: 0
-  m_ShadowVolumeIntensity: 0.75
-  m_LocalBounds:
-    m_Center: {x: 0, y: -0.00000011920929, z: 0}
-    m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
-  m_PointLightInnerAngle: 360
-  m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0.03
-  m_PointLightOuterRadius: 0.27
-  m_ShapeLightParametricSides: 5
-  m_ShapeLightParametricAngleOffset: 0
-  m_ShapeLightParametricRadius: 1
-  m_ShapeLightFalloffSize: 0.5
-  m_ShapeLightFalloffOffset: {x: 0, y: 0}
-  m_ShapePath:
-  - {x: -0.5, y: -0.5, z: 0}
-  - {x: 0.5, y: -0.5, z: 0}
-  - {x: 0.5, y: 0.5, z: 0}
-  - {x: -0.5, y: 0.5, z: 0}
 --- !u!1 &5586743574098997687
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,7 +15,7 @@ GameObject:
   - component: {fileID: 8545377827196497827}
   - component: {fileID: 658208553761751452}
   m_Layer: 0
-  m_Name: AsteroidV04
+  m_Name: AsteroidSmall3
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -115,8 +33,7 @@ Transform:
   m_LocalPosition: {x: -3.5305977, y: 1.5203867, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2346941988107140238}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5129406828234002766
@@ -264,7 +181,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc5c0c3239ac23b4786a48adf0e693f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeSpeed: 1
 --- !u!114 &658208553761751452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,9 +193,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6b67294b57f987479f4b1402674c3d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asteroid2Prefab: {fileID: 3800204725182184565, guid: 0732211df1a52b3418d0dc5902e1ce13, type: 3}
-  asteroid3Prefab: {fileID: 544173343427672791, guid: 97ec031fc877beb49b5045c70d637981, type: 3}
-  asteroid4Prefab: {fileID: 5586743574098997687}
+  asteroidCategory: 2
   energyDropPrefab: {fileID: 6855771246143582453, guid: a0ebb70010c8dd8429d9071d604f2bc0, type: 3}
-  asteroidType: 4
-  energyDropSpeed: 2
+  bigAsteroids:
+  - {fileID: 4322952684289949040, guid: f53e4ededb996b34ca5f248369c2edef, type: 3}
+  - {fileID: 7337570320974620987, guid: e97665691d225cc49ac67c5e0a8d5927, type: 3}
+  mediumAsteroids:
+  - {fileID: 1507209511132809867, guid: 975583c9515f4e4438ab137911de237c, type: 3}
+  - {fileID: 3578305188542722971, guid: 7470c1b9a559d5143af6c3e16ba07852, type: 3}
+  - {fileID: 3800204725182184565, guid: 0732211df1a52b3418d0dc5902e1ce13, type: 3}
+  smallAsteroids:
+  - {fileID: 4390671318925620015, guid: 38c1368d47336ba4eab77ee02662332c, type: 3}
+  - {fileID: 3050639962028678484, guid: 33d5dbea90131724d9ef9f9b669911e5, type: 3}
+  - {fileID: 5586743574098997687}
+  - {fileID: 544173343427672791, guid: 97ec031fc877beb49b5045c70d637981, type: 3}
