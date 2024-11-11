@@ -443,6 +443,8 @@ MonoBehaviour:
   - dialogEvent: 0
     text: 'Event  1  is  currently  being  executed.  I  hope  this  went  well . 
       .  . '
+    dialogPool: 0
+  dialogTEST: 0
 --- !u!114 &47947461
 MonoBehaviour:
   m_ObjectHideFlags: 0

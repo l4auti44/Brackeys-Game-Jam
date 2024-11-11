@@ -30,6 +30,9 @@ public class DialogSystem : MonoBehaviour
         private bool isDone = false;
     }
 
+    private bool isWritting = false;
+    public DialogEvents dialogTEST;
+
     private void Start()
     {
         textComponent = GetComponent<TMPro.TMP_Text>();
@@ -49,6 +52,12 @@ public class DialogSystem : MonoBehaviour
 
     private void StartDialog(DialogEvents dialog)
     {
+        if (isWritting)
+        {
+            StopAllCoroutines();
+            isWritting = false;
+            SoundManager.StopDialogueSound();
+        }
         var dialogEventClass = GetDialog(dialog);
         if (dialogEventClass != null)
         {
@@ -80,14 +89,21 @@ public class DialogSystem : MonoBehaviour
         }
     }
 
+    public void TestEvent()
+    {
+        StartDialog(dialogTEST);
+    }
+
     private IEnumerator TypeText(string message)
     {
+        isWritting = true;
         textComponent.text = "";
         foreach (char letter in message)
         {
             textComponent.text += letter;
             yield return new WaitForSeconds(timeForEachCharacter);
         }
+        isWritting = false;
         SoundManager.StopDialogueSound();
     }
 }

@@ -171,12 +171,19 @@ public static class SoundManager
             dialogueGameObject = new GameObject("Dialogue Sound");
             dialogueAudioSource = dialogueGameObject.AddComponent<AudioSource>();
         }
+        else
+        {
+            if (dialogueAudioSource.isPlaying) dialogueAudioSource.Stop();
+        }
 
         //Get dialoguePool
         var poolAudios = GetDialogueAudios(pool);
         List<AudioClip> audioList = new List<AudioClip>(poolAudios);
         dialogueAudioSource.volume = DialogueVolume;
-        dialogueGameObject.AddComponent<MonoBehaviourHelper>().StartCoroutine(WaitUntilDialogueFinish(audioList, dialogueAudioSource));
+        if (!dialogueGameObject.GetComponent<MonoBehaviourHelper>())
+                    dialogueGameObject.AddComponent<MonoBehaviourHelper>();
+        
+        dialogueGameObject.GetComponent<MonoBehaviourHelper>().StartCoroutine(WaitUntilDialogueFinish(audioList, dialogueAudioSource));
 
     }
     public static void StopDialogueSound()
