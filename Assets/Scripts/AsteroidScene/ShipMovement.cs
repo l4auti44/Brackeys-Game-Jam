@@ -11,8 +11,10 @@ public class ShipMovement : MonoBehaviour
     public GameObject gameManager; //Game manager reference
     public GameObject shipMovementSlider;
     public Transform missileSpawnPoint; // Spawn point for the missile
+
     public GameFeelManager gameFeelManager; //reference to the script for game feel elements
     public float timeStopWhenHitEnemy, shakeAmountWhenHitEnemy, shakeTimeWhenHitEnemy;
+    public RectTransform cabinUI_gameObject, frame_asteriodsUI; //reference to the cabin UI object to trigger the shake effect
 
     public float energyCollectable; //Energy replenished when collects an energy collectable
     private float energy;
@@ -89,6 +91,7 @@ public class ShipMovement : MonoBehaviour
         {
             gameManager.GetComponent<GameManager>().IncreaseEnergy(energyCollectable);
             SoundManager.PlaySound(collectSoundsFX);
+
             Destroy(collision.gameObject);
         }
 
@@ -105,6 +108,12 @@ public class ShipMovement : MonoBehaviour
 
             //Trigger screen shake
             gameFeelManager.StartShake(shakeTimeWhenHitEnemy, shakeAmountWhenHitEnemy);
+
+            gameFeelManager.ShakeObjectUI(cabinUI_gameObject, shakeAmountWhenHitEnemy, shakeTimeWhenHitEnemy);
+
+            gameFeelManager.ShakeObjectUI(frame_asteriodsUI, shakeAmountWhenHitEnemy, shakeTimeWhenHitEnemy);
+
+
 
             //Trigger time stop
             gameFeelManager.StopFrame(timeStopWhenHitEnemy);
