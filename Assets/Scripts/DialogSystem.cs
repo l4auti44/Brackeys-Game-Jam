@@ -31,6 +31,8 @@ public class DialogSystem : MonoBehaviour
     }
 
     private bool isWritting = false;
+
+    [HideInInspector]
     public DialogEvents dialogTEST;
 
     private void Start()
