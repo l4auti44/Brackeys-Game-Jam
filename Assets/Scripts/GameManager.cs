@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
     private float timerForGameOver = 10f;
 
     private float timer = 10f;
-
+    private bool winCondition = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -131,12 +131,14 @@ public class GameManager : MonoBehaviour
         mainCamera = Camera.main;
         targetZoom = mainCamera.orthographicSize; // Set initial target to current zoom level
 
+        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!SceneController.isGamePaused)
+        if (!SceneController.isGamePaused && !winCondition)
         {
             //Increae the game progress over time
             gameProgress += gameProgressSpeed * 0.01f;
@@ -146,6 +148,8 @@ public class GameManager : MonoBehaviour
             if (gameProgress * 0.01f >= 1f)   
             {
                 EventManager.Game.OnWin.Invoke(this);
+                winCondition = true;
+                return;
             }
 
 

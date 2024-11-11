@@ -19,14 +19,23 @@ public class HumanAnimatorController : MonoBehaviour
         }
     }
 
+    private void Win(Component comp)
+    {
+
+        _animator.SetBool("Win", true);
+        
+    }
+
     private void OnEnable()
     {
         EventManager.Player.OnImpact += Impact;
+        EventManager.Game.OnWin += Win;
     }
 
     private void OnDisable()
     {
         EventManager.Player.OnImpact -= Impact;
+        EventManager.Game.OnWin -= Win;
     }
 
 

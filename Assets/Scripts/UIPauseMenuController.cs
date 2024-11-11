@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 
@@ -49,13 +50,18 @@ public class UIPauseMenuController : MonoBehaviour
 
     private void SwitchPauseMenuOnDie(Component comp)
     {
+
+        StartCoroutine(Win());
+    }
+
+    private IEnumerator Win()
+    {
+        yield return new WaitForSeconds(1.4f);
         resumeButton.SetActive(false);
         titleText.text = "YOU DIED!";
         diedOrWinConditions = true;
         SwitchPauseMenu();
-        
     }
-
     private void SwitchPauseMenuOnWin(Component comp)
     {
         resumeButton.SetActive(false);
@@ -64,5 +70,6 @@ public class UIPauseMenuController : MonoBehaviour
         SwitchPauseMenu();
 
     }
-
+    
+    
 }
