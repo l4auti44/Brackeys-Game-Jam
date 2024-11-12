@@ -5617,6 +5617,7 @@ GameObject:
   m_Component:
   - component: {fileID: 963167946}
   - component: {fileID: 963167947}
+  - component: {fileID: 963167948}
   m_Layer: 0
   m_Name: DialogueSystem
   m_TagString: Untagged
@@ -5651,15 +5652,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68976c0d3871c4843919c6ef008c826d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeForEachCharacter: 0.1
+  timeForEachCharacter: 0.08
   dialogEventsList:
   - dialogEvent: 0
-    dialogPool: 0
     taskText: Don't get hit for 15 seconds!!!!!
-    failText: you failed lol
+    failText: you failed?? I knew that you was inferior than me, but... you surprised
+      me
     goodText: Good, now continue this way...
     timeForTask: 15
   dialogTEST: 0
+--- !u!114 &963167948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963167945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84edb8ef46b7ccc40a4c18e684840ca7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BreakTime: 15
 --- !u!1 &969604998
 GameObject:
   m_ObjectHideFlags: 0

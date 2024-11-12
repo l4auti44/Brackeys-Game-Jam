@@ -75,3 +75,11 @@ MonoBehaviour:
     - {fileID: 8300000, guid: b08dc3ffca0c31441bc8ce1f3a89282c, type: 3}
     - {fileID: 8300000, guid: 6fdbe0e9ef8c99848866919cab4a7157, type: 3}
     volume: 0.25
+  - dialogPool: 1
+    audios:
+    - {fileID: 8300000, guid: 75b6593bb5363d948a678219b202d653, type: 3}
+    - {fileID: 8300000, guid: 696670d8c561edd439a3b477c7e8fd42, type: 3}
+    - {fileID: 8300000, guid: 206bcb652bc7a7d4496678d7286007ab, type: 3}
+    - {fileID: 8300000, guid: 60e6924af491f8947af1b1a47d23c20f, type: 3}
+    - {fileID: 8300000, guid: a36d6747a5d77874c8d11d6134750055, type: 3}
+    volume: 0.25

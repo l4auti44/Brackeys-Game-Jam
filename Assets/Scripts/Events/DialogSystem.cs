@@ -24,7 +24,6 @@ public class DialogSystem : MonoBehaviour
     public class DialogEventsList
     {
         public DialogEvents dialogEvent;
-        public DialogPool dialogPool;
         [TextArea]
         public string taskText, failText, goodText;
         public float timeForTask = 30f;
@@ -76,7 +75,8 @@ public class DialogSystem : MonoBehaviour
         currentDialog = GetDialog(dialog);
         if (currentDialog != null)
         {
-            StartCoroutine(TypeText(currentDialog.taskText));
+            StopAllCoroutines();
+            StartCoroutine(TypeText(currentDialog.taskText, DialogPool.Calm));
         }
         StartCoroutine(WaitingForAction());
     }
@@ -105,7 +105,7 @@ public class DialogSystem : MonoBehaviour
     private void TaskCompleted()
     {
         StopWritting();
-        StartCoroutine(TypeText(currentDialog.goodText));
+        StartCoroutine(TypeText(currentDialog.goodText, DialogPool.Calm));
         StartCoroutine(WaitToDeleteText());
         currentDialog = null;
     }
@@ -113,15 +113,16 @@ public class DialogSystem : MonoBehaviour
     public void TaskFailed()
     {
         StopWritting();
-        StartCoroutine(TypeText(currentDialog.failText));
+        StartCoroutine(TypeText(currentDialog.failText, DialogPool.Angry));
         StartCoroutine(WaitToDeleteText());
         currentDialog = null;
+        EventManager.Game.OnTaskDialogFailed.Invoke();
     }
 
 
     private void CheckOnImpactTask(Component comp)
     {
-        if (currentDialog != null)
+        if (currentDialog != null && isWritting == false)
         {
             if (currentDialog.dialogEvent == DialogEvents.NoGetHit)
             {
@@ -158,9 +159,9 @@ public class DialogSystem : MonoBehaviour
         yield return new WaitForSeconds(10f);
         StopWritting();
     }
-    private IEnumerator TypeText(string message)
+    private IEnumerator TypeText(string message, DialogPool audioPool)
     {
-        SoundManager.PlayDialogueSound(currentDialog.dialogPool);
+        SoundManager.PlayDialogueSound(audioPool);
         isWritting = true;
         textComponent.text = "";
         foreach (char letter in message)
@@ -168,7 +169,9 @@ public class DialogSystem : MonoBehaviour
             textComponent.text += letter;
             yield return new WaitForSeconds(timeForEachCharacter);
         }
-        isWritting = false;
+
         SoundManager.StopDialogueSound();
+        yield return new WaitForSeconds(2f);
+        isWritting = false;
     }
 }
