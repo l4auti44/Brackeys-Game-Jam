@@ -5666,11 +5666,11 @@ MonoBehaviour:
     goodText: Well done, it was a simple task anyways..
     timeForTask: 20
   - dialogEvent: 2
-    taskText: 'Humans, keep your ENGINE at level 2, starting in 3, 2, 1... '
-    failText: I guess you didn't understand my command..
-    goodText: Well done, it was a simple task anyways..
-    timeForTask: 20
-  dialogTEST: 1
+    taskText: Listen, ENGINE needs to stay at level 2, don't disappoint me. . . .
+    failText: Well, that is on my for trusting on simple humans
+    goodText: don't let it go to your head and keep following my orders
+    timeForTask: 15
+  dialogTEST: 2
 --- !u!114 &963167948
 MonoBehaviour:
   m_ObjectHideFlags: 0

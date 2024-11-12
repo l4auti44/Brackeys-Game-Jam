@@ -53,6 +53,7 @@ public class DialogSystem : MonoBehaviour
         EventManager.Game.OnDialog += StartDialog;
         EventManager.Player.OnImpact += CheckOnImpactTask;
         EventManager.Game.OnRadarChange += RadarLevelCheck;
+        EventManager.Game.OnEngineChange += EngineLevelCheck;
     }
 
     private void OnDisable()
@@ -60,6 +61,7 @@ public class DialogSystem : MonoBehaviour
         EventManager.Game.OnDialog -= StartDialog;
         EventManager.Player.OnImpact -= CheckOnImpactTask;
         EventManager.Game.OnRadarChange -= RadarLevelCheck;
+        EventManager.Game.OnEngineChange -= EngineLevelCheck;
     }
 
     private void StartDialog(DialogEvents dialog)
@@ -128,6 +130,20 @@ public class DialogSystem : MonoBehaviour
             }
         }
     }
+
+    private void EngineLevelCheck(int lv)
+    {
+        if (currentDialog != null && isWritting == false)
+        {
+            if (currentDialog.dialogEvent == DialogEvents.KeepEngineAt)
+            {
+                if (lv != 2)
+                {
+                    TaskFailed();
+                }
+            }
+        }
+    }
     private void CheckOnImpactTask(Component comp)
     {
         if (currentDialog != null && isWritting == false)
@@ -165,6 +181,17 @@ public class DialogSystem : MonoBehaviour
                 yield return new WaitForSeconds(time);
                 TaskCompleted();
                 break;
+            case DialogEvents.KeepEngineAt:
+                CurrentLevelTask = (int)gameManager.shipSpeed;
+                if (CurrentLevelTask != 2)
+                {
+                    TaskFailed();
+                    break;
+                }
+                yield return new WaitForSeconds(time);
+                TaskCompleted();
+                break;
+
             default:
                 yield return new WaitForSeconds(time);
                 TaskFailed();
