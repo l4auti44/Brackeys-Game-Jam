@@ -17,6 +17,8 @@ public static class EventManager
         public UnityAction<DialogSystem.DialogEvents> OnDialog;
         public UnityAction<DialogSystem.DialogEvents> OnTaskDialogCompleted;
         public UnityAction OnTaskDialogFailed;
+        public UnityAction<int> OnRadarChange;
+        public UnityAction<int> OnEngineChange;
         
     }
     

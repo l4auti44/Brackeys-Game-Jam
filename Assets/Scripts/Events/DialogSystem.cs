@@ -8,7 +8,8 @@ public class DialogSystem : MonoBehaviour
     public enum DialogEvents
     {
         NoGetHit,
-        Event2,
+        KeepRadarAt,
+        KeepEngineAt,
     }
 
     public enum DialogPool
@@ -17,6 +18,7 @@ public class DialogSystem : MonoBehaviour
         Angry
     }
     private TMPro.TMP_Text textComponent;
+    private GameManager gameManager;
 
     public DialogEventsList[] dialogEventsList;
 
@@ -34,36 +36,30 @@ public class DialogSystem : MonoBehaviour
 
     private bool isWritting = false;
 
+    private int CurrentLevelTask;
+
     [HideInInspector]
     public DialogEvents dialogTEST;
 
     private void Start()
     {
         textComponent = GameObject.Find("DialogText").GetComponent<TMPro.TMP_Text>();
+        gameManager = transform.parent.GetComponent<GameManager>();
     }
 
-    private void Update()
-    {
-        if (currentDialog != null)
-        {
-            switch (currentDialog.dialogEvent)
-            {
-                case DialogEvents.NoGetHit:
-                    break;
-            }
-        }
-    }
 
     private void OnEnable()
     {
         EventManager.Game.OnDialog += StartDialog;
         EventManager.Player.OnImpact += CheckOnImpactTask;
+        EventManager.Game.OnRadarChange += RadarLevelCheck;
     }
 
     private void OnDisable()
     {
         EventManager.Game.OnDialog -= StartDialog;
         EventManager.Player.OnImpact -= CheckOnImpactTask;
+        EventManager.Game.OnRadarChange -= RadarLevelCheck;
     }
 
     private void StartDialog(DialogEvents dialog)
@@ -78,7 +74,7 @@ public class DialogSystem : MonoBehaviour
             StopAllCoroutines();
             StartCoroutine(TypeText(currentDialog.taskText, DialogPool.Calm));
         }
-        StartCoroutine(WaitingForAction());
+        
     }
 
     private DialogEventsList GetDialog(DialogEvents dialogEvent)
@@ -119,7 +115,19 @@ public class DialogSystem : MonoBehaviour
         EventManager.Game.OnTaskDialogFailed.Invoke();
     }
 
-
+    private void RadarLevelCheck(int lv)
+    {
+        if (currentDialog != null && isWritting == false)
+        {
+            if (currentDialog.dialogEvent == DialogEvents.KeepRadarAt)
+            {
+                if (lv != 2)
+                {
+                    TaskFailed();
+                }
+            }
+        }
+    }
     private void CheckOnImpactTask(Component comp)
     {
         if (currentDialog != null && isWritting == false)
@@ -144,6 +152,16 @@ public class DialogSystem : MonoBehaviour
         switch (currentDialog.dialogEvent)
         {
             case DialogEvents.NoGetHit:
+                yield return new WaitForSeconds(time);
+                TaskCompleted();
+                break;
+            case DialogEvents.KeepRadarAt:
+                CurrentLevelTask = (int)gameManager.radarLV;
+                if (CurrentLevelTask != 2)
+                {
+                    TaskFailed();
+                    break;
+                }
                 yield return new WaitForSeconds(time);
                 TaskCompleted();
                 break;
@@ -173,5 +191,9 @@ public class DialogSystem : MonoBehaviour
         SoundManager.StopDialogueSound();
         yield return new WaitForSeconds(2f);
         isWritting = false;
+        if (currentDialog != null)
+        {
+            StartCoroutine(WaitingForAction());
+        }
     }
 }

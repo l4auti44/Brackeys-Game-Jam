@@ -5655,12 +5655,22 @@ MonoBehaviour:
   timeForEachCharacter: 0.08
   dialogEventsList:
   - dialogEvent: 0
-    taskText: Don't get hit for 15 seconds!!!!!
+    taskText: Humans, don't get hit for 15 seconds or.. you will see.
     failText: you failed?? I knew that you was inferior than me, but... you surprised
       me
     goodText: Good, now continue this way...
     timeForTask: 15
-  dialogTEST: 0
+  - dialogEvent: 1
+    taskText: Humans, keep your RADAR at level 2, starting in 3... 2... 1...
+    failText: I guess you didn't understand my command..
+    goodText: Well done, it was a simple task anyways..
+    timeForTask: 20
+  - dialogEvent: 2
+    taskText: 'Humans, keep your ENGINE at level 2, starting in 3, 2, 1... '
+    failText: I guess you didn't understand my command..
+    goodText: Well done, it was a simple task anyways..
+    timeForTask: 20
+  dialogTEST: 1
 --- !u!114 &963167948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6904,7 +6914,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4644239082296200507, guid: 7d779d91143eda444ac5a1ada05cd660, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

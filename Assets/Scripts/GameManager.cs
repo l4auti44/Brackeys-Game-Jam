@@ -376,6 +376,7 @@ public class GameManager : MonoBehaviour
             //Decrease energy
             radarModEnergyDecreaseLV1 = radarModEnergyDecreaseLV1_original;
         }
+        EventManager.Game.OnRadarChange.Invoke((int)radarLV);
     }
 
     public void DecreaseRadar()
@@ -425,6 +426,8 @@ public class GameManager : MonoBehaviour
             radarModEnergyDecreaseLV3 = 0;
             radarModEnergyDecreaseLV2 = radarModEnergyDecreaseLV1_original;
         }
+
+        EventManager.Game.OnRadarChange.Invoke((int)radarLV);
     }
 
 
