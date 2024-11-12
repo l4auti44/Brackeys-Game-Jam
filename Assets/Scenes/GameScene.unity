@@ -399,9 +399,8 @@ GameObject:
   - component: {fileID: 47947459}
   - component: {fileID: 47947462}
   - component: {fileID: 47947461}
-  - component: {fileID: 47947460}
   m_Layer: 5
-  m_Name: DialogSystem
+  m_Name: DialogText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -426,27 +425,6 @@ RectTransform:
   m_AnchoredPosition: {x: -0.2555, y: 43.2923}
   m_SizeDelta: {x: 211.6989, y: 31.0393}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &47947460
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 47947458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68976c0d3871c4843919c6ef008c826d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeForEachCharacter: 0.1
-  dialogEventsList:
-  - dialogEvent: 0
-    dialogPool: 0
-    taskText: Don't get hit for 15 seconds!!!!!
-    failText: you failed lol
-    goodText: Good, now continue this way...
-    timeForTask: 15
-  dialogTEST: 0
 --- !u!114 &47947461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5629,6 +5607,59 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 960545589}
   m_CullTransparentMesh: 1
+--- !u!1 &963167945
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 963167946}
+  - component: {fileID: 963167947}
+  m_Layer: 0
+  m_Name: DialogueSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &963167946
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963167945}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1017901626}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &963167947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963167945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68976c0d3871c4843919c6ef008c826d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeForEachCharacter: 0.1
+  dialogEventsList:
+  - dialogEvent: 0
+    dialogPool: 0
+    taskText: Don't get hit for 15 seconds!!!!!
+    failText: you failed lol
+    goodText: Good, now continue this way...
+    timeForTask: 15
+  dialogTEST: 0
 --- !u!1 &969604998
 GameObject:
   m_ObjectHideFlags: 0
@@ -6481,6 +6512,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2741447641755538250}
+  - {fileID: 963167946}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1017901627

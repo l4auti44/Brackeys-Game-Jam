@@ -40,7 +40,7 @@ public class DialogSystem : MonoBehaviour
 
     private void Start()
     {
-        textComponent = GetComponent<TMPro.TMP_Text>();
+        textComponent = GameObject.Find("DialogText").GetComponent<TMPro.TMP_Text>();
     }
 
     private void Update()
