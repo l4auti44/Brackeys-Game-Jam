@@ -24,6 +24,7 @@ public class AsteroidSpawner : MonoBehaviour
     private Vector3 pos2Value;
     private Vector3 targetPos;
     private float spawnTimer;
+    public Transform player; // Assign the player transform in the inspector or dynamically
 
     void Start()
     {
@@ -37,8 +38,9 @@ public class AsteroidSpawner : MonoBehaviour
 
     void Update()
     {
-        MoveBetweenPositions();
+        //MoveBetweenPositions();
         HandleAsteroidSpawning();
+        FollowPlayerOnXAxis();
     }
 
     void MoveBetweenPositions()
@@ -49,6 +51,13 @@ public class AsteroidSpawner : MonoBehaviour
         {
             targetPos = targetPos == pos1Value ? pos2Value : pos1Value;
         }
+    }
+    void FollowPlayerOnXAxis()
+    {
+        // Keep the object's Y position the same and update only the X position
+        Vector3 newPosition = transform.position;
+        newPosition.x = player.position.x;
+        transform.position = newPosition;
     }
 
     void HandleAsteroidSpawning()

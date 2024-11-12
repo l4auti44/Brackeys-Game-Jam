@@ -7286,6 +7286,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   energyPrefabs:
   - {fileID: 6855771246143582453, guid: a0ebb70010c8dd8429d9071d604f2bc0, type: 3}
+  - {fileID: 1390194709076669044, guid: 5fdddb0614f678b43940c79a75839ddd, type: 3}
+  energyWeights:
+  - 70
+  - 30
   arrow1Prefab: {fileID: 2994502435472261125, guid: 7d8332797e2c2e842bbe8aef7558292b, type: 3}
   arrow2Prefab: {fileID: 7317858387522903152, guid: 48aa24771f530c44bb7d6c39efeef4b8, type: 3}
   arrow3Prefab: {fileID: 4288243871637922812, guid: 262e5ee80dbec214b9a34823393301b5, type: 3}
@@ -13205,11 +13209,12 @@ MonoBehaviour:
   moveSpeed: 2
   minSpawnInterval: 1
   maxSpawnInterval: 3
-  minAsteroidSpeed: 1
-  maxAsteroidSpeed: 3
+  minAsteroidSpeed: 3
+  maxAsteroidSpeed: 5
   minRotationSpeed: 20
   maxRotationSpeed: 120
   arrowYOffset: -6.5
+  player: {fileID: 1257503199}
 --- !u!4 &1970598915
 Transform:
   m_ObjectHideFlags: 0
