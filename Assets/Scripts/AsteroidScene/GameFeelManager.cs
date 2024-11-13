@@ -21,6 +21,16 @@ public class GameFeelManager : MonoBehaviour
         originalPosition = cameraTransform.localPosition; // Save the camera's initial position
     }
 
+    private void Update()
+    {
+        if (SceneController.isGamePaused && isShaking)
+        {
+            StopAllCoroutines();
+            cameraTransform.localPosition = originalPosition;
+            isShaking = false;
+        }    
+    }
+
     // Call this function to start the screen shake
     public void StartShake(float duration, float magnitude)
     {
@@ -29,12 +39,13 @@ public class GameFeelManager : MonoBehaviour
 
         shakeDuration = duration;
         shakeMagnitude = magnitude;
-        isShaking = true;
+        
         StartCoroutine(Shake());
     }
 
     IEnumerator Shake()
     {
+        isShaking = true;
         float elapsed = 0.0f;
 
         while (elapsed < shakeDuration)
