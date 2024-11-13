@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2b15d0b68951a0c49ac782d813e438a3
+guid: f8cb6314c5f7bf34a9e464167953c471
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HAL_command_0
+      name: HAL_smil_testsprite_0
       rect:
         serializedVersion: 2
         x: 0
@@ -111,29 +111,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 88cfc9b47521072418f0f79224a07d03
-      internalID: -158570168
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HAL_command_1
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 45e1fea9899fea14cba3728472d41dc7
-      internalID: -553407881
+      spriteID: 9de110439c7ec284db1bb47d0c187547
+      internalID: -171017043
       vertices: []
       indices: 
       edges: []
@@ -149,8 +128,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      HAL_command_0: -158570168
-      HAL_command_1: -553407881
+      HAL_smil_testsprite_0: -171017043
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
