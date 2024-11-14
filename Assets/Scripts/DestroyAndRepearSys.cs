@@ -5,6 +5,14 @@ using UnityEngine;
 
 public class DestroyAndRepearSys : MonoBehaviour
 {
+    public enum Modules{
+        MissileModule,
+        ShieldModule,
+        ArrowModule,
+        EngineModule,
+        radarModule
+    }
+
     [SerializeField] private float BreakTime = 15f;
 
     private GameObject repairModuleIsActiveImage;
@@ -13,7 +21,12 @@ public class DestroyAndRepearSys : MonoBehaviour
     private SoundButton MissileModule;
     private SoundButton ShieldModule;
     private SoundButton ArrowModule;
-    
+
+    //Only One button for now
+    private SoundButton engineButtonUp;
+    private SoundButton engineButtonDown;
+    private SoundButton radarButtonUp;
+    private SoundButton radarButtonDown;
 
     private List<SoundButton> Systems = new List<SoundButton>();
 
@@ -26,11 +39,21 @@ public class DestroyAndRepearSys : MonoBehaviour
         MissileModule = GameObject.Find("MissileModule").GetComponent<SoundButton>();
         ShieldModule = GameObject.Find("ShieldModule").GetComponent<SoundButton>();
         ArrowModule = GameObject.Find("ArrowModule").GetComponent<SoundButton>();
+        var engineButtons = GameObject.Find("EngineButtons");
+        engineButtonUp = engineButtons.transform.GetChild(0).GetComponent<SoundButton>();
+        engineButtonDown = engineButtons.transform.GetChild(1).GetComponent<SoundButton>();
+        var radarButtons = GameObject.Find("RadarButtons");
+        radarButtonUp = radarButtons.transform.GetChild(0).GetComponent<SoundButton>();
+        radarButtonDown = radarButtons.transform.GetChild(1).GetComponent<SoundButton>();
         repairModuleIsActiveImage = GameObject.Find("IsActiveRepairSys");
         repairModuleIsActiveImage.SetActive(false);
         Systems.Add(MissileModule);
         Systems.Add(ShieldModule);
         Systems.Add(ArrowModule);
+        Systems.Add(engineButtonUp);
+        Systems.Add(engineButtonDown);
+        Systems.Add(radarButtonUp);
+        Systems.Add(radarButtonDown);
 
     }
     private void OnEnable()
@@ -54,6 +77,14 @@ public class DestroyAndRepearSys : MonoBehaviour
     private IEnumerator BreakAndWait()
     {
         currentSystemBroken.isBroken = true;
+        if (currentSystemBroken == Systems[3])
+        {
+            Systems[4].isBroken = true;
+        }
+        if (currentSystemBroken == Systems[5])
+        {
+            Systems[6].isBroken = true;
+        }
         if (ColorUtility.TryParseHtmlString("#C8C8C8", out Color disabledColor))
         {
             var colors = currentSystemBroken.colors;
@@ -69,11 +100,20 @@ public class DestroyAndRepearSys : MonoBehaviour
     {
         if (currentSystemBroken != null)
         {
+
             canRepair = false;
             Debug.Log("System " + currentSystemBroken.name + " has been repaired");
             repairModuleIsActiveImage.SetActive(false);
             StopAllCoroutines();
             currentSystemBroken.isBroken = false;
+            if (currentSystemBroken == Systems[3])
+            {
+                Systems[4].isBroken = false;
+            }
+            if (currentSystemBroken == Systems[5])
+            {
+                Systems[6].isBroken = false;
+            }
             if (ColorUtility.TryParseHtmlString("#FFFFFF", out Color enabledColor))
             {
                 var colors = currentSystemBroken.colors;
@@ -100,5 +140,34 @@ public class DestroyAndRepearSys : MonoBehaviour
         yield return new WaitForSeconds(5f);
         repairModuleIsActiveImage.SetActive(false);
         canRepair = false;
+    }
+
+
+    public void TestBreakSomething(Modules module)
+    {
+        SoundButton breakSis;
+        switch (module){
+            case Modules.MissileModule:
+                breakSis = Systems[0];
+                break;
+            case Modules.ShieldModule:
+                breakSis = Systems[1];
+                break;
+            case Modules.ArrowModule:
+                breakSis = Systems[2];
+                break;
+            case Modules.EngineModule:
+                breakSis = Systems[3];
+                break;
+            case Modules.radarModule:
+                breakSis = Systems[5];
+                break;
+            default:
+                breakSis = Systems[0];
+                break;
+        }
+        currentSystemBroken = breakSis;
+        Debug.Log("System " + currentSystemBroken.name + " is broken");
+        StartCoroutine(BreakAndWait());
     }
 }

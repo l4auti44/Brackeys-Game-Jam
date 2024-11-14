@@ -69,6 +69,8 @@ public class GameManager : MonoBehaviour
     private bool winCondition = false;
 
     private SoundButton shieldModule, arrowModule;
+    private List<SoundButton> engineModules = new List<SoundButton>();
+    private List<SoundButton> radarModules = new List<SoundButton>();
     private DestroyAndRepearSys repairSys;
     // Start is called before the first frame update
     void Start()
@@ -139,6 +141,13 @@ public class GameManager : MonoBehaviour
 
         shieldModule = GameObject.Find("ShieldModule").GetComponent<SoundButton>();
         arrowModule = GameObject.Find("ArrowModule").GetComponent<SoundButton>();
+        var engineButtons = GameObject.Find("EngineButtons");
+        engineModules.Add(engineButtons.transform.GetChild(0).GetComponent<SoundButton>());
+        engineModules.Add(engineButtons.transform.GetChild(1).GetComponent<SoundButton>());
+        var radarButtons = GameObject.Find("RadarButtons");
+        radarModules.Add(radarButtons.transform.GetChild(0).GetComponent<SoundButton>());
+        radarModules.Add(radarButtons.transform.GetChild(1).GetComponent<SoundButton>());
+
         repairSys = this.GetComponentInChildren<DestroyAndRepearSys>();
     }
 
@@ -232,6 +241,7 @@ public class GameManager : MonoBehaviour
 
     public void AccelerateShip()
     {
+
         //Increase speed movement
         if (shipSpeed == speedLV4)
         {
@@ -276,6 +286,8 @@ public class GameManager : MonoBehaviour
             //engineModEnergyDecreaseLV2 = engineMoEnergyDecreaseLV2_original;
             gameProgressSpeed += 1;
         }
+        
+
     }
 
     public void DecelerateShip()
@@ -336,103 +348,119 @@ public class GameManager : MonoBehaviour
 
     public void IncreaseRadar()
     {
-        //Increase radar LV
-        if (radarLV == 2)
+        if (!radarModules[0].isBroken)
         {
-            //Update the radar LV and sprite
-            radarLV = 3;
-            radarModuleSpriteLV3.GetComponent<Image>().color = Color.green;
+            //Increase radar LV
+            if (radarLV == 2)
+            {
+                //Update the radar LV and sprite
+                radarLV = 3;
+                radarModuleSpriteLV3.GetComponent<Image>().color = Color.green;
 
-            //Activate radar LV3
-            ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV3;
-            radarUI.GetComponent<RadarControllerUI>().waveInterval = radarWaveIntervalLV3;
+                //Activate radar LV3
+                ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV3;
+                radarUI.GetComponent<RadarControllerUI>().waveInterval = radarWaveIntervalLV3;
 
-            //Decrease energy
-            radarModEnergyDecreaseLV3 = radarModEnergyDecreaseLV3_original;
+                //Decrease energy
+                radarModEnergyDecreaseLV3 = radarModEnergyDecreaseLV3_original;
 
+            }
+
+            else if (radarLV == 1)
+            {
+                //Update the radar LV and sprite
+                radarLV = 2;
+                radarModuleSpriteLV2.GetComponent<Image>().color = Color.green;
+
+                //Activate radar LV2
+                ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV2;
+                radarUI.GetComponent<RadarControllerUI>().waveInterval = radarWaveIntervalLV2;
+
+                //Decrease energy
+                radarModEnergyDecreaseLV2 = radarModEnergyDecreaseLV2_original;
+            }
+
+            else if (radarLV == 0)
+            {
+                //Update the radar LV and sprite
+                radarLV = 1;
+                radarModuleSpriteLV1.GetComponent<Image>().color = Color.green;
+
+                //Activate radar LV1
+                ship.GetComponent<RadarController>().isSpawning = true;
+                radarUI.GetComponent<RadarControllerUI>().isSpawning = true;
+                ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV1;
+                radarUI.GetComponent<RadarControllerUI>().waveInterval = radarWaveIntervalLV1;
+
+                //Decrease energy
+                radarModEnergyDecreaseLV1 = radarModEnergyDecreaseLV1_original;
+            }
+            EventManager.Game.OnRadarChange.Invoke((int)radarLV);
+        }
+        else if (repairSys.canRepair)
+        {
+            repairSys.Repair();
         }
 
-        else if (radarLV == 1)
-        {
-            //Update the radar LV and sprite
-            radarLV = 2;
-            radarModuleSpriteLV2.GetComponent<Image>().color = Color.green;
-
-            //Activate radar LV2
-            ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV2;
-            radarUI.GetComponent<RadarControllerUI>().waveInterval = radarWaveIntervalLV2;
-
-            //Decrease energy
-            radarModEnergyDecreaseLV2 = radarModEnergyDecreaseLV2_original;
-        }
-
-        else if (radarLV == 0)
-        {
-            //Update the radar LV and sprite
-            radarLV = 1;
-            radarModuleSpriteLV1.GetComponent<Image>().color = Color.green;
-
-            //Activate radar LV1
-            ship.GetComponent<RadarController>().isSpawning = true;
-            radarUI.GetComponent<RadarControllerUI>().isSpawning = true;
-            ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV1;
-            radarUI.GetComponent<RadarControllerUI>().waveInterval = radarWaveIntervalLV1;
-
-            //Decrease energy
-            radarModEnergyDecreaseLV1 = radarModEnergyDecreaseLV1_original;
-        }
-        EventManager.Game.OnRadarChange.Invoke((int)radarLV);
     }
 
     public void DecreaseRadar()
     {
-        //Decrease radar LV
-        if (radarLV == 1)
+        if (!radarModules[1].isBroken)
         {
-            //Update the radar LV and sprite
-            radarLV = 0;
-            radarModuleSpriteLV1.GetComponent<Image>().color = Color.white;
+            //Decrease radar LV
+            if (radarLV == 1)
+            {
+                //Update the radar LV and sprite
+                radarLV = 0;
+                radarModuleSpriteLV1.GetComponent<Image>().color = Color.white;
 
-            //Activate radar LV0
-            ship.GetComponent<RadarController>().isSpawning = false;
-            radarUI.GetComponent<RadarControllerUI>().isSpawning = false;
+                //Activate radar LV0
+                ship.GetComponent<RadarController>().isSpawning = false;
+                radarUI.GetComponent<RadarControllerUI>().isSpawning = false;
 
-            //Decrease energy
-            radarModEnergyDecreaseLV1 = 0;
+                //Decrease energy
+                radarModEnergyDecreaseLV1 = 0;
 
+            }
+
+            else if (radarLV == 2)
+            {
+                //Update the radar LV and sprite
+                radarLV = 1;
+                radarModuleSpriteLV2.GetComponent<Image>().color = Color.white;
+
+                //Activate radar LV1
+                ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV1;
+                radarUI.GetComponent<RadarControllerUI>().waveInterval = radarWaveIntervalLV1;
+
+                //Decrease energy
+                radarModEnergyDecreaseLV2 = 0;
+                radarModEnergyDecreaseLV1 = radarModEnergyDecreaseLV1_original;
+            }
+
+            else if (radarLV == 3)
+            {
+                //Update the radar LV and sprite
+                radarLV = 2;
+                radarModuleSpriteLV3.GetComponent<Image>().color = Color.white;
+
+                //Activate radar LV2
+                ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV2;
+                radarUI.GetComponent<RadarControllerUI>().waveInterval = radarWaveIntervalLV2;
+
+                //Decrease energy
+                radarModEnergyDecreaseLV3 = 0;
+                radarModEnergyDecreaseLV2 = radarModEnergyDecreaseLV1_original;
+            }
+
+            EventManager.Game.OnRadarChange.Invoke((int)radarLV);
         }
-
-        else if (radarLV == 2)
+        else if (repairSys.canRepair)
         {
-            //Update the radar LV and sprite
-            radarLV = 1;
-            radarModuleSpriteLV2.GetComponent<Image>().color = Color.white;
-
-            //Activate radar LV1
-            ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV1;
-            radarUI.GetComponent<RadarControllerUI>().waveInterval = radarWaveIntervalLV1;
-
-            //Decrease energy
-            radarModEnergyDecreaseLV2 = 0;
-            radarModEnergyDecreaseLV1 = radarModEnergyDecreaseLV1_original;
+            repairSys.Repair();
         }
-
-        else if (radarLV == 3)
-        {
-            //Update the radar LV and sprite
-            radarLV = 2;
-            radarModuleSpriteLV3.GetComponent<Image>().color = Color.white;
-
-            //Activate radar LV2
-            ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV2;
-            radarUI.GetComponent<RadarControllerUI>().waveInterval = radarWaveIntervalLV2;
-
-            //Decrease energy
-            radarModEnergyDecreaseLV3 = 0;
-            radarModEnergyDecreaseLV2 = radarModEnergyDecreaseLV1_original;
-        }
-
-        EventManager.Game.OnRadarChange.Invoke((int)radarLV);
+        
     }
 
 
@@ -510,178 +538,202 @@ public class GameManager : MonoBehaviour
 
     public void IncreasePositionShip ()
     {
-        //Increase position
-        if (positionLV == 4)
+        if (!engineModules[0].isBroken)
         {
-            //Update the position LV and sprite
-            positionLV = 5;
-            positionModuleSpriteLV5.GetComponent<Image>().color = Color.green;
+            //Increase position
+            if (positionLV == 4)
+            {
+                //Update the position LV and sprite
+                positionLV = 5;
+                positionModuleSpriteLV5.GetComponent<Image>().color = Color.green;
 
-            ship.GetComponent<ShipMovement>().MoveToLevel(positionLV5);
+                ship.GetComponent<ShipMovement>().MoveToLevel(positionLV5);
 
-            positionModEnergyDecreaseLV5 = positionModEnergyDecreaseLV5_original;
+                positionModEnergyDecreaseLV5 = positionModEnergyDecreaseLV5_original;
 
-            //Increase parallax
-            parallax.GetComponent<ParallarEffect>().IncreaseSpeed(speedParallaxLV5);
+                //Increase parallax
+                parallax.GetComponent<ParallarEffect>().IncreaseSpeed(speedParallaxLV5);
 
-            //Increase speed when transitioning to the next position
-            ship.GetComponent<ShipMovement>().moveDuration = durationToPosition5;
+                //Increase speed when transitioning to the next position
+                ship.GetComponent<ShipMovement>().moveDuration = durationToPosition5;
 
-            //Zoom out camera
-            ZoomOut(cameraPosLV5);
+                //Zoom out camera
+                ZoomOut(cameraPosLV5);
+            }
+
+            else if (positionLV == 3)
+            {
+                //Update the position LV and sprite
+                positionLV = 4;
+                positionModuleSpriteLV4.GetComponent<Image>().color = Color.green;
+
+                ship.GetComponent<ShipMovement>().MoveToLevel(positionLV4);
+
+                positionModEnergyDecreaseLV4 = positionModEnergyDecreaseLV4_original;
+
+                //Increase parallax
+                parallax.GetComponent<ParallarEffect>().IncreaseSpeed(speedParallaxLV4);
+
+                //Increase speed when transitioning to the next position
+                ship.GetComponent<ShipMovement>().moveDuration = durationToPosition4;
+
+                //Zoom out camera
+                ZoomOut(cameraPosLV4);
+            }
+
+            else if (positionLV == 2)
+            {
+                //Update the position LV and sprite
+                positionLV = 3;
+                positionModuleSpriteLV3.GetComponent<Image>().color = Color.green;
+
+                ship.GetComponent<ShipMovement>().MoveToLevel(positionLV3);
+
+                positionModEnergyDecreaseLV3 = positionModEnergyDecreaseLV3_original;
+
+                //Increase parallax
+                parallax.GetComponent<ParallarEffect>().IncreaseSpeed(speedParallaxLV3);
+
+                //Increase speed when transitioning to the next position
+                ship.GetComponent<ShipMovement>().moveDuration = durationToPosition3;
+
+                //Zoom out camera
+                ZoomOut(cameraPosLV3);
+            }
+
+            else if (positionLV == 1)
+            {
+                positionLV = 2;
+                positionModuleSpriteLV2.GetComponent<Image>().color = Color.green;
+
+                ship.GetComponent<ShipMovement>().MoveToLevel(positionLV2);
+
+                positionModEnergyDecreaseLV2 = positionModEnergyDecreaseLV2_original;
+
+                //Increase parallax
+                parallax.GetComponent<ParallarEffect>().IncreaseSpeed(speedParallaxLV2);
+
+                //Increase speed when transitioning to the next position
+                ship.GetComponent<ShipMovement>().moveDuration = durationToPosition2;
+
+                //Zoom out camera
+                ZoomOut(cameraPosLV2);
+            }
+
+
+            //Moved events on the button here
+            AccelerateShip();
+            ToggleAsteroidSpeed();
         }
-
-        else if (positionLV == 3)
+        else if (repairSys.canRepair)
         {
-            //Update the position LV and sprite
-            positionLV = 4;
-            positionModuleSpriteLV4.GetComponent<Image>().color = Color.green;
-
-            ship.GetComponent<ShipMovement>().MoveToLevel(positionLV4);
-
-            positionModEnergyDecreaseLV4 = positionModEnergyDecreaseLV4_original;
-
-            //Increase parallax
-            parallax.GetComponent<ParallarEffect>().IncreaseSpeed(speedParallaxLV4);
-
-            //Increase speed when transitioning to the next position
-            ship.GetComponent<ShipMovement>().moveDuration = durationToPosition4;
-
-            //Zoom out camera
-            ZoomOut(cameraPosLV4);
+            repairSys.Repair();
         }
-
-        else if (positionLV == 2)
-        {
-            //Update the position LV and sprite
-            positionLV = 3;
-            positionModuleSpriteLV3.GetComponent<Image>().color = Color.green;
-
-            ship.GetComponent<ShipMovement>().MoveToLevel(positionLV3);
-
-            positionModEnergyDecreaseLV3 = positionModEnergyDecreaseLV3_original;
-
-            //Increase parallax
-            parallax.GetComponent<ParallarEffect>().IncreaseSpeed(speedParallaxLV3);
-
-            //Increase speed when transitioning to the next position
-            ship.GetComponent<ShipMovement>().moveDuration = durationToPosition3;
-
-            //Zoom out camera
-            ZoomOut(cameraPosLV3);
-        }
-
-        else if (positionLV == 1)
-        {
-            positionLV = 2;
-            positionModuleSpriteLV2.GetComponent<Image>().color = Color.green;
-
-            ship.GetComponent<ShipMovement>().MoveToLevel(positionLV2);
-
-            positionModEnergyDecreaseLV2 = positionModEnergyDecreaseLV2_original;
-
-            //Increase parallax
-            parallax.GetComponent<ParallarEffect>().IncreaseSpeed(speedParallaxLV2);
-
-            //Increase speed when transitioning to the next position
-            ship.GetComponent<ShipMovement>().moveDuration = durationToPosition2;
-
-            //Zoom out camera
-            ZoomOut(cameraPosLV2);
-        }
-
     }
 
     public void DecreasePositionShip()
     {
-        //Decrease position
-        if (positionLV == 5)
+        if (!engineModules[1].isBroken)
         {
-            //Update the position LV and sprite
-            positionLV = 4;
-            positionModuleSpriteLV5.GetComponent<Image>().color = Color.white;
+            //Decrease position
+            if (positionLV == 5)
+            {
+                //Update the position LV and sprite
+                positionLV = 4;
+                positionModuleSpriteLV5.GetComponent<Image>().color = Color.white;
 
-            ship.GetComponent<ShipMovement>().MoveToLevel(positionLV4);
+                ship.GetComponent<ShipMovement>().MoveToLevel(positionLV4);
 
-            positionModEnergyDecreaseLV5 = 0;
-            positionModEnergyDecreaseLV4 = positionModEnergyDecreaseLV4_original;
+                positionModEnergyDecreaseLV5 = 0;
+                positionModEnergyDecreaseLV4 = positionModEnergyDecreaseLV4_original;
 
-            //Decrease parallax speed
-            parallax.GetComponent<ParallarEffect>().IncreaseSpeed(speedParallaxLV4);
+                //Decrease parallax speed
+                parallax.GetComponent<ParallarEffect>().IncreaseSpeed(speedParallaxLV4);
 
-            //Increase speed when transitioning to the next position
-            ship.GetComponent<ShipMovement>().moveDuration = durationToPosition4;
+                //Increase speed when transitioning to the next position
+                ship.GetComponent<ShipMovement>().moveDuration = durationToPosition4;
 
-            //Zoom out camera
-            ZoomOut(cameraPosLV4);
+                //Zoom out camera
+                ZoomOut(cameraPosLV4);
+            }
+
+            else if (positionLV == 4)
+            {
+                //Update the position LV and sprite
+                positionLV = 3;
+                positionModuleSpriteLV4.GetComponent<Image>().color = Color.white;
+
+                ship.GetComponent<ShipMovement>().MoveToLevel(positionLV3);
+
+                positionModEnergyDecreaseLV4 = 0;
+                positionModEnergyDecreaseLV3 = positionModEnergyDecreaseLV3_original;
+
+                //Decrease parallax speed
+                parallax.GetComponent<ParallarEffect>().IncreaseSpeed(speedParallaxLV3);
+
+                //Increase speed when transitioning to the next position
+                ship.GetComponent<ShipMovement>().moveDuration = durationToPosition3;
+
+                //Zoom out camera
+                ZoomOut(cameraPosLV3);
+            }
+
+            else if (positionLV == 3)
+            {
+                //Update the position LV and sprite
+                positionLV = 2;
+                positionModuleSpriteLV3.GetComponent<Image>().color = Color.white;
+
+                ship.GetComponent<ShipMovement>().MoveToLevel(positionLV2);
+
+                positionModEnergyDecreaseLV3 = 0;
+                positionModEnergyDecreaseLV2 = positionModEnergyDecreaseLV2_original;
+
+                //Decrease parallax speed
+                parallax.GetComponent<ParallarEffect>().IncreaseSpeed(speedParallaxLV2);
+
+                //Increase speed when transitioning to the next position
+                ship.GetComponent<ShipMovement>().moveDuration = durationToPosition2;
+
+                //Zoom out camera
+                ZoomOut(cameraPosLV2);
+            }
+
+            else if (positionLV == 2)
+            {
+                positionLV = 1;
+                positionModuleSpriteLV2.GetComponent<Image>().color = Color.white;
+
+                ship.GetComponent<ShipMovement>().MoveToLevel(positionLV1);
+
+                positionModEnergyDecreaseLV2 = 0;
+                positionModEnergyDecreaseLV1 = positionModEnergyDecreaseLV1_original;
+
+                //Decrease parallax spee1
+                parallax.GetComponent<ParallarEffect>().IncreaseSpeed(speedParallaxLV1);
+
+                //Increase speed when transitioning to the next position
+                ship.GetComponent<ShipMovement>().moveDuration = durationToPosition1;
+
+                //Zoom out camera
+                ZoomOut(cameraPosLV1);
+
+                //Moved events on the button here
+                DecelerateShip();
+                ToggleAsteroidSpeed();
+            }
         }
-
-        else if (positionLV == 4)
+        else if (repairSys.canRepair)
         {
-            //Update the position LV and sprite
-            positionLV = 3;
-            positionModuleSpriteLV4.GetComponent<Image>().color = Color.white;
-
-            ship.GetComponent<ShipMovement>().MoveToLevel(positionLV3);
-
-            positionModEnergyDecreaseLV4 = 0;
-            positionModEnergyDecreaseLV3 = positionModEnergyDecreaseLV3_original;
-
-            //Decrease parallax speed
-            parallax.GetComponent<ParallarEffect>().IncreaseSpeed(speedParallaxLV3);
-
-            //Increase speed when transitioning to the next position
-            ship.GetComponent<ShipMovement>().moveDuration = durationToPosition3;
-
-            //Zoom out camera
-            ZoomOut(cameraPosLV3);
+            repairSys.Repair();
         }
-
-        else if (positionLV == 3)
-        {
-            //Update the position LV and sprite
-            positionLV = 2;
-            positionModuleSpriteLV3.GetComponent<Image>().color = Color.white;
-
-            ship.GetComponent<ShipMovement>().MoveToLevel(positionLV2);
-
-            positionModEnergyDecreaseLV3 = 0;
-            positionModEnergyDecreaseLV2 = positionModEnergyDecreaseLV2_original;
-
-            //Decrease parallax speed
-            parallax.GetComponent<ParallarEffect>().IncreaseSpeed(speedParallaxLV2);
-
-            //Increase speed when transitioning to the next position
-            ship.GetComponent<ShipMovement>().moveDuration = durationToPosition2;
-
-            //Zoom out camera
-            ZoomOut(cameraPosLV2);
-        }
-
-        else if (positionLV == 2)
-        {
-            positionLV = 1;
-            positionModuleSpriteLV2.GetComponent<Image>().color = Color.white;
-
-            ship.GetComponent<ShipMovement>().MoveToLevel(positionLV1);
-
-            positionModEnergyDecreaseLV2 = 0;
-            positionModEnergyDecreaseLV1 = positionModEnergyDecreaseLV1_original;
-
-            //Decrease parallax spee1
-            parallax.GetComponent<ParallarEffect>().IncreaseSpeed(speedParallaxLV1);
-
-            //Increase speed when transitioning to the next position
-            ship.GetComponent<ShipMovement>().moveDuration = durationToPosition1;
-
-            //Zoom out camera
-            ZoomOut(cameraPosLV1);
-        }
+        
     }
 
 
     public void ToggleAsteroidSpeed()
     {
+
         //Increase speed movement
         if (positionLV == 5)
         {
@@ -737,6 +789,9 @@ public class GameManager : MonoBehaviour
             //Change speed of all spawned asteroids in the scene to the average number of the range in that level
             ChangeAsteroidSpeeds(maxAsteroidSpeedLV5 - minAsteroidSpeedLV1);
         }
+    
+            
+        
     }
 
     public void ChangeAsteroidSpeeds(float speed)
