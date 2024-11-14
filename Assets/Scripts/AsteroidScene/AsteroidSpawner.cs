@@ -19,12 +19,15 @@ public class AsteroidSpawner : MonoBehaviour
     public float minRotationSpeed = 10f;
     public float maxRotationSpeed = 100f;
     public float arrowYOffset = 1f;
+    public Transform player; // Assign the player transform in the inspector or dynamically
+    public int asteroidsBeforeFollow = 5; // Number of asteroids to spawn before following the player once
 
     private Vector3 pos1Value;
     private Vector3 pos2Value;
     private Vector3 targetPos;
     private float spawnTimer;
-    public Transform player; // Assign the player transform in the inspector or dynamically
+    private int asteroidSpawnCount = 0;
+    private bool isFollowingPlayer = false;
 
     void Start()
     {
@@ -38,9 +41,16 @@ public class AsteroidSpawner : MonoBehaviour
 
     void Update()
     {
-        //MoveBetweenPositions();
+        if (isFollowingPlayer)
+        {
+            FollowPlayerOnXAxis();
+        }
+        else
+        {
+            MoveBetweenPositions();
+        }
+
         HandleAsteroidSpawning();
-        FollowPlayerOnXAxis();
     }
 
     void MoveBetweenPositions()
@@ -52,9 +62,9 @@ public class AsteroidSpawner : MonoBehaviour
             targetPos = targetPos == pos1Value ? pos2Value : pos1Value;
         }
     }
+
     void FollowPlayerOnXAxis()
     {
-        // Keep the object's Y position the same and update only the X position
         Vector3 newPosition = transform.position;
         newPosition.x = player.position.x;
         transform.position = newPosition;
@@ -67,7 +77,18 @@ public class AsteroidSpawner : MonoBehaviour
         if (spawnTimer <= 0f)
         {
             SpawnAsteroid();
-            spawnTimer = Random.Range(minSpawnInterval, maxSpawnInterval); // Randomize the next spawn timer
+            spawnTimer = Random.Range(minSpawnInterval, maxSpawnInterval); // Reset spawn timer
+
+            // Check if we should follow the player next
+            asteroidSpawnCount++;
+            if (asteroidSpawnCount % asteroidsBeforeFollow == 0)
+            {
+                isFollowingPlayer = true;
+            }
+            else
+            {
+                isFollowingPlayer = false;
+            }
         }
     }
 
