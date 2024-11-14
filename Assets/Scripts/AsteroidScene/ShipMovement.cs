@@ -39,10 +39,15 @@ public class ShipMovement : MonoBehaviour
 
     private SoundManager.Sound[] collectSoundsFX = { SoundManager.Sound.Collect1, SoundManager.Sound.Collect2 }; //List of possible sounds for a collected energy
 
+    private SoundButton MissileModule;
+    private DestroyAndRepearSys repairSys;
     private void Start()
     {
         minX = gameManager.GetComponent<GameManager>().minX;
         maxX = gameManager.GetComponent<GameManager>().maxX;
+
+        MissileModule = GameObject.Find("MissileModule").GetComponent<SoundButton>();
+        repairSys = gameManager.GetComponentInChildren<DestroyAndRepearSys>();
     }
 
 
@@ -128,15 +133,22 @@ public class ShipMovement : MonoBehaviour
     // Function to shoot a missile
     public void ShootMissile()
     {
-        if (energy > 0)
+        if (!MissileModule.isBroken)
         {
-            Instantiate(missilePrefab, missileSpawnPoint.position, Quaternion.identity);
-        }
+            if (energy > 0)
+            {
+                Instantiate(missilePrefab, missileSpawnPoint.position, Quaternion.identity);
+            }
 
-        else
+            else
+            {
+                //Negative feedback to the player that they are doing something without energy
+            }
+        }else if (repairSys.canRepair)
         {
-            //Negative feedback to the player that they are doing something without energy
+            repairSys.Repair();
         }
+        
     }
 
 

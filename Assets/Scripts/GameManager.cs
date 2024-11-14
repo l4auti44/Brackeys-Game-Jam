@@ -67,6 +67,9 @@ public class GameManager : MonoBehaviour
 
     private float timer = 10f;
     private bool winCondition = false;
+
+    private SoundButton shieldModule, arrowModule;
+    private DestroyAndRepearSys repairSys;
     // Start is called before the first frame update
     void Start()
     {
@@ -133,8 +136,10 @@ public class GameManager : MonoBehaviour
         mainCamera = Camera.main;
         targetZoom = mainCamera.orthographicSize; // Set initial target to current zoom level
 
-        
 
+        shieldModule = GameObject.Find("ShieldModule").GetComponent<SoundButton>();
+        arrowModule = GameObject.Find("ArrowModule").GetComponent<SoundButton>();
+        repairSys = this.GetComponentInChildren<DestroyAndRepearSys>();
     }
 
     // Update is called once per frame
@@ -433,9 +438,12 @@ public class GameManager : MonoBehaviour
 
     public void ActivateShield()
     {
-        if (!isShieldCooldown)
+        if (!isShieldCooldown && !shieldModule.isBroken)
         {
             StartCoroutine(ShieldRoutine());
+        }else if (repairSys.canRepair && shieldModule.isBroken)
+        {
+            repairSys.Repair();
         }
     }
 
@@ -472,22 +480,30 @@ public class GameManager : MonoBehaviour
 
     public void ToggleArrows()
     {
-        //if the number of tumes that the key was pressed is an odd number, the shield will be activated.
-        //the count starts with 0, so the first hit will be a 1 => odd number => activate shield. Next press is 2 => even number => inactivate
-        asteroidSpawner.GetComponent<AsteroidSpawner>().spawnArrow = !asteroidSpawner.GetComponent<AsteroidSpawner>().spawnArrow;
-        energySpawner.GetComponent<EnergySpawner>().spawnArrow = !energySpawner.GetComponent<EnergySpawner>().spawnArrow;
-
-        if (asteroidSpawner.GetComponent<AsteroidSpawner>().spawnArrow)
+        if (!arrowModule.isBroken)
         {
-            arrowModEnergyDecrease = arrowModEnergyDecrease_original;
-            arrowUI.GetComponent<Image>().color = Color.green;
-        }
+            //if the number of tumes that the key was pressed is an odd number, the shield will be activated.
+            //the count starts with 0, so the first hit will be a 1 => odd number => activate shield. Next press is 2 => even number => inactivate
+            asteroidSpawner.GetComponent<AsteroidSpawner>().spawnArrow = !asteroidSpawner.GetComponent<AsteroidSpawner>().spawnArrow;
+            energySpawner.GetComponent<EnergySpawner>().spawnArrow = !energySpawner.GetComponent<EnergySpawner>().spawnArrow;
 
-        else
-        {
-            arrowModEnergyDecrease = 0;
-            arrowUI.GetComponent<Image>().color = Color.white;
+            if (asteroidSpawner.GetComponent<AsteroidSpawner>().spawnArrow)
+            {
+                arrowModEnergyDecrease = arrowModEnergyDecrease_original;
+                arrowUI.GetComponent<Image>().color = Color.green;
+            }
+
+            else
+            {
+                arrowModEnergyDecrease = 0;
+                arrowUI.GetComponent<Image>().color = Color.white;
+            }
         }
+        else if (repairSys.canRepair)
+        {
+            repairSys.Repair();
+        }
+        
         
     }
 

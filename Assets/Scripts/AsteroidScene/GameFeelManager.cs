@@ -35,7 +35,7 @@ public class GameFeelManager : MonoBehaviour
     public void StartShake(float duration, float magnitude)
     {
         if (isShaking) return; // Skip if already shaking
-        Debug.Log("Camera shake triggered");
+        //Debug.Log("Camera shake triggered");
 
         shakeDuration = duration;
         shakeMagnitude = magnitude;
@@ -76,7 +76,7 @@ public class GameFeelManager : MonoBehaviour
     public void ShakeObjectUI(RectTransform uiElementToShake, float intensity, float duration)
     {
         StartCoroutine(ShakeUIRoutine(uiElementToShake, intensity, duration));
-        Debug.Log("UI shake triggered");
+        //Debug.Log("UI shake triggered");
     }
 
     private IEnumerator ShakeUIRoutine(RectTransform uiElementToShake, float intensity, float duration)

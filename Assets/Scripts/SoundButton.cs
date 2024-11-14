@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class SoundButton : Button
 {
+    [HideInInspector] public bool isBroken = false;
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -22,6 +23,10 @@ public class SoundButton : Button
 
     private void PlayClickSound()
     {
-        SoundManager.PlaySound(SoundManager.Sound.ButtonClick);
+        if (!isBroken)
+        {
+            SoundManager.PlaySound(SoundManager.Sound.ButtonClick);
+        }
+        
     }
 }

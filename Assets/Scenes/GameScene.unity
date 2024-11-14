@@ -3349,6 +3349,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  isBroken: 0
 --- !u!1 &635839919
 GameObject:
   m_ObjectHideFlags: 0
@@ -3770,6 +3771,7 @@ RectTransform:
   m_Children:
   - {fileID: 2136604738}
   - {fileID: 1753358150}
+  - {fileID: 2031877909}
   m_Father: {fileID: 1646411964}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -3821,9 +3823,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1257503200}
-        m_TargetAssemblyTypeName: ShipMovement, Assembly-CSharp
-        m_MethodName: ShootMissile
+      - m_Target: {fileID: 1039065990}
+        m_TargetAssemblyTypeName: DestroyAndRepearSys, Assembly-CSharp
+        m_MethodName: OnRepairButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3845,6 +3847,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  isBroken: 0
 --- !u!114 &702659392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5619,7 +5622,6 @@ GameObject:
   m_Component:
   - component: {fileID: 963167946}
   - component: {fileID: 963167947}
-  - component: {fileID: 963167948}
   m_Layer: 0
   m_Name: DialogueSystem
   m_TagString: Untagged
@@ -5673,19 +5675,6 @@ MonoBehaviour:
     goodText: don't let it go to your head and keep following my orders
     timeForTask: 15
   dialogTEST: 2
---- !u!114 &963167948
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963167945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84edb8ef46b7ccc40a4c18e684840ca7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BreakTime: 15
 --- !u!1 &969604998
 GameObject:
   m_ObjectHideFlags: 0
@@ -5950,6 +5939,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  isBroken: 0
 --- !u!1 &984563407
 GameObject:
   m_ObjectHideFlags: 0
@@ -6309,6 +6299,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  isBroken: 0
 --- !u!1 &1016236085
 GameObject:
   m_ObjectHideFlags: 0
@@ -6539,6 +6530,7 @@ Transform:
   m_Children:
   - {fileID: 2741447641755538250}
   - {fileID: 963167946}
+  - {fileID: 1039065989}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1017901627
@@ -6556,6 +6548,52 @@ MonoBehaviour:
   cameraTransform: {fileID: 0}
   shakeDuration: 0.5
   shakeMagnitude: 0.2
+--- !u!1 &1039065988
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1039065989}
+  - component: {fileID: 1039065990}
+  m_Layer: 0
+  m_Name: RepairAndDestroySystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1039065989
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039065988}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1017901626}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1039065990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039065988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84edb8ef46b7ccc40a4c18e684840ca7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BreakTime: 15
+  canRepair: 0
 --- !u!1 &1053437753
 GameObject:
   m_ObjectHideFlags: 0
@@ -9339,6 +9377,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  isBroken: 0
 --- !u!1 &1527993413
 GameObject:
   m_ObjectHideFlags: 0
@@ -12865,6 +12904,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  isBroken: 0
 --- !u!1 &1943403135
 GameObject:
   m_ObjectHideFlags: 0
@@ -13985,6 +14025,82 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  isBroken: 0
+--- !u!1 &2031877908
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2031877909}
+  - component: {fileID: 2031877911}
+  - component: {fileID: 2031877910}
+  m_Layer: 5
+  m_Name: IsActiveRepairSys
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2031877909
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031877908}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 702659390}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.00000095367, y: 4.0667}
+  m_SizeDelta: {x: 18, y: 17.867}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2031877910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031877908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.030037284, g: 1, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &2031877911
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031877908}
+  m_CullTransparentMesh: 1
 --- !u!1 &2041500995
 GameObject:
   m_ObjectHideFlags: 0
@@ -14353,6 +14469,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  isBroken: 0
 --- !u!1 &2069746203
 GameObject:
   m_ObjectHideFlags: 0
