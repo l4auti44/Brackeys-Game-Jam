@@ -15,12 +15,14 @@ public class GameManager : MonoBehaviour
 
     // --- Game Objects ---
     [Header("Game Objects")]
-    public GameObject ship, asteroidSpawner, energySpawner, shield, radar, radarUI, parallax;
+    public GameObject ship;
+    public GameObject asteroidSpawner, energySpawner, shield, radar, radarUI, parallax;
     public Camera mainCamera;
 
     // --- Radar & Position Modules ---
     [Header("Radar & Position Modules")]
-    public GameObject radarModuleSpriteLV1, radarModuleSpriteLV2, radarModuleSpriteLV3;
+    public GameObject radarModuleSpriteLV1;
+    public GameObject radarModuleSpriteLV2, radarModuleSpriteLV3;
     public GameObject positionModuleSpriteLV1, positionModuleSpriteLV2, positionModuleSpriteLV3, positionModuleSpriteLV4, positionModuleSpriteLV5;
     public GameObject arrowUI, shieldUI;
 
@@ -33,7 +35,8 @@ public class GameManager : MonoBehaviour
 
     // --- Speed Variations ---
     [Header("Speed Variations")]
-    public float speedLV0, speedLV1, speedLV2, speedLV3, speedLV4, speedLV5;
+    public float speedLV0;
+    public float speedLV1, speedLV2, speedLV3, speedLV4, speedLV5;
     public float minAsteroidSpeedLV1, minAsteroidSpeedLV2, minAsteroidSpeedLV3, minAsteroidSpeedLV4, minAsteroidSpeedLV5;
     public float maxAsteroidSpeedLV1, maxAsteroidSpeedLV2, maxAsteroidSpeedLV3, maxAsteroidSpeedLV4, maxAsteroidSpeedLV5;
     public float minRotationSpeedLV1, minRotationSpeedLV2, minRotationSpeedLV3, minRotationSpeedLV4, minRotationSpeedLV5;
@@ -41,20 +44,24 @@ public class GameManager : MonoBehaviour
 
     // --- Radar Wave Intervals ---
     [Header("Radar Wave Intervals")]
-    public float radarWaveIntervalLV3, radarWaveIntervalLV2, radarWaveIntervalLV1, radarWaveIntervalLV0;
+    public float radarWaveIntervalLV3;
+    public float radarWaveIntervalLV2, radarWaveIntervalLV1, radarWaveIntervalLV0;
 
     // --- Position Settings ---
     [Header("Position Settings")]
-    public Transform positionLV1, positionLV2, positionLV3, positionLV4, positionLV5;
+    public Transform positionLV1;
+    public Transform positionLV2, positionLV3, positionLV4, positionLV5;
     public float durationToPosition5, durationToPosition4, durationToPosition3, durationToPosition2, durationToPosition1;
 
     // --- Parallax Speed Settings ---
     [Header("Parallax Speed Settings")]
-    public float speedParallaxLV0, speedParallaxLV1, speedParallaxLV2, speedParallaxLV3, speedParallaxLV4, speedParallaxLV5;
+    public float speedParallaxLV0;
+    public float speedParallaxLV1, speedParallaxLV2, speedParallaxLV3, speedParallaxLV4, speedParallaxLV5;
 
     // --- Camera Settings ---
     [Header("Camera Settings")]
-    public float cameraPosLV0, cameraPosLV1, cameraPosLV2, cameraPosLV3, cameraPosLV4, cameraPosLV5;
+    public float cameraPosLV0;
+    public float cameraPosLV1, cameraPosLV2, cameraPosLV3, cameraPosLV4, cameraPosLV5;
     public float cameraZoomOutSpeed = 2;
     private float targetZoom; // Target orthographic size
 
@@ -66,7 +73,8 @@ public class GameManager : MonoBehaviour
 
     // --- Energy Modifiers ---
     [Header("Energy Modifiers")]
-    public float radarModEnergyDecreaseLV1, radarModEnergyDecreaseLV2, radarModEnergyDecreaseLV3;
+    public float radarModEnergyDecreaseLV1;
+    public float radarModEnergyDecreaseLV2, radarModEnergyDecreaseLV3;
     private float radarModEnergyDecreaseLV1_original, radarModEnergyDecreaseLV2_original, radarModEnergyDecreaseLV3_original;
     public float shieldModEnergyDecrease;
     private float shieldModEnergyDecrease_original;
@@ -97,7 +105,8 @@ public class GameManager : MonoBehaviour
 
     // --- Sound Modules ---
     [Header("Sound Modules")]
-    private SoundButton shieldModule, arrowModule;
+    private SoundButton shieldModule;
+    private SoundButton arrowModule;
     private List<SoundButton> engineModules = new List<SoundButton>();
     private List<SoundButton> radarModules = new List<SoundButton>();
 
