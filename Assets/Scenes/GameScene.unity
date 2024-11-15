@@ -6446,6 +6446,7 @@ GameObject:
   - component: {fileID: 1017901625}
   - component: {fileID: 1017901627}
   - component: {fileID: 1017901628}
+  - component: {fileID: 1017901629}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -6559,13 +6560,13 @@ MonoBehaviour:
   positionModEnergyDecreaseLV5: 35
   arrowModEnergyDecrease: 2
   energySlider: {fileID: 1053437753}
-  isOverload: 0
-  overloadDuration: 5
   shieldObject: {fileID: 366897731}
   shieldDuration: 2
   shieldCooldown: 2
   isShieldActive: 0
   isShieldCooldown: 0
+  isOverload: 0
+  overloadDuration: 5
 --- !u!4 &1017901626
 Transform:
   m_ObjectHideFlags: 0
@@ -6622,6 +6623,47 @@ MonoBehaviour:
   minSpawnIntervalLimit: 0.2
   maxSpawnIntervalLimit: 0.5
   asteroidSpawnIntervalIncrease: 0.5
+--- !u!114 &1017901629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017901624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44786acfff4a40947ae5ff0573cadbf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minStormInterval: 5
+  maxStormInterval: 10
+  speedAdjustmentLV1:
+  - 0
+  - 0
+  speedAdjustmentLV2:
+  - 0
+  - 0
+  speedAdjustmentLV3:
+  - 0
+  - 0
+  spawnIntervalAdjustmentLV1:
+  - 0
+  - 0
+  spawnIntervalAdjustmentLV2:
+  - 0
+  - 0
+  spawnIntervalAdjustmentLV3:
+  - 0
+  - 0
+  alphaAdjustmentLV1:
+  - 0
+  - 0
+  alphaAdjustmentLV2:
+  - 0
+  - 0
+  alphaAdjustmentLV3:
+  - 0
+  - 0
 --- !u!1 &1039065988
 GameObject:
   m_ObjectHideFlags: 0

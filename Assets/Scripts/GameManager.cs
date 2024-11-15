@@ -6,73 +6,103 @@ using static UnityEngine.EventSystems.EventTrigger;
 
 public class GameManager : MonoBehaviour
 {
-    public float gameProgress, gameProgressSpeed;
+    // --- Game Progression ---
+    [Header("Game Progression")]
+    public float gameProgress;
+    public float gameProgressSpeed;
     public GameObject gameProgressSlider;
+
+    // --- Game Objects ---
+    [Header("Game Objects")]
     public GameObject ship, asteroidSpawner, energySpawner, shield, radar, radarUI, parallax;
     public Camera mainCamera;
-    //public GameObject engineModuleSpriteLV1, engineModuleSpriteLV2, engineModuleSpriteLV3;
+
+    // --- Radar & Position Modules ---
+    [Header("Radar & Position Modules")]
     public GameObject radarModuleSpriteLV1, radarModuleSpriteLV2, radarModuleSpriteLV3;
     public GameObject positionModuleSpriteLV1, positionModuleSpriteLV2, positionModuleSpriteLV3, positionModuleSpriteLV4, positionModuleSpriteLV5;
     public GameObject arrowUI, shieldUI;
-    public float shipSpeed, radarLV, positionLV;
+
+    // --- Ship & Movement Settings ---
+    [Header("Ship & Movement Settings")]
+    public float shipSpeed;
+    public float radarLV, positionLV;
     public float minX, maxX; // Minimum and maximum X boundary for player movement
-    public float asteroidFadeLightSpeed; //Asteroid light face speed
-    public float speedLV0, speedLV1, speedLV2, speedLV3, speedLV4, speedLV5; //Speed variations for each module level
-    public float minAsteroidSpeedLV1, minAsteroidSpeedLV2, minAsteroidSpeedLV3, minAsteroidSpeedLV4, minAsteroidSpeedLV5; //Speed variations for each module level
-    public float maxAsteroidSpeedLV1, maxAsteroidSpeedLV2, maxAsteroidSpeedLV3, maxAsteroidSpeedLV4, maxAsteroidSpeedLV5; //Speed variations for each module level
-    public float minRotationSpeedLV1, minRotationSpeedLV2, minRotationSpeedLV3, minRotationSpeedLV4, minRotationSpeedLV5; //Speed variations for each module level
-    public float maxRotationSpeedLV1, maxRotationSpeedLV2, maxRotationSpeedLV3, maxRotationSpeedLV4, maxRotationSpeedLV5; //Speed variations for each module level
+    public float asteroidFadeLightSpeed; // Asteroid light fade speed
+
+    // --- Speed Variations ---
+    [Header("Speed Variations")]
+    public float speedLV0, speedLV1, speedLV2, speedLV3, speedLV4, speedLV5;
+    public float minAsteroidSpeedLV1, minAsteroidSpeedLV2, minAsteroidSpeedLV3, minAsteroidSpeedLV4, minAsteroidSpeedLV5;
+    public float maxAsteroidSpeedLV1, maxAsteroidSpeedLV2, maxAsteroidSpeedLV3, maxAsteroidSpeedLV4, maxAsteroidSpeedLV5;
+    public float minRotationSpeedLV1, minRotationSpeedLV2, minRotationSpeedLV3, minRotationSpeedLV4, minRotationSpeedLV5;
+    public float maxRotationSpeedLV1, maxRotationSpeedLV2, maxRotationSpeedLV3, maxRotationSpeedLV4, maxRotationSpeedLV5;
+
+    // --- Radar Wave Intervals ---
+    [Header("Radar Wave Intervals")]
     public float radarWaveIntervalLV3, radarWaveIntervalLV2, radarWaveIntervalLV1, radarWaveIntervalLV0;
-    public Transform positionLV1, positionLV2, positionLV3, positionLV4, positionLV5; //Position variations for each module level
-    public float durationToPosition5, durationToPosition4, durationToPosition3, durationToPosition2, durationToPosition1; //Speed variations for each module level when moving to another position
-    public float speedParallaxLV0, speedParallaxLV1, speedParallaxLV2, speedParallaxLV3, speedParallaxLV4, speedParallaxLV5; //Speed variations for each module level
+
+    // --- Position Settings ---
+    [Header("Position Settings")]
+    public Transform positionLV1, positionLV2, positionLV3, positionLV4, positionLV5;
+    public float durationToPosition5, durationToPosition4, durationToPosition3, durationToPosition2, durationToPosition1;
+
+    // --- Parallax Speed Settings ---
+    [Header("Parallax Speed Settings")]
+    public float speedParallaxLV0, speedParallaxLV1, speedParallaxLV2, speedParallaxLV3, speedParallaxLV4, speedParallaxLV5;
+
+    // --- Camera Settings ---
+    [Header("Camera Settings")]
     public float cameraPosLV0, cameraPosLV1, cameraPosLV2, cameraPosLV3, cameraPosLV4, cameraPosLV5;
     public float cameraZoomOutSpeed = 2;
-    private float targetZoom;        // Target orthographic size
+    private float targetZoom; // Target orthographic size
 
-    //public GameObject lightPlayerLV1, lightPlayerLV2; //Radar light variations for each module level
-
+    // --- Energy Settings ---
+    [Header("Energy Settings")]
     public float energy = 100f; // Amount of energy at any time
-    public float energyDecreaseSpeed; //Speed at which the energy is depleted
+    public float energyDecreaseSpeed; // Speed at which the energy is depleted
     public float maxEnergy = 100f; // Amount of total energy
 
-    //public float engineModEnergyDecreaseLV1, engineModEnergyDecreaseLV2, engineModEnergyDecreaseLV3;
-    //private float engineModEnergyDecreaseLV1_original, engineMoEnergyDecreaseLV2_original, engineModEnergyDecreaseLV3_original;
-
+    // --- Energy Modifiers ---
+    [Header("Energy Modifiers")]
     public float radarModEnergyDecreaseLV1, radarModEnergyDecreaseLV2, radarModEnergyDecreaseLV3;
     private float radarModEnergyDecreaseLV1_original, radarModEnergyDecreaseLV2_original, radarModEnergyDecreaseLV3_original;
-
     public float shieldModEnergyDecrease;
     private float shieldModEnergyDecrease_original;
-
     public float positionModEnergyDecreaseLV1, positionModEnergyDecreaseLV2, positionModEnergyDecreaseLV3, positionModEnergyDecreaseLV4, positionModEnergyDecreaseLV5;
     private float positionModEnergyDecreaseLV1_original, positionModEnergyDecreaseLV2_original, positionModEnergyDecreaseLV3_original, positionModEnergyDecreaseLV4_original, positionModEnergyDecreaseLV5_original;
-
     public float arrowModEnergyDecrease;
     private float arrowModEnergyDecrease_original;
-
     public GameObject energySlider;
 
-    public bool isOverload = false;  // Tracks overload state
-    public float overloadDuration = 5f;  // Duration of the overload state
-
+    // --- Shield Settings ---
+    [Header("Shield Settings")]
     public GameObject shieldObject;      // The shield GameObject
     public float shieldDuration = 5f;    // How long the shield stays active
     public float shieldCooldown = 10f;   // Cooldown before shield can be reactivated
     public bool isShieldActive = false;
     public bool isShieldCooldown = false;
 
-    
-    private float timerForGameOver = 10f;
+    // --- Overload Settings ---
+    [Header("Overload Settings")]
+    public bool isOverload = false;  // Tracks overload state
+    public float overloadDuration = 5f;  // Duration of the overload state
 
+    // --- Game Over Timer ---
+    [Header("Game Over Timer")]
+    private float timerForGameOver = 10f;
     private float timer = 10f;
     private bool winCondition = false;
 
+    // --- Sound Modules ---
+    [Header("Sound Modules")]
     private SoundButton shieldModule, arrowModule;
     private List<SoundButton> engineModules = new List<SoundButton>();
     private List<SoundButton> radarModules = new List<SoundButton>();
+
+    // --- Repair System ---
     private DestroyAndRepearSys repairSys;
-    // Start is called before the first frame update
+
     void Start()
     {
         //Get ship speed
