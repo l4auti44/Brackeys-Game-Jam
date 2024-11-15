@@ -159,6 +159,9 @@ public class GameManager : MonoBehaviour
         radarModEnergyDecreaseLV1 = radarModEnergyDecreaseLV1_original;
         radarModuleSpriteLV1.GetComponent<Image>().color = Color.green;
 
+        //Start level with game progress speed LV1
+        gameProgressSpeed = gameProgressSpeedPositionLV1;
+
         //Start game with no arrow spawn
         asteroidSpawner.GetComponent<AsteroidSpawner>().spawnArrow = false;
 
