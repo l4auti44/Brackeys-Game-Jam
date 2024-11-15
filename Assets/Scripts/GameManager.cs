@@ -9,8 +9,9 @@ public class GameManager : MonoBehaviour
     // --- Game Progression ---
     [Header("Game Progression")]
     public float gameProgress;
-    public float gameProgressSpeed;
+    private float gameProgressSpeed;
     public GameObject gameProgressSlider;
+    public float gameProgressSpeedPositionLV1, gameProgressSpeedPositionLV2, gameProgressSpeedPositionLV3, gameProgressSpeedPositionLV4, gameProgressSpeedPositionLV5;
 
     // --- Game Objects ---
     [Header("Game Objects")]
@@ -281,7 +282,7 @@ public class GameManager : MonoBehaviour
 
             //modify the energy decrease speed and reset the rest
             //engineModEnergyDecreaseLV3 = engineModEnergyDecreaseLV3_original;
-            gameProgressSpeed += 1;
+            gameProgressSpeed = gameProgressSpeedPositionLV5;
         }
 
         else if (shipSpeed == speedLV3)
@@ -292,7 +293,7 @@ public class GameManager : MonoBehaviour
 
             //modify the energy decrease speed and reset the rest
             //engineModEnergyDecreaseLV3 = engineModEnergyDecreaseLV3_original;
-            gameProgressSpeed += 1;
+            gameProgressSpeed = gameProgressSpeedPositionLV4;
         }
 
         else if (shipSpeed == speedLV2)
@@ -303,7 +304,7 @@ public class GameManager : MonoBehaviour
 
             //modify the energy decrease speed and reset the rest
             //engineModEnergyDecreaseLV3 = engineModEnergyDecreaseLV3_original;
-            gameProgressSpeed += 1;
+            gameProgressSpeed = gameProgressSpeedPositionLV3;
         }
 
         else if (shipSpeed == speedLV1)
@@ -314,7 +315,7 @@ public class GameManager : MonoBehaviour
 
             //modify the energy decrease speed and reset the rest
             //engineModEnergyDecreaseLV2 = engineMoEnergyDecreaseLV2_original;
-            gameProgressSpeed += 1;
+            gameProgressSpeed = gameProgressSpeedPositionLV2;
         }
         
 
@@ -333,7 +334,7 @@ public class GameManager : MonoBehaviour
             //engineModEnergyDecreaseLV3 = 0;
             //engineModEnergyDecreaseLV2 = 0;
             //engineModEnergyDecreaseLV1 = 0;
-            gameProgressSpeed -= 1;
+            gameProgressSpeed = gameProgressSpeedPositionLV1;
         }
 
         else if (shipSpeed == speedLV3)
@@ -346,7 +347,7 @@ public class GameManager : MonoBehaviour
             //engineModEnergyDecreaseLV3 = 0;
             //engineModEnergyDecreaseLV2 = 0;
             //engineModEnergyDecreaseLV1 = 0;
-            gameProgressSpeed -= 1;
+            gameProgressSpeed = gameProgressSpeedPositionLV2;
         }
 
         else if (shipSpeed == speedLV4)
@@ -358,7 +359,7 @@ public class GameManager : MonoBehaviour
             //modify the energy decrease speed and reset the rest
             //engineModEnergyDecreaseLV2 = 0;
             //engineModEnergyDecreaseLV1 = engineModEnergyDecreaseLV1_original;
-            gameProgressSpeed -= 1;
+            gameProgressSpeed = gameProgressSpeedPositionLV3;
         }
 
         else if (shipSpeed == speedLV5)
@@ -370,7 +371,7 @@ public class GameManager : MonoBehaviour
             //modify the energy decrease speed and reset the rest
             //engineModEnergyDecreaseLV3 = 0;
             //engineModEnergyDecreaseLV2 = engineMoEnergyDecreaseLV2_original;
-            gameProgressSpeed -= 1;
+            gameProgressSpeed = gameProgressSpeedPositionLV4;
         }
 
     }

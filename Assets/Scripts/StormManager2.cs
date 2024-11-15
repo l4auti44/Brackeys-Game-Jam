@@ -55,6 +55,9 @@ public class StormManager2 : MonoBehaviour
 
     private void ActivateStorm()
     {
+        //Console indication
+        Debug.Log("Storm is coming");
+        
         // Randomly select storm level (1, 2, or 3)
         int stormLevel = Random.Range(1, 4);
 
@@ -95,8 +98,5 @@ public class StormManager2 : MonoBehaviour
             spriteRenderer.color = newColor;
         }
     }
-
-
-
 
 }

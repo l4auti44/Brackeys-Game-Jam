@@ -6467,8 +6467,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameProgress: 0
-  gameProgressSpeed: 0.01
   gameProgressSlider: {fileID: 1988926708}
+  gameProgressSpeedPositionLV1: 0.1
+  gameProgressSpeedPositionLV2: 0.2
+  gameProgressSpeedPositionLV3: 0.5
+  gameProgressSpeedPositionLV4: 0.8
+  gameProgressSpeedPositionLV5: 1
   ship: {fileID: 1257503198}
   asteroidSpawner: {fileID: 1970598913}
   energySpawner: {fileID: 1232595329}
@@ -6607,7 +6611,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1017901624}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5817c41bd42c6374d8aa1a9235efa609, type: 3}
   m_Name: 
