@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     // --- Radar & Position Modules ---
     [Header("Radar & Position Modules")]
     public GameObject radarModuleSpriteLV1;
-    public GameObject radarModuleSpriteLV2, radarModuleSpriteLV3;
+    public GameObject radarModuleSpriteLV2, radarModuleSpriteLV3, radarModuleSpriteLV4;
     public GameObject positionModuleSpriteLV1, positionModuleSpriteLV2, positionModuleSpriteLV3, positionModuleSpriteLV4, positionModuleSpriteLV5;
     public GameObject arrowUI, shieldUI;
 
@@ -41,11 +41,12 @@ public class GameManager : MonoBehaviour
     public float maxAsteroidSpeedLV1, maxAsteroidSpeedLV2, maxAsteroidSpeedLV3, maxAsteroidSpeedLV4, maxAsteroidSpeedLV5;
     public float minRotationSpeedLV1, minRotationSpeedLV2, minRotationSpeedLV3, minRotationSpeedLV4, minRotationSpeedLV5;
     public float maxRotationSpeedLV1, maxRotationSpeedLV2, maxRotationSpeedLV3, maxRotationSpeedLV4, maxRotationSpeedLV5;
+    public float speedDecreaseRateWhenGameOver;
 
     // --- Radar Wave Intervals ---
     [Header("Radar Wave Intervals")]
     public float radarWaveIntervalLV3;
-    public float radarWaveIntervalLV2, radarWaveIntervalLV1, radarWaveIntervalLV0;
+    public float radarWaveIntervalLV2, radarWaveIntervalLV1, radarWaveIntervalLV4;
 
     // --- Position Settings ---
     [Header("Position Settings")]
@@ -74,8 +75,8 @@ public class GameManager : MonoBehaviour
     // --- Energy Modifiers ---
     [Header("Energy Modifiers")]
     public float radarModEnergyDecreaseLV1;
-    public float radarModEnergyDecreaseLV2, radarModEnergyDecreaseLV3;
-    private float radarModEnergyDecreaseLV1_original, radarModEnergyDecreaseLV2_original, radarModEnergyDecreaseLV3_original;
+    public float radarModEnergyDecreaseLV2, radarModEnergyDecreaseLV3, radarModEnergyDecreaseLV4;
+    private float radarModEnergyDecreaseLV1_original, radarModEnergyDecreaseLV2_original, radarModEnergyDecreaseLV3_original, radarModEnergyDecreaseLV4_original;
     public float shieldModEnergyDecrease;
     private float shieldModEnergyDecrease_original;
     public float positionModEnergyDecreaseLV1, positionModEnergyDecreaseLV2, positionModEnergyDecreaseLV3, positionModEnergyDecreaseLV4, positionModEnergyDecreaseLV5;
@@ -122,6 +123,7 @@ public class GameManager : MonoBehaviour
         radarModEnergyDecreaseLV1_original = radarModEnergyDecreaseLV1;
         radarModEnergyDecreaseLV2_original = radarModEnergyDecreaseLV2;
         radarModEnergyDecreaseLV3_original = radarModEnergyDecreaseLV3;
+        radarModEnergyDecreaseLV4_original = radarModEnergyDecreaseLV4;
 
         shieldModEnergyDecrease_original = shieldModEnergyDecrease;
 
@@ -241,7 +243,13 @@ public class GameManager : MonoBehaviour
             //Deactivate all modules if energy is 0
             if (energy < 0)
             {
-                shipSpeed = 0;
+                // Gradually decrease ship speed to zero during the game-over timer
+                shipSpeed = Mathf.Max(0, shipSpeed - speedDecreaseRateWhenGameOver * Time.deltaTime);
+
+                //Disable Input Windows
+
+
+                // Disable radar level and play warning sound
                 radarLV = 0;
                 SoundManager.PlaySound(SoundManager.Sound.EnergyAtZeroWarning);
 
@@ -394,7 +402,22 @@ public class GameManager : MonoBehaviour
         if (!radarModules[0].isBroken)
         {
             //Increase radar LV
-            if (radarLV == 2)
+            if (radarLV == 3)
+            {
+                //Update the radar LV and sprite
+                radarLV = 4;
+                radarModuleSpriteLV4.GetComponent<Image>().color = Color.green;
+
+                //Activate radar LV4
+                ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV3;
+                radarUI.GetComponent<RadarControllerUI>().waveInterval = radarWaveIntervalLV3;
+
+                //Decrease energy
+                radarModEnergyDecreaseLV4 = radarModEnergyDecreaseLV4_original;
+
+            }
+
+            else if (radarLV == 2)
             {
                 //Update the radar LV and sprite
                 radarLV = 3;
@@ -423,21 +446,22 @@ public class GameManager : MonoBehaviour
                 radarModEnergyDecreaseLV2 = radarModEnergyDecreaseLV2_original;
             }
 
-            else if (radarLV == 0)
-            {
-                //Update the radar LV and sprite
-                radarLV = 1;
-                radarModuleSpriteLV1.GetComponent<Image>().color = Color.green;
+            //else if (radarLV == 0)
+            //{
+            //    //Update the radar LV and sprite
+            //    radarLV = 1;
+            //    radarModuleSpriteLV1.GetComponent<Image>().color = Color.green;
 
-                //Activate radar LV1
-                ship.GetComponent<RadarController>().isSpawning = true;
-                radarUI.GetComponent<RadarControllerUI>().isSpawning = true;
-                ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV1;
-                radarUI.GetComponent<RadarControllerUI>().waveInterval = radarWaveIntervalLV1;
+            //    //Activate radar LV1
+            //    ship.GetComponent<RadarController>().isSpawning = true;
+            //    radarUI.GetComponent<RadarControllerUI>().isSpawning = true;
+            //    ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV1;
+            //    radarUI.GetComponent<RadarControllerUI>().waveInterval = radarWaveIntervalLV1;
 
-                //Decrease energy
-                radarModEnergyDecreaseLV1 = radarModEnergyDecreaseLV1_original;
-            }
+            //    //Decrease energy
+            //    radarModEnergyDecreaseLV1 = radarModEnergyDecreaseLV1_original;
+            //}
+
             EventManager.Game.OnRadarChange.Invoke((int)radarLV);
         }
         else if (repairSys.canRepair)
@@ -451,23 +475,24 @@ public class GameManager : MonoBehaviour
     {
         if (!radarModules[1].isBroken)
         {
+
+            //if (radarLV == 1)
+            //{
+            //    //Update the radar LV and sprite
+            //    radarLV = 0;
+            //    radarModuleSpriteLV1.GetComponent<Image>().color = Color.white;
+
+            //    //Activate radar LV0
+            //    ship.GetComponent<RadarController>().isSpawning = false;
+            //    radarUI.GetComponent<RadarControllerUI>().isSpawning = false;
+
+            //    //Decrease energy
+            //    radarModEnergyDecreaseLV1 = 0;
+
+            //}
+
             //Decrease radar LV
-            if (radarLV == 1)
-            {
-                //Update the radar LV and sprite
-                radarLV = 0;
-                radarModuleSpriteLV1.GetComponent<Image>().color = Color.white;
-
-                //Activate radar LV0
-                ship.GetComponent<RadarController>().isSpawning = false;
-                radarUI.GetComponent<RadarControllerUI>().isSpawning = false;
-
-                //Decrease energy
-                radarModEnergyDecreaseLV1 = 0;
-
-            }
-
-            else if (radarLV == 2)
+            if (radarLV == 2)
             {
                 //Update the radar LV and sprite
                 radarLV = 1;
@@ -494,7 +519,22 @@ public class GameManager : MonoBehaviour
 
                 //Decrease energy
                 radarModEnergyDecreaseLV3 = 0;
-                radarModEnergyDecreaseLV2 = radarModEnergyDecreaseLV1_original;
+                radarModEnergyDecreaseLV2 = radarModEnergyDecreaseLV2_original;
+            }
+
+            else if (radarLV == 4)
+            {
+                //Update the radar LV and sprite
+                radarLV = 3;
+                radarModuleSpriteLV4.GetComponent<Image>().color = Color.white;
+
+                //Activate radar LV3
+                ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV3;
+                radarUI.GetComponent<RadarControllerUI>().waveInterval = radarWaveIntervalLV3;
+
+                //Decrease energy
+                radarModEnergyDecreaseLV4 = 0;
+                radarModEnergyDecreaseLV3 = radarModEnergyDecreaseLV3_original;
             }
 
             EventManager.Game.OnRadarChange.Invoke((int)radarLV);
