@@ -8485,10 +8485,10 @@ MonoBehaviour:
   maxRotationSpeedLV4: 400
   maxRotationSpeedLV5: 500
   speedDecreaseRateWhenGameOver: 0.1
-  radarWaveIntervalLV3: 1
-  radarWaveIntervalLV2: 2
-  radarWaveIntervalLV1: 3
-  radarWaveIntervalLV4: 4
+  radarWaveIntervalLV3: 2
+  radarWaveIntervalLV2: 3
+  radarWaveIntervalLV1: 5
+  radarWaveIntervalLV4: 0.1
   positionLV1: {fileID: 2125261609}
   positionLV2: {fileID: 300244156}
   positionLV3: {fileID: 200715443}
@@ -8514,7 +8514,7 @@ MonoBehaviour:
   cameraZoomOutSpeed: 1
   energy: 0
   energyDecreaseSpeed: 0
-  maxEnergy: 50
+  maxEnergy: 1000
   radarModEnergyDecreaseLV1: 2
   radarModEnergyDecreaseLV2: 15
   radarModEnergyDecreaseLV3: 30
