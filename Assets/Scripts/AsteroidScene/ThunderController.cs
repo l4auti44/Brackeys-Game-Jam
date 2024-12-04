@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public enum ThunderState { Idle, ThunderYellow, ThunderRed }
@@ -11,6 +12,7 @@ public class ThunderController : MonoBehaviour
     public float timeToRed = 3f;     // Time to switch to ThunderRed after ThunderYellow
     public float timeToIdle = 4f;    // Time to switch back to Idle from ThunderRed
     public float energyToDecrease = 10f;
+    public float timeInactivateText = 1f;
 
     public Sprite idleSprite;        // Sprite for the idle state
     public Sprite yellowSprite;      // Sprite for the ThunderYellow state
@@ -18,11 +20,13 @@ public class ThunderController : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
     public GameManager gameManager; // Reference to GameManager
+    public GameObject textParrySucess; //Reference to the text that appears when you do a parry successfully
 
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>(); // Get the SpriteRenderer component
         gameManager = FindObjectOfType<GameManager>();  // Find the GameManager in the scene
+        textParrySucess = GameObject.Find("ParryIndicator");
 
         // Start the state change process
         StartCoroutine(ChangeState());
@@ -72,6 +76,10 @@ public class ThunderController : MonoBehaviour
         {
             // Increase the energy of the game manager
             gameManager.energy = gameManager.maxEnergy;
+
+            //Give player feedback
+            textParrySucess.gameObject.SetActive(true);
+            TriggerInactivation(timeInactivateText);
         }
     }
 
@@ -85,4 +93,21 @@ public class ThunderController : MonoBehaviour
             gameManager.energy -= energyToDecrease;
         }
     }
+
+    public void TriggerInactivation(float customDelay)
+    {
+        StartCoroutine(InactivateObjectAfterDelay(customDelay));
+    }
+
+    IEnumerator InactivateObjectAfterDelay(float customDelay)
+    {
+        yield return new WaitForSeconds(customDelay);
+        if (textParrySucess != null)
+        {
+            textParrySucess.gameObject.SetActive(false);
+        }
+    }
+
+
+
 }
