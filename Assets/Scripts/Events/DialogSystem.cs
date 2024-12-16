@@ -5,6 +5,7 @@ using UnityEngine;
 public class DialogSystem : MonoBehaviour
 {
     public float timeForEachCharacter = 0.2f;
+    public Animator halAnimator;
     public enum DialogEvents
     {
         NoGetHit,
@@ -97,6 +98,7 @@ public class DialogSystem : MonoBehaviour
         StopAllCoroutines();
         
         textComponent.text = "";
+        halAnimator.SetBool("Talking", false);
         isWritting = false;
         SoundManager.StopDialogueSound();
     }
@@ -105,6 +107,7 @@ public class DialogSystem : MonoBehaviour
         StopWritting();
         StartCoroutine(TypeText(currentDialog.goodText, DialogPool.Calm));
         StartCoroutine(WaitToDeleteText());
+        halAnimator.SetBool("Completed", true);
         currentDialog = null;
     }
 
@@ -113,6 +116,7 @@ public class DialogSystem : MonoBehaviour
         StopWritting();
         StartCoroutine(TypeText(currentDialog.failText, DialogPool.Angry));
         StartCoroutine(WaitToDeleteText());
+        halAnimator.SetBool("Failed", true);
         currentDialog = null;
         EventManager.Game.OnTaskDialogFailed.Invoke();
     }
@@ -207,6 +211,9 @@ public class DialogSystem : MonoBehaviour
     private IEnumerator TypeText(string message, DialogPool audioPool)
     {
         SoundManager.PlayDialogueSound(audioPool);
+        halAnimator.SetBool("Talking", true);
+        halAnimator.SetBool("Failed", false);
+        halAnimator.SetBool("Completed", false);
         isWritting = true;
         textComponent.text = "";
         foreach (char letter in message)
@@ -218,6 +225,7 @@ public class DialogSystem : MonoBehaviour
         SoundManager.StopDialogueSound();
         yield return new WaitForSeconds(2f);
         isWritting = false;
+        halAnimator.SetBool("Talking", false);
         if (currentDialog != null)
         {
             StartCoroutine(WaitingForAction());

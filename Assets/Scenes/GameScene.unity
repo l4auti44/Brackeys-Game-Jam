@@ -7556,6 +7556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeForEachCharacter: 0.08
+  halAnimator: {fileID: 969605000}
   dialogEventsList:
   - dialogEvent: 0
     taskText: Humans, don't get hit for 15 seconds or.. you will see.

@@ -618,7 +618,7 @@ public class GameManager : MonoBehaviour
         
     }
 
-
+    #region EngineRelatedRegion
     public void IncreasePositionShip ()
     {
         if (!engineModules[0].isBroken)
@@ -707,6 +707,8 @@ public class GameManager : MonoBehaviour
             //Moved events on the button here
             AccelerateShip();
             ToggleAsteroidSpeed();
+
+            EventManager.Game.OnEngineChange.Invoke((int)positionLV);
         }
         else if (repairSys.canRepair)
         {
@@ -804,6 +806,8 @@ public class GameManager : MonoBehaviour
                 //Moved events on the button here
                 DecelerateShip();
                 ToggleAsteroidSpeed();
+
+                EventManager.Game.OnEngineChange.Invoke((int)positionLV);
             }
         }
         else if (repairSys.canRepair)
@@ -813,7 +817,7 @@ public class GameManager : MonoBehaviour
         
     }
 
-
+    #endregion
     public void ToggleAsteroidSpeed()
     {
 
