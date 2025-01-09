@@ -549,12 +549,9 @@ public class GameManager : MonoBehaviour
 
     public void ActivateShield()
     {
-        if (!isShieldCooldown && !shieldModule.isBroken)
+        if (!isShieldCooldown)
         {
             StartCoroutine(ShieldRoutine());
-        }else if (repairSys.canRepair && shieldModule.isBroken)
-        {
-            repairSys.Repair();
         }
     }
 
@@ -591,8 +588,7 @@ public class GameManager : MonoBehaviour
 
     public void ToggleArrows()
     {
-        if (!arrowModule.isBroken)
-        {
+
             //if the number of tumes that the key was pressed is an odd number, the shield will be activated.
             //the count starts with 0, so the first hit will be a 1 => odd number => activate shield. Next press is 2 => even number => inactivate
             asteroidSpawner.GetComponent<AsteroidSpawner>().spawnArrow = !asteroidSpawner.GetComponent<AsteroidSpawner>().spawnArrow;
@@ -609,11 +605,6 @@ public class GameManager : MonoBehaviour
                 arrowModEnergyDecrease = 0;
                 arrowUI.GetComponent<Image>().color = Color.white;
             }
-        }
-        else if (repairSys.canRepair)
-        {
-            repairSys.Repair();
-        }
         
         
     }

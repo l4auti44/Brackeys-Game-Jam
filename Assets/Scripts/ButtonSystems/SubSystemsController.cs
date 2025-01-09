@@ -5,7 +5,7 @@ using UnityEngine;
 public class SubSystemsController : MonoBehaviour
 {
     //SYSTEMS
-    private SystemBlueprint missileModule, shieldModule, arrowModule;
+    private SystemBlueprint missileModule, shieldModule, arrowModule, repairModule;
 
     private Transform wheelIndicator;
     private int currentSys = 0;
@@ -17,9 +17,11 @@ public class SubSystemsController : MonoBehaviour
         missileModule = GameObject.Find("MissileModule").GetComponent<SystemBlueprint>();
         shieldModule = GameObject.Find("ShieldModule").GetComponent<SystemBlueprint>();
         arrowModule = GameObject.Find("ArrowModule").GetComponent<SystemBlueprint>();
+        repairModule = GameObject.Find("RepairModule").GetComponent<SystemBlueprint>();
 
         missileModule.SwitchAvailable();
         arrowModule.SwitchAvailable();
+        repairModule.SwitchAvailable();
     }
 
     private void Update()
@@ -29,33 +31,37 @@ public class SubSystemsController : MonoBehaviour
             wheelIndicator.Rotate(0, 0, wheelIndicator.rotation.z + 90);
             currentSys += 1;
 
-            if (currentSys > 2)
+            if (currentSys > 3)
             {
                 currentSys = 0;
             }
 
-            if (currentSys == 2)
-            {
-                wheelIndicator.Rotate(0, 0, wheelIndicator.rotation.z + 90);
-            }
-            
 
+            TurnOffSystems();
             switch (currentSys) {
                 case 0:
                     shieldModule.SwitchAvailable();
-                    arrowModule.SwitchAvailable();
                     break;
                 case 1:
                     missileModule.SwitchAvailable();
-                    shieldModule.SwitchAvailable();
                     break;
                 case 2:
+                    repairModule.SwitchAvailable();
+                    break;
+                case 3:
                     arrowModule.SwitchAvailable();
-                    missileModule.SwitchAvailable();
                     break;
                 default:
                     break;
             }
         }
+    }
+
+    private void TurnOffSystems()
+    {
+        arrowModule.SwitchAvailable(false);
+        missileModule.SwitchAvailable(false);
+        repairModule.SwitchAvailable(false);
+        shieldModule.SwitchAvailable(false);
     }
 }

@@ -136,7 +136,7 @@ public class DestroyAndRepearSys : MonoBehaviour
     private IEnumerator RepairButtonClicked()
     {
         canRepair = true;
-        repairModuleIsActiveImage.SetActive(true);
+        //repairModuleIsActiveImage.SetActive(true);
         yield return new WaitForSeconds(5f);
         repairModuleIsActiveImage.SetActive(false);
         canRepair = false;

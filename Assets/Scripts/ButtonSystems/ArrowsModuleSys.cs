@@ -10,7 +10,7 @@ public class ArrowsModuleSys : SystemBlueprint
     override public void Start()
     {
         base.Start();
-        module = Modules.ArrowModule;
+        module = SubSys.ArrowModule;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 

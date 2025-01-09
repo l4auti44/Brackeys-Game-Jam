@@ -9,7 +9,7 @@ public class ShieldModuleSys : SystemBlueprint
     override public void Start()
     {
         base.Start();
-        module = Modules.ShieldModule;
+        module = SubSys.ShieldModule;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
     }

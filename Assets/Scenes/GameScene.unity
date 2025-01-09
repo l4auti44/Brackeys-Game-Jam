@@ -5117,6 +5117,7 @@ GameObject:
   - component: {fileID: 702659393}
   - component: {fileID: 702659392}
   - component: {fileID: 702659391}
+  - component: {fileID: 702659394}
   m_Layer: 5
   m_Name: RepairModule
   m_TagString: Untagged
@@ -5192,27 +5193,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1039065990}
-        m_TargetAssemblyTypeName: DestroyAndRepearSys, Assembly-CSharp
-        m_MethodName: OnRepairButtonClicked
+      - m_Target: {fileID: 702659394}
+        m_TargetAssemblyTypeName: RepairModuleSys, Assembly-CSharp
+        m_MethodName: DoAction
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1017901625}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: DecreaseEnergy
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 10
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -5255,6 +5244,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 702659389}
   m_CullTransparentMesh: 1
+--- !u!114 &702659394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702659389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8cd2f2a31bb5ab4fb6a64bc9a81544c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  module: 0
+  broken: 0
+  repairSys: {fileID: 0}
+  energyCost: 10
 --- !u!1 &711992171
 GameObject:
   m_ObjectHideFlags: 0
@@ -8335,18 +8340,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1017901625}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: DecreaseEnergy
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 10
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   isBroken: 0
 --- !u!114 &1004026306
 MonoBehaviour:
@@ -8363,6 +8356,7 @@ MonoBehaviour:
   module: 0
   broken: 0
   repairSys: {fileID: 0}
+  energyCost: 10
 --- !u!1 &1016236085
 GameObject:
   m_ObjectHideFlags: 0

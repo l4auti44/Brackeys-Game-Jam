@@ -4,16 +4,15 @@ using UnityEngine.UI;
 
 abstract public class SystemBlueprint : MonoBehaviour
 {
-    public enum Modules
+    public enum SubSys
     {
         MissileModule,
         ShieldModule,
         ArrowModule,
-        EngineModule,
-        radarModule
+        repairModule
     }
 
-    [HideInInspector] public Modules module;
+    [HideInInspector] public SubSys module;
     private bool available = true;
     [HideInInspector] public bool broken = false;
     [HideInInspector] public DestroyAndRepearSys repairSys;
@@ -35,14 +34,32 @@ abstract public class SystemBlueprint : MonoBehaviour
         if (available)
         {
             currentColor = imageComponent.color;
-            currentColor.a = imageComponent.color.a / 2;
+            currentColor.a = 0.5f;
 
             imageComponent.color = currentColor;
             available = false;
         }
         else
         {
-            currentColor.a = imageComponent.color.a * 2;
+            currentColor.a = 1;
+            imageComponent.color = currentColor;
+            available = true;
+        }
+    }
+
+    public void SwitchAvailable(bool state)
+    {
+        if (state == false)
+        {
+            currentColor = imageComponent.color;
+            currentColor.a = 0.5f;
+
+            imageComponent.color = currentColor;
+            available = false;
+        }
+        else
+        {
+            currentColor.a = 1;
             imageComponent.color = currentColor;
             available = true;
         }
