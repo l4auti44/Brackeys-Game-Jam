@@ -2223,11 +2223,11 @@ RectTransform:
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1646411964}
+  m_Father: {fileID: 855998378}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 139.8, y: 0.3}
+  m_AnchoredPosition: {x: 138.8, y: 0.000019103289}
   m_SizeDelta: {x: 8, y: 8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &344946680
@@ -6587,6 +6587,42 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!1 &855998377
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 855998378}
+  m_Layer: 5
+  m_Name: WheelIndicator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &855998378
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855998377}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 344946679}
+  m_Father: {fileID: 1646411964}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -2.5, y: 0.2999997}
+  m_SizeDelta: {x: 32, y: 32}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &879010765
 GameObject:
   m_ObjectHideFlags: 0
@@ -8174,6 +8210,7 @@ GameObject:
   - component: {fileID: 1004026304}
   - component: {fileID: 1004026303}
   - component: {fileID: 1004026305}
+  - component: {fileID: 1004026306}
   m_Layer: 5
   m_Name: MissileModule
   m_TagString: Untagged
@@ -8286,9 +8323,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1257503200}
-        m_TargetAssemblyTypeName: ShipMovement, Assembly-CSharp
-        m_MethodName: ShootMissile
+      - m_Target: {fileID: 1004026306}
+        m_TargetAssemblyTypeName: MissileModuleSys, Assembly-CSharp
+        m_MethodName: DoAction
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8311,6 +8348,21 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   isBroken: 0
+--- !u!114 &1004026306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004026300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a2ca71f01749924e9ed751ee935dfcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  module: 0
+  broken: 0
+  repairSys: {fileID: 0}
 --- !u!1 &1016236085
 GameObject:
   m_ObjectHideFlags: 0
@@ -11991,6 +12043,7 @@ GameObject:
   - component: {fileID: 1525640167}
   - component: {fileID: 1525640166}
   - component: {fileID: 1525640168}
+  - component: {fileID: 1525640169}
   m_Layer: 5
   m_Name: ShieldModule
   m_TagString: Untagged
@@ -12102,9 +12155,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1017901625}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ActivateShield
+      - m_Target: {fileID: 1525640169}
+        m_TargetAssemblyTypeName: ShieldModuleSys, Assembly-CSharp
+        m_MethodName: DoAction
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12115,6 +12168,21 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   isBroken: 0
+--- !u!114 &1525640169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1525640163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 010a1cfdbef4d5b4798a7af03e94da0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  module: 0
+  broken: 0
+  repairSys: {fileID: 0}
 --- !u!1 &1527993413
 GameObject:
   m_ObjectHideFlags: 0
@@ -13336,6 +13404,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1646411964}
+  - component: {fileID: 1646411965}
   m_Layer: 5
   m_Name: SubSystems
   m_TagString: Untagged
@@ -13356,7 +13425,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1255324812}
-  - {fileID: 344946679}
+  - {fileID: 855998378}
   - {fileID: 1729354561}
   - {fileID: 1004026301}
   - {fileID: 702659390}
@@ -13369,6 +13438,18 @@ RectTransform:
   m_AnchoredPosition: {x: 228.3, y: -8.8}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1646411965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1646411963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d9afeb352eef65489fcbd5cfb0e176c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1676225191
 GameObject:
   m_ObjectHideFlags: 0
@@ -17051,6 +17132,7 @@ GameObject:
   - component: {fileID: 2030261324}
   - component: {fileID: 2030261323}
   - component: {fileID: 2030261325}
+  - component: {fileID: 2030261326}
   m_Layer: 5
   m_Name: ArrowModule
   m_TagString: Untagged
@@ -17162,9 +17244,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1017901625}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ToggleArrows
+      - m_Target: {fileID: 2030261326}
+        m_TargetAssemblyTypeName: ArrowsModuleSys, Assembly-CSharp
+        m_MethodName: DoAction
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17175,6 +17257,21 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   isBroken: 0
+--- !u!114 &2030261326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030261320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32f97308abfac9045af44ffd45a0452a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  module: 0
+  broken: 0
+  repairSys: {fileID: 0}
 --- !u!1 &2031877908
 GameObject:
   m_ObjectHideFlags: 0
