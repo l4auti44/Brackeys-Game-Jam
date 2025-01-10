@@ -10,6 +10,7 @@ public class SubSystemsController : MonoBehaviour
     private Transform wheelIndicator;
     private int currentSys = 0;
     private bool isRotating = false;
+    public float timeForRotation = 1.5f;
     void Start()
     {
         wheelIndicator = GameObject.Find("WheelIndicator").GetComponent<Transform>();
@@ -27,7 +28,7 @@ public class SubSystemsController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R) && !isRotating)
         {
-            StartCoroutine(RotateWheel(1.5f));
+            StartCoroutine(RotateWheel(timeForRotation));
         }
     }
 
