@@ -45,8 +45,8 @@ public class DestroyAndRepearSys : MonoBehaviour
         var radarButtons = GameObject.Find("RadarButtons");
         radarButtonUp = radarButtons.transform.GetChild(0).GetComponent<SoundButton>();
         radarButtonDown = radarButtons.transform.GetChild(1).GetComponent<SoundButton>();
-        repairModuleIsActiveImage = GameObject.Find("IsActiveRepairSys");
-        repairModuleIsActiveImage.SetActive(false);
+        //repairModuleIsActiveImage = GameObject.Find("IsActiveRepairSys");
+        //repairModuleIsActiveImage.SetActive(false);
         Systems.Add(MissileModule);
         Systems.Add(ShieldModule);
         Systems.Add(ArrowModule);
@@ -137,7 +137,7 @@ public class DestroyAndRepearSys : MonoBehaviour
     {
         canRepair = true;
         //repairModuleIsActiveImage.SetActive(true);
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(10f);
         repairModuleIsActiveImage.SetActive(false);
         canRepair = false;
     }

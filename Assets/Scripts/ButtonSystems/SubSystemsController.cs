@@ -9,7 +9,7 @@ public class SubSystemsController : MonoBehaviour
 
     private Transform wheelIndicator;
     private int currentSys = 0;
-
+    private bool isRotating = false;
     void Start()
     {
         wheelIndicator = GameObject.Find("WheelIndicator").GetComponent<Transform>();
@@ -18,7 +18,6 @@ public class SubSystemsController : MonoBehaviour
         shieldModule = GameObject.Find("ShieldModule").GetComponent<SystemBlueprint>();
         arrowModule = GameObject.Find("ArrowModule").GetComponent<SystemBlueprint>();
         repairModule = GameObject.Find("RepairModule").GetComponent<SystemBlueprint>();
-
         missileModule.SwitchAvailable();
         arrowModule.SwitchAvailable();
         repairModule.SwitchAvailable();
@@ -26,34 +25,9 @@ public class SubSystemsController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && !isRotating)
         {
-            wheelIndicator.Rotate(0, 0, wheelIndicator.rotation.z + 90);
-            currentSys += 1;
-
-            if (currentSys > 3)
-            {
-                currentSys = 0;
-            }
-
-
-            TurnOffSystems();
-            switch (currentSys) {
-                case 0:
-                    shieldModule.SwitchAvailable();
-                    break;
-                case 1:
-                    missileModule.SwitchAvailable();
-                    break;
-                case 2:
-                    repairModule.SwitchAvailable();
-                    break;
-                case 3:
-                    arrowModule.SwitchAvailable();
-                    break;
-                default:
-                    break;
-            }
+            StartCoroutine(RotateWheel(1.5f));
         }
     }
 
@@ -63,5 +37,52 @@ public class SubSystemsController : MonoBehaviour
         missileModule.SwitchAvailable(false);
         repairModule.SwitchAvailable(false);
         shieldModule.SwitchAvailable(false);
+    }
+
+    public IEnumerator RotateWheel(float duration)
+    {
+        
+        Quaternion initialRotation = wheelIndicator.rotation;
+        Quaternion finalRotation = Quaternion.Euler(wheelIndicator.rotation.eulerAngles + new Vector3(0, 0, 90));
+
+        float elapsedTime = 0;
+
+        while (elapsedTime < duration)
+        {
+            isRotating = true;
+            wheelIndicator.rotation = Quaternion.Slerp(initialRotation, finalRotation, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        wheelIndicator.rotation = finalRotation;
+        currentSys += 1;
+
+        if (currentSys > 3)
+        {
+            currentSys = 0;
+        }
+
+        TurnOffSystems();
+        switch (currentSys)
+        {
+            case 0:
+                shieldModule.SwitchAvailable();
+                break;
+            case 1:
+                missileModule.SwitchAvailable();
+                break;
+            case 2:
+                repairModule.SwitchAvailable();
+                break;
+            case 3:
+                arrowModule.SwitchAvailable();
+                break;
+            default:
+                break;
+        }
+
+
+        isRotating = false;
     }
 }

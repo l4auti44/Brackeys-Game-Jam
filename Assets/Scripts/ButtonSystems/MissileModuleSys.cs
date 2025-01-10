@@ -19,8 +19,11 @@ public class MissileModuleSys : SystemBlueprint
 
     override public void DoAction()
     {
-        if(CanDoAction())
-        shipMovementScript.ShootMissile();
-        gameManager.DecreaseEnergy(energyCost);
+        if (CanDoAction())
+        {
+            shipMovementScript.ShootMissile();
+            gameManager.DecreaseEnergy(energyCost);
+        }
+
     }
 }
