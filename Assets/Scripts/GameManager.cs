@@ -114,6 +114,9 @@ public class GameManager : MonoBehaviour
     // --- Repair System ---
     private DestroyAndRepearSys repairSys;
 
+    //temporal flags
+    private bool eventFlag = false;
+
     void Start()
     {
         //Get ship speed
@@ -199,6 +202,19 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameProgress > 15f && eventFlag == false)
+        {
+            DialogSystem.DialogEvents[] dialogEvents = new DialogSystem.DialogEvents[]
+            {
+                DialogSystem.DialogEvents.KeepEngineAt,
+                DialogSystem.DialogEvents.KeepRadarAt,
+                DialogSystem.DialogEvents.NoGetHit
+            };
+
+            EventManager.Game.OnDialog.Invoke(dialogEvents[Random.Range(0,dialogEvents.Length)]);
+            eventFlag = true;
+        }
+
         if (!SceneController.isGamePaused && !winCondition)
         {
             //Increae the game progress over time
@@ -212,7 +228,6 @@ public class GameManager : MonoBehaviour
                 winCondition = true;
                 return;
             }
-
 
             //Determination of energy decrease speed
             energyDecreaseSpeed =
