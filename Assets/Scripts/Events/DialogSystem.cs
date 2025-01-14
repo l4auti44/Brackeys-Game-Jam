@@ -186,7 +186,7 @@ public class DialogSystem : MonoBehaviour
                 TaskCompleted();
                 break;
             case DialogEvents.KeepEngineAt:
-                CurrentLevelTask = (int)gameManager.shipSpeed;
+                CurrentLevelTask = (int)gameManager.positionLV;
                 if (CurrentLevelTask != 2)
                 {
                     TaskFailed();
