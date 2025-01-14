@@ -28,6 +28,7 @@ public class SubSystemsController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R) && !isRotating)
         {
+            TurnOffSystems();
             StartCoroutine(RotateWheel(timeForRotation));
         }
     }
@@ -64,7 +65,7 @@ public class SubSystemsController : MonoBehaviour
             currentSys = 0;
         }
 
-        TurnOffSystems();
+        
         switch (currentSys)
         {
             case 0:
