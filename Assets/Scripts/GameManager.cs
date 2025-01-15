@@ -145,6 +145,7 @@ public class GameManager : MonoBehaviour
         radarModEnergyDecreaseLV1 = 0;
         radarModEnergyDecreaseLV2 = 0;
         radarModEnergyDecreaseLV3 = 0;
+        radarModEnergyDecreaseLV4 = 0;
 
         shieldModEnergyDecrease = 0;
 
@@ -239,6 +240,7 @@ public class GameManager : MonoBehaviour
             (radarModEnergyDecreaseLV1 +
             radarModEnergyDecreaseLV2 +
             radarModEnergyDecreaseLV3 +
+            radarModEnergyDecreaseLV4 +
 
             shieldModEnergyDecrease +
 
@@ -430,8 +432,8 @@ public class GameManager : MonoBehaviour
                 radarModuleSpriteLV4.GetComponent<Image>().color = Color.green;
 
                 //Activate radar LV4
-                ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV3;
-                radarUI.GetComponent<RadarControllerUI>().waveInterval = radarWaveIntervalLV3;
+                ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV4;
+                radarUI.GetComponent<RadarControllerUI>().waveInterval = radarWaveIntervalLV4;
 
                 //Decrease energy
                 radarModEnergyDecreaseLV4 = radarModEnergyDecreaseLV4_original;

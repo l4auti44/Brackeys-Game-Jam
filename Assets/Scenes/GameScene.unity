@@ -8579,7 +8579,7 @@ MonoBehaviour:
   radarWaveIntervalLV3: 2
   radarWaveIntervalLV2: 3
   radarWaveIntervalLV1: 5
-  radarWaveIntervalLV4: 0.1
+  radarWaveIntervalLV4: 0.9
   positionLV1: {fileID: 2125261609}
   positionLV2: {fileID: 300244156}
   positionLV3: {fileID: 200715443}
