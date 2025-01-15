@@ -7147,7 +7147,7 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.615
+    x: 0.611
     y: 0.444
     width: 0.053
     height: 0.05
@@ -8604,7 +8604,6 @@ MonoBehaviour:
   cameraPosLV5: 9
   cameraZoomOutSpeed: 1
   energy: 0
-  energyDecreaseSpeed: 0
   maxEnergy: 1000
   radarModEnergyDecreaseLV1: 2
   radarModEnergyDecreaseLV2: 15
@@ -14790,7 +14789,7 @@ Transform:
   m_GameObject: {fileID: 1777739613}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1273.7, y: -583.9, z: -11.912212}
+  m_LocalPosition: {x: -1292, y: -587.6, z: -11.912212}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -15556,7 +15555,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5a4add3e3e86a314fa74003c1d3faf8a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a447f2dda4b85c2428b141eea37e37e5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
