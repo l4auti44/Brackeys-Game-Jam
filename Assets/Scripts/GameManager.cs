@@ -817,12 +817,14 @@ public class GameManager : MonoBehaviour
                 //Zoom out camera
                 ZoomOut(cameraPosLV1);
 
-                //Moved events on the button here
-                DecelerateShip();
-                ToggleAsteroidSpeed();
-
-                EventManager.Game.OnEngineChange.Invoke((int)positionLV);
+                
             }
+
+            //Moved events on the button here
+            DecelerateShip();
+            ToggleAsteroidSpeed();
+
+            EventManager.Game.OnEngineChange.Invoke((int)positionLV);
         }
         else if (repairSys.canRepair)
         {
