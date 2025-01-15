@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEngine.EventSystems.EventTrigger;
@@ -69,7 +70,7 @@ public class GameManager : MonoBehaviour
     // --- Energy Settings ---
     [Header("Energy Settings")]
     public float energy = 100f; // Amount of energy at any time
-    public float energyDecreaseSpeed; // Speed at which the energy is depleted
+    private float energyDecreaseSpeed; // Speed at which the energy is depleted
     public float maxEnergy = 100f; // Amount of total energy
 
     // --- Energy Modifiers ---
@@ -114,6 +115,7 @@ public class GameManager : MonoBehaviour
     // --- Repair System ---
     private DestroyAndRepearSys repairSys;
 
+    private TextMeshPro totalRateEnergyDecrease;
     //temporal flags
     private bool eventFlag = false;
 
@@ -197,6 +199,8 @@ public class GameManager : MonoBehaviour
         radarModules.Add(radarButtons.transform.GetChild(1).GetComponent<SoundButton>());
 
         repairSys = this.GetComponentInChildren<DestroyAndRepearSys>();
+
+        totalRateEnergyDecrease = GameObject.Find("Total Rate").GetComponentInChildren<TextMeshPro>();
     }
 
     // Update is called once per frame
@@ -290,7 +294,9 @@ public class GameManager : MonoBehaviour
             // Smoothly adjust the orthographic size towards the target zoom value
             mainCamera.orthographicSize = Mathf.MoveTowards(mainCamera.orthographicSize, targetZoom, cameraZoomOutSpeed * Time.deltaTime);
         }
-        
+
+
+        totalRateEnergyDecrease.text = energyDecreaseSpeed.ToString();
 
     }
 
