@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
 
     // --- Game Over Timer ---
     [Header("Game Over Timer")]
-    private float timerForGameOver = 10f;
+    public float timerForGameOver = 10f;
     private float timer = 10f;
     private bool winCondition = false;
 
