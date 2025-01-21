@@ -8401,6 +8401,7 @@ MonoBehaviour:
   broken: 0
   repairSys: {fileID: 0}
   energyCost: 10
+  cooldown: 1
 --- !u!1 &1016236085
 GameObject:
   m_ObjectHideFlags: 0
@@ -8624,6 +8625,7 @@ MonoBehaviour:
   isShieldCooldown: 0
   isOverload: 0
   overloadDuration: 5
+  timerForGameOver: 10
 --- !u!4 &1017901626
 Transform:
   m_ObjectHideFlags: 0
@@ -8853,7 +8855,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BreakTime: 15
-  canRepair: 0
 --- !u!1 &1053437753
 GameObject:
   m_ObjectHideFlags: 0
@@ -12363,6 +12364,7 @@ MonoBehaviour:
   module: 0
   broken: 0
   repairSys: {fileID: 0}
+  cooldown: 10
 --- !u!1 &1527993413
 GameObject:
   m_ObjectHideFlags: 0
