@@ -15,7 +15,6 @@ public class DestroyAndRepearSys : MonoBehaviour
 
     [SerializeField] private float BreakTime = 15f;
 
-    private GameObject repairModuleIsActiveImage;
 
     //SYSTEMS
     private SoundButton MissileModule;
@@ -30,9 +29,9 @@ public class DestroyAndRepearSys : MonoBehaviour
 
     private List<SoundButton> Systems = new List<SoundButton>();
 
-    private SoundButton currentSystemBroken;
+    
 
-    [HideInInspector] public bool canRepair = false;
+    private Stack<SoundButton> disabledSystems = new Stack<SoundButton>();
 
     private void Start()
     {
@@ -68,83 +67,45 @@ public class DestroyAndRepearSys : MonoBehaviour
 
     public void BreakSomething()
     {
-        var ramdomChoice = Systems[Random.Range(0, Systems.Count)];
-        currentSystemBroken = ramdomChoice;
-        Debug.Log("System " + currentSystemBroken.name +" is broken");
-        StartCoroutine(BreakAndWait());
-    }
-
-    private IEnumerator BreakAndWait()
-    {
-        currentSystemBroken.isBroken = true;
-        if (currentSystemBroken == Systems[3])
+        //var ramdomChoice = Systems[Random.Range(0, Systems.Count)];
+        List<SoundButton> enabledSystems = new List<SoundButton>();
+        foreach (var system in Systems)
         {
-            Systems[4].isBroken = true;
-        }
-        if (currentSystemBroken == Systems[5])
-        {
-            Systems[6].isBroken = true;
-        }
-        if (ColorUtility.TryParseHtmlString("#C8C8C8", out Color disabledColor))
-        {
-            var colors = currentSystemBroken.colors;
-            colors.disabledColor = disabledColor;
-            currentSystemBroken.colors = colors;
+            if (!system.isBroken)
+            {
+                enabledSystems.Add(system);
+            }
         }
 
-        yield return new WaitForSeconds(BreakTime);
-        Repair();
+        if (enabledSystems.Count > 0)
+        {
+            int ramdomChoice = Random.Range(0, enabledSystems.Count);
+            SoundButton currentSystemBroken = Systems[ramdomChoice];
+            Debug.Log("System " + currentSystemBroken.name + " is broken");
+            currentSystemBroken.GetComponent<SystemBlueprint>().broken = true;
+            disabledSystems.Push(currentSystemBroken);
+        }
+
+
+        
+
     }
 
     public void Repair()
     {
-        if (currentSystemBroken != null)
+        if (disabledSystems.Count > 0)
         {
 
-            canRepair = false;
-            Debug.Log("System " + currentSystemBroken.name + " has been repaired");
-            repairModuleIsActiveImage.SetActive(false);
-            StopAllCoroutines();
-            currentSystemBroken.isBroken = false;
-            if (currentSystemBroken == Systems[3])
-            {
-                Systems[4].isBroken = false;
-            }
-            if (currentSystemBroken == Systems[5])
-            {
-                Systems[6].isBroken = false;
-            }
-            if (ColorUtility.TryParseHtmlString("#FFFFFF", out Color enabledColor))
-            {
-                var colors = currentSystemBroken.colors;
-                colors.disabledColor = enabledColor;
-                currentSystemBroken.colors = colors;
-            }
-
-            currentSystemBroken = null;
+            SoundButton systemToEnable = disabledSystems.Pop();
+            Debug.Log("System " + systemToEnable.name + " has been repaired");
+            
+            systemToEnable.GetComponent<SystemBlueprint>().broken = false;
         }
     }
 
-    public void OnRepairButtonClicked()
-    {
-        if (canRepair == false)
-        {
-            StartCoroutine(RepairButtonClicked());
-        } 
-    }
-
-    private IEnumerator RepairButtonClicked()
-    {
-        canRepair = true;
-        //repairModuleIsActiveImage.SetActive(true);
-        yield return new WaitForSeconds(10f);
-        repairModuleIsActiveImage.SetActive(false);
-        canRepair = false;
-    }
-
-
     public void TestBreakSomething(Modules module)
     {
+        
         SoundButton breakSis;
         switch (module){
             case Modules.MissileModule:
@@ -166,8 +127,12 @@ public class DestroyAndRepearSys : MonoBehaviour
                 breakSis = Systems[0];
                 break;
         }
-        currentSystemBroken = breakSis;
-        Debug.Log("System " + currentSystemBroken.name + " is broken");
-        StartCoroutine(BreakAndWait());
+        if (!breakSis.GetComponent<SystemBlueprint>().broken)
+        {
+            breakSis.GetComponent<SystemBlueprint>().broken = true;
+            disabledSystems.Push(breakSis);
+            Debug.Log("System " + breakSis.name + " is broken");
+            
+        }
     }
 }

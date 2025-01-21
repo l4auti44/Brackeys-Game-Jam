@@ -487,10 +487,7 @@ public class GameManager : MonoBehaviour
 
             EventManager.Game.OnRadarChange.Invoke((int)radarLV);
         }
-        else if (repairSys.canRepair)
-        {
-            repairSys.Repair();
-        }
+
 
     }
 
@@ -561,10 +558,6 @@ public class GameManager : MonoBehaviour
             }
 
             EventManager.Game.OnRadarChange.Invoke((int)radarLV);
-        }
-        else if (repairSys.canRepair)
-        {
-            repairSys.Repair();
         }
         
     }
@@ -724,10 +717,7 @@ public class GameManager : MonoBehaviour
 
             EventManager.Game.OnEngineChange.Invoke((int)positionLV);
         }
-        else if (repairSys.canRepair)
-        {
-            repairSys.Repair();
-        }
+
     }
 
     public void DecreasePositionShip()
@@ -825,10 +815,6 @@ public class GameManager : MonoBehaviour
             ToggleAsteroidSpeed();
 
             EventManager.Game.OnEngineChange.Invoke((int)positionLV);
-        }
-        else if (repairSys.canRepair)
-        {
-            repairSys.Repair();
         }
         
     }

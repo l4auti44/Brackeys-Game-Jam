@@ -71,7 +71,6 @@ abstract public class SystemBlueprint : MonoBehaviour
     {
         if (broken)
         {
-            CheckIfCanRepair();
             return false;
         }
         if (!available)
@@ -79,13 +78,5 @@ abstract public class SystemBlueprint : MonoBehaviour
             return false;
         }
         return true;
-    }
-
-    private void CheckIfCanRepair()
-    {
-        if (repairSys.canRepair)
-        {
-            repairSys.Repair();
-        }
     }
 }

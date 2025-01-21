@@ -69,15 +69,19 @@ public class SubSystemsController : MonoBehaviour
         switch (currentSys)
         {
             case 0:
-                shieldModule.SwitchAvailable();
+                if (!shieldModule.broken)
+                    shieldModule.SwitchAvailable();
+                
                 break;
             case 1:
-                missileModule.SwitchAvailable();
+                if(!missileModule.broken)
+                    missileModule.SwitchAvailable();
                 break;
             case 2:
                 repairModule.SwitchAvailable();
                 break;
             case 3:
+                if(!arrowModule.broken)
                 arrowModule.SwitchAvailable();
                 break;
             default:
