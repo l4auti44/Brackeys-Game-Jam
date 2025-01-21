@@ -9,7 +9,7 @@ public class RepairModuleSys : SystemBlueprint
     private GameManager gameManager;
     public float energyCost = 10f;
     private bool isOnCooldown = false;
-    private float cooldown = 20f;
+    public float cooldown = 20f;
     private TextMeshPro text;
 
     override public void Start()

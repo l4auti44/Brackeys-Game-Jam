@@ -5303,7 +5303,8 @@ MonoBehaviour:
   module: 0
   broken: 0
   repairSys: {fileID: 0}
-  energyCost: 10
+  energyCost: 99
+  cooldown: 70
 --- !u!1 &711992171
 GameObject:
   m_ObjectHideFlags: 0
@@ -12364,7 +12365,7 @@ MonoBehaviour:
   module: 0
   broken: 0
   repairSys: {fileID: 0}
-  cooldown: 10
+  cooldown: 20
 --- !u!1 &1527993413
 GameObject:
   m_ObjectHideFlags: 0
