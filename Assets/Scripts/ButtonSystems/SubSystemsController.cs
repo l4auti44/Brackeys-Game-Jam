@@ -91,4 +91,16 @@ public class SubSystemsController : MonoBehaviour
 
         isRotating = false;
     }
+
+    private void CheckIfCurrentSysIsBroken(SystemBlueprint brokenSys)
+    {
+        if (brokenSys.GetAvailable()) brokenSys.SwitchAvailable();
+
+    }
+    private void OnEnable()
+    {
+        EventManager.Game.OnBrokenSystem += CheckIfCurrentSysIsBroken;
+    }
+
+    
 }

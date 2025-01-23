@@ -82,7 +82,9 @@ public class DestroyAndRepearSys : MonoBehaviour
             int ramdomChoice = Random.Range(0, enabledSystems.Count);
             SoundButton currentSystemBroken = Systems[ramdomChoice];
             Debug.Log("System " + currentSystemBroken.name + " is broken");
-            currentSystemBroken.GetComponent<SystemBlueprint>().broken = true;
+            SystemBlueprint currentSys = currentSystemBroken.GetComponent<SystemBlueprint>();
+            currentSys.broken = true;
+            EventManager.Game.OnBrokenSystem.Invoke(currentSys);
             disabledSystems.Enqueue(currentSystemBroken);
         }
 
@@ -127,9 +129,11 @@ public class DestroyAndRepearSys : MonoBehaviour
                 breakSis = Systems[0];
                 break;
         }
-        if (!breakSis.GetComponent<SystemBlueprint>().broken)
+        SystemBlueprint currentSys = breakSis.GetComponent<SystemBlueprint>();
+        if (!currentSys.broken)
         {
-            breakSis.GetComponent<SystemBlueprint>().broken = true;
+            currentSys.broken = true;
+            EventManager.Game.OnBrokenSystem.Invoke(currentSys);
             disabledSystems.Enqueue(breakSis);
             Debug.Log("System " + breakSis.name + " is broken");
             

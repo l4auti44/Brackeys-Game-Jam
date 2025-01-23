@@ -19,6 +19,7 @@ public static class EventManager
         public UnityAction OnTaskDialogFailed;
         public UnityAction<int> OnRadarChange;
         public UnityAction<int> OnEngineChange;
+        public UnityAction<SystemBlueprint> OnBrokenSystem;
         
     }
     

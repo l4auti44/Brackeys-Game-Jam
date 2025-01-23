@@ -79,4 +79,9 @@ abstract public class SystemBlueprint : MonoBehaviour
         }
         return true;
     }
+
+    public bool GetAvailable()
+    {
+        return available;
+    }
 }
