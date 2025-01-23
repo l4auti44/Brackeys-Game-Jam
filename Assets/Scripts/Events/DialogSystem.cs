@@ -168,6 +168,7 @@ public class DialogSystem : MonoBehaviour
     private IEnumerator WaitingForAction()
     {
         float time = currentDialog.timeForTask;
+        EventManager.Game.OnTaskWaiting.Invoke(1.57f / time);
 
         switch (currentDialog.dialogEvent)
         {
