@@ -31,7 +31,7 @@ public class DestroyAndRepearSys : MonoBehaviour
 
     
 
-    private Stack<SoundButton> disabledSystems = new Stack<SoundButton>();
+    private Queue<SoundButton> disabledSystems = new Queue<SoundButton>();
 
     private void Start()
     {
@@ -83,7 +83,7 @@ public class DestroyAndRepearSys : MonoBehaviour
             SoundButton currentSystemBroken = Systems[ramdomChoice];
             Debug.Log("System " + currentSystemBroken.name + " is broken");
             currentSystemBroken.GetComponent<SystemBlueprint>().broken = true;
-            disabledSystems.Push(currentSystemBroken);
+            disabledSystems.Enqueue(currentSystemBroken);
         }
 
 
@@ -96,7 +96,7 @@ public class DestroyAndRepearSys : MonoBehaviour
         if (disabledSystems.Count > 0)
         {
 
-            SoundButton systemToEnable = disabledSystems.Pop();
+            SoundButton systemToEnable = disabledSystems.Dequeue();
             Debug.Log("System " + systemToEnable.name + " has been repaired");
             
             systemToEnable.GetComponent<SystemBlueprint>().broken = false;
@@ -130,7 +130,7 @@ public class DestroyAndRepearSys : MonoBehaviour
         if (!breakSis.GetComponent<SystemBlueprint>().broken)
         {
             breakSis.GetComponent<SystemBlueprint>().broken = true;
-            disabledSystems.Push(breakSis);
+            disabledSystems.Enqueue(breakSis);
             Debug.Log("System " + breakSis.name + " is broken");
             
         }
