@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.57, y: -0.73, z: 0}
-  m_LocalScale: {x: 0.063084, y: 0.063084, z: 0.063084}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7859578209984054031}
@@ -74,9 +74,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 137146281
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0e1c70199b5e3a349b4dc25255afd744, type: 3}
+  m_Sprite: {fileID: 1714975718, guid: cd62727e6e10e0146a3da147ea55a5b5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -104,10 +104,12 @@ MonoBehaviour:
   timeToRed: 1
   timeToIdle: 0.2
   energyToDecrease: 10
+  timeInactivateText: 1
   idleSprite: {fileID: 21300000, guid: 8c619d7b0763a7b41ba41591580fe8b8, type: 3}
   yellowSprite: {fileID: 21300000, guid: 2cffae154cda0574eb7ed19764fb8114, type: 3}
   redSprite: {fileID: 21300000, guid: 0fe4cadc7e7028d4aabee6eec3badf9d, type: 3}
   gameManager: {fileID: 0}
+  textParrySucess: {fileID: 0}
 --- !u!58 &6359922510465915423
 CircleCollider2D:
   m_ObjectHideFlags: 0
