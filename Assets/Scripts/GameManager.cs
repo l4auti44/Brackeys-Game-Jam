@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
     private float positionModEnergyDecreaseLV1_original, positionModEnergyDecreaseLV2_original, positionModEnergyDecreaseLV3_original, positionModEnergyDecreaseLV4_original, positionModEnergyDecreaseLV5_original;
     public float arrowModEnergyDecrease;
     private float arrowModEnergyDecrease_original;
-    public GameObject energySlider;
+    public Slider energySlider, energyMax;
 
     // --- Shield Settings ---
     [Header("Shield Settings")]
@@ -259,7 +259,7 @@ public class GameManager : MonoBehaviour
             energy -= energyDecreaseSpeed * 0.01f;
 
             //Update the energy value of the slider
-            energySlider.GetComponent<Slider>().value = energy * 0.01f;
+            energySlider.value = energy * 0.01f;
 
             //Deactivate all modules if energy is 0
             if (energy < 0)
@@ -313,6 +313,11 @@ public class GameManager : MonoBehaviour
         energy += energyToIncrease;
     }
 
+    public void DecreaseMaxEnergy(float amount)
+    {
+        maxEnergy -= amount;
+        energyMax.value += amount * 0.01f;
+    }
     public void AccelerateShip()
     {
 

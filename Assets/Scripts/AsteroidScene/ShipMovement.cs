@@ -107,7 +107,7 @@ public class ShipMovement : MonoBehaviour
             //Trigger crew animator with this event
             EventManager.Player.OnImpact.Invoke(this);
 
-            gameManager.GetComponent<GameManager>().DecreaseEnergy(energyDecreaseEnemyHit);
+            gameManager.GetComponent<GameManager>().DecreaseMaxEnergy(energyDecreaseEnemyHit);
 
             SoundManager.PlaySound(SoundManager.Sound.HitByAsteroid);
 
