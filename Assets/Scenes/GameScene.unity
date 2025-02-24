@@ -8844,13 +8844,14 @@ MonoBehaviour:
   energySpawner: {fileID: 1232595329}
   shield: {fileID: 366897731}
   radar: {fileID: 1257503198}
-  radarUI: {fileID: 1699942371}
+  radarUI: {fileID: 1699942373}
   parallax: {fileID: 1198210114}
   mainCamera: {fileID: 1760420531}
-  radarModuleSpriteLV1: {fileID: 1558679556}
-  radarModuleSpriteLV2: {fileID: 1882776031}
-  radarModuleSpriteLV3: {fileID: 1824798053}
-  radarModuleSpriteLV4: {fileID: 1801328686}
+  radarModuleSpriteLVS:
+  - {fileID: 1558679558}
+  - {fileID: 1882776033}
+  - {fileID: 1824798055}
+  - {fileID: 1801328688}
   positionModuleSpriteLVS:
   - {fileID: 928338692}
   - {fileID: 564598698}
@@ -8892,10 +8893,11 @@ MonoBehaviour:
   maxRotationSpeedLV4: 400
   maxRotationSpeedLV5: 500
   speedDecreaseRateWhenGameOver: 0.1
-  radarWaveIntervalLV3: 2
-  radarWaveIntervalLV2: 3
-  radarWaveIntervalLV1: 5
-  radarWaveIntervalLV4: 0.9
+  radarWaveIntervalLVS:
+  - 5
+  - 3
+  - 2
+  - 0.9
   positionLVS:
   - {fileID: 2125261609}
   - {fileID: 300244156}

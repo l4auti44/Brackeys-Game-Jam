@@ -18,14 +18,14 @@ public class GameManager : MonoBehaviour
     // --- Game Objects ---
     [Header("Game Objects")]
     public GameObject ship;
-    public GameObject asteroidSpawner, energySpawner, shield, radar, radarUI;
+    public GameObject asteroidSpawner, energySpawner, shield, radar;
+    [SerializeField] private RadarControllerUI radarUI;
     public ParallarEffect parallax;
     public Camera mainCamera;
 
     // --- Radar & Position Modules ---
     [Header("Radar & Position Modules")]
-    public GameObject radarModuleSpriteLV1;
-    public GameObject radarModuleSpriteLV2, radarModuleSpriteLV3, radarModuleSpriteLV4;
+    public Image[] radarModuleSpriteLVS = new Image[4];
     public Image[] positionModuleSpriteLVS = new Image[5];
     public GameObject arrowUI, shieldUI;
 
@@ -47,8 +47,7 @@ public class GameManager : MonoBehaviour
 
     // --- Radar Wave Intervals ---
     [Header("Radar Wave Intervals")]
-    public float radarWaveIntervalLV3;
-    public float radarWaveIntervalLV2, radarWaveIntervalLV1, radarWaveIntervalLV4;
+    public float[] radarWaveIntervalLVS = new float[4];
 
     // --- Position Settings ---
     [Header("Position Settings")]
@@ -170,10 +169,10 @@ public class GameManager : MonoBehaviour
 
         //Start level with radar LV1
         radarLV = 1;
-        ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV1;
-        radarUI.GetComponent<RadarControllerUI>().waveInterval = radarWaveIntervalLV1;
+        ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLVS[0];
+        radarUI.waveInterval = radarWaveIntervalLVS[0];
         radarModEnergyDecreaseLV1 = radarModEnergyDecreaseLV1_original;
-        radarModuleSpriteLV1.GetComponent<Image>().color = Color.green;
+        radarModuleSpriteLVS[0].color = Color.green;
 
         //Start level with game progress speed LV1
         gameProgressSpeed = gameProgressSpeedPositionLVS[0];
@@ -356,142 +355,58 @@ public class GameManager : MonoBehaviour
 
     public void IncreaseRadar()
     {
-        if (!radarModules[0].isBroken)
+        if (!radarModules[0].isBroken && radarLV != 4)
         {
-            //Increase radar LV
-            if (radarLV == 3)
+            radarLV++;
+            radarModuleSpriteLVS[radarLV - 1].color = Color.green;
+            ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLVS[radarLV - 1];
+            radarUI.waveInterval = radarWaveIntervalLVS[radarLV - 1];
+
+            //Decrease energy
+            switch (radarLV)
             {
-                //Update the radar LV and sprite
-                radarLV = 4;
-                radarModuleSpriteLV4.GetComponent<Image>().color = Color.green;
-
-                //Activate radar LV4
-                ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV4;
-                radarUI.GetComponent<RadarControllerUI>().waveInterval = radarWaveIntervalLV4;
-
-                //Decrease energy
-                radarModEnergyDecreaseLV4 = radarModEnergyDecreaseLV4_original;
-
+                case 4:
+                    radarModEnergyDecreaseLV4 = radarModEnergyDecreaseLV4_original;
+                    break;
+                case 3:
+                    radarModEnergyDecreaseLV3 = radarModEnergyDecreaseLV3_original;
+                    break;
+                case 2:
+                    radarModEnergyDecreaseLV2 = radarModEnergyDecreaseLV2_original;
+                    break;
             }
+            EventManager.Game.OnRadarChange.Invoke(radarLV);
 
-            else if (radarLV == 2)
-            {
-                //Update the radar LV and sprite
-                radarLV = 3;
-                radarModuleSpriteLV3.GetComponent<Image>().color = Color.green;
-
-                //Activate radar LV3
-                ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV3;
-                radarUI.GetComponent<RadarControllerUI>().waveInterval = radarWaveIntervalLV3;
-
-                //Decrease energy
-                radarModEnergyDecreaseLV3 = radarModEnergyDecreaseLV3_original;
-
-            }
-
-            else if (radarLV == 1)
-            {
-                //Update the radar LV and sprite
-                radarLV = 2;
-                radarModuleSpriteLV2.GetComponent<Image>().color = Color.green;
-
-                //Activate radar LV2
-                ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV2;
-                radarUI.GetComponent<RadarControllerUI>().waveInterval = radarWaveIntervalLV2;
-
-                //Decrease energy
-                radarModEnergyDecreaseLV2 = radarModEnergyDecreaseLV2_original;
-            }
-
-            //else if (radarLV == 0)
-            //{
-            //    //Update the radar LV and sprite
-            //    radarLV = 1;
-            //    radarModuleSpriteLV1.GetComponent<Image>().color = Color.green;
-
-            //    //Activate radar LV1
-            //    ship.GetComponent<RadarController>().isSpawning = true;
-            //    radarUI.GetComponent<RadarControllerUI>().isSpawning = true;
-            //    ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV1;
-            //    radarUI.GetComponent<RadarControllerUI>().waveInterval = radarWaveIntervalLV1;
-
-            //    //Decrease energy
-            //    radarModEnergyDecreaseLV1 = radarModEnergyDecreaseLV1_original;
-            //}
-
-            EventManager.Game.OnRadarChange.Invoke((int)radarLV);
         }
-
 
     }
 
     public void DecreaseRadar()
     {
-        if (!radarModules[1].isBroken)
+        if (!radarModules[1].isBroken && radarLV != 1)
         {
+            radarModuleSpriteLVS[radarLV - 1].color = Color.white;
+            radarLV--;
+            ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLVS[radarLV - 1];
+            radarUI.waveInterval = radarWaveIntervalLVS[radarLV - 1];
 
-            //if (radarLV == 1)
-            //{
-            //    //Update the radar LV and sprite
-            //    radarLV = 0;
-            //    radarModuleSpriteLV1.GetComponent<Image>().color = Color.white;
-
-            //    //Activate radar LV0
-            //    ship.GetComponent<RadarController>().isSpawning = false;
-            //    radarUI.GetComponent<RadarControllerUI>().isSpawning = false;
-
-            //    //Decrease energy
-            //    radarModEnergyDecreaseLV1 = 0;
-
-            //}
-
-            //Decrease radar LV
-            if (radarLV == 2)
+            switch (radarLV)
             {
-                //Update the radar LV and sprite
-                radarLV = 1;
-                radarModuleSpriteLV2.GetComponent<Image>().color = Color.white;
-
-                //Activate radar LV1
-                ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV1;
-                radarUI.GetComponent<RadarControllerUI>().waveInterval = radarWaveIntervalLV1;
-
-                //Decrease energy
-                radarModEnergyDecreaseLV2 = 0;
-                radarModEnergyDecreaseLV1 = radarModEnergyDecreaseLV1_original;
+                case 3:
+                    radarModEnergyDecreaseLV4 = 0;
+                    radarModEnergyDecreaseLV3 = radarModEnergyDecreaseLV3_original;
+                    break;
+                case 2:
+                    radarModEnergyDecreaseLV3 = 0;
+                    radarModEnergyDecreaseLV2 = radarModEnergyDecreaseLV2_original;
+                    break;
+                case 1:
+                    radarModEnergyDecreaseLV2 = 0;
+                    radarModEnergyDecreaseLV1 = radarModEnergyDecreaseLV1_original;
+                    break;
             }
-
-            else if (radarLV == 3)
-            {
-                //Update the radar LV and sprite
-                radarLV = 2;
-                radarModuleSpriteLV3.GetComponent<Image>().color = Color.white;
-
-                //Activate radar LV2
-                ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV2;
-                radarUI.GetComponent<RadarControllerUI>().waveInterval = radarWaveIntervalLV2;
-
-                //Decrease energy
-                radarModEnergyDecreaseLV3 = 0;
-                radarModEnergyDecreaseLV2 = radarModEnergyDecreaseLV2_original;
-            }
-
-            else if (radarLV == 4)
-            {
-                //Update the radar LV and sprite
-                radarLV = 3;
-                radarModuleSpriteLV4.GetComponent<Image>().color = Color.white;
-
-                //Activate radar LV3
-                ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLV3;
-                radarUI.GetComponent<RadarControllerUI>().waveInterval = radarWaveIntervalLV3;
-
-                //Decrease energy
-                radarModEnergyDecreaseLV4 = 0;
-                radarModEnergyDecreaseLV3 = radarModEnergyDecreaseLV3_original;
-            }
-
-            EventManager.Game.OnRadarChange.Invoke((int)radarLV);
+          
+            EventManager.Game.OnRadarChange.Invoke(radarLV);
         }
         
     }
