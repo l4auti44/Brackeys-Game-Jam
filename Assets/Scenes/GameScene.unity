@@ -8833,28 +8833,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameProgress: 0
   gameProgressSlider: {fileID: 1988926708}
-  gameProgressSpeedPositionLV1: 0.1
-  gameProgressSpeedPositionLV2: 0.2
-  gameProgressSpeedPositionLV3: 0.5
-  gameProgressSpeedPositionLV4: 0.8
-  gameProgressSpeedPositionLV5: 1
+  gameProgressSpeedPositionLVS:
+  - 0.1
+  - 0.2
+  - 0.5
+  - 0.8
+  - 1
   ship: {fileID: 1257503198}
   asteroidSpawner: {fileID: 1970598913}
   energySpawner: {fileID: 1232595329}
   shield: {fileID: 366897731}
   radar: {fileID: 1257503198}
   radarUI: {fileID: 1699942371}
-  parallax: {fileID: 1198210112}
+  parallax: {fileID: 1198210114}
   mainCamera: {fileID: 1760420531}
   radarModuleSpriteLV1: {fileID: 1558679556}
   radarModuleSpriteLV2: {fileID: 1882776031}
   radarModuleSpriteLV3: {fileID: 1824798053}
   radarModuleSpriteLV4: {fileID: 1801328686}
-  positionModuleSpriteLV1: {fileID: 928338690}
-  positionModuleSpriteLV2: {fileID: 564598696}
-  positionModuleSpriteLV3: {fileID: 1255244686}
-  positionModuleSpriteLV4: {fileID: 348657525}
-  positionModuleSpriteLV5: {fileID: 1992527322}
+  positionModuleSpriteLVS:
+  - {fileID: 928338692}
+  - {fileID: 564598698}
+  - {fileID: 1255244688}
+  - {fileID: 348657527}
+  - {fileID: 1992527324}
   arrowUI: {fileID: 2030261320}
   shieldUI: {fileID: 1525640163}
   shipSpeed: 0
@@ -8863,12 +8865,12 @@ MonoBehaviour:
   minX: 0
   maxX: 11
   asteroidFadeLightSpeed: 0.5
-  speedLV0: 0
-  speedLV1: 1.5
-  speedLV2: 2.3
-  speedLV3: 3
-  speedLV4: 3.5
-  speedLV5: 4
+  speedLVS:
+  - 1.5
+  - 2.3
+  - 3
+  - 3.5
+  - 4
   minAsteroidSpeedLV1: 1
   minAsteroidSpeedLV2: 2
   minAsteroidSpeedLV3: 3.3
@@ -8894,28 +8896,30 @@ MonoBehaviour:
   radarWaveIntervalLV2: 3
   radarWaveIntervalLV1: 5
   radarWaveIntervalLV4: 0.9
-  positionLV1: {fileID: 2125261609}
-  positionLV2: {fileID: 300244156}
-  positionLV3: {fileID: 200715443}
-  positionLV4: {fileID: 1580754185}
-  positionLV5: {fileID: 711992172}
-  durationToPosition5: 0.5
-  durationToPosition4: 0.5
-  durationToPosition3: 0.7
-  durationToPosition2: 0.9
-  durationToPosition1: 1
-  speedParallaxLV0: 0
-  speedParallaxLV1: 1
-  speedParallaxLV2: 2
-  speedParallaxLV3: 3.1
-  speedParallaxLV4: 4.3
-  speedParallaxLV5: 4.9
-  cameraPosLV0: 0
-  cameraPosLV1: 7
-  cameraPosLV2: 7.5
-  cameraPosLV3: 8
-  cameraPosLV4: 8.5
-  cameraPosLV5: 9
+  positionLVS:
+  - {fileID: 2125261609}
+  - {fileID: 300244156}
+  - {fileID: 200715443}
+  - {fileID: 1580754185}
+  - {fileID: 711992172}
+  durationToPositions:
+  - 1
+  - 0.9
+  - 0.7
+  - 0.5
+  - 0.5
+  speedParallaxLVS:
+  - 1
+  - 2
+  - 3.1
+  - 4.3
+  - 4.9
+  cameraPosLVS:
+  - 7
+  - 7.5
+  - 8
+  - 8.5
+  - 9
   cameraZoomOutSpeed: 1
   energy: 0
   maxEnergy: 1000
