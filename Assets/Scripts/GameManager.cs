@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -8,6 +9,16 @@ using static UnityEngine.EventSystems.EventTrigger;
 
 public class GameManager : MonoBehaviour
 {
+    [System.Serializable]
+    private class AsteroidMovementLevel
+    {
+        public Levels level;
+        public float minSpeed;
+        public float maxSpeed;
+        public float minRotation;
+        public float maxRotation;
+    }
+
     // --- Game Progression ---
     [Header("Game Progression")]
     public float gameProgress;
@@ -18,7 +29,8 @@ public class GameManager : MonoBehaviour
     // --- Game Objects ---
     [Header("Game Objects")]
     public GameObject ship;
-    public GameObject asteroidSpawner, energySpawner, shield, radar;
+    public AsteroidSpawner asteroidSpawner;
+    public GameObject  energySpawner, shield, radar;
     [SerializeField] private RadarControllerUI radarUI;
     public ParallarEffect parallax;
     public Camera mainCamera;
@@ -39,10 +51,7 @@ public class GameManager : MonoBehaviour
     // --- Speed Variations ---
     [Header("Speed Variations")]
     public float[] speedLVS = new float[5];
-    public float minAsteroidSpeedLV1, minAsteroidSpeedLV2, minAsteroidSpeedLV3, minAsteroidSpeedLV4, minAsteroidSpeedLV5;
-    public float maxAsteroidSpeedLV1, maxAsteroidSpeedLV2, maxAsteroidSpeedLV3, maxAsteroidSpeedLV4, maxAsteroidSpeedLV5;
-    public float minRotationSpeedLV1, minRotationSpeedLV2, minRotationSpeedLV3, minRotationSpeedLV4, minRotationSpeedLV5;
-    public float maxRotationSpeedLV1, maxRotationSpeedLV2, maxRotationSpeedLV3, maxRotationSpeedLV4, maxRotationSpeedLV5;
+    [SerializeField] private AsteroidMovementLevel[] asteroidMovementLevels = new AsteroidMovementLevel[5];
     public float speedDecreaseRateWhenGameOver;
 
     // --- Radar Wave Intervals ---
@@ -117,6 +126,15 @@ public class GameManager : MonoBehaviour
     //temporal flags
     private bool eventFlag = false;
 
+
+    enum Levels
+    {
+        Lv1,
+        Lv2,
+        Lv3,
+        Lv4,
+        Lv5
+    }
     void Start()
     {
         //Get ship speed
@@ -178,7 +196,7 @@ public class GameManager : MonoBehaviour
         gameProgressSpeed = gameProgressSpeedPositionLVS[0];
 
         //Start game with no arrow spawn
-        asteroidSpawner.GetComponent<AsteroidSpawner>().spawnArrow = false;
+        asteroidSpawner.spawnArrow = false;
 
         //Start game with parallax effect LV1
         parallax.IncreaseSpeed(speedParallaxLVS[0]);
@@ -456,10 +474,10 @@ public class GameManager : MonoBehaviour
 
             //if the number of tumes that the key was pressed is an odd number, the shield will be activated.
             //the count starts with 0, so the first hit will be a 1 => odd number => activate shield. Next press is 2 => even number => inactivate
-            asteroidSpawner.GetComponent<AsteroidSpawner>().spawnArrow = !asteroidSpawner.GetComponent<AsteroidSpawner>().spawnArrow;
+            asteroidSpawner.spawnArrow = !asteroidSpawner.spawnArrow;
             energySpawner.GetComponent<EnergySpawner>().spawnArrow = !energySpawner.GetComponent<EnergySpawner>().spawnArrow;
 
-            if (asteroidSpawner.GetComponent<AsteroidSpawner>().spawnArrow)
+            if (asteroidSpawner.spawnArrow)
             {
                 arrowModEnergyDecrease = arrowModEnergyDecrease_original;
                 arrowUI.GetComponent<Image>().color = Color.green;
@@ -576,65 +594,36 @@ public class GameManager : MonoBehaviour
     #endregion
     public void ToggleAsteroidSpeed()
     {
+        Levels currentLV = GetCurrentLV(positionLV);
 
-        //Increase speed movement
-        if (positionLV == 5)
-        {
-            asteroidSpawner.GetComponent<AsteroidSpawner>().minAsteroidSpeed = minAsteroidSpeedLV5;
-            asteroidSpawner.GetComponent<AsteroidSpawner>().maxAsteroidSpeed = minAsteroidSpeedLV5;
-            asteroidSpawner.GetComponent<AsteroidSpawner>().minRotationSpeed = minRotationSpeedLV5;
-            asteroidSpawner.GetComponent<AsteroidSpawner>().maxRotationSpeed = maxRotationSpeedLV5;
-
-            //Change speed of all spawned asteroids in the scene to the average number of the range in that level
-            ChangeAsteroidSpeeds(maxAsteroidSpeedLV5 - minAsteroidSpeedLV5);
-        }
-
-        else if (positionLV == 4)
-        {
-            asteroidSpawner.GetComponent<AsteroidSpawner>().minAsteroidSpeed = minAsteroidSpeedLV4;
-            asteroidSpawner.GetComponent<AsteroidSpawner>().maxAsteroidSpeed = maxAsteroidSpeedLV4;
-            asteroidSpawner.GetComponent<AsteroidSpawner>().minRotationSpeed = minRotationSpeedLV4;
-            asteroidSpawner.GetComponent<AsteroidSpawner>().maxRotationSpeed = maxRotationSpeedLV4;
-
-            //Change speed of all spawned asteroids in the scene to the average number of the range in that level
-            ChangeAsteroidSpeeds(maxAsteroidSpeedLV5 - minAsteroidSpeedLV4);
-        }
-
-        else if (positionLV == 3)
-        {
-            asteroidSpawner.GetComponent<AsteroidSpawner>().minAsteroidSpeed = minAsteroidSpeedLV3;
-            asteroidSpawner.GetComponent<AsteroidSpawner>().maxAsteroidSpeed = maxAsteroidSpeedLV3;
-            asteroidSpawner.GetComponent<AsteroidSpawner>().minRotationSpeed = minRotationSpeedLV3;
-            asteroidSpawner.GetComponent<AsteroidSpawner>().maxRotationSpeed = maxRotationSpeedLV3;
-
-            //Change speed of all spawned asteroids in the scene to the average number of the range in that level
-            ChangeAsteroidSpeeds(maxAsteroidSpeedLV5 - minAsteroidSpeedLV3);
-        }
-
-        else if (positionLV == 2)
-        {
-            asteroidSpawner.GetComponent<AsteroidSpawner>().minAsteroidSpeed = minAsteroidSpeedLV2;
-            asteroidSpawner.GetComponent<AsteroidSpawner>().maxAsteroidSpeed = maxAsteroidSpeedLV2;
-            asteroidSpawner.GetComponent<AsteroidSpawner>().minRotationSpeed = minRotationSpeedLV2;
-            asteroidSpawner.GetComponent<AsteroidSpawner>().maxRotationSpeed = maxRotationSpeedLV2;
-
-            //Change speed of all spawned asteroids in the scene to the average number of the range in that level
-            ChangeAsteroidSpeeds(maxAsteroidSpeedLV5 - minAsteroidSpeedLV2);
-        }
-
-        else if (positionLV == 1)
-        {
-            asteroidSpawner.GetComponent<AsteroidSpawner>().minAsteroidSpeed = minAsteroidSpeedLV1;
-            asteroidSpawner.GetComponent<AsteroidSpawner>().maxAsteroidSpeed = maxAsteroidSpeedLV1;
-            asteroidSpawner.GetComponent<AsteroidSpawner>().minRotationSpeed = minRotationSpeedLV1;
-            asteroidSpawner.GetComponent<AsteroidSpawner>().maxRotationSpeed = maxRotationSpeedLV1;
-
-            //Change speed of all spawned asteroids in the scene to the average number of the range in that level
-            ChangeAsteroidSpeeds(maxAsteroidSpeedLV5 - minAsteroidSpeedLV1);
-        }
-    
-            
+        var asteroidSpeed = asteroidMovementLevels.FirstOrDefault<AsteroidMovementLevel>(x => x.level == currentLV);
+        asteroidSpawner.minAsteroidSpeed = asteroidSpeed.minSpeed;
+        asteroidSpawner.maxAsteroidSpeed = asteroidSpeed.maxSpeed;
+        asteroidSpawner.minRotationSpeed = asteroidSpeed.minRotation;
+        asteroidSpawner.maxRotationSpeed = asteroidSpeed.maxRotation;
+        //Change speed of all spawned asteroids in the scene to the average number of the range in that level
+        var lv5MaxSpeed = asteroidMovementLevels.FirstOrDefault<AsteroidMovementLevel>(x => x.level == Levels.Lv5).maxSpeed;
+        ChangeAsteroidSpeeds(lv5MaxSpeed - asteroidSpeed.minSpeed);
         
+    }
+
+    private Levels GetCurrentLV(int positionLV)
+    {
+        switch (positionLV)
+        {
+            case 5:
+                return Levels.Lv5;
+            case 4:
+                return  Levels.Lv4;
+            case 3:
+                return Levels.Lv3;
+            case 2:
+                return Levels.Lv2;
+            case 1:
+                return Levels.Lv1;
+            default:
+                return Levels.Lv1;
+        }
     }
 
     public void ChangeAsteroidSpeeds(float speed)

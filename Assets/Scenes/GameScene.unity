@@ -8840,7 +8840,7 @@ MonoBehaviour:
   - 0.8
   - 1
   ship: {fileID: 1257503198}
-  asteroidSpawner: {fileID: 1970598913}
+  asteroidSpawner: {fileID: 1970598914}
   energySpawner: {fileID: 1232595329}
   shield: {fileID: 366897731}
   radar: {fileID: 1257503198}
@@ -8872,26 +8872,32 @@ MonoBehaviour:
   - 3
   - 3.5
   - 4
-  minAsteroidSpeedLV1: 1
-  minAsteroidSpeedLV2: 2
-  minAsteroidSpeedLV3: 3.3
-  minAsteroidSpeedLV4: 4.4
-  minAsteroidSpeedLV5: 5.5
-  maxAsteroidSpeedLV1: 3
-  maxAsteroidSpeedLV2: 3.5
-  maxAsteroidSpeedLV3: 4.5
-  maxAsteroidSpeedLV4: 5.5
-  maxAsteroidSpeedLV5: 6.5
-  minRotationSpeedLV1: 20
-  minRotationSpeedLV2: 100
-  minRotationSpeedLV3: 200
-  minRotationSpeedLV4: 300
-  minRotationSpeedLV5: 400
-  maxRotationSpeedLV1: 100
-  maxRotationSpeedLV2: 200
-  maxRotationSpeedLV3: 300
-  maxRotationSpeedLV4: 400
-  maxRotationSpeedLV5: 500
+  asteroidMovementLevels:
+  - level: 0
+    minSpeed: 1
+    maxSpeed: 3
+    minRotation: 20
+    maxRotation: 100
+  - level: 1
+    minSpeed: 2
+    maxSpeed: 3.5
+    minRotation: 100
+    maxRotation: 200
+  - level: 2
+    minSpeed: 3.3
+    maxSpeed: 4.5
+    minRotation: 200
+    maxRotation: 300
+  - level: 3
+    minSpeed: 4.4
+    maxSpeed: 5.5
+    minRotation: 300
+    maxRotation: 400
+  - level: 4
+    minSpeed: 5.5
+    maxSpeed: 6.5
+    minRotation: 400
+    maxRotation: 500
   speedDecreaseRateWhenGameOver: 0.1
   radarWaveIntervalLVS:
   - 5
