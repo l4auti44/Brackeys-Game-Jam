@@ -23,6 +23,8 @@ public class AsteroidMovement : MonoBehaviour
     private bool canCollideWithAsteroids = false; // Track if the asteroid can collide with others
     private float screenBottomY; // Y position of the bottom of the screen
     private float energyDropSpeed = 2f; // Force applied to energy drop
+    [Range(0f, 100f)]
+    [SerializeField] private float energyDropRate = 5;
 
     void Start()
     {
@@ -113,24 +115,27 @@ public class AsteroidMovement : MonoBehaviour
     // Spawns an energy drop at the position of the destroyed asteroid
     private void SpawnEnergyDrop()
     {
-        GameObject energyDrop = Instantiate(energyDropPrefab, transform.position, Quaternion.identity);
-
-
-        // Find the player's position
-        GameObject player = GameObject.FindWithTag("Player");
-        if (player != null)
+        if (Random.value < energyDropRate / 100f)
         {
-            // Calculate direction towards the player
-            Vector2 directionToPlayer = (player.transform.position - energyDrop.transform.position).normalized;
+            GameObject energyDrop = Instantiate(energyDropPrefab, transform.position, Quaternion.identity);
 
-            // Set the speed of the energy drop
-            Rigidbody2D rb = energyDrop.GetComponent<Rigidbody2D>();
-            if (rb != null)
+
+            // Find the player's position
+            GameObject player = GameObject.FindWithTag("Player");
+            if (player != null)
             {
-                rb.velocity = directionToPlayer * energyDropSpeed;
-            }
+                // Calculate direction towards the player
+                Vector2 directionToPlayer = (player.transform.position - energyDrop.transform.position).normalized;
 
+                // Set the speed of the energy drop
+                Rigidbody2D rb = energyDrop.GetComponent<Rigidbody2D>();
+                if (rb != null)
+                {
+                    rb.velocity = directionToPlayer * energyDropSpeed;
+                }
+            }
         }
+        
     }
 
     private IEnumerator DestroyAfterLifespan()
