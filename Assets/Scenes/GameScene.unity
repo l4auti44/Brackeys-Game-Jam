@@ -10470,7 +10470,7 @@ MonoBehaviour:
   speed: 10
   missilePrefab: {fileID: 8719118827296770964, guid: a283bcfb91de7ce498120bf9556bade1, type: 3}
   energyMissile: 10
-  gameManager: {fileID: 1017901624}
+  gameManager: {fileID: 1017901625}
   shipMovementSlider: {fileID: 986520743}
   missileSpawnPoint: {fileID: 34951063}
   gameFeelManager: {fileID: 1017901627}
@@ -15896,8 +15896,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.4, y: 29.2}
-  m_SizeDelta: {x: 234, y: 134}
+  m_AnchoredPosition: {x: 2.4, y: 31.799}
+  m_SizeDelta: {x: 234, y: 135.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1846394114
 MonoBehaviour:

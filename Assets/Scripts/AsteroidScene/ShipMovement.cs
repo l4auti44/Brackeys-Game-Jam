@@ -8,7 +8,7 @@ public class ShipMovement : MonoBehaviour
     public float speed; // Speed of the ship
     public GameObject missilePrefab; // Missile prefab to shoot
     public float energyMissile; //Cost of energy per missile
-    public GameObject gameManager; //Game manager reference
+    public GameManager gameManager; //Game manager reference
     public GameObject shipMovementSlider;
     public Transform missileSpawnPoint; // Spawn point for the missile
 
@@ -41,8 +41,8 @@ public class ShipMovement : MonoBehaviour
 
     private void Start()
     {
-        minX = gameManager.GetComponent<GameManager>().minX;
-        maxX = gameManager.GetComponent<GameManager>().maxX;
+        minX = gameManager.minX;
+        maxX = gameManager.maxX;
 
     }
 
@@ -50,8 +50,8 @@ public class ShipMovement : MonoBehaviour
     void Update()
     {
         // Get updated speed and energy from game manager
-        speed = gameManager.GetComponent<GameManager>().shipSpeed;
-        energy = gameManager.GetComponent<GameManager>().energy;
+        speed = gameManager.shipSpeed;
+        energy = gameManager.energy;
 
         // Get horizontal input (left/right arrows or A/D keys)
         float move = Input.GetAxis("Horizontal");
@@ -96,7 +96,7 @@ public class ShipMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("EnergyCollectable"))
         {
-            gameManager.GetComponent<GameManager>().IncreaseEnergy(energyCollectable);
+            gameManager.IncreaseEnergy(energyCollectable);
             SoundManager.PlaySound(collectSoundsFX);
 
             Destroy(collision.gameObject);
@@ -107,7 +107,7 @@ public class ShipMovement : MonoBehaviour
             //Trigger crew animator with this event
             EventManager.Player.OnImpact.Invoke(this);
 
-            gameManager.GetComponent<GameManager>().DecreaseMaxEnergy(energyDecreaseEnemyHit);
+            gameManager.DecreaseMaxEnergy(energyDecreaseEnemyHit);
 
             SoundManager.PlaySound(SoundManager.Sound.HitByAsteroid);
 

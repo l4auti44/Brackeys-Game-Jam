@@ -9,6 +9,7 @@ public class GameFeelManager : MonoBehaviour
     public float shakeDuration = 0.5f; // How long the camera shakes
     public float shakeMagnitude = 0.2f; // How intense the shake is
     private bool isShaking = false;
+    private int isUiShaking = 0;
 
     private Vector3 originalPosition; // Store the camera's original position
 
@@ -75,6 +76,7 @@ public class GameFeelManager : MonoBehaviour
     //To shake an object in the UI
     public void ShakeObjectUI(RectTransform uiElementToShake, float intensity, float duration)
     {
+        if (isUiShaking == 2) return;
         StartCoroutine(ShakeUIRoutine(uiElementToShake, intensity, duration));
         //Debug.Log("UI shake triggered");
     }
@@ -83,7 +85,7 @@ public class GameFeelManager : MonoBehaviour
     {
         Vector2 originalPosition = uiElementToShake.anchoredPosition; // Save the UI element's initial anchored position
         float elapsed = 0f;
-
+        isUiShaking++;
         while (elapsed < duration)
         {
             // Generate a random offset for the UI element's anchored position
@@ -102,6 +104,7 @@ public class GameFeelManager : MonoBehaviour
 
         // Reset the UI element to its original position after shaking
         uiElementToShake.anchoredPosition = originalPosition;
+        isUiShaking--;
     }
 
 
