@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.57, y: -0.73, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7859578209984054031}
@@ -106,9 +106,7 @@ MonoBehaviour:
   timeToIdle: 0.2
   energyToDecrease: 10
   timeInactivateText: 1
-  idleSprite: {fileID: 21300000, guid: 8c619d7b0763a7b41ba41591580fe8b8, type: 3}
-  yellowSprite: {fileID: 21300000, guid: 2cffae154cda0574eb7ed19764fb8114, type: 3}
-  redSprite: {fileID: 21300000, guid: 0fe4cadc7e7028d4aabee6eec3badf9d, type: 3}
+  timeToDestroy: 1.5
   gameManager: {fileID: 0}
   textParrySucess: {fileID: 0}
 --- !u!58 &6359922510465915423

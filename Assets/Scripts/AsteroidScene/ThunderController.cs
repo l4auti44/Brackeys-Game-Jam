@@ -13,10 +13,9 @@ public class ThunderController : MonoBehaviour
     public float timeToIdle = 4f;    // Time to switch back to Idle from ThunderRed
     public float energyToDecrease = 10f;
     public float timeInactivateText = 1f;
+    public float timeToDestroy = 1.5f;
 
-    public Sprite idleSprite;        // Sprite for the idle state
-    public Sprite yellowSprite;      // Sprite for the ThunderYellow state
-    public Sprite redSprite;         // Sprite for the ThunderRed state
+
 
     private SpriteRenderer spriteRenderer;
     public GameManager gameManager; // Reference to GameManager
@@ -28,8 +27,9 @@ public class ThunderController : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();  // Find the GameManager in the scene
         textParrySucess = GameObject.Find("ParryIndicator");
 
+        Destroy(gameObject, timeToDestroy);
         // Start the state change process
-        StartCoroutine(ChangeState());
+        //StartCoroutine(ChangeState());
     }
 
     private IEnumerator ChangeState()
@@ -61,10 +61,10 @@ public class ThunderController : MonoBehaviour
                 Destroy(gameObject);
                 break;
             case ThunderState.ThunderYellow:
-                spriteRenderer.sprite = yellowSprite;
+                //spriteRenderer.sprite = yellowSprite;
                 break;
             case ThunderState.ThunderRed:
-                spriteRenderer.sprite = redSprite;
+                //spriteRenderer.sprite = redSprite;
                 break;
         }
     }
