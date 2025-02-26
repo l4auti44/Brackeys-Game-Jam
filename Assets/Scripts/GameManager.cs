@@ -532,11 +532,9 @@ public class GameManager : MonoBehaviour
 
         //Moved events on the button here
         AccelerateShip();
-        if (positionLV != 5)
-        {
-            ToggleAsteroidSpeed();
-            EventManager.Game.OnEngineChange.Invoke((int)positionLV);
-        }
+        ToggleAsteroidSpeed();
+        EventManager.Game.OnEngineChange.Invoke((int)positionLV);
+        
             
         
 
@@ -580,15 +578,12 @@ public class GameManager : MonoBehaviour
 
 
         //Moved events on the button here
-        DecelerateShip();
-        if (positionLV != 1)
-        {
-            ToggleAsteroidSpeed();
-            EventManager.Game.OnEngineChange.Invoke((int)positionLV);
-        }
+        DecelerateShip();    
+        ToggleAsteroidSpeed();
+        
+        EventManager.Game.OnEngineChange.Invoke((int)positionLV);
 
-        
-        
+
     }
 
     #endregion

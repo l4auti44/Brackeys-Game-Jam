@@ -8,9 +8,7 @@ public class DestroyAndRepearSys : MonoBehaviour
     public enum Modules{
         MissileModule,
         ShieldModule,
-        ArrowModule,
-        EngineModule,
-        radarModule
+        ArrowModule
     }
 
     [SerializeField] private float BreakTime = 15f;
@@ -38,21 +36,21 @@ public class DestroyAndRepearSys : MonoBehaviour
         MissileModule = GameObject.Find("MissileModule").GetComponent<SoundButton>();
         ShieldModule = GameObject.Find("ShieldModule").GetComponent<SoundButton>();
         ArrowModule = GameObject.Find("ArrowModule").GetComponent<SoundButton>();
-        var engineButtons = GameObject.Find("EngineButtons");
-        engineButtonUp = engineButtons.transform.GetChild(0).GetComponent<SoundButton>();
-        engineButtonDown = engineButtons.transform.GetChild(1).GetComponent<SoundButton>();
-        var radarButtons = GameObject.Find("RadarButtons");
-        radarButtonUp = radarButtons.transform.GetChild(0).GetComponent<SoundButton>();
-        radarButtonDown = radarButtons.transform.GetChild(1).GetComponent<SoundButton>();
+        //var engineButtons = GameObject.Find("EngineButtons");
+        //engineButtonUp = engineButtons.transform.GetChild(0).GetComponent<SoundButton>();
+        //engineButtonDown = engineButtons.transform.GetChild(1).GetComponent<SoundButton>();
+        //var radarButtons = GameObject.Find("RadarButtons");
+        //radarButtonUp = radarButtons.transform.GetChild(0).GetComponent<SoundButton>();
+        //radarButtonDown = radarButtons.transform.GetChild(1).GetComponent<SoundButton>();
         //repairModuleIsActiveImage = GameObject.Find("IsActiveRepairSys");
         //repairModuleIsActiveImage.SetActive(false);
         Systems.Add(MissileModule);
         Systems.Add(ShieldModule);
         Systems.Add(ArrowModule);
-        Systems.Add(engineButtonUp);
-        Systems.Add(engineButtonDown);
-        Systems.Add(radarButtonUp);
-        Systems.Add(radarButtonDown);
+        //Systems.Add(engineButtonUp);
+        //Systems.Add(engineButtonDown);
+        //Systems.Add(radarButtonUp);
+        //Systems.Add(radarButtonDown);
 
     }
     private void OnEnable()
@@ -118,12 +116,6 @@ public class DestroyAndRepearSys : MonoBehaviour
                 break;
             case Modules.ArrowModule:
                 breakSis = Systems[2];
-                break;
-            case Modules.EngineModule:
-                breakSis = Systems[3];
-                break;
-            case Modules.radarModule:
-                breakSis = Systems[5];
                 break;
             default:
                 breakSis = Systems[0];
