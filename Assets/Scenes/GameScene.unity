@@ -9414,6 +9414,11 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &1079795733 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8433069637326889131, guid: 7d779d91143eda444ac5a1ada05cd660, type: 3}
+  m_PrefabInstance: {fileID: 1152279557}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1127073550
 GameObject:
   m_ObjectHideFlags: 0
@@ -9677,6 +9682,14 @@ PrefabInstance:
     - target: {fileID: 4644239082296200507, guid: 7d779d91143eda444ac5a1ada05cd660, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5278220544007451672, guid: 7d779d91143eda444ac5a1ada05cd660, type: 3}
+      propertyPath: pauseMenu
+      value: 
+      objectReference: {fileID: 1079795733}
+    - target: {fileID: 8433069637326889131, guid: 7d779d91143eda444ac5a1ada05cd660, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

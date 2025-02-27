@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class UIPauseMenuController : MonoBehaviour
 {
-    private GameObject pauseMenu;
+    [SerializeField] private GameObject pauseMenu;
     private GameObject resumeButton;
     private bool diedOrWinConditions = false;
     private TMPro.TMP_Text titleText;
 
     private void Awake()
     {
-        pauseMenu = transform.Find("PauseMenu").gameObject;
+        //pauseMenu = transform.Find("PauseMenu").gameObject;
         resumeButton = pauseMenu.transform.Find("ResumeButton").gameObject;
         titleText = pauseMenu.transform.Find("Title").GetComponent<TMPro.TMP_Text>();
         pauseMenu.SetActive(false);
