@@ -31,7 +31,6 @@ public class GameManager : MonoBehaviour
     public GameObject ship;
     public AsteroidSpawner asteroidSpawner;
     public GameObject  energySpawner, shield, radar;
-    [SerializeField] private RadarControllerUI radarUI;
     public ParallarEffect parallax;
     public Camera mainCamera;
 
@@ -188,7 +187,7 @@ public class GameManager : MonoBehaviour
         //Start level with radar LV1
         radarLV = 1;
         ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLVS[0];
-        radarUI.waveInterval = radarWaveIntervalLVS[0];
+        //radarUI.waveInterval = radarWaveIntervalLVS[0];
         radarModEnergyDecreaseLV1 = radarModEnergyDecreaseLV1_original;
         radarModuleSpriteLVS[0].color = Color.green;
 
@@ -378,7 +377,6 @@ public class GameManager : MonoBehaviour
             radarLV++;
             radarModuleSpriteLVS[radarLV - 1].color = Color.green;
             ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLVS[radarLV - 1];
-            radarUI.waveInterval = radarWaveIntervalLVS[radarLV - 1];
 
             //Decrease energy
             switch (radarLV)
@@ -406,7 +404,6 @@ public class GameManager : MonoBehaviour
             radarModuleSpriteLVS[radarLV - 1].color = Color.white;
             radarLV--;
             ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLVS[radarLV - 1];
-            radarUI.waveInterval = radarWaveIntervalLVS[radarLV - 1];
 
             switch (radarLV)
             {
