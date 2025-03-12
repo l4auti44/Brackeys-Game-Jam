@@ -8,6 +8,7 @@ public class ThunderSpawner : MonoBehaviour
     public Transform parentObject;             // Parent object containing all spawn position children
     public float minSpawnInterval = 1f;        // Minimum interval between spawns (in seconds)
     public float maxSpawnInterval = 5f;        // Maximum interval between spawns (in seconds)
+    public float RandomXPositionRange = 5f;        // Maximum interval between spawns (in seconds)
 
     private List<Transform> spawnPositions;    // List to store spawn positions
     private bool isSpawning = true;            // Control whether spawning continues
@@ -57,7 +58,8 @@ public class ThunderSpawner : MonoBehaviour
 
         // Get a random spawn position from the list of predefined positions
         Transform randomPosition = spawnPositions[Random.Range(0, spawnPositions.Count)];
-
+        float randomX = Random.Range(-RandomXPositionRange, RandomXPositionRange);
+        randomPosition.position = new Vector3(randomPosition.position.x + RandomXPositionRange, randomPosition.position.y, 0 );
         // Instantiate the object at the random position
         Instantiate(objectPrefab, randomPosition.position, Quaternion.identity);
     }

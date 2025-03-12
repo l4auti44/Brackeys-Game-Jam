@@ -100,15 +100,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 964e710f7b1919148a2f2b708e97f110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
-  timeToYellow: 2
-  timeToRed: 1
-  timeToIdle: 0.2
-  energyToDecrease: 10
-  timeInactivateText: 1
+  energyToIncrease: 30
+  timeToEnableCol: 1
   timeToDestroy: 1.5
-  gameManager: {fileID: 0}
-  textParrySucess: {fileID: 0}
 --- !u!58 &6359922510465915423
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -141,9 +135,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.05686837, y: 0}
+  m_Offset: {x: 0.011877656, y: 0}
   serializedVersion: 2
-  m_Radius: 10.754774
+  m_Radius: 0.24929583
 --- !u!95 &3357103090441690558
 Animator:
   serializedVersion: 5
