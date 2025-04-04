@@ -35,4 +35,6 @@ public class GameAssets : MonoBehaviour
         public AudioClip[] audios;
         [Range(0, 1)] public float volume = 1;
     }
+
+    public PerkScriptableObject[] perksPool;
 }

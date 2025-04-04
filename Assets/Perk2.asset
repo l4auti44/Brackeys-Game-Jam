@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 539fd6bd99690e44c95bf7b6ccd6b40b, type: 3}
+  m_Name: Perk2
+  m_EditorClassIdentifier: 
+  title: Perk2
+  description: -20 aura
+  sprite: {fileID: 1941346405, guid: 5895ec28f1b83664a98b753c09c29af0, type: 3}

@@ -126,6 +126,12 @@ public class GameManager : MonoBehaviour
     private bool eventFlag = false;
 
 
+    private Image sourceImageEngineModule;
+    [SerializeField] private Sprite[] EngineModuleImages = new Sprite[6];
+
+    private Image sourceImageRadarModule;
+    [SerializeField] private Sprite[] RadarModuleImages = new Sprite[5];
+
     enum Levels
     {
         Lv1,
@@ -181,7 +187,6 @@ public class GameManager : MonoBehaviour
 
         //start game with position LV1
         positionLV = 1;
-        positionModuleSpriteLVS[0].color = Color.green;
         positionModEnergyDecreaseLV1 = positionModEnergyDecreaseLV1_original;
 
         //Start level with radar LV1
@@ -189,7 +194,6 @@ public class GameManager : MonoBehaviour
         ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLVS[0];
         //radarUI.waveInterval = radarWaveIntervalLVS[0];
         radarModEnergyDecreaseLV1 = radarModEnergyDecreaseLV1_original;
-        radarModuleSpriteLVS[0].color = Color.green;
 
         //Start level with game progress speed LV1
         gameProgressSpeed = gameProgressSpeedPositionLVS[0];
@@ -217,6 +221,9 @@ public class GameManager : MonoBehaviour
         repairSys = this.GetComponentInChildren<DestroyAndRepearSys>();
 
         totalRateEnergyDecrease = GameObject.Find("Total Rate").GetComponentInChildren<TextMeshPro>();
+
+        sourceImageEngineModule = GameObject.Find("EngineModule").transform.GetComponentInChildren<Image>();
+        sourceImageRadarModule = GameObject.Find("RadarModule").transform.GetComponentInChildren<Image>();
     }
 
     // Update is called once per frame
@@ -375,7 +382,6 @@ public class GameManager : MonoBehaviour
         if (!radarModules[0].isBroken && radarLV != 4)
         {
             radarLV++;
-            radarModuleSpriteLVS[radarLV - 1].color = Color.green;
             ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLVS[radarLV - 1];
 
             //Decrease energy
@@ -391,7 +397,9 @@ public class GameManager : MonoBehaviour
                     radarModEnergyDecreaseLV2 = radarModEnergyDecreaseLV2_original;
                     break;
             }
+            ChangeRadarSprite();
             EventManager.Game.OnRadarChange.Invoke(radarLV);
+
 
         }
 
@@ -401,7 +409,6 @@ public class GameManager : MonoBehaviour
     {
         if (!radarModules[1].isBroken && radarLV != 1)
         {
-            radarModuleSpriteLVS[radarLV - 1].color = Color.white;
             radarLV--;
             ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLVS[radarLV - 1];
 
@@ -420,7 +427,8 @@ public class GameManager : MonoBehaviour
                     radarModEnergyDecreaseLV1 = radarModEnergyDecreaseLV1_original;
                     break;
             }
-          
+
+            ChangeRadarSprite();
             EventManager.Game.OnRadarChange.Invoke(radarLV);
         }
         
@@ -497,7 +505,7 @@ public class GameManager : MonoBehaviour
 
             positionLV++;
             ship.GetComponent<ShipMovement>().MoveToLevel(positionLVS[positionLV - 1]);
-            positionModuleSpriteLVS[positionLV - 1].color = Color.green;
+            //positionModuleSpriteLVS[positionLV - 1].color = Color.green;
             // Increase parallax
             parallax.IncreaseSpeed(speedParallaxLVS[positionLV - 1]);
             //Increase speed when transitioning to the next position
@@ -530,6 +538,7 @@ public class GameManager : MonoBehaviour
         //Moved events on the button here
         AccelerateShip();
         ToggleAsteroidSpeed();
+        ChangeEngineSprite();
         EventManager.Game.OnEngineChange.Invoke((int)positionLV);
         
             
@@ -541,7 +550,7 @@ public class GameManager : MonoBehaviour
     {
         if (!engineModules[1].isBroken && positionLV != 1)
         {
-            positionModuleSpriteLVS[positionLV - 1].color = Color.white;
+            //positionModuleSpriteLVS[positionLV - 1].color = Color.white;
             positionLV--;
             ship.GetComponent<ShipMovement>().MoveToLevel(positionLVS[positionLV - 1]);
             //Decrease parallax speed
@@ -577,7 +586,7 @@ public class GameManager : MonoBehaviour
         //Moved events on the button here
         DecelerateShip();    
         ToggleAsteroidSpeed();
-        
+        ChangeEngineSprite();
         EventManager.Game.OnEngineChange.Invoke((int)positionLV);
 
 
@@ -660,6 +669,51 @@ public class GameManager : MonoBehaviour
 
         // Optional: Add any effect when overload ends
         Debug.Log("Overload ended.");
+    }
+
+    public void ChangeEngineSprite()
+    {
+        
+        switch (positionLV)
+        {
+            case 5:
+                sourceImageEngineModule.sprite = EngineModuleImages[5];
+                break;
+            case 4:
+                sourceImageEngineModule.sprite = EngineModuleImages[4];
+                break;
+            case 3:
+                sourceImageEngineModule.sprite = EngineModuleImages[3];
+                break;
+            case 2:
+                sourceImageEngineModule.sprite = EngineModuleImages[2];
+                break;
+            case 1:
+                sourceImageEngineModule.sprite = EngineModuleImages[1];
+                break;
+
+        }
+    }
+
+    public void ChangeRadarSprite()
+    {
+
+        switch (radarLV)
+        {
+            case 4:
+                sourceImageRadarModule.sprite = RadarModuleImages[4];
+                break;
+            case 3:
+                sourceImageRadarModule.sprite = RadarModuleImages[3];
+                break;
+            case 2:
+                sourceImageRadarModule.sprite = RadarModuleImages[2];
+                break;
+            case 1:
+                sourceImageRadarModule.sprite = RadarModuleImages[1];
+                break;
+
+        }
     }
 
 }
