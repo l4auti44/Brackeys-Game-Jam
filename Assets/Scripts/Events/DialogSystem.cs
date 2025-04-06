@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class DialogSystem : MonoBehaviour
 {
     public float timeForEachCharacter = 0.2f;
     public Animator halAnimator;
+    [SerializeField] private Image backgroundText;
     public enum DialogEvents
     {
         NoGetHit,
@@ -46,6 +49,7 @@ public class DialogSystem : MonoBehaviour
     {
         textComponent = GameObject.Find("DialogText").GetComponent<TMPro.TMP_Text>();
         gameManager = transform.parent.GetComponent<GameManager>();
+        backgroundText.enabled = false;
     }
 
 
@@ -67,6 +71,7 @@ public class DialogSystem : MonoBehaviour
 
     private void StartDialog(DialogEvents dialog)
     {
+        backgroundText.enabled = true;
         if (isWritting)
         {
             StopWritting();
@@ -95,6 +100,7 @@ public class DialogSystem : MonoBehaviour
     }
     private void StopWritting()
     {
+        backgroundText.enabled = false;
         StopAllCoroutines();
         
         textComponent.text = "";
@@ -211,6 +217,7 @@ public class DialogSystem : MonoBehaviour
     }
     private IEnumerator TypeText(string message, DialogPool audioPool)
     {
+        backgroundText.enabled = true;
         SoundManager.PlayDialogueSound(audioPool);
         halAnimator.SetBool("Talking", true);
         halAnimator.SetBool("Failed", false);
