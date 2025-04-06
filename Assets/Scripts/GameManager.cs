@@ -453,7 +453,7 @@ public class GameManager : MonoBehaviour
         shieldObject.GetComponent<SpriteRenderer>().enabled = true;
 
         shieldModEnergyDecrease = shieldModEnergyDecrease_original;
-        shieldUI.GetComponent<Image>().color = Color.green;
+
 
         // Wait for the shield duration
         yield return new WaitForSeconds(shieldDuration);
@@ -464,14 +464,14 @@ public class GameManager : MonoBehaviour
 
         isShieldActive = false;
         shieldModEnergyDecrease = 0;
-        shieldUI.GetComponent<Image>().color = Color.red;
+
 
         // Start the cooldown
         yield return new WaitForSeconds(shieldCooldown);
 
         // Allow shield to be reactivated after cooldown
         isShieldCooldown = false;
-        shieldUI.GetComponent<Image>().color = Color.white;
+
     }
 
     public void ToggleArrows()
