@@ -907,6 +907,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: master_spritesheet_8
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 0
+        width: 1
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab53207572ceb1d49b829495b7958f5c
+      internalID: 1334713462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: master_spritesheet_9
+      rect:
+        serializedVersion: 2
+        x: 541
+        y: 0
+        width: 1
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e39b742d9d510a4489b8bb0f10fab8a5
+      internalID: 1791788415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
