@@ -105,7 +105,7 @@ TextureImporter:
         width: 234
         height: 134
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -113,6 +113,27 @@ TextureImporter:
       bones: []
       spriteID: dd0a635cda4f0d44f992807224cabd8e
       internalID: -2094535651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ship_windows_3_37 1_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 240
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34df8066a2969be4095e66b6d7bbfbf9
+      internalID: -351191592
       vertices: []
       indices: 
       edges: []
@@ -128,6 +149,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      ship_windows_3_37 1_0: -351191592
       ship_windows_3_37_0: -2094535651
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
