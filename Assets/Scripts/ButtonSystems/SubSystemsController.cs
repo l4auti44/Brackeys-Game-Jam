@@ -10,7 +10,14 @@ public class SubSystemsController : MonoBehaviour
     private Transform wheelIndicator;
     private int currentSys = 0;
     private bool isRotating = false;
-    public float timeForRotation = 1.5f;
+    public float speed = 1.5f;
+
+    [SerializeField] private Transform missilePos;
+    [SerializeField] private Transform shieldPos;
+    [SerializeField] private Transform repairPos;
+    [SerializeField] private RectTransform arrowPos;
+
+    [SerializeField] private float initalX;
     void Start()
     {
         wheelIndicator = GameObject.Find("WheelIndicator").GetComponent<Transform>();
@@ -22,14 +29,20 @@ public class SubSystemsController : MonoBehaviour
         missileModule.SwitchAvailable();
         arrowModule.SwitchAvailable();
         repairModule.SwitchAvailable();
-    }
 
+        //initalX = wheelIndicator.GetComponent<RectTransform>().localPosition.x;
+
+
+        StartCoroutine(GoToPos(arrowPos.localPosition));
+    }
+    
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.R) && !isRotating)
         {
             TurnOffSystems();
-            StartCoroutine(RotateWheel(timeForRotation));
+            //StartCoroutine(GoToPos());
+            //StartCoroutine(RotateWheel(timeForRotation));
         }
     }
 
@@ -40,6 +53,49 @@ public class SubSystemsController : MonoBehaviour
         repairModule.SwitchAvailable(false);
         shieldModule.SwitchAvailable(false);
     }
+
+    public IEnumerator GoToPos(Vector3 targetPos)
+    {
+        RectTransform rectTransform = wheelIndicator.GetComponent<RectTransform>();
+
+        Vector3 goToInitialX = new Vector3(initalX, rectTransform.localPosition.y, rectTransform.localPosition.z);
+        while (Vector3.Distance(rectTransform.localPosition, goToInitialX) > 0.01f)
+        {
+            rectTransform.localPosition = Vector3.MoveTowards(
+                rectTransform.localPosition,
+                goToInitialX,
+                speed * Time.deltaTime
+            );
+            yield return null;
+        }
+
+
+        Vector3 yTarget = new Vector3(rectTransform.localPosition.x, targetPos.y, rectTransform.localPosition.z);
+        while (Vector3.Distance(rectTransform.localPosition, yTarget) > 0.01f)
+        {
+            rectTransform.localPosition = Vector3.MoveTowards(
+                rectTransform.localPosition,
+                yTarget,
+                speed * Time.deltaTime
+            );
+            yield return null;
+        }
+
+
+        Vector3 xTarget = new Vector3(targetPos.x, rectTransform.localPosition.y, rectTransform.localPosition.z);
+        while (Vector3.Distance(rectTransform.localPosition, xTarget) > 0.01f)
+        {
+            rectTransform.localPosition = Vector3.MoveTowards(
+                rectTransform.localPosition,
+                xTarget,
+                speed * Time.deltaTime
+            );
+            yield return null;
+        }
+
+        rectTransform.localPosition = targetPos;
+    }
+
 
     public IEnumerator RotateWheel(float duration)
     {
