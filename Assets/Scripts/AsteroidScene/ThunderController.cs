@@ -15,9 +15,14 @@ public class ThunderController : MonoBehaviour
     private bool energyEarned = false;
     private GameManager gameManager; // Reference to GameManager
     private CircleCollider2D _collider;
+    private GameObject lightning;
+    private SpriteRenderer crosshair;
 
     private void Start()
     {
+        crosshair = GetComponent<SpriteRenderer>();
+        lightning = transform.GetChild(0).gameObject;
+        lightning.SetActive(false);
         gameManager = FindObjectOfType<GameManager>();  // Find the GameManager in the scene
         _collider = GetComponent<CircleCollider2D>();
         _collider.enabled = false;
@@ -32,6 +37,8 @@ public class ThunderController : MonoBehaviour
         if (timeToEnableCol < 0)
         {
             _collider.enabled = true;
+            crosshair.enabled = false;
+            lightning.SetActive(true);
             timeToEnableCol = 900f;
         }
     }
