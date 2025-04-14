@@ -12700,7 +12700,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d9afeb352eef65489fcbd5cfb0e176c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 20
   missilePos: {fileID: 1764485084}
   shieldPos: {fileID: 1471565465}
   repairPos: {fileID: 1726144809}

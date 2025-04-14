@@ -485,13 +485,11 @@ public class GameManager : MonoBehaviour
             if (asteroidSpawner.spawnArrow)
             {
                 arrowModEnergyDecrease = arrowModEnergyDecrease_original;
-                arrowUI.GetComponent<Image>().color = Color.green;
             }
 
             else
             {
                 arrowModEnergyDecrease = 0;
-                arrowUI.GetComponent<Image>().color = Color.white;
             }
         
         
