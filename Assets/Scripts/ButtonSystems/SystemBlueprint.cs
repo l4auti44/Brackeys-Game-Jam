@@ -36,6 +36,7 @@ abstract public class SystemBlueprint : MonoBehaviour
 
             available = true;
         }
+        ChangeApareance();
     }
 
     public void SwitchAvailable(bool state)
@@ -50,6 +51,7 @@ abstract public class SystemBlueprint : MonoBehaviour
 
             available = true;
         }
+        ChangeApareance();
     }
 
     abstract public void DoAction();
@@ -70,5 +72,18 @@ abstract public class SystemBlueprint : MonoBehaviour
     public bool GetAvailable()
     {
         return available;
+    }
+
+    public void ChangeApareance()
+    {
+        if (available)
+        {
+            gameObject.GetComponent<SoundButton>().interactable = true;
+        }
+        else
+        {
+            gameObject.GetComponent<SoundButton>().interactable = false;
+
+        }
     }
 }

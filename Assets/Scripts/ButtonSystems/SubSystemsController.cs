@@ -9,12 +9,13 @@ public class SubSystemsController : MonoBehaviour
 
     private Transform wheelIndicator;
     private int currentSys = 0;
-    private bool isRotating = false;
+    private RectTransform currentSysPos;
+    private bool isMoving = false;
     public float speed = 1.5f;
 
-    [SerializeField] private Transform missilePos;
-    [SerializeField] private Transform shieldPos;
-    [SerializeField] private Transform repairPos;
+    [SerializeField] private RectTransform missilePos;
+    [SerializeField] private RectTransform shieldPos;
+    [SerializeField] private RectTransform repairPos;
     [SerializeField] private RectTransform arrowPos;
 
     [SerializeField] private float initalX;
@@ -30,19 +31,15 @@ public class SubSystemsController : MonoBehaviour
         arrowModule.SwitchAvailable();
         repairModule.SwitchAvailable();
 
-        //initalX = wheelIndicator.GetComponent<RectTransform>().localPosition.x;
-
-
-        StartCoroutine(GoToPos(arrowPos.localPosition));
     }
     
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R) && !isRotating)
+        if (Input.GetKeyDown(KeyCode.R) && !isMoving)
         {
             TurnOffSystems();
-            //StartCoroutine(GoToPos());
-            //StartCoroutine(RotateWheel(timeForRotation));
+            RotateSys();
+            StartCoroutine(GoToPos(currentSysPos.localPosition));
         }
     }
 
@@ -56,6 +53,7 @@ public class SubSystemsController : MonoBehaviour
 
     public IEnumerator GoToPos(Vector3 targetPos)
     {
+        isMoving = true;
         RectTransform rectTransform = wheelIndicator.GetComponent<RectTransform>();
 
         Vector3 goToInitialX = new Vector3(initalX, rectTransform.localPosition.y, rectTransform.localPosition.z);
@@ -94,26 +92,14 @@ public class SubSystemsController : MonoBehaviour
         }
 
         rectTransform.localPosition = targetPos;
+        isMoving = false;
+        EnableCurrentSys();
     }
 
 
-    public IEnumerator RotateWheel(float duration)
+    public void RotateSys()
     {
-        
-        Quaternion initialRotation = wheelIndicator.rotation;
-        Quaternion finalRotation = Quaternion.Euler(wheelIndicator.rotation.eulerAngles + new Vector3(0, 0, 90));
 
-        float elapsedTime = 0;
-
-        while (elapsedTime < duration)
-        {
-            isRotating = true;
-            wheelIndicator.rotation = Quaternion.Slerp(initialRotation, finalRotation, elapsedTime / duration);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        wheelIndicator.rotation = finalRotation;
         currentSys += 1;
 
         if (currentSys > 3)
@@ -121,31 +107,63 @@ public class SubSystemsController : MonoBehaviour
             currentSys = 0;
         }
 
-        
         switch (currentSys)
         {
             case 0:
                 if (!shieldModule.broken)
-                    shieldModule.SwitchAvailable();
-                
+                {
+                    currentSysPos = shieldPos;
+                }
                 break;
             case 1:
-                if(!missileModule.broken)
-                    missileModule.SwitchAvailable();
+                if (!missileModule.broken)
+                {
+                    currentSysPos = missilePos;
+                }   
                 break;
             case 2:
-                repairModule.SwitchAvailable();
+                if (!arrowModule.broken)
+                {
+                    currentSysPos = arrowPos;
+                }
                 break;
             case 3:
-                if(!arrowModule.broken)
-                arrowModule.SwitchAvailable();
+                currentSysPos = repairPos;
                 break;
             default:
                 break;
         }
 
+    }
 
-        isRotating = false;
+    private void EnableCurrentSys()
+    {
+        switch (currentSys)
+        {
+            case 0:
+                if (!shieldModule.broken)
+                {
+                    shieldModule.SwitchAvailable();
+                }
+                break;
+            case 1:
+                if (!missileModule.broken)
+                {
+                    missileModule.SwitchAvailable();
+                }
+                break;
+            case 2:
+                if (!arrowModule.broken)
+                {
+                    arrowModule.SwitchAvailable();
+                }
+                break;
+            case 3:
+                repairModule.SwitchAvailable();
+                break;
+            default:
+                break;
+        }
     }
 
     private void CheckIfCurrentSysIsBroken(SystemBlueprint brokenSys)
