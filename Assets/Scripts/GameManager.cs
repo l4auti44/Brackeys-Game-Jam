@@ -382,7 +382,7 @@ public class GameManager : MonoBehaviour
 
     public void IncreaseRadar()
     {
-        if (!radarModules[0].isBroken && radarLV != 4)
+        if (!radarModules[0].isBroken && radarLV != 4 && !SceneController.isGameStopped)
         {
             radarLV++;
             ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLVS[radarLV - 1];
@@ -410,7 +410,7 @@ public class GameManager : MonoBehaviour
 
     public void DecreaseRadar()
     {
-        if (!radarModules[1].isBroken && radarLV != 1)
+        if (!radarModules[1].isBroken && radarLV != 1 && !SceneController.isGameStopped)
         {
             radarLV--;
             ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLVS[radarLV - 1];
@@ -440,7 +440,7 @@ public class GameManager : MonoBehaviour
 
     public void ActivateShield()
     {
-        if (!isShieldCooldown)
+        if (!isShieldCooldown && !SceneController.isGameStopped)
         {
             StartCoroutine(ShieldRoutine());
         }
@@ -479,7 +479,8 @@ public class GameManager : MonoBehaviour
 
     public void ToggleArrows()
     {
-
+        if (!SceneController.isGameStopped)
+        {
             //if the number of tumes that the key was pressed is an odd number, the shield will be activated.
             //the count starts with 0, so the first hit will be a 1 => odd number => activate shield. Next press is 2 => even number => inactivate
             asteroidSpawner.spawnArrow = !asteroidSpawner.spawnArrow;
@@ -494,101 +495,104 @@ public class GameManager : MonoBehaviour
             {
                 arrowModEnergyDecrease = 0;
             }
-        
-        
+        }
+           
     }
 
     #region EngineRelatedRegion
     public void IncreasePositionShip ()
     {
-        if (!engineModules[0].isBroken && positionLV != 5)
+        if (!SceneController.isGameStopped)
         {
+            if (!engineModules[0].isBroken && positionLV != 5)
+            {
 
-            positionLV++;
-            ship.GetComponent<ShipMovement>().MoveToLevel(positionLVS[positionLV - 1]);
-            //positionModuleSpriteLVS[positionLV - 1].color = Color.green;
-            // Increase parallax
-            parallax.IncreaseSpeed(speedParallaxLVS[positionLV - 1]);
-            //Increase speed when transitioning to the next position
-            ship.GetComponent<ShipMovement>().moveDuration = durationToPositions[positionLV - 1];
-            //Zoom out camera
-            ZoomOut(cameraPosLVS[positionLV - 1]);
+                positionLV++;
+                ship.GetComponent<ShipMovement>().MoveToLevel(positionLVS[positionLV - 1]);
+                //positionModuleSpriteLVS[positionLV - 1].color = Color.green;
+                // Increase parallax
+                parallax.IncreaseSpeed(speedParallaxLVS[positionLV - 1]);
+                //Increase speed when transitioning to the next position
+                ship.GetComponent<ShipMovement>().moveDuration = durationToPositions[positionLV - 1];
+                //Zoom out camera
+                ZoomOut(cameraPosLVS[positionLV - 1]);
 
+            }
+
+            switch (positionLV)
+            {
+
+                case 5:
+                    positionModEnergyDecreaseLV5 = positionModEnergyDecreaseLV5_original;
+                    break;
+                case 4:
+                    positionModEnergyDecreaseLV4 = positionModEnergyDecreaseLV4_original;
+                    break;
+                case 3:
+
+                    positionModEnergyDecreaseLV3 = positionModEnergyDecreaseLV3_original;
+                    break;
+                case 2:
+
+                    positionModEnergyDecreaseLV2 = positionModEnergyDecreaseLV2_original;
+                    break;
+            }
+
+
+            //Moved events on the button here
+            AccelerateShip();
+            ToggleAsteroidSpeed();
+            ChangeEngineSprite();
+            EventManager.Game.OnEngineChange.Invoke((int)positionLV);
         }
-
-        switch (positionLV)
-        {
-               
-            case 5:
-                positionModEnergyDecreaseLV5 = positionModEnergyDecreaseLV5_original;
-                break;
-            case 4:
-                positionModEnergyDecreaseLV4 = positionModEnergyDecreaseLV4_original;
-                break;
-            case 3:
-
-                positionModEnergyDecreaseLV3 = positionModEnergyDecreaseLV3_original;
-                break;
-            case 2:
-
-                positionModEnergyDecreaseLV2 = positionModEnergyDecreaseLV2_original;
-                break;
-        }
-
-
-        //Moved events on the button here
-        AccelerateShip();
-        ToggleAsteroidSpeed();
-        ChangeEngineSprite();
-        EventManager.Game.OnEngineChange.Invoke((int)positionLV);
-        
-            
-        
-
     }
 
     public void DecreasePositionShip()
     {
-        if (!engineModules[1].isBroken && positionLV != 1)
+        if (!SceneController.isGameStopped)
         {
-            //positionModuleSpriteLVS[positionLV - 1].color = Color.white;
-            positionLV--;
-            ship.GetComponent<ShipMovement>().MoveToLevel(positionLVS[positionLV - 1]);
-            //Decrease parallax speed
-            parallax.IncreaseSpeed(speedParallaxLVS[positionLV - 1]);
-            //Increase speed when transitioning to the next position
-            ship.GetComponent<ShipMovement>().moveDuration = durationToPositions[positionLV - 1];
-            //Zoom out camera
-            ZoomOut(cameraPosLVS[positionLV - 1]);
+            if (!engineModules[1].isBroken && positionLV != 1)
+            {
+                //positionModuleSpriteLVS[positionLV - 1].color = Color.white;
+                positionLV--;
+                ship.GetComponent<ShipMovement>().MoveToLevel(positionLVS[positionLV - 1]);
+                //Decrease parallax speed
+                parallax.IncreaseSpeed(speedParallaxLVS[positionLV - 1]);
+                //Increase speed when transitioning to the next position
+                ship.GetComponent<ShipMovement>().moveDuration = durationToPositions[positionLV - 1];
+                //Zoom out camera
+                ZoomOut(cameraPosLVS[positionLV - 1]);
 
+            }
+            switch (positionLV)
+            {
+
+                case 4:
+                    positionModEnergyDecreaseLV5 = 0;
+                    positionModEnergyDecreaseLV4 = positionModEnergyDecreaseLV4_original;
+                    break;
+                case 3:
+                    positionModEnergyDecreaseLV4 = 0;
+                    positionModEnergyDecreaseLV3 = positionModEnergyDecreaseLV3_original;
+                    break;
+                case 2:
+                    positionModEnergyDecreaseLV3 = 0;
+                    positionModEnergyDecreaseLV2 = positionModEnergyDecreaseLV2_original;
+                    break;
+                case 1:
+                    positionModEnergyDecreaseLV2 = 0;
+                    positionModEnergyDecreaseLV1 = positionModEnergyDecreaseLV1_original;
+                    break;
+            }
+
+
+            //Moved events on the button here
+            DecelerateShip();
+            ToggleAsteroidSpeed();
+            ChangeEngineSprite();
+            EventManager.Game.OnEngineChange.Invoke((int)positionLV);
         }
-        switch (positionLV)
-        {
-
-            case 4:
-                positionModEnergyDecreaseLV5 = 0;
-                positionModEnergyDecreaseLV4 = positionModEnergyDecreaseLV4_original;
-                break;
-            case 3:
-                positionModEnergyDecreaseLV4 = 0;
-                positionModEnergyDecreaseLV3 = positionModEnergyDecreaseLV3_original;
-                break;
-            case 2:
-                positionModEnergyDecreaseLV3 = 0;
-                positionModEnergyDecreaseLV2 = positionModEnergyDecreaseLV2_original;
-                break;
-            case 1:
-                positionModEnergyDecreaseLV2 = 0;
-                positionModEnergyDecreaseLV1 = positionModEnergyDecreaseLV1_original;
-                break;
-        }
-
-
-        //Moved events on the button here
-        DecelerateShip();    
-        ToggleAsteroidSpeed();
-        ChangeEngineSprite();
-        EventManager.Game.OnEngineChange.Invoke((int)positionLV);
+        
 
 
     }

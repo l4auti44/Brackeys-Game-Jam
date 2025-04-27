@@ -68,4 +68,16 @@ public class ThunderSpawner : MonoBehaviour
     {
         isSpawning = false;  // You can call this method to stop spawning objects if needed
     }
+
+    private void Update()
+    {
+        if (SceneController.isGameStopped)
+        {
+            isSpawning = false;
+        }
+        else
+        {
+            isSpawning = true;
+        }
+    }
 }
