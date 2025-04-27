@@ -42,7 +42,11 @@ public class EnergySpawner : MonoBehaviour
 
     void Update()
     {
-        HandleEnergySpawning();
+        if (!SceneController.isGameStopped)
+        {
+            HandleEnergySpawning();
+        }
+        
     }
 
     void HandleEnergySpawning()

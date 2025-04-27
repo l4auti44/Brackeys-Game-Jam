@@ -49,47 +49,49 @@ public class ShipMovement : MonoBehaviour
 
     void Update()
     {
-        // Get updated speed and energy from game manager
-        speed = gameManager.shipSpeed;
-        energy = gameManager.energy;
-
-        // Get horizontal input (left/right arrows or A/D keys)
-        float move = Input.GetAxis("Horizontal");
-
-        // Calculate new horizontal position but do not apply it directly
-        float newX = Mathf.Clamp(transform.position.x + move * speed * Time.deltaTime, minX, maxX);
-
-        // If moving to level, update only the vertical position
-        float newY = transform.position.y;
-        if (isMovingToLevel)
+        if (!SceneController.isGameStopped)
         {
-            moveTimer += Time.deltaTime;
+            // Get updated speed and energy from game manager
+            speed = gameManager.shipSpeed;
+            energy = gameManager.energy;
 
-            // Calculate how far we are through the movement
-            float t = moveTimer / moveDuration;
+            // Get horizontal input (left/right arrows or A/D keys)
+            float move = Input.GetAxis("Horizontal");
 
-            // Apply an S-curve easing function to the time variable 't'
-            t = EaseInFastOutSlow(t);
+            // Calculate new horizontal position but do not apply it directly
+            float newX = Mathf.Clamp(transform.position.x + move * speed * Time.deltaTime, minX, maxX);
 
-            // Interpolate only the Y-axis between initial and target positions
-            newY = Mathf.Lerp(initialPosition.y, targetPosition.y, t);
-
-            // Stop moving when we reach the target position
-            if (t >= 1f)
+            // If moving to level, update only the vertical position
+            float newY = transform.position.y;
+            if (isMovingToLevel)
             {
-                isMovingToLevel = false;
+                moveTimer += Time.deltaTime;
+
+                // Calculate how far we are through the movement
+                float t = moveTimer / moveDuration;
+
+                // Apply an S-curve easing function to the time variable 't'
+                t = EaseInFastOutSlow(t);
+
+                // Interpolate only the Y-axis between initial and target positions
+                newY = Mathf.Lerp(initialPosition.y, targetPosition.y, t);
+
+                // Stop moving when we reach the target position
+                if (t >= 1f)
+                {
+                    isMovingToLevel = false;
+                }
             }
+
+            // Update the transform position with the new X and Y values
+            transform.position = new Vector2(newX, newY);
+
+
+            //Slider movement
+            //moveXTowards = shipMovementSlider.GetComponent<Slider>().value * (maxX - minX);
+            //moveTowards = new Vector3(moveXTowards, transform.position.y, transform.position.z);
+            //transform.position = Vector3.MoveTowards(transform.position, moveTowards, moveSpeedB * Time.deltaTime);
         }
-
-        // Update the transform position with the new X and Y values
-        transform.position = new Vector2(newX, newY);
-
-
-        //Slider movement
-        //moveXTowards = shipMovementSlider.GetComponent<Slider>().value * (maxX - minX);
-        //moveTowards = new Vector3(moveXTowards, transform.position.y, transform.position.z);
-        //transform.position = Vector3.MoveTowards(transform.position, moveTowards, moveSpeedB * Time.deltaTime);
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

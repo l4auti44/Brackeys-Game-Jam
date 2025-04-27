@@ -41,16 +41,19 @@ public class AsteroidSpawner : MonoBehaviour
 
     void Update()
     {
-        if (isFollowingPlayer)
+        if (!SceneController.isGameStopped)
         {
-            FollowPlayerOnXAxis();
-        }
-        else
-        {
-            MoveBetweenPositions();
-        }
+            if (isFollowingPlayer)
+            {
+                FollowPlayerOnXAxis();
+            }
+            else
+            {
+                MoveBetweenPositions();
+            }
 
-        HandleAsteroidSpawning();
+            HandleAsteroidSpawning();
+        }
     }
 
     void MoveBetweenPositions()

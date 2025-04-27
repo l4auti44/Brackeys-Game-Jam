@@ -28,12 +28,10 @@ public class UIPauseMenuController : MonoBehaviour
     private void OnEnable()
     {
         EventManager.Game.OnDie += SwitchPauseMenuOnDie;
-        EventManager.Game.OnWin += SwitchPauseMenuOnWin;
     }
     private void OnDisable()
     {
         EventManager.Game.OnDie -= SwitchPauseMenuOnDie;
-        EventManager.Game.OnWin -= SwitchPauseMenuOnWin;
     }
 
 
@@ -51,10 +49,10 @@ public class UIPauseMenuController : MonoBehaviour
     private void SwitchPauseMenuOnDie(Component comp)
     {
 
-        StartCoroutine(Win());
+        StartCoroutine(Loose());
     }
 
-    private IEnumerator Win()
+    private IEnumerator Loose()
     {
         yield return new WaitForSeconds(1.4f);
         resumeButton.SetActive(false);

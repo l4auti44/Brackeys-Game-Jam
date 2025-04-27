@@ -16,6 +16,18 @@ public class RadarController : MonoBehaviour
         StartCoroutine(TriggerSonarWaves());
     }
 
+    private void Update()
+    {
+        if (SceneController.isGameStopped)
+        {
+            isSpawning = false;
+        }
+        else
+        {
+            isSpawning = true;
+        }
+    }
+
     private IEnumerator TriggerSonarWaves()
     {
         while (true)

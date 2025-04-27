@@ -9,6 +9,7 @@ public class SceneController : MonoBehaviour
 {
     public static SceneController Instance;
     public static bool isGamePaused = false;
+    public static bool isGameStopped = false;
 
     private void Awake()
     {

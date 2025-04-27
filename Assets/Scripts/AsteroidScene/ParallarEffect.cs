@@ -12,23 +12,27 @@ public class ParallarEffect : MonoBehaviour
 
     private void Update()
     {
-        for (int i = 0; i < backgroundLayers.Count; i++)
+        if (!SceneController.isGameStopped)
         {
-            // Calculate the total speed for each layer (standard speed + additional speed)
-            float totalSpeed = standardSpeed + additionalSpeeds[i];
-
-            // Move each background layer downwards at the calculated speed
-            backgroundLayers[i].localPosition += Vector3.down * totalSpeed * Time.deltaTime;
-
-            // Check if the layer has moved past the reset threshold
-            if (backgroundLayers[i].localPosition.y <= resetThreshold)
+            for (int i = 0; i < backgroundLayers.Count; i++)
             {
-                // Reset the layer's position to the resetPosition
-                Vector3 newPos = backgroundLayers[i].localPosition;
-                newPos.y = resetPosition;
-                backgroundLayers[i].localPosition = newPos;
+                // Calculate the total speed for each layer (standard speed + additional speed)
+                float totalSpeed = standardSpeed + additionalSpeeds[i];
+
+                // Move each background layer downwards at the calculated speed
+                backgroundLayers[i].localPosition += Vector3.down * totalSpeed * Time.deltaTime;
+
+                // Check if the layer has moved past the reset threshold
+                if (backgroundLayers[i].localPosition.y <= resetThreshold)
+                {
+                    // Reset the layer's position to the resetPosition
+                    Vector3 newPos = backgroundLayers[i].localPosition;
+                    newPos.y = resetPosition;
+                    backgroundLayers[i].localPosition = newPos;
+                }
             }
         }
+        
     }
 
     // Method to Modify the speed of all layers by a specified amount
