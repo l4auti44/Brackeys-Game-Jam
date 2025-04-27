@@ -19,7 +19,7 @@ public class HumanAnimatorController : MonoBehaviour
         }
     }
 
-    private void Win(Component comp)
+    private void Win()
     {
 
         _animator.SetBool("Win", true);

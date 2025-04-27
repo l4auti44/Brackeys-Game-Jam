@@ -252,7 +252,7 @@ public class GameManager : MonoBehaviour
                 gameProgressSlider.GetComponent<Slider>().value = gameProgress * 0.01f;
                 if (gameProgress * 0.01f >= 1f)
                 {
-                    EventManager.Game.OnWin.Invoke(this);
+                    EventManager.Game.OnWin.Invoke();
                     
                     return;
                 }

@@ -18,7 +18,7 @@ public class PerkController : MonoBehaviour
         EventManager.Game.OnWin -= SwitchEnable;
     }
 
-    public void SwitchEnable(Component comp)
+    public void SwitchEnable()
     {
         perkSys.SetActive(!perkSys.activeSelf);
         inputBlocker.SetActive(!inputBlocker.activeSelf); 

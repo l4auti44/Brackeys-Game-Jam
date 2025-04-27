@@ -12,7 +12,7 @@ public static class EventManager
 
     public class GameEvents
     {
-        public UnityAction<Component> OnWin;
+        public UnityAction OnWin;
         public UnityAction<Component> OnDie;
         public UnityAction<DialogSystem.DialogEvents> OnDialog;
         public UnityAction<DialogSystem.DialogEvents> OnTaskDialogCompleted;
