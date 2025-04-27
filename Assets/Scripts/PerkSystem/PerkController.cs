@@ -22,7 +22,7 @@ public class PerkController : MonoBehaviour
     {
         perkSys.SetActive(!perkSys.activeSelf);
         inputBlocker.SetActive(!inputBlocker.activeSelf); 
-        SceneController.isGameStopped = true;
+        SceneController.isGameStopped = !SceneController.isGameStopped;
     }
 
     private void Start()

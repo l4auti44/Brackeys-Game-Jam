@@ -46,6 +46,14 @@ public class AsteroidMovement : MonoBehaviour
     void Update()
     {
         // Any code for asteroid movement or rotation can go here
+        if (SceneController.isGameStopped)
+        {
+            rb.simulated = false;
+        }
+        else
+        {
+            rb.simulated = true;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)

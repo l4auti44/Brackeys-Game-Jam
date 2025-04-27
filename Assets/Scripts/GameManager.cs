@@ -109,7 +109,6 @@ public class GameManager : MonoBehaviour
     [Header("Game Over Timer")]
     public float timerForGameOver = 10f;
     private float timer = 10f;
-    private bool winCondition = false;
 
     // --- Sound Modules ---
     [Header("Sound Modules")]
@@ -244,7 +243,7 @@ public class GameManager : MonoBehaviour
                 eventFlag = true;
             }
 
-            if (!SceneController.isGamePaused && !winCondition)
+            if (!SceneController.isGamePaused)
             {
                 //Increae the game progress over time
                 gameProgress += gameProgressSpeed * 0.01f;
@@ -254,7 +253,7 @@ public class GameManager : MonoBehaviour
                 if (gameProgress * 0.01f >= 1f)
                 {
                     EventManager.Game.OnWin.Invoke(this);
-                    winCondition = true;
+                    
                     return;
                 }
 
@@ -719,6 +718,11 @@ public class GameManager : MonoBehaviour
                 break;
 
         }
+    }
+
+    public void RestartGameProgress()
+    {
+        gameProgress = 0f;
     }
 
 }
