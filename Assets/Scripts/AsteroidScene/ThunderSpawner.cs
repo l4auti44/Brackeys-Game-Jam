@@ -69,15 +69,25 @@ public class ThunderSpawner : MonoBehaviour
         isSpawning = false;  // You can call this method to stop spawning objects if needed
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        if (SceneController.isGameStopped)
-        {
-            isSpawning = false;
-        }
-        else
-        {
-            isSpawning = true;
-        }
+        EventManager.Game.OnWin += GameStopped;
+        EventManager.Game.OnPerkPicked += GameResumed;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.Game.OnWin -= GameStopped;
+        EventManager.Game.OnPerkPicked -= GameResumed;
+    }
+
+    private void GameStopped()
+    {
+        StopAllCoroutines();
+    }
+
+    private void GameResumed()
+    {
+        StartCoroutine(SpawnAtIntervals());
     }
 }

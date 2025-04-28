@@ -723,6 +723,7 @@ public class GameManager : MonoBehaviour
     public void RestartGameProgress()
     {
         gameProgress = 0f;
+        EventManager.Game.OnPerkPicked.Invoke();
     }
 
 }
