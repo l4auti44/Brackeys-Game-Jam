@@ -15952,9 +15952,9 @@ MonoBehaviour:
   moveSpeed: 2
   minSpawnInterval: 0.5
   maxSpawnInterval: 3
-  minAsteroidSpeed: 2.9
-  maxAsteroidSpeed: 4.1
-  minRotationSpeed: 15
+  minAsteroidSpeed: 1
+  maxAsteroidSpeed: 3
+  minRotationSpeed: 20
   maxRotationSpeed: 120
   arrowYOffset: -6.5
   player: {fileID: 1257503199}
