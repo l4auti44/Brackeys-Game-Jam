@@ -29,7 +29,9 @@ public static class SoundManager
         Collect1,
         Collect2,
         Music1,
-        Music2
+        Music2,
+        PerkText,
+        PerkButtons
     }
 
     private static GameObject OneShotGameObject, musicGameObject, dialogueGameObject;

@@ -21,6 +21,7 @@ public class PerkController : MonoBehaviour
     public void SwitchEnable()
     {
         perkSys.SetActive(!perkSys.activeSelf);
+        SoundManager.PlaySound(SoundManager.Sound.PerkText);
         inputBlocker.SetActive(!inputBlocker.activeSelf); 
         SceneController.isGameStopped = !SceneController.isGameStopped;
     }

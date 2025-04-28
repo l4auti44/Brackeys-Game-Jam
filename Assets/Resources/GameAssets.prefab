@@ -66,6 +66,9 @@ MonoBehaviour:
   - sound: 15
     audioClip: {fileID: 8300000, guid: 95bfb0c7cccd78844b0a6cfdbf009d57, type: 3}
     volume: 0.543
+  - sound: 16
+    audioClip: {fileID: 8300000, guid: 40dc2d3a532ffd94c909bb591c452221, type: 3}
+    volume: 0.543
   dialogueAudioPools:
   - dialogPool: 0
     audios:
