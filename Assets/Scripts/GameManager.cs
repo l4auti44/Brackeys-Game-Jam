@@ -141,10 +141,21 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        //Get ship speed
+        InitializeShip();
+        StoreOriginalEnergyModifiers();
+        ResetEnergyModifiers();
+        InitializeGameSettings();
+        InitializeModules();
+        InitializeUIReferences();
+    }
+    #region StartMethods
+    private void InitializeShip()
+    {
         ship.GetComponent<ShipMovement>().speed = shipSpeed;
+    }
 
-        //store values for all energy decrease mods
+    private void StoreOriginalEnergyModifiers()
+    {
         radarModEnergyDecreaseLV1_original = radarModEnergyDecreaseLV1;
         radarModEnergyDecreaseLV2_original = radarModEnergyDecreaseLV2;
         radarModEnergyDecreaseLV3_original = radarModEnergyDecreaseLV3;
@@ -159,173 +170,160 @@ public class GameManager : MonoBehaviour
         positionModEnergyDecreaseLV5_original = positionModEnergyDecreaseLV5;
 
         arrowModEnergyDecrease_original = arrowModEnergyDecrease;
+    }
 
-
-        //set all energy decrease mods at 0 after storing their values
-        radarModEnergyDecreaseLV1 = 0;
-        radarModEnergyDecreaseLV2 = 0;
-        radarModEnergyDecreaseLV3 = 0;
-        radarModEnergyDecreaseLV4 = 0;
-
+    private void ResetEnergyModifiers()
+    {
+        radarModEnergyDecreaseLV1 = radarModEnergyDecreaseLV2 = radarModEnergyDecreaseLV3 = radarModEnergyDecreaseLV4 = 0;
         shieldModEnergyDecrease = 0;
-
-        positionModEnergyDecreaseLV1 = 0;
-        positionModEnergyDecreaseLV2 = 0;
-        positionModEnergyDecreaseLV3 = 0;
-        positionModEnergyDecreaseLV4 = 0;
-        positionModEnergyDecreaseLV5 = 0;
-
+        positionModEnergyDecreaseLV1 = positionModEnergyDecreaseLV2 = positionModEnergyDecreaseLV3 = positionModEnergyDecreaseLV4 = positionModEnergyDecreaseLV5 = 0;
         arrowModEnergyDecrease = 0;
+    }
 
-
-        //Start game with energy equals to total
+    private void InitializeGameSettings()
+    {
         energy = maxEnergy;
-        
-        //start game with engine module speed LV1
         shipSpeed = speedLVS[0];
-
-        //start game with position LV1
         positionLV = 1;
         positionModEnergyDecreaseLV1 = positionModEnergyDecreaseLV1_original;
 
-        //Start level with radar LV1
         radarLV = 1;
         ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLVS[0];
-        //radarUI.waveInterval = radarWaveIntervalLVS[0];
         radarModEnergyDecreaseLV1 = radarModEnergyDecreaseLV1_original;
 
-        //Start level with game progress speed LV1
         gameProgressSpeed = gameProgressSpeedPositionLVS[0];
-
-        //Start game with no arrow spawn
         asteroidSpawner.spawnArrow = false;
-
-        //Start game with parallax effect LV1
         parallax.IncreaseSpeed(speedParallaxLVS[0]);
 
-        //Reference to the main camera
         mainCamera = Camera.main;
-        targetZoom = mainCamera.orthographicSize; // Set initial target to current zoom level
+        targetZoom = mainCamera.orthographicSize;
+    }
 
-
+    private void InitializeModules()
+    {
         shieldModule = GameObject.Find("ShieldModule").GetComponent<SoundButton>();
         arrowModule = GameObject.Find("ArrowModule").GetComponent<SoundButton>();
+
         var engineButtons = GameObject.Find("EngineButtons");
         engineModules.Add(engineButtons.transform.GetChild(0).GetComponent<SoundButton>());
         engineModules.Add(engineButtons.transform.GetChild(1).GetComponent<SoundButton>());
+
         var radarButtons = GameObject.Find("RadarButtons");
         radarModules.Add(radarButtons.transform.GetChild(0).GetComponent<SoundButton>());
         radarModules.Add(radarButtons.transform.GetChild(1).GetComponent<SoundButton>());
 
-        repairSys = this.GetComponentInChildren<DestroyAndRepearSys>();
+        repairSys = GetComponentInChildren<DestroyAndRepearSys>();
+    }
 
+    private void InitializeUIReferences()
+    {
         totalRateEnergyDecrease = GameObject.Find("Total Rate").GetComponentInChildren<TextMeshPro>();
-
         sourceImageEngineModule = GameObject.Find("EngineModule").transform.GetComponentInChildren<Image>();
         sourceImageRadarModule = GameObject.Find("RadarModule").transform.GetComponentInChildren<Image>();
     }
+    #endregion
+    
+    
 
-    // Update is called once per frame
     void Update()
     {
-        if (!SceneController.isGameStopped)
+        if (SceneController.isGameStopped) return;
+
+        HandleDialogEvents();
+        if (!SceneController.isGamePaused)
         {
-            if (gameProgress > 15f && eventFlag == false)
+            UpdateGameProgress();
+            UpdateEnergy();
+            HandleGameOver();
+            ClampEnergy();
+            UpdateCameraZoom();
+            UpdateUI();
+        }
+    }
+
+    private void HandleDialogEvents()
+    {
+        if (gameProgress > 15f && !eventFlag)
+        {
+            var dialogEvents = new DialogSystem.DialogEvents[]
             {
-                DialogSystem.DialogEvents[] dialogEvents = new DialogSystem.DialogEvents[]
-                {
                 DialogSystem.DialogEvents.KeepEngineAt,
                 DialogSystem.DialogEvents.KeepRadarAt,
                 DialogSystem.DialogEvents.NoGetHit
-                };
+            };
 
-                EventManager.Game.OnDialog.Invoke(dialogEvents[Random.Range(0, dialogEvents.Length)]);
-                eventFlag = true;
-            }
+            EventManager.Game.OnDialog.Invoke(dialogEvents[Random.Range(0, dialogEvents.Length)]);
+            eventFlag = true;
+        }
+    }
 
-            if (!SceneController.isGamePaused)
-            {
-                //Increae the game progress over time
-                gameProgress += gameProgressSpeed * 0.01f;
+    private void UpdateGameProgress()
+    {
+        gameProgress += gameProgressSpeed * 0.01f;
+        gameProgressSlider.GetComponent<Slider>().value = gameProgress * 0.01f;
 
-                //Update the slider filler
-                gameProgressSlider.GetComponent<Slider>().value = gameProgress * 0.01f;
-                if (gameProgress * 0.01f >= 1f)
-                {
-                    EventManager.Game.OnWin.Invoke();
-                    
-                    return;
-                }
+        if (gameProgress * 0.01f >= 1f)
+        {
+            EventManager.Game.OnWin.Invoke();
+        }
+    }
 
-                //Determination of energy decrease speed
-                energyDecreaseSpeed =
+    private void UpdateEnergy()
+    {
+        energyDecreaseSpeed = CalculateEnergyDecreaseSpeed();
+        energy -= energyDecreaseSpeed * 0.01f;
+        energySlider.value = energy * 0.01f;
+    }
 
-                (radarModEnergyDecreaseLV1 +
+    private float CalculateEnergyDecreaseSpeed()
+    {
+        return (radarModEnergyDecreaseLV1 +
                 radarModEnergyDecreaseLV2 +
                 radarModEnergyDecreaseLV3 +
                 radarModEnergyDecreaseLV4 +
-
                 shieldModEnergyDecrease +
-
                 positionModEnergyDecreaseLV1 +
                 positionModEnergyDecreaseLV2 +
                 positionModEnergyDecreaseLV3 +
                 positionModEnergyDecreaseLV4 +
                 positionModEnergyDecreaseLV5 +
-
-                arrowModEnergyDecrease_original
-                )
-                * 0.1f
-                ;
-
-                //Decrease energy over time
-                energy -= energyDecreaseSpeed * 0.01f;
-
-                //Update the energy value of the slider
-                energySlider.value = energy * 0.01f;
-
-                //Deactivate all modules if energy is 0
-                if (energy < 0)
-                {
-                    // Gradually decrease ship speed to zero during the game-over timer
-                    shipSpeed = Mathf.Max(0, shipSpeed - speedDecreaseRateWhenGameOver * Time.deltaTime);
-
-                    //Disable Input Windows
-
-
-                    // Disable radar level and play warning sound
-                    radarLV = 0;
-                    SoundManager.PlaySound(SoundManager.Sound.EnergyAtZeroWarning);
-
-                    timerForGameOver -= Time.deltaTime;
-                    if (timerForGameOver <= 0f)
-                    {
-
-                        timerForGameOver = 99999;
-                        EventManager.Game.OnDie.Invoke(this);
-                    }
-                }
-                else
-                {
-                    timerForGameOver = 10f;
-                }
-
-
-                //Clamp energy
-                energy = Mathf.Max(energy, 0);
-                energy = Mathf.Min(energy, maxEnergy);
-
-                //Move the camera when needed
-                // Smoothly adjust the orthographic size towards the target zoom value
-                mainCamera.orthographicSize = Mathf.MoveTowards(mainCamera.orthographicSize, targetZoom, cameraZoomOutSpeed * Time.deltaTime);
-            }
-
-
-            totalRateEnergyDecrease.text = energyDecreaseSpeed.ToString();
-        }
-       
+                arrowModEnergyDecrease_original) * 0.1f;
     }
 
+    private void HandleGameOver()
+    {
+        if (energy >= 0) 
+        {
+            timerForGameOver = 10f;
+            return;
+        }
+
+        shipSpeed = Mathf.Max(0, shipSpeed - speedDecreaseRateWhenGameOver * Time.deltaTime);
+        radarLV = 0;
+        SoundManager.PlaySound(SoundManager.Sound.EnergyAtZeroWarning);
+
+        timerForGameOver -= Time.deltaTime;
+        if (timerForGameOver <= 0f)
+        {
+            timerForGameOver = 99999;
+            EventManager.Game.OnDie.Invoke(this);
+        }
+    }
+
+    private void ClampEnergy()
+    {
+        energy = Mathf.Clamp(energy, 0, maxEnergy);
+    }
+
+    private void UpdateCameraZoom()
+    {
+        mainCamera.orthographicSize = Mathf.MoveTowards(mainCamera.orthographicSize, targetZoom, cameraZoomOutSpeed * Time.deltaTime);
+    }
+
+    private void UpdateUI()
+    {
+        totalRateEnergyDecrease.text = energyDecreaseSpeed.ToString();
+    }
 
     public void DecreaseEnergy(float energyToDecrease)
     {
