@@ -8497,22 +8497,22 @@ MonoBehaviour:
   - level: 1
     minSpeed: 2
     maxSpeed: 3.5
-    minRotation: 100
+    minRotation: 50
     maxRotation: 200
   - level: 2
     minSpeed: 3.3
     maxSpeed: 4.5
-    minRotation: 200
+    minRotation: 100
     maxRotation: 300
   - level: 3
     minSpeed: 4.4
     maxSpeed: 5.5
-    minRotation: 300
+    minRotation: 200
     maxRotation: 400
   - level: 4
     minSpeed: 5.5
     maxSpeed: 6.5
-    minRotation: 400
+    minRotation: 300
     maxRotation: 500
   speedDecreaseRateWhenGameOver: 0.1
   radarWaveIntervalLVS:
@@ -8534,10 +8534,10 @@ MonoBehaviour:
   - 0.5
   speedParallaxLVS:
   - 1
-  - 2
-  - 3.1
-  - 4.3
-  - 4.9
+  - 1.9
+  - 2.6
+  - 3.5
+  - 4.1
   cameraPosLVS:
   - 7
   - 7.5
