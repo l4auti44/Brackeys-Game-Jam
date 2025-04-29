@@ -35,6 +35,7 @@ public class EnergyCollectableMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(SceneController.isGameStopped) return;
         // Rotate the collectable at the random rotation speed
         transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
     }

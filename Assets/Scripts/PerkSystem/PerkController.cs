@@ -21,7 +21,7 @@ public class PerkController : MonoBehaviour
     public void SwitchEnable()
     {
         perkSys.SetActive(!perkSys.activeSelf);
-        SoundManager.PlaySound(SoundManager.Sound.PerkText);
+        if(perkSys.activeSelf) StartCoroutine(PlaySounds());
         inputBlocker.SetActive(!inputBlocker.activeSelf); 
         SceneController.isGameStopped = !SceneController.isGameStopped;
     }
@@ -30,5 +30,12 @@ public class PerkController : MonoBehaviour
     {
         perkSys.SetActive(false);
         inputBlocker.SetActive(false);
+    }
+
+    private IEnumerator PlaySounds()
+    {
+        SoundManager.PlaySound(SoundManager.Sound.PerkText);
+        yield return new WaitForSeconds(2.25f);
+        SoundManager.PlaySound(SoundManager.Sound.PerkButtons);
     }
 }
