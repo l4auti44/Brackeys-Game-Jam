@@ -240,7 +240,7 @@ public class GameManager : MonoBehaviour
             UpdateUI();
         }
     }
-
+    #region UpdateMethods
     private void HandleDialogEvents()
     {
         if (gameProgress > 15f && !eventFlag)
@@ -324,6 +324,7 @@ public class GameManager : MonoBehaviour
     {
         totalRateEnergyDecrease.text = energyDecreaseSpeed.ToString();
     }
+    #endregion
 
     public void DecreaseEnergy(float energyToDecrease)
     {
@@ -377,70 +378,103 @@ public class GameManager : MonoBehaviour
     }
 
 
+    #region RadarRelatedRegion
+
     public void IncreaseRadar()
     {
-        if (!radarModules[0].isBroken && radarLV != 4 && !SceneController.isGameStopped)
-        {
-            radarLV++;
-            ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLVS[radarLV - 1];
+        if (SceneController.isGameStopped || radarModules[0].isBroken || radarLV == 4) return;
 
-            //Decrease energy
-            switch (radarLV)
-            {
-                case 4:
-                    radarModEnergyDecreaseLV4 = radarModEnergyDecreaseLV4_original;
-                    break;
-                case 3:
-                    radarModEnergyDecreaseLV3 = radarModEnergyDecreaseLV3_original;
-                    break;
-                case 2:
-                    radarModEnergyDecreaseLV2 = radarModEnergyDecreaseLV2_original;
-                    break;
-            }
-            ChangeRadarSprite();
-            EventManager.Game.OnRadarChange.Invoke(radarLV);
-
-
-        }
-
+        radarLV++;
+        UpdateRadarSettings();
+        UpdateEnergyModifiersForRadar();
+        TriggerRadarChangeEvents();
     }
 
     public void DecreaseRadar()
     {
-        if (!radarModules[1].isBroken && radarLV != 1 && !SceneController.isGameStopped)
-        {
-            radarLV--;
-            ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLVS[radarLV - 1];
+        if (SceneController.isGameStopped || radarModules[1].isBroken || radarLV == 1) return;
 
-            switch (radarLV)
-            {
-                case 3:
-                    radarModEnergyDecreaseLV4 = 0;
-                    radarModEnergyDecreaseLV3 = radarModEnergyDecreaseLV3_original;
-                    break;
-                case 2:
-                    radarModEnergyDecreaseLV3 = 0;
-                    radarModEnergyDecreaseLV2 = radarModEnergyDecreaseLV2_original;
-                    break;
-                case 1:
-                    radarModEnergyDecreaseLV2 = 0;
-                    radarModEnergyDecreaseLV1 = radarModEnergyDecreaseLV1_original;
-                    break;
-            }
-
-            ChangeRadarSprite();
-            EventManager.Game.OnRadarChange.Invoke(radarLV);
-        }
-        
+        radarLV--;
+        UpdateRadarSettings();
+        ResetEnergyModifiersForRadar();
+        TriggerRadarChangeEvents();
     }
 
+    private void UpdateRadarSettings()
+    {
+        ship.GetComponent<RadarController>().waveInterval = radarWaveIntervalLVS[radarLV - 1];
+    }
+
+    private void UpdateEnergyModifiersForRadar()
+    {
+        switch (radarLV)
+        {
+            case 4:
+                radarModEnergyDecreaseLV4 = radarModEnergyDecreaseLV4_original;
+                break;
+            case 3:
+                radarModEnergyDecreaseLV3 = radarModEnergyDecreaseLV3_original;
+                break;
+            case 2:
+                radarModEnergyDecreaseLV2 = radarModEnergyDecreaseLV2_original;
+                break;
+        }
+    }
+
+    private void ResetEnergyModifiersForRadar()
+    {
+        switch (radarLV)
+        {
+            case 3:
+                radarModEnergyDecreaseLV4 = 0;
+                radarModEnergyDecreaseLV3 = radarModEnergyDecreaseLV3_original;
+                break;
+            case 2:
+                radarModEnergyDecreaseLV3 = 0;
+                radarModEnergyDecreaseLV2 = radarModEnergyDecreaseLV2_original;
+                break;
+            case 1:
+                radarModEnergyDecreaseLV2 = 0;
+                radarModEnergyDecreaseLV1 = radarModEnergyDecreaseLV1_original;
+                break;
+        }
+    }
+
+    private void TriggerRadarChangeEvents()
+    {
+        ChangeRadarSprite();
+        EventManager.Game.OnRadarChange.Invoke(radarLV);
+    }
+
+        public void ChangeRadarSprite()
+    {
+
+        switch (radarLV)
+        {
+            case 4:
+                sourceImageRadarModule.sprite = RadarModuleImages[4];
+                break;
+            case 3:
+                sourceImageRadarModule.sprite = RadarModuleImages[3];
+                break;
+            case 2:
+                sourceImageRadarModule.sprite = RadarModuleImages[2];
+                break;
+            case 1:
+                sourceImageRadarModule.sprite = RadarModuleImages[1];
+                break;
+
+        }
+    }
+
+    #endregion
 
     public void ActivateShield()
     {
-        if (!isShieldCooldown && !SceneController.isGameStopped)
-        {
-            StartCoroutine(ShieldRoutine());
-        }
+        if (!isShieldCooldown && !SceneController.isGameStopped) return;
+        
+        StartCoroutine(ShieldRoutine());
+        
     }
 
     private IEnumerator ShieldRoutine()
@@ -476,125 +510,110 @@ public class GameManager : MonoBehaviour
 
     public void ToggleArrows()
     {
-        if (!SceneController.isGameStopped)
+        if (!SceneController.isGameStopped) return;
+        
+        //if the number of tumes that the key was pressed is an odd number, the shield will be activated.
+        //the count starts with 0, so the first hit will be a 1 => odd number => activate shield. Next press is 2 => even number => inactivate
+        asteroidSpawner.spawnArrow = !asteroidSpawner.spawnArrow;
+        energySpawner.GetComponent<EnergySpawner>().spawnArrow = !energySpawner.GetComponent<EnergySpawner>().spawnArrow;
+
+        if (asteroidSpawner.spawnArrow)
         {
-            //if the number of tumes that the key was pressed is an odd number, the shield will be activated.
-            //the count starts with 0, so the first hit will be a 1 => odd number => activate shield. Next press is 2 => even number => inactivate
-            asteroidSpawner.spawnArrow = !asteroidSpawner.spawnArrow;
-            energySpawner.GetComponent<EnergySpawner>().spawnArrow = !energySpawner.GetComponent<EnergySpawner>().spawnArrow;
-
-            if (asteroidSpawner.spawnArrow)
-            {
-                arrowModEnergyDecrease = arrowModEnergyDecrease_original;
-            }
-
-            else
-            {
-                arrowModEnergyDecrease = 0;
-            }
+            arrowModEnergyDecrease = arrowModEnergyDecrease_original;
         }
+
+        else
+        {
+            arrowModEnergyDecrease = 0;
+        }
+        
            
     }
 
     #region EngineRelatedRegion
-    public void IncreasePositionShip ()
+
+    public void IncreasePositionShip()
     {
-        if (!SceneController.isGameStopped)
-        {
-            if (!engineModules[0].isBroken && positionLV != 5)
-            {
+        if (SceneController.isGameStopped || engineModules[0].isBroken || positionLV == 5) return;
 
-                positionLV++;
-                ship.GetComponent<ShipMovement>().MoveToLevel(positionLVS[positionLV - 1]);
-                //positionModuleSpriteLVS[positionLV - 1].color = Color.green;
-                // Increase parallax
-                parallax.IncreaseSpeed(speedParallaxLVS[positionLV - 1]);
-                //Increase speed when transitioning to the next position
-                ship.GetComponent<ShipMovement>().moveDuration = durationToPositions[positionLV - 1];
-                //Zoom out camera
-                ZoomOut(cameraPosLVS[positionLV - 1]);
-
-            }
-
-            switch (positionLV)
-            {
-
-                case 5:
-                    positionModEnergyDecreaseLV5 = positionModEnergyDecreaseLV5_original;
-                    break;
-                case 4:
-                    positionModEnergyDecreaseLV4 = positionModEnergyDecreaseLV4_original;
-                    break;
-                case 3:
-
-                    positionModEnergyDecreaseLV3 = positionModEnergyDecreaseLV3_original;
-                    break;
-                case 2:
-
-                    positionModEnergyDecreaseLV2 = positionModEnergyDecreaseLV2_original;
-                    break;
-            }
-
-
-            //Moved events on the button here
-            AccelerateShip();
-            ToggleAsteroidSpeed();
-            ChangeEngineSprite();
-            EventManager.Game.OnEngineChange.Invoke((int)positionLV);
-        }
+        positionLV++;
+        UpdateShipPosition();
+        UpdateEnergyModifiersForPosition();
+        TriggerPositionChangeEvents();
     }
 
     public void DecreasePositionShip()
     {
-        if (!SceneController.isGameStopped)
+        if (SceneController.isGameStopped || engineModules[1].isBroken || positionLV == 1) return;
+
+        positionLV--;
+        UpdateShipPosition();
+        ResetEnergyModifiersForPosition();
+        TriggerPositionChangeEvents();
+    }
+
+    private void UpdateShipPosition()
+    {
+        ship.GetComponent<ShipMovement>().MoveToLevel(positionLVS[positionLV - 1]);
+        parallax.IncreaseSpeed(speedParallaxLVS[positionLV - 1]);
+        ship.GetComponent<ShipMovement>().moveDuration = durationToPositions[positionLV - 1];
+        ZoomOut(cameraPosLVS[positionLV - 1]);
+    }
+
+    private void UpdateEnergyModifiersForPosition()
+    {
+        switch (positionLV)
         {
-            if (!engineModules[1].isBroken && positionLV != 1)
-            {
-                //positionModuleSpriteLVS[positionLV - 1].color = Color.white;
-                positionLV--;
-                ship.GetComponent<ShipMovement>().MoveToLevel(positionLVS[positionLV - 1]);
-                //Decrease parallax speed
-                parallax.IncreaseSpeed(speedParallaxLVS[positionLV - 1]);
-                //Increase speed when transitioning to the next position
-                ship.GetComponent<ShipMovement>().moveDuration = durationToPositions[positionLV - 1];
-                //Zoom out camera
-                ZoomOut(cameraPosLVS[positionLV - 1]);
-
-            }
-            switch (positionLV)
-            {
-
-                case 4:
-                    positionModEnergyDecreaseLV5 = 0;
-                    positionModEnergyDecreaseLV4 = positionModEnergyDecreaseLV4_original;
-                    break;
-                case 3:
-                    positionModEnergyDecreaseLV4 = 0;
-                    positionModEnergyDecreaseLV3 = positionModEnergyDecreaseLV3_original;
-                    break;
-                case 2:
-                    positionModEnergyDecreaseLV3 = 0;
-                    positionModEnergyDecreaseLV2 = positionModEnergyDecreaseLV2_original;
-                    break;
-                case 1:
-                    positionModEnergyDecreaseLV2 = 0;
-                    positionModEnergyDecreaseLV1 = positionModEnergyDecreaseLV1_original;
-                    break;
-            }
-
-
-            //Moved events on the button here
-            DecelerateShip();
-            ToggleAsteroidSpeed();
-            ChangeEngineSprite();
-            EventManager.Game.OnEngineChange.Invoke((int)positionLV);
+            case 5:
+                positionModEnergyDecreaseLV5 = positionModEnergyDecreaseLV5_original;
+                break;
+            case 4:
+                positionModEnergyDecreaseLV4 = positionModEnergyDecreaseLV4_original;
+                break;
+            case 3:
+                positionModEnergyDecreaseLV3 = positionModEnergyDecreaseLV3_original;
+                break;
+            case 2:
+                positionModEnergyDecreaseLV2 = positionModEnergyDecreaseLV2_original;
+                break;
         }
-        
+    }
 
+    private void ResetEnergyModifiersForPosition()
+    {
+        switch (positionLV)
+        {
+            case 4:
+                positionModEnergyDecreaseLV5 = 0;
+                positionModEnergyDecreaseLV4 = positionModEnergyDecreaseLV4_original;
+                break;
+            case 3:
+                positionModEnergyDecreaseLV4 = 0;
+                positionModEnergyDecreaseLV3 = positionModEnergyDecreaseLV3_original;
+                break;
+            case 2:
+                positionModEnergyDecreaseLV3 = 0;
+                positionModEnergyDecreaseLV2 = positionModEnergyDecreaseLV2_original;
+                break;
+            case 1:
+                positionModEnergyDecreaseLV2 = 0;
+                positionModEnergyDecreaseLV1 = positionModEnergyDecreaseLV1_original;
+                break;
+        }
+    }
 
+    private void TriggerPositionChangeEvents()
+    {
+        if (positionLV > 1) AccelerateShip();
+        else DecelerateShip();
+
+        ToggleAsteroidSpeed();
+        ChangeEngineSprite();
+        EventManager.Game.OnEngineChange.Invoke(positionLV);
     }
 
     #endregion
+
     public void ToggleAsteroidSpeed()
     {
         Levels currentLV = GetCurrentLV(positionLV);
@@ -697,26 +716,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ChangeRadarSprite()
-    {
 
-        switch (radarLV)
-        {
-            case 4:
-                sourceImageRadarModule.sprite = RadarModuleImages[4];
-                break;
-            case 3:
-                sourceImageRadarModule.sprite = RadarModuleImages[3];
-                break;
-            case 2:
-                sourceImageRadarModule.sprite = RadarModuleImages[2];
-                break;
-            case 1:
-                sourceImageRadarModule.sprite = RadarModuleImages[1];
-                break;
-
-        }
-    }
 
     public void RestartGameProgress()
     {
