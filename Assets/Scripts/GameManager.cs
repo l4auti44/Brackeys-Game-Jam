@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     // --- Game Progression ---
     [Header("Game Progression")]
     public float gameProgress;
-    private float gameProgressSpeed;
+    public float gameProgressSpeed;
     public GameObject gameProgressSlider;
     public float[] gameProgressSpeedPositionLVS = new float[5];
 
@@ -259,10 +259,10 @@ public class GameManager : MonoBehaviour
 
     private void UpdateGameProgress()
     {
-        gameProgress += gameProgressSpeed * 0.01f;
-        gameProgressSlider.GetComponent<Slider>().value = gameProgress * 0.01f;
+        gameProgress += gameProgressSpeed * Time.deltaTime;
+        gameProgressSlider.GetComponent<Slider>().value = gameProgress;
 
-        if (gameProgress * 0.01f >= 1f)
+        if (gameProgress >= 100f)
         {
             EventManager.Game.OnWin.Invoke();
         }
@@ -341,41 +341,7 @@ public class GameManager : MonoBehaviour
         maxEnergy -= amount;
         energyMax.value += amount * 0.01f;
     }
-    public void AccelerateShip()
-    {
-        for (int i = 0; i < speedLVS.Length; i++)
-        { 
-            if (shipSpeed == speedLVS[i])
-            {
-                if (i != speedLVS.Length - 1)
-                {
-                    shipSpeed = speedLVS[i + 1];
-                    gameProgressSpeed = gameProgressSpeedPositionLVS[i + 1];
-
-                }
-
-            }
-        }
-        
-    }
-
-    public void DecelerateShip()
-    {
-        for (int i = 0; i < speedLVS.Length; i++)
-        {
-            if (shipSpeed == speedLVS[i])
-            {
-                if (i != 0)
-                {
-                    shipSpeed = speedLVS[i - 1];
-                    gameProgressSpeed = gameProgressSpeedPositionLVS[i - 1];
-
-                }
-
-            }
-        }
-        
-    }
+    
 
 
     #region RadarRelatedRegion
@@ -604,13 +570,44 @@ public class GameManager : MonoBehaviour
 
     private void TriggerPositionChangeEvents()
     {
-        if (positionLV > 1) AccelerateShip();
-        else DecelerateShip();
-
         ToggleAsteroidSpeed();
         ChangeEngineSprite();
         EventManager.Game.OnEngineChange.Invoke(positionLV);
     }
+
+    public void AccelerateShip()
+    {
+        for (int i = 0; i < speedLVS.Length; i++)
+        { 
+            if (shipSpeed == speedLVS[i])
+            {
+                if (i < speedLVS.Length - 1)
+                {
+                    shipSpeed = speedLVS[i + 1];
+                    gameProgressSpeed = gameProgressSpeedPositionLVS[i + 1];
+                }
+                break;
+            }
+        }
+
+        
+    }
+
+ public void DecelerateShip()
+{
+    for (int i = 0; i < speedLVS.Length; i++)
+    {
+        if (shipSpeed == speedLVS[i])
+        {
+            if (i > 0)
+            {
+                shipSpeed = speedLVS[i - 1];
+                gameProgressSpeed = gameProgressSpeedPositionLVS[i - 1];
+            }
+            break;
+        }
+    }
+}
 
     #endregion
 

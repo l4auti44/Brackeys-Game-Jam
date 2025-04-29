@@ -7915,6 +7915,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1017901625}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: DecelerateShip
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   isBroken: 0
 --- !u!1 &974438022
 GameObject:
@@ -8449,12 +8461,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameProgress: 0
+  gameProgressSpeed: 0
   gameProgressSlider: {fileID: 1988926708}
   gameProgressSpeedPositionLVS:
   - 0.1
-  - 0.2
   - 0.5
   - 0.8
+  - 0.9
   - 1
   ship: {fileID: 1257503198}
   asteroidSpawner: {fileID: 1970598914}
@@ -16298,9 +16311,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1058495290}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 0.285
+  m_Value: 36.1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -16927,6 +16940,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1017901625}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: IncreasePositionShip
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1017901625}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: AccelerateShip
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
