@@ -11,5 +11,13 @@ public class PerkScriptableObject : ScriptableObject
 
     public Sprite sprite;
 
+    public Perks action;
+
+    public enum Perks
+    {
+        Energy25,
+        MissileCooldown,
+        FullEnergy
+    }
     //public EventManager.PerkEvents action;
 }

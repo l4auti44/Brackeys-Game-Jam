@@ -348,6 +348,11 @@ public class GameManager : MonoBehaviour
         maxEnergy -= amount;
         energyMax.value += amount * 0.01f;
     }
+    public void RestartMaxEnergy()
+    {
+        maxEnergy = 1000;
+        energyMax.value = 0;
+    }
     
 
 

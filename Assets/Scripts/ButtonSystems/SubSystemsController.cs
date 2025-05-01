@@ -35,7 +35,7 @@ public class SubSystemsController : MonoBehaviour
     
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R) && !isMoving)
+        if (Input.GetKeyDown(KeyCode.R) && !isMoving && !SceneController.isGameStopped)
         {
             TurnOffSystems();
             RotateSys();
@@ -53,6 +53,7 @@ public class SubSystemsController : MonoBehaviour
 
     public IEnumerator GoToPos(Vector3 targetPos)
     {
+        if (SceneController.isGameStopped) yield return null;
         isMoving = true;
         RectTransform rectTransform = wheelIndicator.GetComponent<RectTransform>();
 

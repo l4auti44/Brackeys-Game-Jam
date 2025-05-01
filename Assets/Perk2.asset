@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 539fd6bd99690e44c95bf7b6ccd6b40b, type: 3}
   m_Name: Perk2
   m_EditorClassIdentifier: 
-  title: Perk2
-  description: -20 aura
-  sprite: {fileID: 1941346405, guid: 5895ec28f1b83664a98b753c09c29af0, type: 3}
+  title: decrease missile cooldown
+  description: decrease missile cooldown
+  sprite: {fileID: 0}
+  action: 1
