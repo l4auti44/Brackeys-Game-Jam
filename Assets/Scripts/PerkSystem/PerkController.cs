@@ -6,6 +6,7 @@ public class PerkController : MonoBehaviour
 {
     [SerializeField] private GameObject perkSys;
     [SerializeField] private GameObject inputBlocker;
+    private GameManager gameManager;
 
     private void OnEnable()
     {
@@ -21,7 +22,16 @@ public class PerkController : MonoBehaviour
     public void SwitchEnable()
     {
         perkSys.SetActive(!perkSys.activeSelf);
-        if(perkSys.activeSelf) StartCoroutine(PlaySounds());
+        if (perkSys.activeSelf)
+        {
+            StartCoroutine(PlaySounds());
+            gameManager.ResetCameraZoom();
+        }
+        else 
+        {
+            gameManager.ZoomOut(gameManager.cameraPosLVS[gameManager.positionLV - 1]);
+        }
+        
         inputBlocker.SetActive(!inputBlocker.activeSelf); 
         SceneController.isGameStopped = !SceneController.isGameStopped;
     }
@@ -30,6 +40,7 @@ public class PerkController : MonoBehaviour
     {
         perkSys.SetActive(false);
         inputBlocker.SetActive(false);
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     private IEnumerator PlaySounds()

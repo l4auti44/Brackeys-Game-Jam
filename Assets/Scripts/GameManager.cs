@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour
     public float[] cameraPosLVS = new float[5];
     public float cameraZoomOutSpeed = 2;
     private float targetZoom; // Target orthographic size
+    private float _originalZoom; // Target orthographic size
 
     // --- Energy Settings ---
     [Header("Energy Settings")]
@@ -197,6 +198,7 @@ public class GameManager : MonoBehaviour
 
         mainCamera = Camera.main;
         targetZoom = mainCamera.orthographicSize;
+        _originalZoom = mainCamera.orthographicSize;
     }
 
     private void InitializeModules()
@@ -318,6 +320,11 @@ public class GameManager : MonoBehaviour
     private void UpdateCameraZoom()
     {
         mainCamera.orthographicSize = Mathf.MoveTowards(mainCamera.orthographicSize, targetZoom, cameraZoomOutSpeed * Time.deltaTime);
+    }
+
+    public void ResetCameraZoom()
+    {
+        mainCamera.orthographicSize = _originalZoom;
     }
 
     private void UpdateUI()
