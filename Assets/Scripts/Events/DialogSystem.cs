@@ -61,6 +61,7 @@ public class DialogSystem : MonoBehaviour
         EventManager.Game.OnEngineChange += EngineLevelCheck;
         EventManager.Game.OnGameStopped += AbortTask;
         EventManager.Game.OnPerkHover += TypePerkDescription;
+        EventManager.Game.OnPerkPicked += StopWritting;
     }
 
     private void OnDisable()
@@ -71,6 +72,8 @@ public class DialogSystem : MonoBehaviour
         EventManager.Game.OnEngineChange -= EngineLevelCheck;
         EventManager.Game.OnGameStopped -= AbortTask;
         EventManager.Game.OnPerkHover -= TypePerkDescription;
+        EventManager.Game.OnPerkPicked -= StopWritting;
+
 
     }
 
@@ -137,9 +140,10 @@ public class DialogSystem : MonoBehaviour
         if(currentDialog != null)
         {
             StopWritting();
-            halAnimator.SetBool("Failed", true);
+            halAnimator.SetBool("Failed", false);
+            halAnimator.SetBool("Completed", false);
+            halAnimator.Play("HAL_still", 0, 0f);
             currentDialog = null;
-            StopWritting();
         }
         
     }
@@ -257,9 +261,33 @@ public class DialogSystem : MonoBehaviour
         }
     }
 
+        private IEnumerator SimpleTypeText(string message, DialogPool audioPool)
+    {
+        backgroundText.enabled = true;
+        SoundManager.PlayDialogueSound(audioPool);
+        halAnimator.SetBool("Talking", true);
+        halAnimator.SetBool("Failed", false);
+        halAnimator.SetBool("Completed", false);
+        isWritting = true;
+        textComponent.text = "";
+        foreach (char letter in message)
+        {
+            textComponent.text += letter;
+            yield return new WaitForSeconds(timeForEachCharacter);
+        }
+
+        SoundManager.StopDialogueSound();
+        yield return new WaitForSeconds(2f);
+        isWritting = false;
+        halAnimator.SetBool("Talking", false);
+        halAnimator.Play("HAL_still", 0, 0f);
+    }
+
+    
+
     private void TypePerkDescription(string desc)
     {
         StopWritting();
-        StartCoroutine(TypeText(desc, DialogPool.Calm));
+        StartCoroutine(SimpleTypeText(desc, DialogPool.Calm));
     }
 }

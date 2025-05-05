@@ -24,6 +24,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler
     public void PerformeAction()
     {
         perkController.PerformAction(perk.action);
+        EventManager.Game.OnPerkPicked.Invoke();
     }
 
         public void OnPointerEnter(PointerEventData eventData)
