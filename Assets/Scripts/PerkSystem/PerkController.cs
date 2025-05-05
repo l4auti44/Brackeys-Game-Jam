@@ -56,6 +56,7 @@ public class PerkController : MonoBehaviour
 
     public void PerformAction(PerkScriptableObject.Perks perk)
     {
+        
         switch (perk)
         {
             case PerkScriptableObject.Perks.FullEnergy:
@@ -71,5 +72,9 @@ public class PerkController : MonoBehaviour
                 gameManager.energy += 25;
                 break;
         }
+    }
+    public void DeclineButton()
+    {
+        EventManager.Game.OnPerkPicked.Invoke();
     }
 }

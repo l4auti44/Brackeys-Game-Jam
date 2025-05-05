@@ -3838,7 +3838,7 @@ GameObject:
   - component: {fileID: 408876367}
   - component: {fileID: 408876369}
   m_Layer: 5
-  m_Name: Decline text
+  m_Name: Decline Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4007,6 +4007,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1017901625}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: RestartGameProgress
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 431494701}
+        m_TargetAssemblyTypeName: PerkController, Assembly-CSharp
+        m_MethodName: DeclineButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8581,7 +8593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7266b320ccde9345b54ab453cab1b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameProgress: 98
+  gameProgress: 0
   gameProgressSpeed: 0
   gameProgressSlider: {fileID: 1988926708}
   gameProgressSpeedPositionLVS:

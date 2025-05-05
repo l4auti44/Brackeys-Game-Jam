@@ -61,7 +61,7 @@ public class DialogSystem : MonoBehaviour
         EventManager.Game.OnEngineChange += EngineLevelCheck;
         EventManager.Game.OnGameStopped += AbortTask;
         EventManager.Game.OnPerkHover += TypePerkDescription;
-        EventManager.Game.OnPerkPicked += StopWritting;
+        EventManager.Game.OnPerkPicked += RestartHAL;
     }
 
     private void OnDisable()
@@ -72,7 +72,7 @@ public class DialogSystem : MonoBehaviour
         EventManager.Game.OnEngineChange -= EngineLevelCheck;
         EventManager.Game.OnGameStopped -= AbortTask;
         EventManager.Game.OnPerkHover -= TypePerkDescription;
-        EventManager.Game.OnPerkPicked -= StopWritting;
+        EventManager.Game.OnPerkPicked -= RestartHAL;
 
 
     }
@@ -115,6 +115,14 @@ public class DialogSystem : MonoBehaviour
         halAnimator.SetBool("Talking", false);
         isWritting = false;
         SoundManager.StopDialogueSound();
+    }
+
+    private void RestartHAL()
+    {
+        halAnimator.SetBool("Failed", false);
+        halAnimator.SetBool("Completed", false);
+        halAnimator.Play("HAL_still", 0, 0f);
+        StopWritting();
     }
     private void TaskCompleted()
     {
