@@ -14,6 +14,8 @@ public static class EventManager
     {
         public UnityAction OnWin;
         public UnityAction OnPerkPicked;
+        public UnityAction<string> OnPerkHover;
+        public UnityAction OnGameStopped;
         public UnityAction<Component> OnDie;
         public UnityAction<DialogSystem.DialogEvents> OnDialog;
         public UnityAction<DialogSystem.DialogEvents> OnTaskDialogCompleted;

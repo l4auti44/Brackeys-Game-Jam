@@ -26,6 +26,7 @@ public class PerkController : MonoBehaviour
         perkSys.SetActive(!perkSys.activeSelf);
         if (perkSys.activeSelf)
         {
+            EventManager.Game.OnGameStopped.Invoke();
             StartCoroutine(PlaySounds());
             gameManager.ResetCameraZoom();
         }

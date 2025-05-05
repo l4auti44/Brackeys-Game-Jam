@@ -1,8 +1,9 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class Card : MonoBehaviour
+
+public class Card : MonoBehaviour, IPointerEnterHandler
 {
     private PerkScriptableObject perk;
     private PerkController perkController;
@@ -25,4 +26,8 @@ public class Card : MonoBehaviour
         perkController.PerformAction(perk.action);
     }
 
+        public void OnPointerEnter(PointerEventData eventData)
+    {
+        EventManager.Game.OnPerkHover.Invoke(perk.description);
+    }
 }

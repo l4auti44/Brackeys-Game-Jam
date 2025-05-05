@@ -59,6 +59,8 @@ public class DialogSystem : MonoBehaviour
         EventManager.Player.OnImpact += CheckOnImpactTask;
         EventManager.Game.OnRadarChange += RadarLevelCheck;
         EventManager.Game.OnEngineChange += EngineLevelCheck;
+        EventManager.Game.OnGameStopped += AbortTask;
+        EventManager.Game.OnPerkHover += TypePerkDescription;
     }
 
     private void OnDisable()
@@ -67,6 +69,9 @@ public class DialogSystem : MonoBehaviour
         EventManager.Player.OnImpact -= CheckOnImpactTask;
         EventManager.Game.OnRadarChange -= RadarLevelCheck;
         EventManager.Game.OnEngineChange -= EngineLevelCheck;
+        EventManager.Game.OnGameStopped -= AbortTask;
+        EventManager.Game.OnPerkHover -= TypePerkDescription;
+
     }
 
     private void StartDialog(DialogEvents dialog)
@@ -125,6 +130,18 @@ public class DialogSystem : MonoBehaviour
         halAnimator.SetBool("Failed", true);
         currentDialog = null;
         EventManager.Game.OnTaskDialogFailed.Invoke();
+    }
+
+    public void AbortTask()
+    {
+        if(currentDialog != null)
+        {
+            StopWritting();
+            halAnimator.SetBool("Failed", true);
+            currentDialog = null;
+            StopWritting();
+        }
+        
     }
 
     private void RadarLevelCheck(int lv)
@@ -238,5 +255,11 @@ public class DialogSystem : MonoBehaviour
         {
             StartCoroutine(WaitingForAction());
         }
+    }
+
+    private void TypePerkDescription(string desc)
+    {
+        StopWritting();
+        StartCoroutine(TypeText(desc, DialogPool.Calm));
     }
 }
