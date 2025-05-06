@@ -22,7 +22,7 @@ public class HumanAnimatorController : MonoBehaviour
     private void Win()
     {
 
-        _animator.SetBool("Win", true);
+        _animator.SetTrigger("Win");
         
     }
 
