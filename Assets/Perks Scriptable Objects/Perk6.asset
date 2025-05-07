@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 539fd6bd99690e44c95bf7b6ccd6b40b, type: 3}
-  m_Name: Perk4
+  m_Name: Perk6
   m_EditorClassIdentifier: 
-  title: Magnetism
-  description: Magnetism
+  title: repair efficiency
+  description: repair efficiency
   sprite: {fileID: 0}
   action: 0

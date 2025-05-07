@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 539fd6bd99690e44c95bf7b6ccd6b40b, type: 3}
   m_Name: Perk3
   m_EditorClassIdentifier: 
-  title: +25 energy
-  description: +25 energy
+  title: Energy Collection Buff
+  description: Pickups and lightning are worth more energy
   sprite: {fileID: 0}
+  action: 0
