@@ -14772,8 +14772,9 @@ GameObject:
   - component: {fileID: 1718551925}
   - component: {fileID: 1718551927}
   - component: {fileID: 1718551926}
+  - component: {fileID: 1718551928}
   m_Layer: 0
-  m_Name: Status Text
+  m_Name: Score Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14932,6 +14933,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1718551928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1718551924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ac81d8b6e734b743ba13628e709b5be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1725220349
 GameObject:
   m_ObjectHideFlags: 0
