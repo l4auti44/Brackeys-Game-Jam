@@ -240,9 +240,18 @@ public class GameManager : MonoBehaviour
             ClampEnergy();
             UpdateCameraZoom();
             UpdateUI();
+            UpdateScore();
         }
     }
     #region UpdateMethods
+
+    private void UpdateScore()
+    {
+        if (gameProgress > 0)
+        {
+            ScoreManager.AddScore(Mathf.FloorToInt(gameProgress * 10f));
+        }
+    }
     private void HandleDialogEvents()
     {
         if (gameProgress > 15f && !eventFlag)
