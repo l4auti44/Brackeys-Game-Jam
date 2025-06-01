@@ -14796,8 +14796,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -14, y: 12.1}
-  m_SizeDelta: {x: 78.3175, y: 5}
+  m_AnchoredPosition: {x: -19.23, y: 17.6}
+  m_SizeDelta: {x: 114.5442, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1718551926
 MonoBehaviour:
@@ -14819,7 +14819,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 000000000000
+  m_text: ' <mspace=79>000000000000'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5165b27e27684bc45a6215713b9cd4c7, type: 2}
   m_sharedMaterial: {fileID: 5318227907519349231, guid: 5165b27e27684bc45a6215713b9cd4c7, type: 2}
@@ -14846,14 +14846,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 125
+  m_fontSizeBase: 125
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -14882,7 +14882,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 0.1331482, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   _SortingLayer: 0
@@ -15049,10 +15049,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.53
-    y: 0.878
-    width: 0.47
-    height: 0.09
+    x: 0.61
+    y: 0.885
+    width: 0.3
+    height: 0.072
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 0.1
