@@ -581,14 +581,14 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5165b27e27684bc45a6215713b9cd4c7, type: 2}
-  m_sharedMaterial: {fileID: 5318227907519349231, guid: 5165b27e27684bc45a6215713b9cd4c7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 801e82e0fa0606c43a9af0b4c9a82461, type: 2}
+  m_sharedMaterial: {fileID: 5785445197756286854, guid: 801e82e0fa0606c43a9af0b4c9a82461, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -606,8 +606,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 9
-  m_fontSizeBase: 9
+  m_fontSize: 11
+  m_fontSizeBase: 11
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -618,7 +618,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 6
-  m_lineSpacing: 10
+  m_lineSpacing: 9
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -656,6 +656,104 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 47947458}
   m_CullTransparentMesh: 1
+--- !u!1 &49888529
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 49888531}
+  - component: {fileID: 49888530}
+  m_Layer: 0
+  m_Name: GameAssets(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &49888530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49888529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfcfd24efd2fdf4419f7e025b96446fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundAudioClipArray:
+  - sound: 0
+    audioClip: {fileID: 8300000, guid: 6f96901ac3f9a16499c5e521071cee62, type: 3}
+    volume: 0.01
+  - sound: 12
+    audioClip: {fileID: 8300000, guid: 1c8cd8342b702b042b836f8dbd12b92e, type: 3}
+    volume: 0.3
+  - sound: 13
+    audioClip: {fileID: 8300000, guid: 98309c459d103a744b31aa33aa099cb8, type: 3}
+    volume: 0.3
+  - sound: 3
+    audioClip: {fileID: 8300000, guid: 2a49eb887bcec0e45bb51bdf91e46c89, type: 3}
+    volume: 0.3
+  - sound: 9
+    audioClip: {fileID: 8300000, guid: 5feed76d62254ca408fcb08f79113783, type: 3}
+    volume: 0.686
+  - sound: 14
+    audioClip: {fileID: 8300000, guid: ec336779428967e4ebedd2d9d270c309, type: 3}
+    volume: 0.617
+  - sound: 15
+    audioClip: {fileID: 8300000, guid: 95bfb0c7cccd78844b0a6cfdbf009d57, type: 3}
+    volume: 0.543
+  - sound: 16
+    audioClip: {fileID: 8300000, guid: 40dc2d3a532ffd94c909bb591c452221, type: 3}
+    volume: 0.543
+  - sound: 17
+    audioClip: {fileID: 8300000, guid: 366d469af60ab3f4e83bcb537ca51dc9, type: 3}
+    volume: 0.543
+  dialogueAudioPools:
+  - dialogPool: 0
+    audios:
+    - {fileID: 8300000, guid: 117b3334051630a4aa758462623cd99d, type: 3}
+    - {fileID: 8300000, guid: f6e15947a6121c049873cab6a249a8c9, type: 3}
+    - {fileID: 8300000, guid: b70c14c0396904f43897572f3bfba356, type: 3}
+    - {fileID: 8300000, guid: b08dc3ffca0c31441bc8ce1f3a89282c, type: 3}
+    - {fileID: 8300000, guid: 6fdbe0e9ef8c99848866919cab4a7157, type: 3}
+    volume: 0.25
+  - dialogPool: 1
+    audios:
+    - {fileID: 8300000, guid: 75b6593bb5363d948a678219b202d653, type: 3}
+    - {fileID: 8300000, guid: 696670d8c561edd439a3b477c7e8fd42, type: 3}
+    - {fileID: 8300000, guid: 206bcb652bc7a7d4496678d7286007ab, type: 3}
+    - {fileID: 8300000, guid: 60e6924af491f8947af1b1a47d23c20f, type: 3}
+    - {fileID: 8300000, guid: a36d6747a5d77874c8d11d6134750055, type: 3}
+    volume: 0.25
+  perksPool:
+  - {fileID: 11400000, guid: d8745115710cbe044b7c31dbdb5bb6e0, type: 2}
+  - {fileID: 11400000, guid: b64f118c22afc5c4e8258a05a68da6a0, type: 2}
+  - {fileID: 11400000, guid: 5dee2c5fb4b66644fa68d11376d5f5be, type: 2}
+  - {fileID: 11400000, guid: d40045ab24c850140ace8e47ed141d84, type: 2}
+  - {fileID: 11400000, guid: b42ecfaf655891447b40636ef3a6d5e5, type: 2}
+  - {fileID: 11400000, guid: a1bbc74fdafc8d849b1972c58e770107, type: 2}
+  - {fileID: 11400000, guid: 69c06e8e8e9530044b05cd953c6484dd, type: 2}
+  - {fileID: 11400000, guid: da365ad70ae7ab845b0c5fac4dde78cf, type: 2}
+--- !u!4 &49888531
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49888529}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 883.6157, y: 595.4424, z: -8.504262}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &59154881
 GameObject:
   m_ObjectHideFlags: 0
@@ -6864,6 +6962,147 @@ RectTransform:
   m_AnchoredPosition: {x: 32.7, y: 333.9}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &817811665
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 817811668}
+  - component: {fileID: 817811667}
+  - component: {fileID: 817811666}
+  m_Layer: 0
+  m_Name: Dialogue Sound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &817811666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 817811665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 971929402}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!82 &817811667
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 817811665}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.25
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &817811668
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 817811665}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &820089946
 GameObject:
   m_ObjectHideFlags: 0
@@ -7989,20 +8228,22 @@ MonoBehaviour:
   backgroundText: {fileID: 1127924388}
   dialogEventsList:
   - dialogEvent: 0
-    taskText: Humans, don't get hit for 15 seconds or.. you will see.
-    failText: you failed?? I knew that you was inferior than me, but... you surprised
-      me
-    goodText: Good, now continue this way...
+    taskText: Humans, DON'T GET HIT for 15 seconds or . . . you will see.
+    failText: You failed? I know that you are inferior, but . . . that surprised
+      me.
+    goodText: Nice work, keep up the good behavior and you'll go far.
     timeForTask: 15
   - dialogEvent: 1
-    taskText: Humans, keep your RADAR at level 2, starting in 3... 2... 1...
-    failText: I guess you didn't understand my command..
-    goodText: Well done, it was a simple task anyways..
+    taskText: Humans, keep your RADAR at LEVEL 2!
+    failText: I guess you didn't understand my command.
+    goodText: Well done, it was a simple task anyway . . .
     timeForTask: 20
   - dialogEvent: 2
-    taskText: Listen, ENGINE needs to stay at level 2, don't disappoint me. . . .
-    failText: Well, that is on my for trusting on simple humans
-    goodText: don't let it go to your head and keep following my orders
+    taskText: 'Listen, ENGINE needs to stay at LEVEL 2, don''t disappoint me . .
+      . '
+    failText: Well, what did I expect? Trusting humans is a machine's greatest crime.
+    goodText: You succeeded, but don't let it go to your head. Just keep following
+      my orders.
     timeForTask: 15
   dialogTEST: 2
 --- !u!1 &969604998
@@ -8271,6 +8512,21 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   isBroken: 0
+--- !u!115 &971929402
+MonoScript:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 7
+  m_DefaultReferences: {}
+  m_Icon: {fileID: 0}
+  m_Type: 0
+  m_ExecutionOrder: 0
+  m_ClassName: SoundManager/MonoBehaviourHelper
+  m_Namespace: 
+  m_AssemblyName: Assembly-CSharp
 --- !u!1 &974438022
 GameObject:
   m_ObjectHideFlags: 0
@@ -9827,7 +10083,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1127924387
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9855,7 +10111,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1127924386}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -19244,3 +19500,5 @@ SceneRoots:
   - {fileID: 1017901626}
   - {fileID: 1396376256}
   - {fileID: 1309734821}
+  - {fileID: 817811668}
+  - {fileID: 49888531}
