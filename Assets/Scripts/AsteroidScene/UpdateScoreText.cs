@@ -18,7 +18,7 @@ public class UpdateScoreText : MonoBehaviour
         while (true)
         {
             scoreText.text = ScoreManager.GetScore().ToString("D12");
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.1f);
         }
        
     }

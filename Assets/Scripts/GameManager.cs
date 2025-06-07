@@ -249,12 +249,12 @@ public class GameManager : MonoBehaviour
     {
         if (gameProgress > 0)
         {
-            ScoreManager.AddScore(Mathf.FloorToInt(gameProgress * 10f));
+            ScoreManager.AddScore(Mathf.FloorToInt(gameProgress * 1f));
         }
     }
     private void HandleDialogEvents()
     {
-        if (gameProgress > 15f && !eventFlag)
+        if (gameProgress > 8f && !eventFlag)
         {
             var dialogEvents = new DialogSystem.DialogEvents[]
             {
