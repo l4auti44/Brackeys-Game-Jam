@@ -9063,11 +9063,11 @@ MonoBehaviour:
   gameProgressSpeed: 0
   gameProgressSlider: {fileID: 1988926708}
   gameProgressSpeedPositionLVS:
-  - 0.1
-  - 0.25
-  - 0.54
-  - 0.82
+  - 0.7
   - 1.1
+  - 1.5
+  - 1.9
+  - 2.3
   ship: {fileID: 1257503198}
   asteroidSpawner: {fileID: 1970598914}
   energySpawner: {fileID: 1232595329}
@@ -9159,16 +9159,16 @@ MonoBehaviour:
   cameraZoomOutSpeed: 1
   energy: 0
   maxEnergy: 1000
-  radarModEnergyDecreaseLV1: 2
-  radarModEnergyDecreaseLV2: 15
-  radarModEnergyDecreaseLV3: 30
-  radarModEnergyDecreaseLV4: 45
+  radarModEnergyDecreaseLV1: 1
+  radarModEnergyDecreaseLV2: 7
+  radarModEnergyDecreaseLV3: 15
+  radarModEnergyDecreaseLV4: 26
   shieldModEnergyDecrease: 2
-  positionModEnergyDecreaseLV1: 5
-  positionModEnergyDecreaseLV2: 10
-  positionModEnergyDecreaseLV3: 15
-  positionModEnergyDecreaseLV4: 25
-  positionModEnergyDecreaseLV5: 35
+  positionModEnergyDecreaseLV1: 4
+  positionModEnergyDecreaseLV2: 8
+  positionModEnergyDecreaseLV3: 13
+  positionModEnergyDecreaseLV4: 18
+  positionModEnergyDecreaseLV5: 25
   arrowModEnergyDecrease: 2
   energySlider: {fileID: 1053437755}
   energyMax: {fileID: 306082994}
@@ -17481,10 +17481,10 @@ MonoBehaviour:
   arrow3Prefab: {fileID: 1768615014423082408, guid: 2ca49f1c6c6b4d2458c56b41889ad5a1, type: 3}
   spawnArrow: 0
   moveSpeed: 2
-  minSpawnInterval: 0.5
-  maxSpawnInterval: 3
+  minSpawnInterval: 0.01
+  maxSpawnInterval: 1.8
   minAsteroidSpeed: 1
-  maxAsteroidSpeed: 3
+  maxAsteroidSpeed: 3.2
   minRotationSpeed: 20
   maxRotationSpeed: 120
   arrowYOffset: -6.5
