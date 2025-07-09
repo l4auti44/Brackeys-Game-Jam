@@ -9059,7 +9059,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7266b320ccde9345b54ab453cab1b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameProgress: 70
+  gameProgress: 0
   gameProgressSpeed: 0
   gameProgressSlider: {fileID: 1988926708}
   gameProgressSpeedPositionLVS:
@@ -15075,7 +15075,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ' <mspace=79>000000000000'
+  m_text: 000000000000
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5165b27e27684bc45a6215713b9cd4c7, type: 2}
   m_sharedMaterial: {fileID: 5318227907519349231, guid: 5165b27e27684bc45a6215713b9cd4c7, type: 2}
@@ -15201,6 +15201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ac81d8b6e734b743ba13628e709b5be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mspace: 0.65
 --- !u!1 &1725220349
 GameObject:
   m_ObjectHideFlags: 0

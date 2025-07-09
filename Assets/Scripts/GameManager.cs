@@ -247,9 +247,13 @@ public class GameManager : MonoBehaviour
 
     private void UpdateScore()
     {
-        if (gameProgress > 0)
+        if (gameProgress > 1)
         {
             ScoreManager.AddScore(Mathf.FloorToInt(gameProgress * 1f));
+        }
+        else
+        {
+            ScoreManager.AddScore(1);
         }
     }
     private void HandleDialogEvents()
