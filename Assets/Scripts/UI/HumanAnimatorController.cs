@@ -30,12 +30,20 @@ public class HumanAnimatorController : MonoBehaviour
     {
         EventManager.Player.OnImpact += Impact;
         EventManager.Game.OnWin += Win;
+        EventManager.Game.OnDie += Die;
     }
+
+    private void Die(Component comp)
+    {
+        _animator.SetTrigger("GameOver");
+    }
+    
 
     private void OnDisable()
     {
         EventManager.Player.OnImpact -= Impact;
         EventManager.Game.OnWin -= Win;
+        EventManager.Game.OnDie -= Die;
     }
 
 

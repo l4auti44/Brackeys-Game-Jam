@@ -54,10 +54,11 @@ public class UIPauseMenuController : MonoBehaviour
 
     private IEnumerator Loose()
     {
-        yield return new WaitForSeconds(1.4f);
+        yield return new WaitForSeconds(1f);
         resumeButton.SetActive(false);
         titleText.text = "YOU DIED!";
         diedOrWinConditions = true;
+        yield return new WaitForSeconds(2f);
         SwitchPauseMenu();
     }
     private void SwitchPauseMenuOnWin(Component comp)
