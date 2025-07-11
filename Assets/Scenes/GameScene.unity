@@ -8228,21 +8228,22 @@ MonoBehaviour:
   backgroundText: {fileID: 1127924388}
   dialogEventsList:
   - dialogEvent: 0
-    taskText: Humans, DON'T GET HIT for 15 seconds or . . . you will see.
+    taskText: Humans, DO NOT GET HIT for 15 SECONDS or . . . you will see.
     failText: You failed? I know that you are inferior, but . . . that surprised
       me.
     goodText: Nice work, keep up the good behavior and you'll go far.
     timeForTask: 15
   - dialogEvent: 1
     taskText: Humans, keep your RADAR at LEVEL 2!
-    failText: I guess you didn't understand my command.
+    failText: I guess you did not understand my command.
     goodText: Well done, it was a simple task anyway . . .
-    timeForTask: 20
+    timeForTask: 15
   - dialogEvent: 2
-    taskText: 'Listen, ENGINE needs to stay at LEVEL 2, don''t disappoint me . .
+    taskText: 'Listen, ENGINE needs to stay at LEVEL 2, do not disappoint me . .
       . '
-    failText: Well, what did I expect? Trusting humans is a machine's greatest crime.
-    goodText: You succeeded, but don't let it go to your head. Just keep following
+    failText: Well, what did I expect? Trusting humans is the greatest mistake a
+      machine can make.
+    goodText: You succeeded, but do not let it go to your head. Just keep following
       my orders.
     timeForTask: 15
   dialogTEST: 2
