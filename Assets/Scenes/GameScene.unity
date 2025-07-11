@@ -9159,7 +9159,7 @@ MonoBehaviour:
   - 9
   cameraZoomOutSpeed: 1
   energy: 0
-  maxEnergy: 100
+  maxEnergy: 21
   radarModEnergyDecreaseLV1: 1
   radarModEnergyDecreaseLV2: 7
   radarModEnergyDecreaseLV3: 15
