@@ -114,7 +114,7 @@ public class GameManager : MonoBehaviour
     // --- Sound Modules ---
     [Header("Sound Modules")]
     private SoundButton shieldModule;
-    private SoundButton arrowModule;
+    //private SoundButton arrowModule;
     private List<SoundButton> engineModules = new List<SoundButton>();
     private List<SoundButton> radarModules = new List<SoundButton>();
 
@@ -204,7 +204,7 @@ public class GameManager : MonoBehaviour
     private void InitializeModules()
     {
         shieldModule = GameObject.Find("ShieldModule").GetComponent<SoundButton>();
-        arrowModule = GameObject.Find("ArrowModule").GetComponent<SoundButton>();
+        //arrowModule = GameObject.Find("ArrowModule").GetComponent<SoundButton>();
 
         var engineButtons = GameObject.Find("EngineButtons");
         engineModules.Add(engineButtons.transform.GetChild(0).GetComponent<SoundButton>());

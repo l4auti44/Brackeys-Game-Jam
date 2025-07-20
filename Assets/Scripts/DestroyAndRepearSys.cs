@@ -7,8 +7,7 @@ public class DestroyAndRepearSys : MonoBehaviour
 {
     public enum Modules{
         MissileModule,
-        ShieldModule,
-        ArrowModule
+        ShieldModule
     }
 
     [SerializeField] private float BreakTime = 15f;
@@ -17,7 +16,7 @@ public class DestroyAndRepearSys : MonoBehaviour
     //SYSTEMS
     private SoundButton MissileModule;
     private SoundButton ShieldModule;
-    private SoundButton ArrowModule;
+    //private SoundButton ArrowModule;
 
     //Only One button for now
     private SoundButton engineButtonUp;
@@ -35,7 +34,7 @@ public class DestroyAndRepearSys : MonoBehaviour
     {
         MissileModule = GameObject.Find("MissileModule").GetComponent<SoundButton>();
         ShieldModule = GameObject.Find("ShieldModule").GetComponent<SoundButton>();
-        ArrowModule = GameObject.Find("ArrowModule").GetComponent<SoundButton>();
+        //ArrowModule = GameObject.Find("ArrowModule").GetComponent<SoundButton>();
         //var engineButtons = GameObject.Find("EngineButtons");
         //engineButtonUp = engineButtons.transform.GetChild(0).GetComponent<SoundButton>();
         //engineButtonDown = engineButtons.transform.GetChild(1).GetComponent<SoundButton>();
@@ -46,7 +45,7 @@ public class DestroyAndRepearSys : MonoBehaviour
         //repairModuleIsActiveImage.SetActive(false);
         Systems.Add(MissileModule);
         Systems.Add(ShieldModule);
-        Systems.Add(ArrowModule);
+        //Systems.Add(ArrowModule);
         //Systems.Add(engineButtonUp);
         //Systems.Add(engineButtonDown);
         //Systems.Add(radarButtonUp);
@@ -113,9 +112,6 @@ public class DestroyAndRepearSys : MonoBehaviour
                 break;
             case Modules.ShieldModule:
                 breakSis = Systems[1];
-                break;
-            case Modules.ArrowModule:
-                breakSis = Systems[2];
                 break;
             default:
                 breakSis = Systems[0];

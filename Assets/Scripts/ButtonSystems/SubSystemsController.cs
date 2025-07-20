@@ -5,7 +5,7 @@ using UnityEngine;
 public class SubSystemsController : MonoBehaviour
 {
     //SYSTEMS
-    private SystemBlueprint missileModule, shieldModule, arrowModule, repairModule;
+    private SystemBlueprint missileModule, shieldModule, repairModule;
 
     private Transform wheelIndicator;
     private int currentSys = 0;
@@ -16,7 +16,7 @@ public class SubSystemsController : MonoBehaviour
     [SerializeField] private RectTransform missilePos;
     [SerializeField] private RectTransform shieldPos;
     [SerializeField] private RectTransform repairPos;
-    [SerializeField] private RectTransform arrowPos;
+    //[SerializeField] private RectTransform arrowPos;
 
     [SerializeField] private float initalX;
     void Start()
@@ -25,10 +25,10 @@ public class SubSystemsController : MonoBehaviour
 
         missileModule = GameObject.Find("MissileModule").GetComponent<SystemBlueprint>();
         shieldModule = GameObject.Find("ShieldModule").GetComponent<SystemBlueprint>();
-        arrowModule = GameObject.Find("ArrowModule").GetComponent<SystemBlueprint>();
+        //arrowModule = GameObject.Find("ArrowModule").GetComponent<SystemBlueprint>();
         repairModule = GameObject.Find("RepairModule").GetComponent<SystemBlueprint>();
         missileModule.SwitchAvailable();
-        arrowModule.SwitchAvailable();
+        //arrowModule.SwitchAvailable();
         repairModule.SwitchAvailable();
 
     }
@@ -45,7 +45,7 @@ public class SubSystemsController : MonoBehaviour
 
     private void TurnOffSystems()
     {
-        arrowModule.SwitchAvailable(false);
+        //arrowModule.SwitchAvailable(false);
         missileModule.SwitchAvailable(false);
         repairModule.SwitchAvailable(false);
         shieldModule.SwitchAvailable(false);
@@ -103,7 +103,7 @@ public class SubSystemsController : MonoBehaviour
 
         currentSys += 1;
 
-        if (currentSys > 3)
+        if (currentSys > 2)
         {
             currentSys = 0;
         }
@@ -123,12 +123,6 @@ public class SubSystemsController : MonoBehaviour
                 }   
                 break;
             case 2:
-                if (!arrowModule.broken)
-                {
-                    currentSysPos = arrowPos;
-                }
-                break;
-            case 3:
                 currentSysPos = repairPos;
                 break;
             default:
@@ -154,12 +148,6 @@ public class SubSystemsController : MonoBehaviour
                 }
                 break;
             case 2:
-                if (!arrowModule.broken)
-                {
-                    arrowModule.SwitchAvailable();
-                }
-                break;
-            case 3:
                 repairModule.SwitchAvailable();
                 break;
             default:
