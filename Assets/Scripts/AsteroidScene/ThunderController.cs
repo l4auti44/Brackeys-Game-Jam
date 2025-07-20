@@ -12,6 +12,7 @@ public class ThunderController : MonoBehaviour
     public float timeToEnableCol = 1f;
     public float timeToDestroy = 1.5f;
 
+    [SerializeField] private int scoreToAdd = 10;
     private bool energyEarned = false;
     private GameManager gameManager; // Reference to GameManager
     private CircleCollider2D _collider;
@@ -53,6 +54,7 @@ public class ThunderController : MonoBehaviour
                 Debug.Log("Energy earned");
                 // Increase the energy of the game manager
                 gameManager.energy += energyToIncrease;
+                ScoreManager.AddScore(scoreToAdd);
                 energyEarned = true;
 
                 //Give player feedback

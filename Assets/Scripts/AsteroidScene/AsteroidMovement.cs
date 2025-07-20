@@ -13,6 +13,9 @@ public class AsteroidMovement : MonoBehaviour
     private float spawnForce = 5f; // Force applied to spawned asteroids
     private float collisionActivationDelay = 0.2f; // Delay before asteroids can collide with each other
     public float asteroidLifespan = 10f; // Lifespan of the asteroid in seconds
+    
+
+    [SerializeField] private int scoreAmountOnDestroy = 10;
 
     [Header("Asteroid Prefabs")]
     public List<GameObject> bigAsteroids;    // Pool of big asteroids
@@ -29,7 +32,6 @@ public class AsteroidMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
         // Get the screen bottom Y position
         screenBottomY = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0)).y;
 
@@ -59,8 +61,11 @@ public class AsteroidMovement : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         // Check if the asteroid collided with something that should trigger its destruction
-        if (other.CompareTag("Player") || other.CompareTag("Missile"))
+        if (other.CompareTag("Player"))
         {
+            DestroyAsteroid();
+        } else if (other.CompareTag("Missile")) {
+            ScoreManager.AddScore(scoreAmountOnDestroy);
             DestroyAsteroid();
         }
         // Check if the asteroid collided with another asteroid after the delay

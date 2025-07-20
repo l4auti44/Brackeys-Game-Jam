@@ -132,6 +132,8 @@ public class GameManager : MonoBehaviour
     private Image sourceImageRadarModule;
     [SerializeField] private Sprite[] RadarModuleImages = new Sprite[5];
 
+    private float scoreTimer = 0f;
+
     enum Levels
     {
         Lv1,
@@ -247,13 +249,18 @@ public class GameManager : MonoBehaviour
 
     private void UpdateScore()
     {
-        if (gameProgress > 1)
+        scoreTimer += Time.deltaTime;
+        if (scoreTimer >= 0.2f) // Cada 1 segundo
         {
-            ScoreManager.AddScore(Mathf.FloorToInt(gameProgress * 1f));
-        }
-        else
-        {
-            ScoreManager.AddScore(1);
+            if (gameProgress > 1)
+            {
+                ScoreManager.AddScore(Mathf.FloorToInt(gameProgress * 1f));
+            }
+            else
+            {
+                ScoreManager.AddScore(1);
+            }
+            scoreTimer = 0f; // Reinicia el timer
         }
     }
     private void HandleDialogEvents()
