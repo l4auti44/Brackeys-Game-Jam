@@ -65,7 +65,7 @@ public class AsteroidMovement : MonoBehaviour
         {
             DestroyAsteroid();
         } else if (other.CompareTag("Missile")) {
-            ScoreManager.AddScore(scoreAmountOnDestroy);
+            ScoreManager.AddScore(scoreAmountOnDestroy, transform.position);
             DestroyAsteroid();
         }
         // Check if the asteroid collided with another asteroid after the delay
