@@ -81,6 +81,13 @@ public class DestroyAndRepearSys : MonoBehaviour
             Debug.Log("System " + currentSystemBroken.name + " is broken");
             SystemBlueprint currentSys = currentSystemBroken.GetComponent<SystemBlueprint>();
             currentSys.broken = true;
+            foreach (Transform childObj in currentSystemBroken.transform)
+            {
+                if (childObj.gameObject.tag == "Feedback")
+                {
+                    childObj.gameObject.SetActive(true);
+                }
+            }
             EventManager.Game.OnBrokenSystem.Invoke(currentSys);
             disabledSystems.Enqueue(currentSystemBroken);
         }
@@ -97,7 +104,13 @@ public class DestroyAndRepearSys : MonoBehaviour
 
             SoundButton systemToEnable = disabledSystems.Dequeue();
             Debug.Log("System " + systemToEnable.name + " has been repaired");
-            
+            foreach (Transform childObj in systemToEnable.transform)
+            {
+                if (childObj.gameObject.tag == "Feedback")
+                {
+                    childObj.gameObject.SetActive(false);
+                }
+            }
             systemToEnable.GetComponent<SystemBlueprint>().broken = false;
         }
     }
@@ -123,6 +136,13 @@ public class DestroyAndRepearSys : MonoBehaviour
             currentSys.broken = true;
             EventManager.Game.OnBrokenSystem.Invoke(currentSys);
             disabledSystems.Enqueue(breakSis);
+            foreach (Transform childObj in currentSys.transform)
+            {
+                if (childObj.gameObject.tag == "Feedback")
+                {
+                    childObj.gameObject.SetActive(true);
+                }
+            }
             Debug.Log("System " + breakSis.name + " is broken");
             
         }
