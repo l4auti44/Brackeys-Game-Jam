@@ -469,7 +469,7 @@ public class GameManager : MonoBehaviour
 
     public void ActivateShield()
     {
-        if (!isShieldCooldown && !SceneController.isGameStopped) return;
+        if (isShieldCooldown && SceneController.isGameStopped) return;
         
         StartCoroutine(ShieldRoutine());
         
@@ -477,6 +477,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator ShieldRoutine()
     {
+        Debug.Log("Shield Activated");
         isShieldActive = true;
         isShieldCooldown = true;
 
