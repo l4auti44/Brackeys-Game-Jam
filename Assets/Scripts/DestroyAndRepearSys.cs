@@ -81,6 +81,7 @@ public class DestroyAndRepearSys : MonoBehaviour
             Debug.Log("System " + currentSystemBroken.name + " is broken");
             SystemBlueprint currentSys = currentSystemBroken.GetComponent<SystemBlueprint>();
             currentSys.broken = true;
+            currentSys.flashButton.StartFlash();
             foreach (Transform childObj in currentSystemBroken.transform)
             {
                 if (childObj.gameObject.tag == "Feedback")
@@ -112,6 +113,7 @@ public class DestroyAndRepearSys : MonoBehaviour
                 }
             }
             systemToEnable.GetComponent<SystemBlueprint>().broken = false;
+            systemToEnable.GetComponent<SystemBlueprint>().flashButton.StopFlash();
         }
     }
 

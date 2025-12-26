@@ -6030,6 +6030,7 @@ GameObject:
   - component: {fileID: 702659392}
   - component: {fileID: 702659391}
   - component: {fileID: 702659394}
+  - component: {fileID: 702659395}
   m_Layer: 5
   m_Name: RepairModule
   m_TagString: Untagged
@@ -6092,7 +6093,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 1993095617, guid: a27643ba0af0ac44f8251bc318426cdb, type: 3}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 1420262773, guid: a27643ba0af0ac44f8251bc318426cdb, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -6170,8 +6171,22 @@ MonoBehaviour:
   module: 0
   broken: 0
   repairSys: {fileID: 0}
+  flashButton: {fileID: 0}
   energyCost: 99
   cooldown: 70
+--- !u!114 &702659395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702659389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd625bf65bc7e2a4a8630eca1d14663a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whiteImage: {fileID: 1374383364, guid: a27643ba0af0ac44f8251bc318426cdb, type: 3}
 --- !u!1 &711992171
 GameObject:
   m_ObjectHideFlags: 0
@@ -8989,6 +9004,7 @@ GameObject:
   - component: {fileID: 1004026303}
   - component: {fileID: 1004026305}
   - component: {fileID: 1004026306}
+  - component: {fileID: 1004026307}
   m_Layer: 5
   m_Name: MissileModule
   m_TagString: Untagged
@@ -9089,7 +9105,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: -1475232239, guid: a27643ba0af0ac44f8251bc318426cdb, type: 3}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: -779292369, guid: a27643ba0af0ac44f8251bc318426cdb, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -9129,8 +9145,22 @@ MonoBehaviour:
   module: 0
   broken: 0
   repairSys: {fileID: 0}
+  flashButton: {fileID: 0}
   energyCost: 10
   cooldown: 1
+--- !u!114 &1004026307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004026300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd625bf65bc7e2a4a8630eca1d14663a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whiteImage: {fileID: -734544214, guid: a27643ba0af0ac44f8251bc318426cdb, type: 3}
 --- !u!1 &1017901624
 GameObject:
   m_ObjectHideFlags: 0
@@ -11598,6 +11628,7 @@ MonoBehaviour:
   module: 0
   broken: 0
   repairSys: {fileID: 0}
+  flashButton: {fileID: 0}
 --- !u!114 &1286853757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12786,6 +12817,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BrokenFeedback
       objectReference: {fileID: 0}
+    - target: {fileID: 8160850266618642816, guid: 8a87a5b922ffba7478fe5c2cf39fb242, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9137047662569424435, guid: 8a87a5b922ffba7478fe5c2cf39fb242, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -12848,11 +12883,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9137047662569424435, guid: 8a87a5b922ffba7478fe5c2cf39fb242, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -5.8
       objectReference: {fileID: 0}
     - target: {fileID: 9137047662569424435, guid: 8a87a5b922ffba7478fe5c2cf39fb242, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 26.83
+      value: -5.5
       objectReference: {fileID: 0}
     - target: {fileID: 9137047662569424435, guid: 8a87a5b922ffba7478fe5c2cf39fb242, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -13320,6 +13355,7 @@ GameObject:
   - component: {fileID: 1525640166}
   - component: {fileID: 1525640168}
   - component: {fileID: 1525640169}
+  - component: {fileID: 1525640170}
   m_Layer: 5
   m_Name: ShieldModule
   m_TagString: Untagged
@@ -13419,7 +13455,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: -1761536156, guid: a27643ba0af0ac44f8251bc318426cdb, type: 3}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: -95340694, guid: a27643ba0af0ac44f8251bc318426cdb, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -13459,7 +13495,21 @@ MonoBehaviour:
   module: 0
   broken: 0
   repairSys: {fileID: 0}
+  flashButton: {fileID: 0}
   cooldown: 20
+--- !u!114 &1525640170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1525640163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd625bf65bc7e2a4a8630eca1d14663a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whiteImage: {fileID: -1905265530, guid: a27643ba0af0ac44f8251bc318426cdb, type: 3}
 --- !u!1 &1527993413
 GameObject:
   m_ObjectHideFlags: 0
@@ -17647,11 +17697,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9137047662569424435, guid: 8a87a5b922ffba7478fe5c2cf39fb242, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1.1749878
+      value: -5.7
       objectReference: {fileID: 0}
     - target: {fileID: 9137047662569424435, guid: 8a87a5b922ffba7478fe5c2cf39fb242, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 28.02
+      value: -5.3
       objectReference: {fileID: 0}
     - target: {fileID: 9137047662569424435, guid: 8a87a5b922ffba7478fe5c2cf39fb242, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -18457,6 +18507,7 @@ MonoBehaviour:
   module: 0
   broken: 0
   repairSys: {fileID: 0}
+  flashButton: {fileID: 0}
 --- !u!1 &2031877908
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,11 +16,13 @@ abstract public class SystemBlueprint : MonoBehaviour
     private bool available = true;
     [HideInInspector] public bool broken = false;
     [HideInInspector] public DestroyAndRepearSys repairSys;
+    [HideInInspector] public FlashButtonBroken flashButton;
 
 
 
     virtual public void Start()
     {
+        flashButton = gameObject.GetComponent<FlashButtonBroken>();
         repairSys = GameObject.Find("GameManager").GetComponentInChildren<DestroyAndRepearSys>();
     }
 
