@@ -9323,10 +9323,10 @@ MonoBehaviour:
   - {fileID: 593485330, guid: 34e9cafeeea569546925705b2b54411e, type: 3}
   RadarModuleImages:
   - {fileID: -1873720954, guid: 34e9cafeeea569546925705b2b54411e, type: 3}
-  - {fileID: 2099363253, guid: 34e9cafeeea569546925705b2b54411e, type: 3}
-  - {fileID: -1201287795, guid: 34e9cafeeea569546925705b2b54411e, type: 3}
-  - {fileID: -1130387870, guid: 34e9cafeeea569546925705b2b54411e, type: 3}
-  - {fileID: -271581759, guid: 34e9cafeeea569546925705b2b54411e, type: 3}
+  - {fileID: -966233822, guid: 25dd37428a1d41f4083d6ef9dbd319d0, type: 3}
+  - {fileID: -2103408562, guid: 25dd37428a1d41f4083d6ef9dbd319d0, type: 3}
+  - {fileID: -515066569, guid: 25dd37428a1d41f4083d6ef9dbd319d0, type: 3}
+  - {fileID: 226471567, guid: 25dd37428a1d41f4083d6ef9dbd319d0, type: 3}
 --- !u!4 &1017901626
 Transform:
   m_ObjectHideFlags: 0
