@@ -19,6 +19,15 @@ public class SubSystemsController : MonoBehaviour
     //[SerializeField] private RectTransform arrowPos;
 
     [SerializeField] private float initalX;
+
+
+    public enum SlotType
+    {
+        Missile,
+        Shield,
+        Repair
+    }
+
     void Start()
     {
         wheelIndicator = GameObject.Find("WheelIndicator").GetComponent<Transform>();
@@ -35,14 +44,35 @@ public class SubSystemsController : MonoBehaviour
     
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R) && !isMoving && !SceneController.isGameStopped)
+        
+    }
+
+
+    public void ChangePositonToSystem(SlotType slotType)
+    {
+        if (!isMoving && !SceneController.isGameStopped)
         {
+            switch (slotType)
+            {
+                case SlotType.Missile:
+                    currentSysPos = missilePos;
+                    currentSys = 1;
+                    break;
+                case SlotType.Shield:
+                    currentSysPos = shieldPos;
+                    currentSys = 0;
+                    break;
+                case SlotType.Repair:
+                    currentSysPos = repairPos;
+                    currentSys = 2;
+                    break;
+                default:
+                    break;
+            }
             TurnOffSystems();
-            RotateSys();
             StartCoroutine(GoToPos(currentSysPos.localPosition));
         }
     }
-
     private void TurnOffSystems()
     {
         //arrowModule.SwitchAvailable(false);

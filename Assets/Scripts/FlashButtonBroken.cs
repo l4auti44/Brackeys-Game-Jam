@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class FlashButtonBroken : MonoBehaviour
 {
-    [SerializeField] private Sprite whiteImage;
+    private Sprite whiteImage;
     private Button button;
     private Sprite originalSprite;
     private Color originalColor;
@@ -14,8 +13,9 @@ public class FlashButtonBroken : MonoBehaviour
     private void Awake()
     {
         button = GetComponent<Button>();
-        originalSprite = button.image.sprite;
-        originalColor = button.image.color;
+        originalSprite = GetComponent<Image>().sprite;
+        UnityEngine.ColorUtility.TryParseHtmlString("#008851", out originalColor);
+        whiteImage = button.spriteState.disabledSprite;
     }
     public void StartFlash()
     {

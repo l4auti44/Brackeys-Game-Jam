@@ -25,6 +25,7 @@ public class MissileModuleSys : SystemBlueprint
 
     override public void DoAction()
     {
+        if (!GetAvailable() && !broken) subSystemsController.ChangePositonToSystem(SubSystemsController.SlotType.Missile);
         if (CanDoAction() && !isOnCooldown)
         {
             shipMovementScript.ShootMissile();

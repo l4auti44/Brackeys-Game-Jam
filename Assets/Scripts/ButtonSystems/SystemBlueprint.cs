@@ -18,12 +18,20 @@ abstract public class SystemBlueprint : MonoBehaviour
     [HideInInspector] public DestroyAndRepearSys repairSys;
     [HideInInspector] public FlashButtonBroken flashButton;
 
+    private Sprite pressedSprite;
+    private Button button;
+
+    [HideInInspector] public SubSystemsController subSystemsController;
+
 
 
     virtual public void Start()
     {
         flashButton = gameObject.GetComponent<FlashButtonBroken>();
         repairSys = GameObject.Find("GameManager").GetComponentInChildren<DestroyAndRepearSys>();
+        button = GetComponent<Button>();
+        pressedSprite = button.spriteState.pressedSprite;
+        subSystemsController = transform.parent.GetComponent<SubSystemsController>();
     }
 
     public void SwitchAvailable()
@@ -79,16 +87,18 @@ abstract public class SystemBlueprint : MonoBehaviour
     public void ChangeApareance()
     {
         Color myColor;
+        SpriteState state = button.spriteState;
         if (available)
         {
-            gameObject.GetComponent<SoundButton>().interactable = true;
             myColor = Color.white;
+            state.pressedSprite = pressedSprite;
         }
         else
         {
-            gameObject.GetComponent<SoundButton>().interactable = false;
             UnityEngine.ColorUtility.TryParseHtmlString("#008851", out myColor);
+            state.pressedSprite = null;
         }
         gameObject.GetComponent<Image>().color = myColor;
+        button.spriteState = state;
     }
 }

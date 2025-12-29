@@ -22,6 +22,7 @@ public class ShieldModuleSys : SystemBlueprint
 
     override public void DoAction()
     {
+        if (!GetAvailable() && !broken) subSystemsController.ChangePositonToSystem(SubSystemsController.SlotType.Shield);
         if (CanDoAction() && !isOnCooldown)
         {
             gameManager.ActivateShield();

@@ -26,6 +26,7 @@ public class RepairModuleSys : SystemBlueprint
 
     override public void DoAction()
     {
+        if (!GetAvailable() && !broken) subSystemsController.ChangePositonToSystem(SubSystemsController.SlotType.Repair);
         if (CanDoAction() && !isOnCooldown)
         {
             destroySys.Repair();
