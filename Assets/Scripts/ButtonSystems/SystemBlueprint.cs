@@ -78,14 +78,17 @@ abstract public class SystemBlueprint : MonoBehaviour
 
     public void ChangeApareance()
     {
+        Color myColor;
         if (available)
         {
             gameObject.GetComponent<SoundButton>().interactable = true;
+            myColor = Color.white;
         }
         else
         {
             gameObject.GetComponent<SoundButton>().interactable = false;
-
+            UnityEngine.ColorUtility.TryParseHtmlString("#008851", out myColor);
         }
+        gameObject.GetComponent<Image>().color = myColor;
     }
 }
