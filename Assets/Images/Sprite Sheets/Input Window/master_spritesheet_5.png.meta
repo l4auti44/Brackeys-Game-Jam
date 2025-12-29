@@ -121,10 +121,10 @@ TextureImporter:
       name: master_spritesheet_5_1
       rect:
         serializedVersion: 2
-        x: 59
-        y: 60
-        width: 29
-        height: 73
+        x: 56
+        y: 57
+        width: 35
+        height: 79
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,10 +184,10 @@ TextureImporter:
       name: master_spritesheet_5_4
       rect:
         serializedVersion: 2
-        x: 332
-        y: 41
-        width: 29
-        height: 92
+        x: 329
+        y: 38
+        width: 35
+        height: 98
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -504,7 +504,7 @@ TextureImporter:
         width: 234
         height: 134
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

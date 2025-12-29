@@ -126,11 +126,11 @@ public class GameManager : MonoBehaviour
     private bool eventFlag = false;
 
 
-    private Image sourceImageEngineModule;
-    [SerializeField] private Sprite[] EngineModuleImages = new Sprite[6];
 
-    private Image sourceImageRadarModule;
-    [SerializeField] private Sprite[] RadarModuleImages = new Sprite[5];
+    [SerializeField] private Image EngineModuleMeterImage;
+
+  
+    [SerializeField] private Image RadarModuleMeterImage;
 
     private float scoreTimer = 0f;
 
@@ -222,8 +222,8 @@ public class GameManager : MonoBehaviour
     private void InitializeUIReferences()
     {
         totalRateEnergyDecrease = GameObject.Find("Total Rate").GetComponentInChildren<TextMeshPro>();
-        sourceImageEngineModule = GameObject.Find("EngineModule").transform.GetComponentInChildren<Image>();
-        sourceImageRadarModule = GameObject.Find("RadarModule").transform.GetComponentInChildren<Image>();
+        energyMax.gameObject.SetActive(false);
+
     }
     #endregion
     
@@ -366,12 +366,17 @@ public class GameManager : MonoBehaviour
     public void DecreaseMaxEnergy(float amount)
     {
         maxEnergy -= amount;
+        if (!energyMax.gameObject.activeSelf)
+        {
+            energyMax.gameObject.SetActive(true);
+        }
         energyMax.value += amount * 0.01f;
     }
     public void RestartMaxEnergy()
     {
         maxEnergy = 1000;
         energyMax.value = 0;
+        energyMax.gameObject.SetActive(false);
     }
     
 
@@ -450,16 +455,16 @@ public class GameManager : MonoBehaviour
         switch (radarLV)
         {
             case 4:
-                sourceImageRadarModule.sprite = RadarModuleImages[4];
+                RadarModuleMeterImage.fillAmount = 1f;
                 break;
             case 3:
-                sourceImageRadarModule.sprite = RadarModuleImages[3];
+                RadarModuleMeterImage.fillAmount = 0.75f;
                 break;
             case 2:
-                sourceImageRadarModule.sprite = RadarModuleImages[2];
+                RadarModuleMeterImage.fillAmount = 0.50f;
                 break;
             case 1:
-                sourceImageRadarModule.sprite = RadarModuleImages[1];
+                RadarModuleMeterImage.fillAmount = 0.25f;
                 break;
 
         }
@@ -728,19 +733,19 @@ public class GameManager : MonoBehaviour
         switch (positionLV)
         {
             case 5:
-                sourceImageEngineModule.sprite = EngineModuleImages[5];
+                EngineModuleMeterImage.fillAmount = 1f;
                 break;
             case 4:
-                sourceImageEngineModule.sprite = EngineModuleImages[4];
+                EngineModuleMeterImage.fillAmount = 0.8f;
                 break;
             case 3:
-                sourceImageEngineModule.sprite = EngineModuleImages[3];
+                EngineModuleMeterImage.fillAmount = 0.6f;
                 break;
             case 2:
-                sourceImageEngineModule.sprite = EngineModuleImages[2];
+                EngineModuleMeterImage.fillAmount = 0.4f;
                 break;
             case 1:
-                sourceImageEngineModule.sprite = EngineModuleImages[1];
+                EngineModuleMeterImage.fillAmount = 0.2f;
                 break;
 
         }
