@@ -36,6 +36,4 @@ public class SceneController : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene(name);
     }
-
-
 }

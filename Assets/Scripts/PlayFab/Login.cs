@@ -1,40 +1,79 @@
 using PlayFab;
 using PlayFab.ClientModels;
 using System.Collections.Generic;
+using TMPro;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Login : MonoBehaviour
 {
+    [SerializeField] private TMP_InputField customNameInput;
+    private string customID;
+
+    private const string CustomIdKey = "PF_CUSTOM_ID";
+
+    private const string LastUsernameKey = "LAST_USERNAME";
+
+
     void Awake()
+{
+    if (PlayerPrefs.HasKey(LastUsernameKey))
     {
-        LoginAsPlayer();
+        customNameInput.text = PlayerPrefs.GetString(LastUsernameKey);
+        customNameInput.MoveTextEnd(false);
+    }
+}
+
+
+    public void LoginAndEnsureDisplayName()
+    {
+        customID = GetOrCreateCustomId();
+
+        LoginWithCustomIDRequest request = new LoginWithCustomIDRequest
+         { 
+            CustomId = customID,
+            CreateAccount = true,
+            InfoRequestParameters = new GetPlayerCombinedInfoRequestParams
+            {
+                GetPlayerProfile = true
+            }
+         };
+
+        
+
+        PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccessWithPlayerInput, OnLoginFailure);
     }
 
 
-
-    private void LoginAsPlayer(string customId = "LautiCrack")
-    {
-        LoginWithCustomIDRequest request = new LoginWithCustomIDRequest { CustomId = customId, CreateAccount = false };
-
-        PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnLoginFailure);
-    }
-
-    private void OnLoginSuccess(LoginResult result)
+    private void OnLoginSuccessWithPlayerInput(LoginResult result)
     {
         Debug.Log("Login OK 🔥 PlayerId: " + result.PlayFabId);
 
-        var nameReq = new UpdateUserTitleDisplayNameRequest { DisplayName = "LautiCrack" };
-
-        PlayFabClientAPI.UpdateUserTitleDisplayName(nameReq,
-            r =>
+        string currentName = result.InfoResultPayload?.PlayerProfile?.DisplayName;
+        string desiredName = customNameInput?.text?.Trim();
+        if (!string.IsNullOrEmpty(currentName))
+        {
+            if (currentName != desiredName)
             {
-                Debug.Log("Nombre listo 😎");
-            },
-            e =>
+                SetDisplayNameFromInput();
+            }else
             {
-                Debug.LogError("No pude setear nombre 💀: " + e.GenerateErrorReport());
+                if (!PlayerPrefs.HasKey(LastUsernameKey))
+                {
+                    PlayerPrefs.SetString(LastUsernameKey, desiredName);
+                    PlayerPrefs.Save();
+                }
+                Debug.Log("Welcome back, " + currentName);
+                SceneController.SceneLoader("GameScene");
             }
-        );
+        }else
+        {
+            SetDisplayNameFromInput();
+        }
+            
+
+        
     }
 
     private void OnLoginFailure(PlayFabError error)
@@ -56,12 +95,51 @@ public class Login : MonoBehaviour
         PlayFabClientAPI.UpdatePlayerStatistics(request, 
             result =>   
             {
-                Debug.Log("Score subido 🚀: " + score);
+                Debug.Log("Score upload 🚀: " + score);
             },
-            error => Debug.LogError("No subió el score 💀: " + error.GenerateErrorReport())
+            error => Debug.LogError("cannot upload score 💀: " + error.GenerateErrorReport())
         );
     }
 
 
+    private string GetOrCreateCustomId()
+    {
+        if (PlayerPrefs.HasKey(CustomIdKey))
+            return PlayerPrefs.GetString(CustomIdKey);
+
+        string newId = System.Guid.NewGuid().ToString("N");
+        PlayerPrefs.SetString(CustomIdKey, newId);
+        PlayerPrefs.Save();
+        return newId;
+    }
+
+
+    public void SetDisplayNameFromInput()
+    {
+        string desiredName = customNameInput?.text?.Trim();
+
+        if (string.IsNullOrEmpty(desiredName))
+        {
+            Debug.LogWarning("Display name is empty 💀");
+            return;
+        }
+
+
+        var req = new UpdateUserTitleDisplayNameRequest { DisplayName = desiredName };
+
+        PlayFabClientAPI.UpdateUserTitleDisplayName(req,
+            r =>
+            {
+                Debug.Log("Name set 😎: " + desiredName);
+                PlayerPrefs.SetString(LastUsernameKey, desiredName);
+                PlayerPrefs.Save();
+                SceneController.SceneLoader("GameScene");
+            },
+            e =>
+            {
+                Debug.LogError("Cannot set name 💀: " + e.GenerateErrorReport());
+            }
+        );
+    }
 
 }
