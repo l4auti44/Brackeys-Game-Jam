@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.EventSystems.EventTrigger;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -25,6 +24,8 @@ public class GameManager : MonoBehaviour
     public float gameProgressSpeed;
     public GameObject gameProgressSlider;
     public float[] gameProgressSpeedPositionLVS = new float[5];
+
+    private bool dead = false;
 
     // --- Game Objects ---
     [Header("Game Objects")]
@@ -144,6 +145,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        ScoreManager.ResetScore();
         InitializeShip();
         StoreOriginalEnergyModifiers();
         ResetEnergyModifiers();
@@ -236,13 +238,15 @@ public class GameManager : MonoBehaviour
         HandleDialogEvents();
         if (!SceneController.isGamePaused)
         {
-            UpdateGameProgress();
+            if (!dead)
+                UpdateGameProgress();
             UpdateEnergy();
             HandleGameOver();
             ClampEnergy();
             UpdateCameraZoom();
             UpdateUI();
-            UpdateScore();
+            if (!dead)
+                UpdateScore();
         }
     }
     #region UpdateMethods
@@ -328,6 +332,7 @@ public class GameManager : MonoBehaviour
         if (timerForGameOver <= 0f)
         {
             timerForGameOver = 99999;
+            dead = true;
             EventManager.Game.OnDie.Invoke(this);
         }
     }

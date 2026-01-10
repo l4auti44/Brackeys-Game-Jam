@@ -1,12 +1,13 @@
 using PlayFab;
 using PlayFab.ClientModels;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PoblateLeaderBoard : MonoBehaviour
 {
     [SerializeField] private GameObject scoreTemplate;
     [SerializeField] private Transform scoreParent;
+
+    [SerializeField] private Color backgroundColorAlt;
 
     private bool fetched = false;
     // Start is called before the first frame update
@@ -20,12 +21,13 @@ public class PoblateLeaderBoard : MonoBehaviour
     {
         if (PlayFabClientAPI.IsClientLoggedIn() && !fetched)
         {
+            
             GetTop10();
             ClearLeaderboard();
         }
     }
 
-        public void GetTop10()
+    public void GetTop10()
     {
         var request = new GetLeaderboardRequest
         {
@@ -41,8 +43,12 @@ public class PoblateLeaderBoard : MonoBehaviour
                 foreach (var entry in result.Leaderboard)
                 {
                     var scoreObject = Instantiate(scoreTemplate, scoreParent);
+                    if (entry.Position % 2 == 1)
+                    {
+                        scoreObject.GetComponentInChildren<UnityEngine.UI.Image>().color = backgroundColorAlt;
+                    }
                     var name = string.IsNullOrEmpty(entry.DisplayName) ? entry.PlayFabId : entry.DisplayName;
-                    scoreObject.GetComponent<ScoreEntry>().SetData(entry.Position + 1, name, entry.StatValue);
+                    scoreObject.GetComponentInChildren<ScoreEntry>().SetData(entry.Position + 1, name, entry.StatValue);
                     Debug.Log($"{entry.Position + 1}) {name} - {entry.StatValue}");
                 };
             },

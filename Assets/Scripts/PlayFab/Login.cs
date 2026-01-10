@@ -1,10 +1,9 @@
 using PlayFab;
 using PlayFab.ClientModels;
-using System.Collections.Generic;
 using TMPro;
-using UnityEditor.SearchService;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class Login : MonoBehaviour
 {
@@ -65,7 +64,8 @@ public class Login : MonoBehaviour
                     PlayerPrefs.Save();
                 }
                 Debug.Log("Welcome back, " + currentName);
-                SceneController.SceneLoader("GameScene");
+                if (SceneManager.GetActiveScene().name == "Main Menu")
+                    SceneController.SceneLoader("GameScene");
             }
         }else
         {
@@ -81,25 +81,6 @@ public class Login : MonoBehaviour
         Debug.LogError("Login failed 😭 " + error.GenerateErrorReport());
     }
 
-
-    public void SubmitScore(int score)
-    {
-        var request = new UpdatePlayerStatisticsRequest
-        {
-            Statistics = new List<StatisticUpdate>
-            {
-                new StatisticUpdate { StatisticName = "HighScore", Value = score }
-            }
-        };
-
-        PlayFabClientAPI.UpdatePlayerStatistics(request, 
-            result =>   
-            {
-                Debug.Log("Score upload 🚀: " + score);
-            },
-            error => Debug.LogError("cannot upload score 💀: " + error.GenerateErrorReport())
-        );
-    }
 
 
     private string GetOrCreateCustomId()
@@ -133,7 +114,8 @@ public class Login : MonoBehaviour
                 Debug.Log("Name set 😎: " + desiredName);
                 PlayerPrefs.SetString(LastUsernameKey, desiredName);
                 PlayerPrefs.Save();
-                SceneController.SceneLoader("GameScene");
+                if (SceneManager.GetActiveScene().name == "Main Menu")
+                    SceneController.SceneLoader("GameScene");
             },
             e =>
             {

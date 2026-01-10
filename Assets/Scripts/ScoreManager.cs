@@ -32,5 +32,10 @@ public static class ScoreManager
     {
         return score;
     }
+    
+    public static void ResetScore()
+    {
+        score = 0;
+    }
 }
 
