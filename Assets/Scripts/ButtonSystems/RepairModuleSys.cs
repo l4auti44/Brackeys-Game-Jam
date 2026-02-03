@@ -53,6 +53,7 @@ public class RepairModuleSys : SystemBlueprint
         while (currentCooldown > 0)
         {
             currentCooldown -= Time.deltaTime; // Reduce the cooldown by the time since the last frame
+            if (SceneController.isGameStopped) yield return null;
             text.text = Mathf.Clamp(currentCooldown, 0, cooldown).ToString(); // Update the text with formatted cooldown time
             yield return null; // Wait for the next frame
         }

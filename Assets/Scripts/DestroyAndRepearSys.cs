@@ -89,6 +89,7 @@ public class DestroyAndRepearSys : MonoBehaviour
                     childObj.gameObject.SetActive(true);
                 }
             }
+            SoundManager.PlaySound(SoundManager.Sound.DestroySystem);
             EventManager.Game.OnBrokenSystem.Invoke(currentSys);
             disabledSystems.Enqueue(currentSystemBroken);
         }
@@ -105,6 +106,7 @@ public class DestroyAndRepearSys : MonoBehaviour
 
             SoundButton systemToEnable = disabledSystems.Dequeue();
             Debug.Log("System " + systemToEnable.name + " has been repaired");
+            SoundManager.PlaySound(SoundManager.Sound.RepairSystem);
             foreach (Transform childObj in systemToEnable.transform)
             {
                 if (childObj.gameObject.tag == "Feedback")

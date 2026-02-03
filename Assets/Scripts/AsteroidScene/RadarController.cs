@@ -48,7 +48,7 @@ public class RadarController : MonoBehaviour
         /// Instantiate the wave prefab at the sonar's position
         GameObject waveInstance = Instantiate(wavePrefab, transform.position, Quaternion.identity);
         Transform waveTransform = waveInstance.transform;
-
+        SoundManager.PlaySound(SoundManager.Sound.RadarWaveSound);
         float currentSize = 0f;
 
         // Increase size until it reaches the maximum size
