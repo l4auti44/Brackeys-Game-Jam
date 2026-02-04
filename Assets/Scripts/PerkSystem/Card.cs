@@ -8,6 +8,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler
     private PerkScriptableObject perk;
     private PerkController perkController;
 
+    public string perk_id;
+
     void Start()
     {
         perkController = GameObject.Find("Canvas Perks").GetComponent<PerkController>();
@@ -23,7 +25,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler
 
     public void PerformeAction()
     {
-        perkController.PerformAction(perk.action);
+        perkController.PerformAction(perk);
         EventManager.Game.OnPerkPicked.Invoke();
     }
 

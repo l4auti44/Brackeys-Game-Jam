@@ -1296,6 +1296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2887966db2ec3564b999bb9992616610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  perk_id: 
 --- !u!1 &113231485
 GameObject:
   m_ObjectHideFlags: 0
@@ -2663,6 +2664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2887966db2ec3564b999bb9992616610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  perk_id: 
 --- !u!1 &295208214
 GameObject:
   m_ObjectHideFlags: 0
@@ -4612,6 +4614,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9643c58a350b4f34899e352b0f89349f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  missile_perk_decayrate: 2
+  missile_perk_startN: 1
   perkSys: {fileID: 1029981141}
   inputBlocker: {fileID: 1663939394}
 --- !u!1 &448063869
@@ -9452,6 +9456,7 @@ MonoBehaviour:
   subSystemsController: {fileID: 0}
   energyCost: 10
   cooldown: 1
+  missile_mod: 0
 --- !u!114 &1004026307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9497,7 +9502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7266b320ccde9345b54ab453cab1b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameProgress: 0
+  gameProgress: 99
   gameProgressSpeed: 0
   gameProgressSlider: {fileID: 1988926708}
   gameProgressSpeedPositionLVS:
@@ -10373,6 +10378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2887966db2ec3564b999bb9992616610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  perk_id: 
 --- !u!1 &1127073550
 GameObject:
   m_ObjectHideFlags: 0

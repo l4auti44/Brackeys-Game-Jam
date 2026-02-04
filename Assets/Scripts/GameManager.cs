@@ -187,7 +187,7 @@ public class GameManager : MonoBehaviour
 
     private void InitializeGameSettings()
     {
-        energy = maxEnergy;
+        //energy = maxEnergy;
         shipSpeed = speedLVS[0];
         positionLV = 1;
         positionModEnergyDecreaseLV1 = positionModEnergyDecreaseLV1_original;
@@ -357,6 +357,20 @@ public class GameManager : MonoBehaviour
         totalRateEnergyDecrease.text = energyDecreaseSpeed.ToString();
     }
     #endregion
+
+    #region OnChosenPerk
+
+    public void EnergyToMax()
+    {
+        energy = maxEnergy;
+        RestartMaxEnergy();
+    }
+    
+
+    #endregion
+
+
+
 
     public void DecreaseEnergy(float energyToDecrease)
     {

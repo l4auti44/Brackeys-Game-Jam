@@ -15,9 +15,15 @@ public class PerkScriptableObject : ScriptableObject
 
     public enum Perks
     {
-        Energy25,
-        MissileCooldown,
-        FullEnergy
+        MaxEnergyRestore,
+        DecreaseMissileCoolDown,
+        EnergyCollectionBuff,
+        Magnetism,
+        ArrowEffeciency,
+        RepairEffeciency,
+        DecreaseRepairTime,
+        PlusOneMissiles
+
     }
     //public EventManager.PerkEvents action;
 }

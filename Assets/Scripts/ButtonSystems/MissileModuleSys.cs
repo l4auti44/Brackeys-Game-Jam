@@ -9,6 +9,7 @@ public class MissileModuleSys : SystemBlueprint
     private GameManager gameManager;
     public float energyCost = 10f;
     public float cooldown = 1f;
+    public float missile_mod;
     private bool isOnCooldown = false;
     private TextMeshPro text;
     // Start is called before the first frame update
