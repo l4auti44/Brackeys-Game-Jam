@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
     // --- Game Objects ---
     [Header("Game Objects")]
     public GameObject ship;
+    public ShipMovement ship_script;
     public AsteroidSpawner asteroidSpawner;
     public GameObject  energySpawner, shield, radar;
     public ParallarEffect parallax;
@@ -102,6 +104,12 @@ public class GameManager : MonoBehaviour
     public bool isShieldActive = false;
     public bool isShieldCooldown = false;
 
+    // --- Magnetism Settings ---
+
+    public GameObject magnetic_field_Object;
+
+    public MagnetismField magnetic_field;
+
     // --- Overload Settings ---
     [Header("Overload Settings")]
     public bool isOverload = false;  // Tracks overload state
@@ -145,6 +153,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        SceneController.StartGame();
         ScoreManager.ResetScore();
         InitializeShip();
         StoreOriginalEnergyModifiers();

@@ -16,6 +16,7 @@ public class ShipMovement : MonoBehaviour
     public float timeStopWhenHitEnemy, shakeAmountWhenHitEnemy, shakeTimeWhenHitEnemy;
     public RectTransform cabinUI_gameObject, frame_asteriodsUI; //reference to the cabin UI object to trigger the shake effect
 
+    public float EnergyMod;
     public float energyCollectable; //Energy replenished when collects an energy collectable
     private float energy;
 
@@ -98,7 +99,7 @@ public class ShipMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("EnergyCollectable"))
         {
-            gameManager.IncreaseEnergy(energyCollectable);
+            gameManager.IncreaseEnergy(energyCollectable+EnergyMod);
             SoundManager.PlaySound(collectSoundsFX);
 
             Destroy(collision.gameObject);

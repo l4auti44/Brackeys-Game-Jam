@@ -36,4 +36,10 @@ public class SceneController : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene(name);
     }
+
+    public static void StartGame()
+    {
+        isGameStopped = false;
+            Time.timeScale = 1f;
+    }
 }
