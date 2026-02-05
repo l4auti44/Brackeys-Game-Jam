@@ -94,36 +94,35 @@ public class PerkController : MonoBehaviour
     public void PerformAction(PerkScriptableObject perk)
     {
         PerkScriptableObject.Perks perk_yuh = perk.action;
-        ManageMagnetism();
+        //ManageMagnetism();
 
-        //switch (perk_yuh)
-        //{
-        //    case PerkScriptableObject.Perks.MaxEnergyRestore:
-        //        gameManager.EnergyToMax();
-        //        break;
-        //    case PerkScriptableObject.Perks.DecreaseMissileCoolDown:
-        //        if (missileModule.cooldown > 0.15f)
-        //        {
-        //            MissileModCalc();
-        //        }
-        //        break;
-        //    case PerkScriptableObject.Perks.EnergyCollectionBuff:
-        //        {
-        //            EnergyCollectionModCalc();
-        //        }
-        //        break;
-        //    case PerkScriptableObject.Perks.DecreaseRepairTime:
-        //        {
-        //            RepairTimeModCalc();
-        //        }
-        //        break;
-        //        break;
-        //    case PerkScriptableObject.Perks.Magnetism:
-        //        {
-        //            ManageMagnetism();
-        //        }
-        //        break;
-        //}
+        switch (perk_yuh)
+        {
+            case PerkScriptableObject.Perks.MaxEnergyRestore:
+                gameManager.EnergyToMax();
+                break;
+            case PerkScriptableObject.Perks.DecreaseMissileCoolDown:
+                if (missileModule.cooldown > 0.15f)
+                {
+                    MissileModCalc();
+                }
+                break;
+            case PerkScriptableObject.Perks.EnergyCollectionBuff:
+                {
+                    EnergyCollectionModCalc();
+                }
+                break;
+            case PerkScriptableObject.Perks.DecreaseRepairTime:
+                {
+                    RepairTimeModCalc();
+                }
+                break;
+            case PerkScriptableObject.Perks.Magnetism:
+                {
+                    ManageMagnetism();
+                }
+                break;
+        }
     }
 
     void ManageMagnetism()

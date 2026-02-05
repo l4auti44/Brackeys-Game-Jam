@@ -9,11 +9,12 @@ TagManager:
   - EnergyCollectable
   - Missile
   - Feedback
+  - MagneticField
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - MagneticField
   - Water
   - UI
   - 
