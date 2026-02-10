@@ -33,7 +33,6 @@ public class DialogSystem : MonoBehaviour
         [TextArea]
         public string taskText, failText, goodText;
         public float timeForTask = 30f;
-        private bool isDone = false;
     }
 
     private DialogEventsList currentDialog;

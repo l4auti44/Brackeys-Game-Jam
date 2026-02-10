@@ -17,13 +17,4 @@ public class ShieldController : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, player.position, followSpeed * Time.deltaTime);
         }
     }
-
-    // Handle collisions with enemies
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Enemy"))
-        {
-            Destroy(collision.gameObject); // Destroy the enemy
-        }
-    }
 }

@@ -118,7 +118,6 @@ public class GameManager : MonoBehaviour
     // --- Game Over Timer ---
     [Header("Game Over Timer")]
     public float timerForGameOver = 10f;
-    private float timer = 10f;
 
     // --- Sound Modules ---
     [Header("Sound Modules")]

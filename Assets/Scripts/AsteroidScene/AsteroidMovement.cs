@@ -16,6 +16,7 @@ public class AsteroidMovement : MonoBehaviour
     
 
     [SerializeField] private int scoreAmountOnDestroy = 10;
+    [SerializeField] private int scoreAmountOnDestroyWithShield = 15;
 
     [Header("Asteroid Prefabs")]
     public List<GameObject> bigAsteroids;    // Pool of big asteroids
@@ -29,20 +30,18 @@ public class AsteroidMovement : MonoBehaviour
     [Range(0f, 100f)]
     [SerializeField] private float energyDropRate = 5;
 
+    private GameManager gameManager;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         // Get the screen bottom Y position
         screenBottomY = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0)).y;
 
+        gameManager = GameObject.FindObjectOfType<GameManager>();
+
         // Initialize delay for asteroid collision
         StartCoroutine(EnableAsteroidCollision());
-
-        // Destroy the asteroid if it goes off the screen
-        if (transform.position.y < screenBottomY - 1f) // Adding some margin
-        {
-            Destroy(gameObject);
-        }
     }
 
     void Update()
@@ -56,22 +55,29 @@ public class AsteroidMovement : MonoBehaviour
         {
             rb.simulated = true;
         }
+
+        // Destroy the asteroid if it goes off the screen
+        if (transform.position.y < screenBottomY - 1f) // Adding some margin
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Check if the asteroid collided with something that should trigger its destruction
-        if (other.CompareTag("Player"))
+        switch (other.tag)
         {
-            DestroyAsteroid();
-        } else if (other.CompareTag("Missile")) {
-            ScoreManager.AddScore(scoreAmountOnDestroy, transform.position);
-            DestroyAsteroid();
-        }
-        // Check if the asteroid collided with another asteroid after the delay
-        else if (canCollideWithAsteroids && other.CompareTag("Enemy"))
-        {
-            DestroyAsteroid();
+            case "Enemy":
+                if (canCollideWithAsteroids) DestroyAsteroid();
+                return;
+
+            case "Player":
+                DestroyAsteroid(gameManager != null && gameManager.isShieldActive);
+                return;
+
+            case "Missile":
+                DestroyAsteroid();
+                return;
         }
     }
 
@@ -81,11 +87,17 @@ public class AsteroidMovement : MonoBehaviour
         canCollideWithAsteroids = true; // Enable collision with other asteroids
     }
 
-    public void DestroyAsteroid()
+    public void DestroyAsteroid(bool destroyWithShield = false)
     {
         SpawnOnDestruction();
+        if (!destroyWithShield)
+            ScoreManager.AddScore(scoreAmountOnDestroy, transform.position);
+        else
+            ScoreManager.AddScore(scoreAmountOnDestroyWithShield, transform.position);
+
         Destroy(gameObject);
     }
+
 
     private void SpawnOnDestruction()
     {
@@ -141,20 +153,14 @@ public class AsteroidMovement : MonoBehaviour
                 Vector2 directionToPlayer = (player.transform.position - energyDrop.transform.position).normalized;
 
                 // Set the speed of the energy drop
-                Rigidbody2D rb = energyDrop.GetComponent<Rigidbody2D>();
-                if (rb != null)
+                Rigidbody2D dropRb = energyDrop.GetComponent<Rigidbody2D>();
+                if (dropRb != null)
                 {
-                    rb.velocity = directionToPlayer * energyDropSpeed;
+                    dropRb.velocity = directionToPlayer * energyDropSpeed;
                 }
             }
         }
         
-    }
-
-    private IEnumerator DestroyAfterLifespan()
-    {
-        yield return new WaitForSeconds(asteroidLifespan);
-        DestroyAsteroid(); // Automatically destroy asteroid after lifespan ends
     }
 }
 
