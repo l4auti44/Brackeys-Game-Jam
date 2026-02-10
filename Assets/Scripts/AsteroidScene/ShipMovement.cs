@@ -106,14 +106,16 @@ public class ShipMovement : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            //Trigger crew animator with this event
-            EventManager.Player.OnImpact.Invoke(this);
+            if (!gameManager.isShieldActive)
+            {
+                //Trigger crew animator with this event
+                EventManager.Player.OnImpact.Invoke(this);
 
-            gameManager.DecreaseMaxEnergy(energyDecreaseEnemyHit);
+                gameManager.DecreaseMaxEnergy(energyDecreaseEnemyHit);
 
-            SoundManager.PlaySound(SoundManager.Sound.HitByAsteroid);
-
-            Destroy(collision.gameObject);
+                SoundManager.PlaySound(SoundManager.Sound.HitByAsteroid);
+            }
+            
 
             //Trigger screen shake
             gameFeelManager.StartShake(shakeTimeWhenHitEnemy, shakeAmountWhenHitEnemy);

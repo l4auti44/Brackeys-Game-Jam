@@ -10,8 +10,6 @@ public class DestroyAndRepearSys : MonoBehaviour
         ShieldModule
     }
 
-    [SerializeField] private float BreakTime = 15f;
-
 
     //SYSTEMS
     private SoundButton MissileModule;
