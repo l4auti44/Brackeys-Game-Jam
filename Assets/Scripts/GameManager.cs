@@ -133,6 +133,10 @@ public class GameManager : MonoBehaviour
     //temporal flags
     private bool eventFlag = false;
 
+    // --- Perk Related ---
+
+    [SerializeField] private PerkController perkController;
+
 
 
     [SerializeField] private Image EngineModuleMeterImage;
@@ -160,6 +164,7 @@ public class GameManager : MonoBehaviour
         InitializeGameSettings();
         InitializeModules();
         InitializeUIReferences();
+        perkController.ReInitializeCards();
     }
     #region StartMethods
     private void InitializeShip()
@@ -298,6 +303,7 @@ public class GameManager : MonoBehaviour
 
         if (gameProgress >= 100f)
         {
+            perkController.ReInitializeCards();
             EventManager.Game.OnWin.Invoke();
         }
     }

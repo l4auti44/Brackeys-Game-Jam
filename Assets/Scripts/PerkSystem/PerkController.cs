@@ -59,6 +59,7 @@ public class PerkController : MonoBehaviour
 
     public void SwitchEnable()
     {
+        
         perkSys.SetActive(!perkSys.activeSelf);
         if (perkSys.activeSelf)
         {
@@ -125,6 +126,32 @@ public class PerkController : MonoBehaviour
         }
     }
 
+   public void ReInitializeCards()
+    {
+        ResetPool();
+    foreach (Card c in PerkButtons)
+        {
+            Debug.Log("DrewCard");
+            c.PopulatePerkData(DrawCard());
+        }
+        
+    }
+
+    void ResetPool()
+    {
+        
+        perks = new List<PerkScriptableObject>(Totalperks);
+    }
+
+     PerkScriptableObject DrawCard()
+    {
+        PerkScriptableObject perk = perks[Random.Range(0, perks.Count)];
+        perks.Remove(perk);
+        Debug.Log("Perk : " + perk.name);
+        return perk;
+
+    }
+
     void ManageMagnetism()
     {
         gameManager.magnetic_field_Object.SetActive(true);
@@ -182,4 +209,13 @@ public class PerkController : MonoBehaviour
     {
         EventManager.Game.OnPerkPicked.Invoke();
     }
+
+    public List<Card> PerkButtons;
+
+    public List<PerkScriptableObject> Totalperks;
+
+    [SerializeField] private List<PerkScriptableObject> perks;
+
+    
+    
 }

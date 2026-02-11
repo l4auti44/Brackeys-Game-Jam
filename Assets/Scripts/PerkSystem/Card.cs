@@ -13,12 +13,14 @@ public class Card : MonoBehaviour, IPointerEnterHandler
     void Start()
     {
         perkController = GameObject.Find("Canvas Perks").GetComponent<PerkController>();
-        perk = GameAssets.i.perksPool[Random.Range(0, GameAssets.i.perksPool.Length)];
-        PopulatePerkData(perk);
+       
     }
-    public void PopulatePerkData(PerkScriptableObject perk)
+
+
+    public void PopulatePerkData(PerkScriptableObject _perk)
     {
-        GetComponentInChildren<TextMeshProUGUI>().text = perk.title;
+        GetComponentInChildren<TextMeshProUGUI>().text = _perk.title;
+        perk = _perk;
         //description.text = perk.description;
         //sprite.sprite = perk.sprite;
     }

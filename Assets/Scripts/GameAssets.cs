@@ -6,6 +6,11 @@ public class GameAssets : MonoBehaviour
 {
     private static GameAssets _i;
 
+    private void Start()
+    {
+     
+    }
+
     public static GameAssets i
     {
         get
@@ -13,8 +18,18 @@ public class GameAssets : MonoBehaviour
             if (_i == null) _i = Instantiate(Resources.Load("GameAssets") as GameObject).GetComponent<GameAssets>();
             return _i;
         }
+
         
     }
+
+    //public PerkScriptableObject DrawCard()
+    //{
+    //    PerkScriptableObject perk = perksPool[Random.Range(0, perksPool.Count)];
+    //    perksPool.Remove(perk);
+    //    Debug.Log("Perk : " + perk.name);
+    //    return perk;
+        
+    //}
 
     public SoundAudioClip[] soundAudioClipArray;
 
@@ -35,6 +50,4 @@ public class GameAssets : MonoBehaviour
         public AudioClip[] audios;
         [Range(0, 1)] public float volume = 1;
     }
-
-    public PerkScriptableObject[] perksPool;
 }
