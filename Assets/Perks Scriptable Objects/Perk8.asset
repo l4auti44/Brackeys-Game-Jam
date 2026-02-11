@@ -15,4 +15,4 @@ MonoBehaviour:
   title: +1 missiles
   description: 'additional missle fired '
   sprite: {fileID: 0}
-  action: 0
+  action: 7

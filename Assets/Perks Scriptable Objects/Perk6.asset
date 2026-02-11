@@ -15,4 +15,4 @@ MonoBehaviour:
   title: repair efficiency
   description: repair efficiency
   sprite: {fileID: 0}
-  action: 0
+  action: 5

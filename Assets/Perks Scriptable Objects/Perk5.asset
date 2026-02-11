@@ -15,4 +15,4 @@ MonoBehaviour:
   title: Arrow efficiency
   description: Arrow efficiency
   sprite: {fileID: 0}
-  action: 0
+  action: 4

@@ -731,104 +731,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 47947458}
   m_CullTransparentMesh: 1
---- !u!1 &49888529
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 49888531}
-  - component: {fileID: 49888530}
-  m_Layer: 0
-  m_Name: GameAssets(Clone)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &49888530
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 49888529}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfcfd24efd2fdf4419f7e025b96446fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  soundAudioClipArray:
-  - sound: 0
-    audioClip: {fileID: 8300000, guid: 6f96901ac3f9a16499c5e521071cee62, type: 3}
-    volume: 0.01
-  - sound: 12
-    audioClip: {fileID: 8300000, guid: 1c8cd8342b702b042b836f8dbd12b92e, type: 3}
-    volume: 0.3
-  - sound: 13
-    audioClip: {fileID: 8300000, guid: 98309c459d103a744b31aa33aa099cb8, type: 3}
-    volume: 0.3
-  - sound: 3
-    audioClip: {fileID: 8300000, guid: 2a49eb887bcec0e45bb51bdf91e46c89, type: 3}
-    volume: 0.3
-  - sound: 9
-    audioClip: {fileID: 8300000, guid: 5feed76d62254ca408fcb08f79113783, type: 3}
-    volume: 0.686
-  - sound: 14
-    audioClip: {fileID: 8300000, guid: ec336779428967e4ebedd2d9d270c309, type: 3}
-    volume: 0.617
-  - sound: 15
-    audioClip: {fileID: 8300000, guid: 95bfb0c7cccd78844b0a6cfdbf009d57, type: 3}
-    volume: 0.543
-  - sound: 16
-    audioClip: {fileID: 8300000, guid: 40dc2d3a532ffd94c909bb591c452221, type: 3}
-    volume: 0.543
-  - sound: 17
-    audioClip: {fileID: 8300000, guid: 366d469af60ab3f4e83bcb537ca51dc9, type: 3}
-    volume: 0.543
-  dialogueAudioPools:
-  - dialogPool: 0
-    audios:
-    - {fileID: 8300000, guid: 117b3334051630a4aa758462623cd99d, type: 3}
-    - {fileID: 8300000, guid: f6e15947a6121c049873cab6a249a8c9, type: 3}
-    - {fileID: 8300000, guid: b70c14c0396904f43897572f3bfba356, type: 3}
-    - {fileID: 8300000, guid: b08dc3ffca0c31441bc8ce1f3a89282c, type: 3}
-    - {fileID: 8300000, guid: 6fdbe0e9ef8c99848866919cab4a7157, type: 3}
-    volume: 0.25
-  - dialogPool: 1
-    audios:
-    - {fileID: 8300000, guid: 75b6593bb5363d948a678219b202d653, type: 3}
-    - {fileID: 8300000, guid: 696670d8c561edd439a3b477c7e8fd42, type: 3}
-    - {fileID: 8300000, guid: 206bcb652bc7a7d4496678d7286007ab, type: 3}
-    - {fileID: 8300000, guid: 60e6924af491f8947af1b1a47d23c20f, type: 3}
-    - {fileID: 8300000, guid: a36d6747a5d77874c8d11d6134750055, type: 3}
-    volume: 0.25
-  perksPool:
-  - {fileID: 11400000, guid: d8745115710cbe044b7c31dbdb5bb6e0, type: 2}
-  - {fileID: 11400000, guid: b64f118c22afc5c4e8258a05a68da6a0, type: 2}
-  - {fileID: 11400000, guid: 5dee2c5fb4b66644fa68d11376d5f5be, type: 2}
-  - {fileID: 11400000, guid: d40045ab24c850140ace8e47ed141d84, type: 2}
-  - {fileID: 11400000, guid: b42ecfaf655891447b40636ef3a6d5e5, type: 2}
-  - {fileID: 11400000, guid: a1bbc74fdafc8d849b1972c58e770107, type: 2}
-  - {fileID: 11400000, guid: 69c06e8e8e9530044b05cd953c6484dd, type: 2}
-  - {fileID: 11400000, guid: da365ad70ae7ab845b0c5fac4dde78cf, type: 2}
---- !u!4 &49888531
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 49888529}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 883.6157, y: 595.4424, z: -8.504262}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &59154881
 GameObject:
   m_ObjectHideFlags: 0
@@ -1296,6 +1198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2887966db2ec3564b999bb9992616610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  perk_id: 
 --- !u!1 &113231485
 GameObject:
   m_ObjectHideFlags: 0
@@ -2663,6 +2566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2887966db2ec3564b999bb9992616610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  perk_id: 
 --- !u!1 &295208214
 GameObject:
   m_ObjectHideFlags: 0
@@ -4612,8 +4516,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9643c58a350b4f34899e352b0f89349f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  missile_perk_decayrate: 2
+  missile_perk_startN: 1
+  energy_pickup_perk_decayrate: 2
+  energy_pickup_perk_startN: 1
+  repairtime_perk_decayrate: 2
+  repairtime_pickup_perk_startN: 30
+  magnetism_perk_decayrate: 1
+  magnetism_perk_startN: 2
+  magnetism_perks: 1
   perkSys: {fileID: 1029981141}
   inputBlocker: {fileID: 1663939394}
+  PerkButtons:
+  - {fileID: 101269423}
+  - {fileID: 1083487676}
+  - {fileID: 289942340}
+  Totalperks:
+  - {fileID: 11400000, guid: d8745115710cbe044b7c31dbdb5bb6e0, type: 2}
+  - {fileID: 11400000, guid: b64f118c22afc5c4e8258a05a68da6a0, type: 2}
+  - {fileID: 11400000, guid: 5dee2c5fb4b66644fa68d11376d5f5be, type: 2}
+  - {fileID: 11400000, guid: d40045ab24c850140ace8e47ed141d84, type: 2}
+  - {fileID: 11400000, guid: b42ecfaf655891447b40636ef3a6d5e5, type: 2}
+  - {fileID: 11400000, guid: a1bbc74fdafc8d849b1972c58e770107, type: 2}
+  - {fileID: 11400000, guid: 69c06e8e8e9530044b05cd953c6484dd, type: 2}
+  - {fileID: 11400000, guid: da365ad70ae7ab845b0c5fac4dde78cf, type: 2}
+  perks: []
 --- !u!1 &448063869
 GameObject:
   m_ObjectHideFlags: 0
@@ -6496,6 +6423,140 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &727522361
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 727522362}
+  - component: {fileID: 727522363}
+  - component: {fileID: 727522365}
+  - component: {fileID: 727522364}
+  m_Layer: 3
+  m_Name: MagneticField
+  m_TagString: MagneticField
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &727522362
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727522361}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1257503199}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &727522363
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727522361}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Color: {r: 0.15619439, g: 0.394806, b: 0.735849, a: 0.23529412}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!58 &727522364
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727522361}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.0000051259995}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!114 &727522365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727522361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b754153c3b8999c45979ba2c018e01c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strength: 0
 --- !u!1 &733535961
 GameObject:
   m_ObjectHideFlags: 0
@@ -9452,6 +9513,7 @@ MonoBehaviour:
   subSystemsController: {fileID: 0}
   energyCost: 10
   cooldown: 1
+  missile_mod: 0
 --- !u!114 &1004026307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9497,7 +9559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7266b320ccde9345b54ab453cab1b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameProgress: 0
+  gameProgress: 99
   gameProgressSpeed: 0
   gameProgressSlider: {fileID: 1988926708}
   gameProgressSpeedPositionLVS:
@@ -9507,6 +9569,7 @@ MonoBehaviour:
   - 1.9
   - 2.3
   ship: {fileID: 1257503198}
+  ship_script: {fileID: 1257503200}
   asteroidSpawner: {fileID: 1970598914}
   energySpawner: {fileID: 1232595329}
   shield: {fileID: 366897731}
@@ -9615,9 +9678,12 @@ MonoBehaviour:
   shieldCooldown: 2
   isShieldActive: 0
   isShieldCooldown: 0
+  magnetic_field_Object: {fileID: 727522361}
+  magnetic_field: {fileID: 727522365}
   isOverload: 0
   overloadDuration: 5
   timerForGameOver: 10
+  perkController: {fileID: 431494701}
   EngineModuleMeterImage: {fileID: 1968072637}
   RadarModuleMeterImage: {fileID: 1780542493}
 --- !u!4 &1017901626
@@ -10372,6 +10438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2887966db2ec3564b999bb9992616610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  perk_id: 
 --- !u!1 &1127073550
 GameObject:
   m_ObjectHideFlags: 0
@@ -11163,8 +11230,8 @@ MonoBehaviour:
   arrow3Prefab: {fileID: 4288243871637922812, guid: 262e5ee80dbec214b9a34823393301b5, type: 3}
   leftParent: {fileID: 87005118}
   rightParent: {fileID: 153207382}
-  minSpawnInterval: 5
-  maxSpawnInterval: 10
+  minSpawnInterval: 1
+  maxSpawnInterval: 2
   minEnergySpeed: 1
   maxEnergySpeed: 3
   arrowXOffset: 5
@@ -11449,6 +11516,7 @@ Transform:
   - {fileID: 1966944727}
   - {fileID: 2005871904}
   - {fileID: 935544061}
+  - {fileID: 727522362}
   m_Father: {fileID: 894911561}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1257503200
@@ -11475,7 +11543,8 @@ MonoBehaviour:
   shakeTimeWhenHitEnemy: 0.1
   cabinUI_gameObject: {fileID: 1270160456}
   frame_asteriodsUI: {fileID: 670505312}
-  energyCollectable: 5
+  EnergyMod: 0
+  energyCollectable: 10
   energyDecreaseEnemyHit: 10
   moveSpeed: 7
   moveDuration: 1
@@ -20060,4 +20129,3 @@ SceneRoots:
   - {fileID: 1396376256}
   - {fileID: 1309734821}
   - {fileID: 817811668}
-  - {fileID: 49888531}
