@@ -20,17 +20,21 @@ public class HALAnimatorController : MonoBehaviour
 
     private void Update()
     {
-        if (isTalking && _animator.GetCurrentAnimatorStateInfo(0).IsName("HAL_still")) isTalking = false;
-
-
-        if (!isTalking)
-            _timerToSwitch -= Time.deltaTime;
-        if (_timerToSwitch < 0)
+        if (!(SceneController.isGamePaused || SceneController.isGameStopped))
         {
-            randomNum = Random.Range(0, 3);
-            CicleBtwAnims(randomNum);
-            _timerToSwitch = timerToSwitch;
+            if (isTalking && _animator.GetCurrentAnimatorStateInfo(0).IsName("HAL_still")) isTalking = false;
+
+
+            if (!isTalking)
+                _timerToSwitch -= Time.deltaTime;
+            if (_timerToSwitch < 0)
+            {
+                randomNum = Random.Range(0, 3);
+                CicleBtwAnims(randomNum);
+                _timerToSwitch = timerToSwitch;
+            }
         }
+
     }
     private void CicleBtwAnims(int num)
     {
@@ -51,16 +55,24 @@ public class HALAnimatorController : MonoBehaviour
         isTalking = true;
     }
 
+    private void Restart()
+    {
+        isTalking = false;
+        _timerToSwitch = timerToSwitch;
+    }
+
     private void OnEnable()
     {
         EventManager.Game.OnTaskWaiting += SetTimerAnimDuration;
         EventManager.Game.OnDialog += DisableCicling;
+        EventManager.Game.OnGameStopped += Restart;
     }
 
     private void OnDisable()
     {
         EventManager.Game.OnTaskWaiting -= SetTimerAnimDuration;
         EventManager.Game.OnDialog -= DisableCicling;
+        EventManager.Game.OnGameStopped -= Restart;
 
     }
 }

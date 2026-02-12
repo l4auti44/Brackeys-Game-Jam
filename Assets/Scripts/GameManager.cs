@@ -134,7 +134,7 @@ public class GameManager : MonoBehaviour
     private TextMeshPro totalRateEnergyDecrease;
     //temporal flags
     private bool eventFlag = false;
-    private float eventTimer = 15f;
+    private float eventTimer = 20f;
 
     // --- Perk Related ---
 
@@ -286,7 +286,7 @@ public class GameManager : MonoBehaviour
     private void HandleDialogEvents()
     {
         if (!eventFlag) eventTimer -= Time.deltaTime;
-        else eventTimer = 15f;
+        else eventTimer = 20f;
 
 
         if (gameProgress > 8f && !eventFlag && eventTimer <= 0)
@@ -813,12 +813,14 @@ public class GameManager : MonoBehaviour
     {
         EventManager.Game.OnTaskDialogCompleted += TaskEnded;
         EventManager.Game.OnTaskDialogFailed += TaskEnded;
+        EventManager.Game.OnGameStopped += TaskEnded;
     }
 
     private void OnDisable()
     {
         EventManager.Game.OnTaskDialogCompleted -= TaskEnded;
         EventManager.Game.OnTaskDialogFailed -= TaskEnded;
+        EventManager.Game.OnGameStopped -= TaskEnded;
     }
 
 }
