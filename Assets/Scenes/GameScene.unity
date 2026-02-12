@@ -20045,6 +20045,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1017901626}
     m_Modifications:
+    - target: {fileID: 8100659860590157887, guid: b3aa2f95509312b45935e428efb548d6, type: 3}
+      propertyPath: dialogueAudioPools.Array.data[0].volume
+      value: 0.175
+      objectReference: {fileID: 0}
+    - target: {fileID: 8100659860590157887, guid: b3aa2f95509312b45935e428efb548d6, type: 3}
+      propertyPath: dialogueAudioPools.Array.data[1].volume
+      value: 0.179
+      objectReference: {fileID: 0}
+    - target: {fileID: 8100659860590157887, guid: b3aa2f95509312b45935e428efb548d6, type: 3}
+      propertyPath: soundAudioClipArray.Array.data[0].volume
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8100659860590157887, guid: b3aa2f95509312b45935e428efb548d6, type: 3}
+      propertyPath: soundAudioClipArray.Array.data[3].volume
+      value: 0.288
+      objectReference: {fileID: 0}
+    - target: {fileID: 8100659860590157887, guid: b3aa2f95509312b45935e428efb548d6, type: 3}
+      propertyPath: soundAudioClipArray.Array.data[4].volume
+      value: 0.564
+      objectReference: {fileID: 0}
+    - target: {fileID: 8100659860590157887, guid: b3aa2f95509312b45935e428efb548d6, type: 3}
+      propertyPath: soundAudioClipArray.Array.data[7].volume
+      value: 0.128
+      objectReference: {fileID: 0}
+    - target: {fileID: 8100659860590157887, guid: b3aa2f95509312b45935e428efb548d6, type: 3}
+      propertyPath: soundAudioClipArray.Array.data[8].volume
+      value: 0.132
+      objectReference: {fileID: 0}
+    - target: {fileID: 8100659860590157887, guid: b3aa2f95509312b45935e428efb548d6, type: 3}
+      propertyPath: soundAudioClipArray.Array.data[2].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1c8cd8342b702b042b836f8dbd12b92e, type: 3}
     - target: {fileID: 8388680394052220892, guid: b3aa2f95509312b45935e428efb548d6, type: 3}
       propertyPath: m_Name
       value: GameAssets
