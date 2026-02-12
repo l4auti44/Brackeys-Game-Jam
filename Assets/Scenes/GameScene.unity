@@ -9559,7 +9559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7266b320ccde9345b54ab453cab1b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameProgress: 99
+  gameProgress: 0
   gameProgressSpeed: 0
   gameProgressSlider: {fileID: 1988926708}
   gameProgressSpeedPositionLVS:

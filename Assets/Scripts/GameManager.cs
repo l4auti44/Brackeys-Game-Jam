@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static DialogSystem;
 
 
 public class GameManager : MonoBehaviour
@@ -132,6 +133,7 @@ public class GameManager : MonoBehaviour
     private TextMeshPro totalRateEnergyDecrease;
     //temporal flags
     private bool eventFlag = false;
+    private float eventTimer = 15f;
 
     // --- Perk Related ---
 
@@ -282,7 +284,11 @@ public class GameManager : MonoBehaviour
     }
     private void HandleDialogEvents()
     {
-        if (gameProgress > 8f && !eventFlag)
+        if (!eventFlag) eventTimer -= Time.deltaTime;
+        else eventTimer = 15f;
+
+
+        if (gameProgress > 8f && !eventFlag && eventTimer <= 0)
         {
             var dialogEvents = new DialogSystem.DialogEvents[]
             {
@@ -790,6 +796,21 @@ public class GameManager : MonoBehaviour
     {
         gameProgress = 0f;
         EventManager.Game.OnPerkPicked.Invoke();
+    }
+
+    private void TaskEnded(DialogEvents ev)
+    {
+        eventFlag = false;
+    }
+
+    private void OnEnable()
+    {
+        EventManager.Game.OnTaskDialogCompleted += TaskEnded;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.Game.OnTaskDialogCompleted -= TaskEnded;
     }
 
 }
