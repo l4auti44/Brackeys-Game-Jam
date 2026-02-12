@@ -57,6 +57,7 @@ public class HALAnimatorController : MonoBehaviour
 
     private void Restart()
     {
+        _animator.SetTrigger("GameStopped");
         isTalking = false;
         _timerToSwitch = timerToSwitch;
     }
