@@ -78,9 +78,6 @@ MonoBehaviour:
   - sound: 19
     audioClip: {fileID: 8300000, guid: fb27856f3dbc9e249a092a320b76c4d9, type: 3}
     volume: 0.305
-  - sound: 20
-    audioClip: {fileID: 8300000, guid: 9110be0dfbb5734439d195b885ab57f2, type: 3}
-    volume: 0
   dialogueAudioPools:
   - dialogPool: 0
     audios:
@@ -98,12 +95,3 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 60e6924af491f8947af1b1a47d23c20f, type: 3}
     - {fileID: 8300000, guid: a36d6747a5d77874c8d11d6134750055, type: 3}
     volume: 0.25
-  perksPool:
-  - {fileID: 11400000, guid: d8745115710cbe044b7c31dbdb5bb6e0, type: 2}
-  - {fileID: 11400000, guid: b64f118c22afc5c4e8258a05a68da6a0, type: 2}
-  - {fileID: 11400000, guid: 5dee2c5fb4b66644fa68d11376d5f5be, type: 2}
-  - {fileID: 11400000, guid: d40045ab24c850140ace8e47ed141d84, type: 2}
-  - {fileID: 11400000, guid: b42ecfaf655891447b40636ef3a6d5e5, type: 2}
-  - {fileID: 11400000, guid: a1bbc74fdafc8d849b1972c58e770107, type: 2}
-  - {fileID: 11400000, guid: 69c06e8e8e9530044b05cd953c6484dd, type: 2}
-  - {fileID: 11400000, guid: da365ad70ae7ab845b0c5fac4dde78cf, type: 2}

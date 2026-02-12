@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static DialogSystem;
@@ -802,15 +803,22 @@ public class GameManager : MonoBehaviour
     {
         eventFlag = false;
     }
+    private void TaskEnded()
+    {
+        eventFlag = false;
+    }
+
 
     private void OnEnable()
     {
         EventManager.Game.OnTaskDialogCompleted += TaskEnded;
+        EventManager.Game.OnTaskDialogFailed += TaskEnded;
     }
 
     private void OnDisable()
     {
         EventManager.Game.OnTaskDialogCompleted -= TaskEnded;
+        EventManager.Game.OnTaskDialogFailed -= TaskEnded;
     }
 
 }
