@@ -9563,11 +9563,11 @@ MonoBehaviour:
   LvL: 0
   gameProgressSlider: {fileID: 1988926708}
   gameProgressSpeedPositionLVS:
-  - 0.7
-  - 1.1
-  - 1.5
-  - 1.9
-  - 2.3
+  - 0.5
+  - 0.8
+  - 1.2
+  - 1.7
+  - 2.4
   ship: {fileID: 1257503198}
   ship_script: {fileID: 1257503200}
   asteroidSpawner: {fileID: 1970598914}
@@ -9665,10 +9665,10 @@ MonoBehaviour:
   radarModEnergyDecreaseLV3: 15
   radarModEnergyDecreaseLV4: 26
   shieldModEnergyDecrease: 2
-  positionModEnergyDecreaseLV1: 4
-  positionModEnergyDecreaseLV2: 8
-  positionModEnergyDecreaseLV3: 13
-  positionModEnergyDecreaseLV4: 18
+  positionModEnergyDecreaseLV1: 19
+  positionModEnergyDecreaseLV2: 20
+  positionModEnergyDecreaseLV3: 21
+  positionModEnergyDecreaseLV4: 23
   positionModEnergyDecreaseLV5: 25
   arrowModEnergyDecrease: 2
   energySlider: {fileID: 1053437755}
@@ -11189,7 +11189,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1232595330
 Transform:
   m_ObjectHideFlags: 0
@@ -18077,7 +18077,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1970598914
 MonoBehaviour:
   m_ObjectHideFlags: 0
