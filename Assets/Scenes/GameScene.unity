@@ -9563,11 +9563,11 @@ MonoBehaviour:
   LvL: 0
   gameProgressSlider: {fileID: 1988926708}
   gameProgressSpeedPositionLVS:
-  - 0.5
-  - 0.8
   - 1.2
-  - 1.7
-  - 2.4
+  - 1.4
+  - 1.6
+  - 1.9
+  - 2.1
   ship: {fileID: 1257503198}
   ship_script: {fileID: 1257503200}
   asteroidSpawner: {fileID: 1970598914}
@@ -9660,16 +9660,16 @@ MonoBehaviour:
   cameraZoomOutSpeed: 1
   energy: 1000
   maxEnergy: 1000
-  radarModEnergyDecreaseLV1: 1
+  radarModEnergyDecreaseLV1: 20
   radarModEnergyDecreaseLV2: 7
-  radarModEnergyDecreaseLV3: 15
-  radarModEnergyDecreaseLV4: 26
+  radarModEnergyDecreaseLV3: 6
+  radarModEnergyDecreaseLV4: 5
   shieldModEnergyDecrease: 2
-  positionModEnergyDecreaseLV1: 19
-  positionModEnergyDecreaseLV2: 20
-  positionModEnergyDecreaseLV3: 21
-  positionModEnergyDecreaseLV4: 23
-  positionModEnergyDecreaseLV5: 25
+  positionModEnergyDecreaseLV1: 40
+  positionModEnergyDecreaseLV2: 2
+  positionModEnergyDecreaseLV3: 2
+  positionModEnergyDecreaseLV4: 1
+  positionModEnergyDecreaseLV5: 1
   arrowModEnergyDecrease: 2
   energySlider: {fileID: 1053437755}
   energyMax: {fileID: 306082994}
@@ -16957,7 +16957,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 2.4, y: 31.799}
-  m_SizeDelta: {x: 234, y: 134}
+  m_SizeDelta: {x: 239, y: 139}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1846394114
 MonoBehaviour:
