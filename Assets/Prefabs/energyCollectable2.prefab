@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -3889524714917061231}
   m_Layer: 0
   m_Name: energyCollectable2
-  m_TagString: EnergyCollectable
+  m_TagString: EnergyCollectable2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

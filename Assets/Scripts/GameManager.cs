@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     [Header("Game Progression")]
     public float gameProgress;
     public float gameProgressSpeed;
+    public int LvL;
     public GameObject gameProgressSlider;
     public float[] gameProgressSpeedPositionLVS = new float[5];
 
@@ -310,6 +311,8 @@ public class GameManager : MonoBehaviour
 
         if (gameProgress >= 100f)
         {
+            LvL++;
+            asteroidSpawner.TweakAsteroidSettings(LvL);
             perkController.ReInitializeCards();
             EventManager.Game.OnWin.Invoke();
         }

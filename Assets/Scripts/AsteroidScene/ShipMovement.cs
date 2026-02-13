@@ -99,7 +99,14 @@ public class ShipMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("EnergyCollectable"))
         {
-            gameManager.IncreaseEnergy(energyCollectable+EnergyMod);
+            gameManager.IncreaseEnergy(energyCollectable);
+            SoundManager.PlaySound(collectSoundsFX);
+
+            Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.CompareTag("EnergyCollectable2"))
+        {
+            gameManager.IncreaseEnergy(energyCollectable + EnergyMod);
             SoundManager.PlaySound(collectSoundsFX);
 
             Destroy(collision.gameObject);
@@ -116,7 +123,7 @@ public class ShipMovement : MonoBehaviour
 
                 SoundManager.PlaySound(SoundManager.Sound.HitByAsteroid);
             }
-            
+
 
             //Trigger screen shake
             gameFeelManager.StartShake(shakeTimeWhenHitEnemy, shakeAmountWhenHitEnemy);

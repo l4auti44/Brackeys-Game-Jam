@@ -9560,6 +9560,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameProgress: 0
   gameProgressSpeed: 0
+  LvL: 0
   gameProgressSlider: {fileID: 1988926708}
   gameProgressSpeedPositionLVS:
   - 0.7
@@ -9595,10 +9596,10 @@ MonoBehaviour:
   maxX: 11.12
   asteroidFadeLightSpeed: 0.5
   speedLVS:
-  - 1.5
-  - 2.3
-  - 3
-  - 3.5
+  - 4
+  - 4
+  - 4
+  - 4
   - 4
   asteroidMovementLevels:
   - level: 0
@@ -11229,8 +11230,8 @@ MonoBehaviour:
   arrow3Prefab: {fileID: 4288243871637922812, guid: 262e5ee80dbec214b9a34823393301b5, type: 3}
   leftParent: {fileID: 87005118}
   rightParent: {fileID: 153207382}
-  minSpawnInterval: 1
-  maxSpawnInterval: 2
+  minSpawnInterval: 5
+  maxSpawnInterval: 10
   minEnergySpeed: 1
   maxEnergySpeed: 3
   arrowXOffset: 5
@@ -11542,7 +11543,7 @@ MonoBehaviour:
   shakeTimeWhenHitEnemy: 0.1
   cabinUI_gameObject: {fileID: 1270160456}
   frame_asteriodsUI: {fileID: 670505312}
-  EnergyMod: 0
+  EnergyMod: 2
   energyCollectable: 10
   energyDecreaseEnemyHit: 10
   moveSpeed: 7
@@ -18089,6 +18090,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ad87dc9fdbf8954d84c712fbd7029d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultsettings:
+    moveSpeed: 2
+    minSpawnInterval: 0.01
+    maxSpawnInterval: 1.8
+    arrowYOffset: -6.5
+    asteroidsBeforeFollow: 3
+  acrosslevels:
+  - moveSpeed: 0
+    minSpawnInterval: 0
+    maxSpawnInterval: 0
+    arrowYOffset: 0
+    asteroidsBeforeFollow: 0
+  - moveSpeed: 3
+    minSpawnInterval: 0.01
+    maxSpawnInterval: 1
+    arrowYOffset: -6.5
+    asteroidsBeforeFollow: 13
   pos1: {fileID: 456080113}
   pos2: {fileID: 32938073}
   asteroidPrefabs:
@@ -18104,7 +18122,7 @@ MonoBehaviour:
   arrow1Prefab: {fileID: 5157793076503233759, guid: 663da662e6e5e4b44bf31793cad20ecf, type: 3}
   arrow2Prefab: {fileID: 5412882603925449778, guid: 27ed9a05f897fd843942bc8a248c7d19, type: 3}
   arrow3Prefab: {fileID: 1768615014423082408, guid: 2ca49f1c6c6b4d2458c56b41889ad5a1, type: 3}
-  spawnArrow: 0
+  spawnArrow: 1
   moveSpeed: 2
   minSpawnInterval: 0.01
   maxSpawnInterval: 1.8
