@@ -9664,7 +9664,7 @@ MonoBehaviour:
   radarModEnergyDecreaseLV2: 7
   radarModEnergyDecreaseLV3: 6
   radarModEnergyDecreaseLV4: 5
-  shieldModEnergyDecrease: 2
+  shieldModEnergyDecrease: 10
   positionModEnergyDecreaseLV1: 40
   positionModEnergyDecreaseLV2: 2
   positionModEnergyDecreaseLV3: 2
@@ -9674,8 +9674,8 @@ MonoBehaviour:
   energySlider: {fileID: 1053437755}
   energyMax: {fileID: 306082994}
   shieldObject: {fileID: 366897731}
-  shieldDuration: 10
-  shieldCooldown: 2
+  shieldDuration: 8
+  shieldCooldown: 3
   isShieldActive: 0
   isShieldCooldown: 0
   magnetic_field_Object: {fileID: 727522361}
@@ -15914,7 +15914,7 @@ Camera:
   far clip plane: 1000
   field of view: 0.1
   orthographic: 1
-  orthographic size: 7
+  orthographic size: 37
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
