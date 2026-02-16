@@ -7306,7 +7306,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.25
+  m_Volume: 0.192
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -9510,8 +9510,8 @@ MonoBehaviour:
   repairSys: {fileID: 0}
   flashButton: {fileID: 0}
   subSystemsController: {fileID: 0}
-  energyCost: 10
-  cooldown: 1
+  energyCost: 5
+  cooldown: 2
   missile_mod: 0
 --- !u!114 &1004026307
 MonoBehaviour:
@@ -20158,6 +20158,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1017901626}
     m_Modifications:
+    - target: {fileID: 8100659860590157887, guid: b3aa2f95509312b45935e428efb548d6, type: 3}
+      propertyPath: soundAudioClipArray.Array.data[4].volume
+      value: 0.382
+      objectReference: {fileID: 0}
+    - target: {fileID: 8100659860590157887, guid: b3aa2f95509312b45935e428efb548d6, type: 3}
+      propertyPath: soundAudioClipArray.Array.data[0].audioClip
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8388680394052220892, guid: b3aa2f95509312b45935e428efb548d6, type: 3}
       propertyPath: m_Name
       value: GameAssets
