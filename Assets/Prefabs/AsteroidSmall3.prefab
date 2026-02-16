@@ -195,6 +195,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   asteroidCategory: 2
   energyDropPrefab: {fileID: 6855771246143582453, guid: a0ebb70010c8dd8429d9071d604f2bc0, type: 3}
+  asteroidLifespan: 10
+  scoreAmountOnDestroy: 10
+  scoreAmountOnDestroyWithShield: 50
   bigAsteroids:
   - {fileID: 4322952684289949040, guid: f53e4ededb996b34ca5f248369c2edef, type: 3}
   - {fileID: 7337570320974620987, guid: e97665691d225cc49ac67c5e0a8d5927, type: 3}
@@ -207,3 +210,4 @@ MonoBehaviour:
   - {fileID: 3050639962028678484, guid: 33d5dbea90131724d9ef9f9b669911e5, type: 3}
   - {fileID: 5586743574098997687}
   - {fileID: 544173343427672791, guid: 97ec031fc877beb49b5045c70d637981, type: 3}
+  energyDropRate: 5
