@@ -9560,7 +9560,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameProgress: 0
   gameProgressSpeed: 0
-  LvL: 0
+  LvL: 1
   gameProgressSlider: {fileID: 1988926708}
   gameProgressSpeedPositionLVS:
   - 1.2
@@ -18200,9 +18200,39 @@ MonoBehaviour:
     asteroidsBeforeFollow: 0
   - moveSpeed: 3
     minSpawnInterval: 0.01
-    maxSpawnInterval: 1
+    maxSpawnInterval: 0.8
     arrowYOffset: -6.5
-    asteroidsBeforeFollow: 13
+    asteroidsBeforeFollow: 4
+  - moveSpeed: 3
+    minSpawnInterval: 0.0095
+    maxSpawnInterval: 0.75
+    arrowYOffset: -6.5
+    asteroidsBeforeFollow: 3
+  - moveSpeed: 3
+    minSpawnInterval: 0.009
+    maxSpawnInterval: 0.7
+    arrowYOffset: -6.5
+    asteroidsBeforeFollow: 2
+  - moveSpeed: 3
+    minSpawnInterval: 0.008
+    maxSpawnInterval: 0.65
+    arrowYOffset: -6.5
+    asteroidsBeforeFollow: 1
+  - moveSpeed: 3
+    minSpawnInterval: 0.0075
+    maxSpawnInterval: 0.63
+    arrowYOffset: -6.5
+    asteroidsBeforeFollow: 1
+  - moveSpeed: 3
+    minSpawnInterval: 0.0073
+    maxSpawnInterval: 0.62
+    arrowYOffset: -6.5
+    asteroidsBeforeFollow: 1
+  - moveSpeed: 3
+    minSpawnInterval: 0.0071
+    maxSpawnInterval: 0.61
+    arrowYOffset: -6.5
+    asteroidsBeforeFollow: 1
   pos1: {fileID: 456080113}
   pos2: {fileID: 32938073}
   asteroidPrefabs:
@@ -18228,7 +18258,7 @@ MonoBehaviour:
   maxRotationSpeed: 120
   arrowYOffset: -6.5
   player: {fileID: 1257503199}
-  asteroidsBeforeFollow: 3
+  asteroidsBeforeFollow: 5
 --- !u!4 &1970598915
 Transform:
   m_ObjectHideFlags: 0
