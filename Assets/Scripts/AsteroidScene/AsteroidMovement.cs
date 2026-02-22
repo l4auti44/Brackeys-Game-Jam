@@ -16,7 +16,8 @@ public class AsteroidMovement : MonoBehaviour
     
 
     [SerializeField] private int scoreAmountOnDestroy = 10;
-    [SerializeField] private int scoreAmountOnDestroyWithShield = 15;
+    [SerializeField] private int scoreAmountOnDestroyWithShield = 50;
+    [SerializeField] private int scoreAmountOnDestroyWithMissile = 400;
 
     [Header("Asteroid Prefabs")]
     public List<GameObject> bigAsteroids;    // Pool of big asteroids
@@ -76,7 +77,7 @@ public class AsteroidMovement : MonoBehaviour
                 return;
 
             case "Missile":
-                DestroyAsteroid();
+                DestroyAsteroid(false, true);
                 return;
         }
     }
@@ -87,13 +88,15 @@ public class AsteroidMovement : MonoBehaviour
         canCollideWithAsteroids = true; // Enable collision with other asteroids
     }
 
-    public void DestroyAsteroid(bool destroyWithShield = false)
+    public void DestroyAsteroid(bool destroyWithShield = false, bool destroyWithMissile = false)
     {
         SpawnOnDestruction();
-        if (!destroyWithShield)
-            ScoreManager.AddScore(scoreAmountOnDestroy, transform.position);
-        else
+        if (destroyWithShield)
             ScoreManager.AddScore(scoreAmountOnDestroyWithShield, transform.position);
+        else if (destroyWithMissile)
+            ScoreManager.AddScore(scoreAmountOnDestroyWithMissile, transform.position);
+        else
+            ScoreManager.AddScore(scoreAmountOnDestroy, transform.position);
 
         Destroy(gameObject);
     }
