@@ -268,10 +268,11 @@ public class DialogSystem : MonoBehaviour
         }
     }
 
-        private IEnumerator SimpleTypeText(string message, DialogPool audioPool)
+        private IEnumerator SimpleTypeText(string message, DialogPool audioPool, bool muted = false)
     {
         backgroundText.enabled = true;
-        SoundManager.PlayDialogueSound(audioPool);
+        if (!muted)
+            SoundManager.PlayDialogueSound(audioPool);
         halAnimator.SetBool("Talking", true);
         halAnimator.SetBool("Failed", false);
         halAnimator.SetBool("Completed", false);
@@ -295,6 +296,6 @@ public class DialogSystem : MonoBehaviour
     private void TypePerkDescription(string desc)
     {
         StopWritting();
-        StartCoroutine(SimpleTypeText(desc, DialogPool.Calm));
+        StartCoroutine(SimpleTypeText(desc, DialogPool.Calm, true));
     }
 }
