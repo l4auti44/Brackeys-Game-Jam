@@ -8,14 +8,13 @@ public class ShieldModuleSys : SystemBlueprint
     private GameManager gameManager;
     public float cooldown = 10f;
     private bool isOnCooldown = false;
-    private TextMeshPro text;
+    [SerializeField] private TextMeshPro text;
     // Start is called before the first frame update
     override public void Start()
     {
         base.Start();
         module = SubSys.ShieldModule;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        text = transform.GetComponentInChildren<TextMeshPro>();
         text.text = "0";
     }
 
@@ -46,11 +45,12 @@ public class ShieldModuleSys : SystemBlueprint
         while (currentCooldown > 0)
         {
             currentCooldown -= Time.deltaTime;
-            text.text = Mathf.Clamp(currentCooldown, 0, cooldown).ToString();
+            int secondsLeft = Mathf.CeilToInt(Mathf.Clamp(currentCooldown, 0f, cooldown));
+            text.text = secondsLeft.ToString();
             yield return null;
         }
 
-        text.text = "0"; // Ensure the text shows zero when cooldown ends
+        text.text = "0";
     }
 }
 

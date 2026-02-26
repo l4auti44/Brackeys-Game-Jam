@@ -10,7 +10,7 @@ public class RepairModuleSys : SystemBlueprint
     public float energyCost = 10f;
     private bool isOnCooldown = false;
     public float cooldown = 20f;
-    private TextMeshPro text;
+    [SerializeField] private TextMeshPro text;
 
     override public void Start()
     {
@@ -18,7 +18,6 @@ public class RepairModuleSys : SystemBlueprint
         destroySys = GameObject.Find("RepairAndDestroySystem").GetComponent<DestroyAndRepearSys>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         module = SubSys.repairModule;
-        text = transform.GetComponentInChildren<TextMeshPro>();
         text.text = "0";
 
     }
@@ -52,12 +51,13 @@ public class RepairModuleSys : SystemBlueprint
 
         while (currentCooldown > 0)
         {
-            currentCooldown -= Time.deltaTime; // Reduce the cooldown by the time since the last frame
+            currentCooldown -= Time.deltaTime;
             if (SceneController.isGameStopped) yield return null;
-            text.text = Mathf.Clamp(currentCooldown, 0, cooldown).ToString(); // Update the text with formatted cooldown time
-            yield return null; // Wait for the next frame
+            int secondsLeft = Mathf.CeilToInt(Mathf.Clamp(currentCooldown, 0f, cooldown));
+            text.text = secondsLeft.ToString();
+            yield return null;
         }
 
-        text.text = "0"; // Ensure the text shows zero when cooldown ends
+        text.text = "0";
     }
 }

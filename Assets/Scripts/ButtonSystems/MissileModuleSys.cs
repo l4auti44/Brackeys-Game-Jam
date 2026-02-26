@@ -11,7 +11,7 @@ public class MissileModuleSys : SystemBlueprint
     public float cooldown = 1f;
     public float missile_mod;
     private bool isOnCooldown = false;
-    private TextMeshPro text;
+    [SerializeField] private TextMeshPro text;
     // Start is called before the first frame update
     override public void Start()
     {
@@ -19,7 +19,6 @@ public class MissileModuleSys : SystemBlueprint
         shipMovementScript = GameObject.Find("player_ship").GetComponent<ShipMovement>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         module = SubSys.MissileModule;
-        text = transform.GetComponentInChildren<TextMeshPro>();
         text.text = "0";
     }
 
@@ -50,11 +49,12 @@ public class MissileModuleSys : SystemBlueprint
 
         while (currentCooldown > 0)
         {
-            currentCooldown -= Time.deltaTime; // Reduce the cooldown by the time since the last frame
-            text.text = Mathf.Clamp(currentCooldown, 0, cooldown).ToString(); // Update the text with formatted cooldown time
-            yield return null; // Wait for the next frame
+            currentCooldown -= Time.deltaTime;
+            int secondsLeft = Mathf.CeilToInt(Mathf.Clamp(currentCooldown, 0f, cooldown));
+            text.text = secondsLeft.ToString();
+            yield return null;
         }
 
-        text.text = "0"; // Ensure the text shows zero when cooldown ends
+        text.text = "0";
     }
 }
