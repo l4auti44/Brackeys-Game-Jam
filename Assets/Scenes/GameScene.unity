@@ -20322,42 +20322,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1017901626}
     m_Modifications:
-    - target: {fileID: 8100659860590157887, guid: b3aa2f95509312b45935e428efb548d6, type: 3}
-      propertyPath: soundAudioClipArray.Array.size
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 8100659860590157887, guid: b3aa2f95509312b45935e428efb548d6, type: 3}
-      propertyPath: soundAudioClipArray.Array.data[11].sound
-      value: 21
-      objectReference: {fileID: 0}
-    - target: {fileID: 8100659860590157887, guid: b3aa2f95509312b45935e428efb548d6, type: 3}
-      propertyPath: soundAudioClipArray.Array.data[12].sound
-      value: 19
-      objectReference: {fileID: 0}
-    - target: {fileID: 8100659860590157887, guid: b3aa2f95509312b45935e428efb548d6, type: 3}
-      propertyPath: soundAudioClipArray.Array.data[4].volume
-      value: 0.32
-      objectReference: {fileID: 0}
-    - target: {fileID: 8100659860590157887, guid: b3aa2f95509312b45935e428efb548d6, type: 3}
-      propertyPath: soundAudioClipArray.Array.data[11].volume
-      value: 0.472
-      objectReference: {fileID: 0}
-    - target: {fileID: 8100659860590157887, guid: b3aa2f95509312b45935e428efb548d6, type: 3}
-      propertyPath: soundAudioClipArray.Array.data[12].volume
-      value: 0.296
-      objectReference: {fileID: 0}
-    - target: {fileID: 8100659860590157887, guid: b3aa2f95509312b45935e428efb548d6, type: 3}
-      propertyPath: soundAudioClipArray.Array.data[0].audioClip
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8100659860590157887, guid: b3aa2f95509312b45935e428efb548d6, type: 3}
-      propertyPath: soundAudioClipArray.Array.data[11].audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 49397d991f67d8d4eafef37b0e4ea4c3, type: 3}
-    - target: {fileID: 8100659860590157887, guid: b3aa2f95509312b45935e428efb548d6, type: 3}
-      propertyPath: soundAudioClipArray.Array.data[12].audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: fb27856f3dbc9e249a092a320b76c4d9, type: 3}
     - target: {fileID: 8388680394052220892, guid: b3aa2f95509312b45935e428efb548d6, type: 3}
       propertyPath: m_Name
       value: GameAssets
