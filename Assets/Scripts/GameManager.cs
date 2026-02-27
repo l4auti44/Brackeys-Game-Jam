@@ -169,6 +169,7 @@ public class GameManager : MonoBehaviour
         InitializeModules();
         InitializeUIReferences();
         perkController.ReInitializeCards();
+        SoundManager.PlayBackgroundMusic(SoundManager.Sound.BackgroundMusicGameplay);
     }
     #region StartMethods
     private void InitializeShip()

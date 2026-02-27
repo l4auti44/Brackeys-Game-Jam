@@ -34,7 +34,9 @@ public static class SoundManager
         PerkButtons,
         DestroySystem,
         RepairSystem,
-        RadarWaveSound
+        RadarWaveSound,
+        BackgroundMusicGameplay,
+        BackgroundMusicMenu
     }
 
     private static GameObject OneShotGameObject, musicGameObject, dialogueGameObject;
