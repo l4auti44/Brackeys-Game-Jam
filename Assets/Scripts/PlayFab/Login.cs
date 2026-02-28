@@ -27,6 +27,7 @@ public class Login : MonoBehaviour
 
     public void LoginAndEnsureDisplayName()
     {
+        EventManager.Login.OnLoginLoading?.Invoke();
         customID = GetOrCreateCustomId();
 
         LoginWithCustomIDRequest request = new LoginWithCustomIDRequest
@@ -47,6 +48,7 @@ public class Login : MonoBehaviour
 
     private void OnLoginSuccessWithPlayerInput(LoginResult result)
     {
+        
         Debug.Log("Login OK 🔥 PlayerId: " + result.PlayFabId);
 
         string currentName = result.InfoResultPayload?.PlayerProfile?.DisplayName;
@@ -65,7 +67,11 @@ public class Login : MonoBehaviour
                 }
                 Debug.Log("Welcome back, " + currentName);
                 if (SceneManager.GetActiveScene().name == "Main Menu")
-                    SceneController.SceneLoader("GameScene");
+                {
+                    EventManager.Login.OnLoginSuccess?.Invoke();
+                    SceneController.SceneLoader("GameScene", 1.5f);
+                }
+                    
             }
         }else
         {
@@ -78,6 +84,7 @@ public class Login : MonoBehaviour
 
     private void OnLoginFailure(PlayFabError error)
     {
+        EventManager.Login.OnLoginFailure?.Invoke(error.GenerateErrorReport());
         Debug.LogError("Login failed 😭 " + error.GenerateErrorReport());
     }
 
@@ -102,6 +109,7 @@ public class Login : MonoBehaviour
         if (string.IsNullOrEmpty(desiredName))
         {
             Debug.LogWarning("Display name is empty 💀");
+            EventManager.Login.OnLoginFailure?.Invoke("Display name cannot be empty.");
             return;
         }
 
@@ -115,10 +123,15 @@ public class Login : MonoBehaviour
                 PlayerPrefs.SetString(LastUsernameKey, desiredName);
                 PlayerPrefs.Save();
                 if (SceneManager.GetActiveScene().name == "Main Menu")
-                    SceneController.SceneLoader("GameScene");
+                {
+                    EventManager.Login.OnLoginSuccess?.Invoke();
+                    SceneController.SceneLoader("GameScene", 1.5f);
+                }
+                    
             },
             e =>
             {
+                EventManager.Login.OnLoginFailure?.Invoke("Failed to set display name: " + e.GenerateErrorReport());
                 Debug.LogError("Cannot set name 💀: " + e.GenerateErrorReport());
             }
         );

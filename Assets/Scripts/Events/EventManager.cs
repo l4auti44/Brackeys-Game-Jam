@@ -5,6 +5,7 @@ public static class EventManager
 {
     public static readonly PlayerEvents Player = new PlayerEvents();
     public static readonly GameEvents Game = new GameEvents();
+    public static readonly LoginEvents Login = new LoginEvents();
     public class PlayerEvents
     {
         public UnityAction<Component> OnImpact;
@@ -25,5 +26,12 @@ public static class EventManager
         public UnityAction<int> OnEngineChange;
         public UnityAction<SystemBlueprint> OnBrokenSystem;
         
+    }
+
+    public class LoginEvents
+    {
+        public UnityAction OnLoginSuccess;
+        public UnityAction<string> OnLoginFailure;
+        public UnityAction OnLoginLoading;
     }
 }

@@ -37,9 +37,23 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene(name);
     }
 
+    public static void SceneLoader(string name, float delay)
+    {
+        isGamePaused = false;
+        Time.timeScale = 1f;
+        Instance.StartCoroutine(LoadSceneAfterDelay(name, delay));
+       
+    }
+
     public static void StartGame()
     {
         isGameStopped = false;
             Time.timeScale = 1f;
+    }
+
+    private static IEnumerator LoadSceneAfterDelay(string name, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(name);
     }
 }
