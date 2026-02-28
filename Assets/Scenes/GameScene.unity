@@ -1851,7 +1851,7 @@ Transform:
   m_GameObject: {fileID: 200715442}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.710022, y: 1.89, z: 0}
+  m_LocalPosition: {x: 8.710022, y: 1.42, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2768,7 +2768,7 @@ Transform:
   m_GameObject: {fileID: 300244155}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.710022, y: 0.82, z: 0}
+  m_LocalPosition: {x: 8.710022, y: 0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6512,7 +6512,7 @@ Transform:
   m_GameObject: {fileID: 711992171}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.71, y: 3.58, z: 0}
+  m_LocalPosition: {x: 8.71, y: 2.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9816,7 +9816,7 @@ MonoBehaviour:
   positionLV: 0
   minX: 0.8
   maxX: 11.8
-  asteroidFadeLightSpeed: 0.5
+  asteroidFadeLightSpeed: 0.51
   speedLVS:
   - 4
   - 4
@@ -9875,14 +9875,14 @@ MonoBehaviour:
   - 4.3
   cameraPosLVS:
   - 7
-  - 7.5
+  - 7.6
+  - 7.8
+  - 7.9
   - 8
-  - 8.5
-  - 9
-  cameraZoomOutSpeed: 1
+  cameraZoomOutSpeed: 1.1
   energy: 1000
   maxEnergy: 1000
-  radarModEnergyDecreaseLV1: 20
+  radarModEnergyDecreaseLV1: 15
   radarModEnergyDecreaseLV2: 7
   radarModEnergyDecreaseLV3: 6
   radarModEnergyDecreaseLV4: 5
@@ -11866,7 +11866,7 @@ MonoBehaviour:
   cabinUI_gameObject: {fileID: 1270160456}
   frame_asteriodsUI: {fileID: 670505312}
   EnergyMod: 2
-  energyCollectable: 10
+  energyCollectable: 30
   energyDecreaseEnemyHit: 10
   moveSpeed: 7
   moveDuration: 1
@@ -14748,7 +14748,7 @@ Transform:
   m_GameObject: {fileID: 1580754184}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.710022, y: 2.78, z: 0}
+  m_LocalPosition: {x: 8.710022, y: 1.91, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

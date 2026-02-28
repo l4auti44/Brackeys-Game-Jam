@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 964e710f7b1919148a2f2b708e97f110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energyToIncrease: 60
+  energyToIncrease: 200
   timeToEnableCol: 2
   timeToDestroy: 2.6
   scoreToAdd: 400

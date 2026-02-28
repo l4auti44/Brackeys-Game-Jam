@@ -186,7 +186,7 @@ MonoBehaviour:
   energyDropPrefab: {fileID: 6855771246143582453, guid: a0ebb70010c8dd8429d9071d604f2bc0, type: 3}
   asteroidLifespan: 10
   scoreAmountOnDestroy: 10
-  scoreAmountOnDestroyWithShield: 50
+  scoreAmountOnDestroyWithShield: 70
   scoreAmountOnDestroyWithMissile: 400
   bigAsteroids:
   - {fileID: 4322952684289949040, guid: f53e4ededb996b34ca5f248369c2edef, type: 3}
