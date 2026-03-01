@@ -9882,12 +9882,12 @@ MonoBehaviour:
   cameraZoomOutSpeed: 1.1
   energy: 1000
   maxEnergy: 1000
-  radarModEnergyDecreaseLV1: 15
-  radarModEnergyDecreaseLV2: 7
-  radarModEnergyDecreaseLV3: 6
-  radarModEnergyDecreaseLV4: 5
+  radarModEnergyDecreaseLV1: 19
+  radarModEnergyDecreaseLV2: 8
+  radarModEnergyDecreaseLV3: 7
+  radarModEnergyDecreaseLV4: 6
   shieldModEnergyDecrease: 10
-  positionModEnergyDecreaseLV1: 40
+  positionModEnergyDecreaseLV1: 50
   positionModEnergyDecreaseLV2: 2
   positionModEnergyDecreaseLV3: 2
   positionModEnergyDecreaseLV4: 1
@@ -11866,7 +11866,7 @@ MonoBehaviour:
   cabinUI_gameObject: {fileID: 1270160456}
   frame_asteriodsUI: {fileID: 670505312}
   EnergyMod: 2
-  energyCollectable: 30
+  energyCollectable: 17
   energyDecreaseEnemyHit: 10
   moveSpeed: 7
   moveDuration: 1
