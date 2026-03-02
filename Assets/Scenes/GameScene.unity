@@ -20734,7 +20734,7 @@ MonoBehaviour:
   parentObject: {fileID: 87005118}
   minSpawnInterval: 7
   maxSpawnInterval: 10
-  RandomXPositionRange: 2
+  RandomXPositionRange: 1.5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

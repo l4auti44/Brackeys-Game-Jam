@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ThunderSpawner : MonoBehaviour
@@ -11,10 +12,13 @@ public class ThunderSpawner : MonoBehaviour
     public float RandomXPositionRange = 5f;        // Maximum interval between spawns (in seconds)
 
     private List<Transform> spawnPositions;    // List to store spawn positions
-    private bool isSpawning = true;            // Control whether spawning continues
+
+
+    private float timer;
 
     void Start()
     {
+        timer = GetRandomSpawnInterval();
         // Initialize the list of spawn positions and populate it from the parent object's children
         spawnPositions = new List<Transform>();
 
@@ -28,23 +32,28 @@ public class ThunderSpawner : MonoBehaviour
         {
             Debug.LogWarning("No spawn positions found in the parent object.");
         }
-        else
-        {
-            // Start the spawning coroutine
-            StartCoroutine(SpawnAtIntervals());
-        }
     }
 
-    IEnumerator SpawnAtIntervals()
+    void Update()
     {
-        while (isSpawning)
+        if (SceneController.isGamePaused || SceneController.isGameStopped)
+        {
+            return;
+        }
+
+        timer -= Time.deltaTime;
+        if (timer <= 0f)
         {
             SpawnRandomObject();
-
-            // Randomize the interval for the next spawn
-            float randomInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
-            yield return new WaitForSeconds(randomInterval); // Wait for the randomized interval before spawning the next object
+            timer = GetRandomSpawnInterval(); // Reset the timer with a new random interval
         }
+
+    }
+
+
+    public float GetRandomSpawnInterval()
+    {
+        return Random.Range(minSpawnInterval, maxSpawnInterval);
     }
 
     public void SpawnRandomObject()
@@ -59,35 +68,9 @@ public class ThunderSpawner : MonoBehaviour
         // Get a random spawn position from the list of predefined positions
         Transform randomPosition = spawnPositions[Random.Range(0, spawnPositions.Count)];
         float randomX = Random.Range(-RandomXPositionRange, RandomXPositionRange);
-        randomPosition.position = new Vector3(randomPosition.position.x + RandomXPositionRange, randomPosition.position.y, 0 );
+        Vector3 spawnPos = randomPosition.position + Vector3.right * randomX;
         // Instantiate the object at the random position
-        Instantiate(objectPrefab, randomPosition.position, Quaternion.identity);
+        Instantiate(objectPrefab, spawnPos, Quaternion.identity);
     }
 
-    public void StopSpawning()
-    {
-        isSpawning = false;  // You can call this method to stop spawning objects if needed
-    }
-
-    private void OnEnable()
-    {
-        EventManager.Game.OnWin += GameStopped;
-        EventManager.Game.OnPerkPicked += GameResumed;
-    }
-
-    private void OnDisable()
-    {
-        EventManager.Game.OnWin -= GameStopped;
-        EventManager.Game.OnPerkPicked -= GameResumed;
-    }
-
-    private void GameStopped()
-    {
-        StopAllCoroutines();
-    }
-
-    private void GameResumed()
-    {
-        StartCoroutine(SpawnAtIntervals());
-    }
 }

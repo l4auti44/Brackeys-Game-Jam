@@ -39,8 +39,8 @@ public class RepairModuleSys : SystemBlueprint
     private IEnumerator StartCooldown()
     {
         isOnCooldown = true;
-        StartCoroutine(UpdateCooldownNumber());
-        yield return new WaitForSeconds(cooldown);
+        // run the countdown coroutine and wait for it to finish; it already accounts for pauses
+        yield return StartCoroutine(UpdateCooldownNumber());
         isOnCooldown = false;
     }
 
@@ -51,8 +51,14 @@ public class RepairModuleSys : SystemBlueprint
 
         while (currentCooldown > 0)
         {
+            // when game is stopped we should pause the countdown entirely
+            if (SceneController.isGameStopped)
+            {
+                yield return null;
+                continue; // skip decrement and text update until unpaused
+            }
+
             currentCooldown -= Time.deltaTime;
-            if (SceneController.isGameStopped) yield return null;
             int secondsLeft = Mathf.CeilToInt(Mathf.Clamp(currentCooldown, 0f, cooldown));
             text.text = secondsLeft.ToString();
             yield return null;

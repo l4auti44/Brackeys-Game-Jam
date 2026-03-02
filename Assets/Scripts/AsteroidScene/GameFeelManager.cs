@@ -24,7 +24,7 @@ public class GameFeelManager : MonoBehaviour
 
     private void Update()
     {
-        if (SceneController.isGamePaused && isShaking)
+        if ((SceneController.isGamePaused || SceneController.isGameStopped) && isShaking)
         {
             StopAllCoroutines();
             cameraTransform.localPosition = originalPosition;
