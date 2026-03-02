@@ -13,7 +13,7 @@ public class Follower : MonoBehaviour
         
         if (collision.gameObject.tag == "MagneticField")
         {
-            Debug.Log("DoingSomething");
+            //Debug.Log("DoingSomething");
             var f = collision.gameObject.GetComponent<MagnetismField>();
 
             float s = f.strength;
@@ -25,7 +25,7 @@ public class Follower : MonoBehaviour
 
     void MMoveTowards(Vector2 location,float strength)
     {
-        Debug.Log("MovingTowards");
+        //Debug.Log("MovingTowards");
         //location *= location * strength;
 
         transform.parent.position = Vector2.MoveTowards(transform.parent.position, location, strength * Time.deltaTime);

@@ -33,9 +33,9 @@ public class ShieldModuleSys : SystemBlueprint
     private IEnumerator StartCooldown()
     {
         isOnCooldown = true;
-        StartCoroutine(UpdateCooldownNumber());
-        yield return new WaitForSeconds(cooldown);
+        yield return StartCoroutine(UpdateCooldownNumber());
         isOnCooldown = false;
+
     }
 
     private IEnumerator UpdateCooldownNumber()
@@ -44,6 +44,13 @@ public class ShieldModuleSys : SystemBlueprint
 
         while (currentCooldown > 0)
         {
+
+            if (SceneController.isGameStopped)
+            {
+                yield return null;
+                continue;
+            }
+
             currentCooldown -= Time.deltaTime;
             int secondsLeft = Mathf.CeilToInt(Mathf.Clamp(currentCooldown, 0f, cooldown));
             text.text = secondsLeft.ToString();
