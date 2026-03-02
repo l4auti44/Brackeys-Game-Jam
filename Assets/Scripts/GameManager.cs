@@ -259,7 +259,6 @@ public class GameManager : MonoBehaviour
             if (!dead)
                 UpdateGameProgress();
             UpdateEnergy();
-            HandleGameOver();
             ClampEnergy();
             UpdateCameraZoom();
             UpdateUI();
@@ -324,6 +323,10 @@ public class GameManager : MonoBehaviour
         energyDecreaseSpeed = CalculateEnergyDecreaseSpeed();
         energy -= energyDecreaseSpeed * 0.01f;
         energySlider.value = energy * 0.01f;
+        if (energy <= 0 && !dead)
+        {
+            HandleGameOver();
+        }
     }
 
     private float CalculateEnergyDecreaseSpeed()
@@ -343,23 +346,16 @@ public class GameManager : MonoBehaviour
 
     private void HandleGameOver()
     {
-        if (energy >= 0) 
-        {
-            timerForGameOver = 10f;
-            return;
-        }
-
         shipSpeed = Mathf.Max(0, shipSpeed - speedDecreaseRateWhenGameOver * Time.deltaTime);
         radarLV = 0;
         SoundManager.PlaySound(SoundManager.Sound.EnergyAtZeroWarning);
 
         timerForGameOver -= Time.deltaTime;
-        if (timerForGameOver <= 0f)
-        {
-            timerForGameOver = 99999;
-            dead = true;
-            EventManager.Game.OnDie.Invoke(this);
-        }
+
+
+        dead = true;
+        EventManager.Game.OnDie.Invoke(this);
+        
     }
 
     private void ClampEnergy()

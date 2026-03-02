@@ -58,7 +58,7 @@ public class UIPauseMenuController : MonoBehaviour
         resumeButton.SetActive(false);
         titleText.text = "YOU DIED!";
         diedOrWinConditions = true;
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(2f);
         SwitchPauseMenu();
     }
     private void SwitchPauseMenuOnWin(Component comp)
