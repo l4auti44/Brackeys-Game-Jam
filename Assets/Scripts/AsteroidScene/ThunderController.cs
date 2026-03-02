@@ -54,7 +54,7 @@ public class ThunderController : MonoBehaviour
                 Debug.Log("Energy earned");
                 // Increase the energy of the game manager
                 gameManager.energy += energyToIncrease;
-                ScoreManager.AddScore(scoreToAdd);
+                ScoreManager.AddScore(scoreToAdd, transform.position);
                 energyEarned = true;
 
                 //Give player feedback
