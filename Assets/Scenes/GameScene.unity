@@ -8934,11 +8934,13 @@ MonoBehaviour:
       me.
     goodText: Nice work, keep up the good behavior and you'll go far.
     timeForTask: 15
+    levelToKeep: 2
   - dialogEvent: 1
     taskText: Humans, keep your RADAR at LEVEL
     failText: I guess you did not understand my command.
     goodText: Well done, it was a simple task anyway . . .
     timeForTask: 15
+    levelToKeep: 2
   - dialogEvent: 2
     taskText: Listen, ENGINE needs to stay at LEVEL
     failText: Well, what did I expect? Trusting humans is the greatest mistake a
@@ -8946,6 +8948,7 @@ MonoBehaviour:
     goodText: You succeeded, but do not let it go to your head. Just keep following
       my orders.
     timeForTask: 15
+    levelToKeep: 2
   dialogTEST: 2
 --- !u!1 &969604998
 GameObject:
@@ -18594,37 +18597,37 @@ MonoBehaviour:
     minSpawnInterval: 0.01
     maxSpawnInterval: 0.8
     arrowYOffset: -6.5
-    asteroidsBeforeFollow: 4
+    asteroidsBeforeFollow: 5
   - moveSpeed: 3
     minSpawnInterval: 0.0095
     maxSpawnInterval: 0.75
     arrowYOffset: -6.5
-    asteroidsBeforeFollow: 3
+    asteroidsBeforeFollow: 4
   - moveSpeed: 3
     minSpawnInterval: 0.009
     maxSpawnInterval: 0.7
     arrowYOffset: -6.5
-    asteroidsBeforeFollow: 2
+    asteroidsBeforeFollow: 3
   - moveSpeed: 3
     minSpawnInterval: 0.008
     maxSpawnInterval: 0.65
     arrowYOffset: -6.5
-    asteroidsBeforeFollow: 1
+    asteroidsBeforeFollow: 2
   - moveSpeed: 3
     minSpawnInterval: 0.0075
-    maxSpawnInterval: 0.63
+    maxSpawnInterval: 0.6
     arrowYOffset: -6.5
-    asteroidsBeforeFollow: 1
+    asteroidsBeforeFollow: 2
   - moveSpeed: 3
     minSpawnInterval: 0.0073
-    maxSpawnInterval: 0.62
+    maxSpawnInterval: 0.5
     arrowYOffset: -6.5
-    asteroidsBeforeFollow: 1
+    asteroidsBeforeFollow: 2
   - moveSpeed: 3
     minSpawnInterval: 0.0071
-    maxSpawnInterval: 0.61
+    maxSpawnInterval: 0.4
     arrowYOffset: -6.5
-    asteroidsBeforeFollow: 1
+    asteroidsBeforeFollow: 2
   pos1: {fileID: 456080113}
   pos2: {fileID: 32938073}
   asteroidPrefabs:
