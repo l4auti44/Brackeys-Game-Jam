@@ -100,6 +100,8 @@ public class ShipMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("EnergyCollectable"))
         {
             gameManager.IncreaseEnergy(energyCollectable);
+            var EnergyCollectableScript = collision.gameObject.GetComponent<LightController>();
+            ScoreManager.AddScore(EnergyCollectableScript.score, transform.position);
             SoundManager.PlaySound(collectSoundsFX);
 
             Destroy(collision.gameObject);
@@ -107,6 +109,8 @@ public class ShipMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("EnergyCollectable2"))
         {
             gameManager.IncreaseEnergy(energyCollectable + EnergyMod);
+            var EnergyCollectableScript = collision.gameObject.GetComponent<LightController>();
+            ScoreManager.AddScore(EnergyCollectableScript.score, transform.position);
             SoundManager.PlaySound(collectSoundsFX);
 
             Destroy(collision.gameObject);

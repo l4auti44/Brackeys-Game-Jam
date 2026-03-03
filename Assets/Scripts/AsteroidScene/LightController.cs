@@ -10,6 +10,8 @@ public class LightController : MonoBehaviour
     private bool isFading = false; // Flag to control the fading process
     private GameManager gameManager;
 
+    public int score = 10;
+
     void Start()
     {
         // Automatically find the Light2D component in the child object

@@ -8,6 +8,10 @@ public class MasterVolumeSlider : MonoBehaviour
     private void Start()
     {
         GetComponent<UnityEngine.UI.Slider>().value = SoundManager.MasterVolume;
+        if (musicAudioSource != null)
+        {
+            musicAudioSource.volume = SoundManager.MasterVolume;
+        }
     }
 
     public void OnValueChanged(float value)
