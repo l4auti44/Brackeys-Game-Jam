@@ -11807,7 +11807,7 @@ MonoBehaviour:
   cabinUI_gameObject: {fileID: 1270160456}
   frame_asteriodsUI: {fileID: 670505312}
   EnergyMod: 2
-  energyCollectable: 17
+  energyCollectable: 5
   energyDecreaseEnemyHit: 10
   moveSpeed: 7
   moveDuration: 1
