@@ -91,12 +91,12 @@ public class DialogSystem : MonoBehaviour
                 break;
             case DialogEvents.KeepRadarAt:
                 currentDialog.levelToKeep = Random.Range(1, 4);
-                currentDialog.taskText += " " + currentDialog.levelToKeep + "!";
+                currentDialog.taskText = "Humans, keep your RADAR at LEVEL " + currentDialog.levelToKeep + "!";
                 
                 break;
             case DialogEvents.KeepEngineAt:
                 currentDialog.levelToKeep = Random.Range(1, 5);
-                currentDialog.taskText += " " + currentDialog.levelToKeep + ", do not disappoint me . . . ";
+                currentDialog.taskText = "Listen, ENGINE needs to stay at LEVEL " + currentDialog.levelToKeep + ", do not disappoint me . . . ";
                 break;
         }
         if (currentDialog != null)
