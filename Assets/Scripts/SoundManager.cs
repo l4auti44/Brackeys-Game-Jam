@@ -44,6 +44,8 @@ public static class SoundManager
 
     private static float audioClipVolume, DialogueVolume;
 
+    public static float MasterVolume = 1f;
+
 
 
     //Timers for sounds that need a delay between each PlaySound()
@@ -55,6 +57,21 @@ public static class SoundManager
         soundTimerDictionary = new Dictionary<Sound, float>();
         //INITIALIZE HERE EACH SOUND THAT NEED A TIMER
         //EXAMPLE: soundTimerDictionary[Sound.PlayerMove] = 0f;
+        
+        // Load MasterVolume from PlayerPrefs (default to 1f if not set)
+        MasterVolume = PlayerPrefs.GetFloat("MasterVolume", 1f);
+    }
+
+    /// <summary>
+    /// Set the master volume and save it to PlayerPrefs
+    /// </summary>
+    /// <param name="volume">Volume value between 0f and 1f</param>
+    public static void SetMasterVolume(float volume)
+    {
+        volume = Mathf.Clamp01(volume); // Clamp between 0 and 1
+        MasterVolume = volume;
+        PlayerPrefs.SetFloat("MasterVolume", volume);
+        PlayerPrefs.Save();
     }
 
     
@@ -69,7 +86,7 @@ public static class SoundManager
                 musicAudioSource.loop = true;
             }
             GetAudioClip(sound);
-            float targetVolume = audioClipVolume;
+            float targetVolume = audioClipVolume * MasterVolume;
             // If the music is already playing, start the fade-out before changing the track.
             if (musicAudioSource.isPlaying)
             {
@@ -118,7 +135,7 @@ public static class SoundManager
     {
         AudioClip audioClip = GetAudioClip(sound);
         musicAudioSource.clip = audioClip;
-        musicAudioSource.volume = targetVolume;
+        musicAudioSource.volume = targetVolume * MasterVolume;
         musicAudioSource.Play();
     }
 
@@ -135,6 +152,7 @@ public static class SoundManager
             AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
             audioSource.clip = GetAudioClip(sound);
             // Could have some audio options in here like: audioSource.maxDistance = 100f;
+            audioSource.volume = audioClipVolume * MasterVolume;
             audioSource.Play();
 
             Object.Destroy(soundGameObject, audioSource.clip.length);
@@ -151,7 +169,7 @@ public static class SoundManager
                 oneShotAudioSource = OneShotGameObject.AddComponent<AudioSource>();
             }
             AudioClip audioClip = GetAudioClip(sound);
-            oneShotAudioSource.volume = audioClipVolume;
+            oneShotAudioSource.volume = audioClipVolume * MasterVolume;
             oneShotAudioSource.PlayOneShot(audioClip);
         }
     }
@@ -186,7 +204,7 @@ public static class SoundManager
         //Get dialoguePool
         var poolAudios = GetDialogueAudios(pool);
         List<AudioClip> audioList = new List<AudioClip>(poolAudios);
-        dialogueAudioSource.volume = DialogueVolume;
+        dialogueAudioSource.volume = DialogueVolume * MasterVolume;
         if (!dialogueGameObject.GetComponent<MonoBehaviourHelper>())
                     dialogueGameObject.AddComponent<MonoBehaviourHelper>();
         
