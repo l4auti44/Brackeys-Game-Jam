@@ -8935,13 +8935,12 @@ MonoBehaviour:
     goodText: Nice work, keep up the good behavior and you'll go far.
     timeForTask: 15
   - dialogEvent: 1
-    taskText: Humans, keep your RADAR at LEVEL 2!
+    taskText: Humans, keep your RADAR at LEVEL
     failText: I guess you did not understand my command.
     goodText: Well done, it was a simple task anyway . . .
     timeForTask: 15
   - dialogEvent: 2
-    taskText: 'Listen, ENGINE needs to stay at LEVEL 2, do not disappoint me . .
-      . '
+    taskText: Listen, ENGINE needs to stay at LEVEL
     failText: Well, what did I expect? Trusting humans is the greatest mistake a
       machine can make.
     goodText: You succeeded, but do not let it go to your head. Just keep following

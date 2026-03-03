@@ -33,6 +33,7 @@ public class DialogSystem : MonoBehaviour
         [TextArea]
         public string taskText, failText, goodText;
         public float timeForTask = 30f;
+        [HideInInspector] public int levelToKeep = 2;
     }
 
     private DialogEventsList currentDialog;
@@ -84,6 +85,20 @@ public class DialogSystem : MonoBehaviour
             StopWritting();
         }
         currentDialog = GetDialog(dialog);
+        switch (currentDialog.dialogEvent)
+        {
+            case DialogEvents.NoGetHit:
+                break;
+            case DialogEvents.KeepRadarAt:
+                currentDialog.levelToKeep = Random.Range(1, 4);
+                currentDialog.taskText += " " + currentDialog.levelToKeep + "!";
+                
+                break;
+            case DialogEvents.KeepEngineAt:
+                currentDialog.levelToKeep = Random.Range(1, 5);
+                currentDialog.taskText += " " + currentDialog.levelToKeep + ", do not disappoint me . . . ";
+                break;
+        }
         if (currentDialog != null)
         {
             StopAllCoroutines();
@@ -161,7 +176,7 @@ public class DialogSystem : MonoBehaviour
         {
             if (currentDialog.dialogEvent == DialogEvents.KeepRadarAt)
             {
-                if (lv != 2)
+                if (lv != currentDialog.levelToKeep)
                 {
                     TaskFailed();
                 }
@@ -175,7 +190,7 @@ public class DialogSystem : MonoBehaviour
         {
             if (currentDialog.dialogEvent == DialogEvents.KeepEngineAt)
             {
-                if (lv != 2)
+                if (lv != currentDialog.levelToKeep)
                 {
                     TaskFailed();
                 }
@@ -212,7 +227,7 @@ public class DialogSystem : MonoBehaviour
                 break;
             case DialogEvents.KeepRadarAt:
                 CurrentLevelTask = (int)gameManager.radarLV;
-                if (CurrentLevelTask != 2)
+                if (CurrentLevelTask != currentDialog.levelToKeep)
                 {
                     TaskFailed();
                     break;
@@ -222,7 +237,7 @@ public class DialogSystem : MonoBehaviour
                 break;
             case DialogEvents.KeepEngineAt:
                 CurrentLevelTask = (int)gameManager.positionLV;
-                if (CurrentLevelTask != 2)
+                if (CurrentLevelTask != currentDialog.levelToKeep)
                 {
                     TaskFailed();
                     break;
