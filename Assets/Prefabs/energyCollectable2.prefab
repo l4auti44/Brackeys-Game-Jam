@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2237861409240281729}
   - component: {fileID: 6709956961209627275}
   - component: {fileID: -3889524714917061231}
+  - component: {fileID: 2068501037240357327}
   m_Layer: 0
   m_Name: energyCollectable2
   m_TagString: EnergyCollectable2
@@ -190,3 +191,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 2237861409240281729}
+--- !u!114 &2068501037240357327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390194709076669044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68783ccea76aa11429c79a1012ea1f1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

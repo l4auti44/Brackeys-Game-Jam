@@ -176,6 +176,7 @@ GameObject:
   - component: {fileID: 3422233627552412450}
   - component: {fileID: 6007830761918410752}
   - component: {fileID: 9188439271743671876}
+  - component: {fileID: 2190974340122651377}
   m_Layer: 0
   m_Name: energyCollectable
   m_TagString: EnergyCollectable
@@ -341,3 +342,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 5
+--- !u!114 &2190974340122651377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6855771246143582453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68783ccea76aa11429c79a1012ea1f1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

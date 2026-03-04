@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
+
 
 public class LightController : MonoBehaviour
 {
@@ -12,8 +10,7 @@ public class LightController : MonoBehaviour
 
     public int score = 10;
 
-    private Rigidbody2D rb;
-    private Vector2 saveSpeed; 
+
 
     void Start()
     {
@@ -27,13 +24,12 @@ public class LightController : MonoBehaviour
         fadeSpeed = gameManager.asteroidFadeLightSpeed;
 
         isFading = true;
-        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
         // If fading is activated, reduce the light intensity over time
-        if (isFading)
+        if (isFading && !(SceneController.isGameStopped || SceneController.isGamePaused))
         {
             Color color = spriteRenderer.color; // Get the current color
             color.a -= fadeSpeed * 0.01f; // Set the alpha to 1
@@ -50,35 +46,4 @@ public class LightController : MonoBehaviour
 
     }
 
-    private void StopMovement()
-    {
-        saveSpeed = rb.velocity;
-        rb.velocity = Vector2.zero;
-    }
-
-    private void ResumeMovement()
-    {
-        rb.velocity = saveSpeed;
-    }
-
-    void Awake()
-    {
-        EventManager.Game.OnGameStopped += StopMovement;
-        EventManager.Game.OnPerkPicked += ResumeMovement;
-    }
-
-    void OnDestroy()
-    {
-        EventManager.Game.OnGameStopped -= StopMovement;
-        EventManager.Game.OnPerkPicked -= ResumeMovement;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-
-        if (collision.CompareTag("Wall"))
-        {
-            Destroy(gameObject); // Destroy the asteroid upon collision 
-        }
-    }
 }
