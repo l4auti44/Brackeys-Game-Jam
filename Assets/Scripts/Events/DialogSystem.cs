@@ -88,6 +88,8 @@ public class DialogSystem : MonoBehaviour
         switch (currentDialog.dialogEvent)
         {
             case DialogEvents.NoGetHit:
+                currentDialog.timeForTask = Random.Range(5, 20);
+                currentDialog.taskText = "Humans, DO NOT GET HIT for  " + currentDialog.timeForTask + " SECONDS or . . . you will see.";
                 break;
             case DialogEvents.KeepRadarAt:
                 currentDialog.levelToKeep = Random.Range(1, 4);
@@ -217,11 +219,13 @@ public class DialogSystem : MonoBehaviour
     private IEnumerator WaitingForAction()
     {
         float time = currentDialog.timeForTask;
+
         EventManager.Game.OnTaskWaiting.Invoke(1.57f / time);
 
         switch (currentDialog.dialogEvent)
         {
             case DialogEvents.NoGetHit:
+                time = currentDialog.timeForTask;
                 yield return new WaitForSeconds(time);
                 TaskCompleted();
                 break;
