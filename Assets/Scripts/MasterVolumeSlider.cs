@@ -5,13 +5,21 @@ using UnityEngine;
 public class MasterVolumeSlider : MonoBehaviour
 {
     [SerializeField] private AudioSource musicAudioSource;
-    private void Start()
+    private float startVolume;
+    private void Awake()
     {
-        GetComponent<UnityEngine.UI.Slider>().value = SoundManager.MasterVolume;
+        
         if (musicAudioSource != null)
         {
-            musicAudioSource.volume = SoundManager.MasterVolume;
+            startVolume = musicAudioSource.volume;
+            musicAudioSource.volume = startVolume * SoundManager.MasterVolume;
         }
+        GetComponent<UnityEngine.UI.Slider>().value = SoundManager.MasterVolume;
+    }
+
+    private void Start()
+    {
+
     }
 
     public void OnValueChanged(float value)
@@ -23,7 +31,7 @@ public class MasterVolumeSlider : MonoBehaviour
     {
         if (musicAudioSource != null)
         {
-            musicAudioSource.volume = SoundManager.MasterVolume;
+            musicAudioSource.volume = startVolume * SoundManager.MasterVolume;
         }
     }
 }
