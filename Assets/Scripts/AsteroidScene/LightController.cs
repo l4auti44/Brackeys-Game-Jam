@@ -12,6 +12,9 @@ public class LightController : MonoBehaviour
 
     public int score = 10;
 
+    private Rigidbody2D rb;
+    private Vector2 saveSpeed; 
+
     void Start()
     {
         // Automatically find the Light2D component in the child object
@@ -24,6 +27,7 @@ public class LightController : MonoBehaviour
         fadeSpeed = gameManager.asteroidFadeLightSpeed;
 
         isFading = true;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -44,5 +48,37 @@ public class LightController : MonoBehaviour
         color.a = 1f; // Set the alpha to 1
         spriteRenderer.color = color; // Apply the updated color back to the SpriteRenderer
 
+    }
+
+    private void StopMovement()
+    {
+        saveSpeed = rb.velocity;
+        rb.velocity = Vector2.zero;
+    }
+
+    private void ResumeMovement()
+    {
+        rb.velocity = saveSpeed;
+    }
+
+    void Awake()
+    {
+        EventManager.Game.OnGameStopped += StopMovement;
+        EventManager.Game.OnPerkPicked += ResumeMovement;
+    }
+
+    void OnDestroy()
+    {
+        EventManager.Game.OnGameStopped -= StopMovement;
+        EventManager.Game.OnPerkPicked -= ResumeMovement;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+
+        if (collision.CompareTag("Wall"))
+        {
+            Destroy(gameObject); // Destroy the asteroid upon collision 
+        }
     }
 }
