@@ -7,7 +7,7 @@ public class RadarWaveController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Check if the collided object has the tag "Enemy" or "EnergyCollectable"
-        if (collision.CompareTag("Enemy") || collision.CompareTag("EnergyCollectable"))
+        if (collision.CompareTag("Enemy") || collision.CompareTag("EnergyCollectable") || collision.CompareTag("EnergyCollectable2"))
         {
             // Activate all child objects of the collided object
             foreach (Transform child in collision.transform)

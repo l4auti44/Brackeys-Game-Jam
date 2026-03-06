@@ -55,15 +55,16 @@ public class AsteroidMovement : MonoBehaviour
         else
         {
             rb.simulated = true;
+            asteroidLifespan -= Time.deltaTime;
         }
 
-        // Destroy the asteroid if it goes off the screen
-        if (transform.position.y < screenBottomY - 1f) // Adding some margin
+        // Destroy the asteroid if it goes off the screen or its lifespan expires
+        if (transform.position.y < screenBottomY - 1f || asteroidLifespan <= 0)
         {
             Destroy(gameObject);
         }
-        // Destroy the asteroid after its lifespan expires
-        Destroy(gameObject, asteroidLifespan);
+        
+        
     }
 
     private void OnTriggerEnter2D(Collider2D other)
