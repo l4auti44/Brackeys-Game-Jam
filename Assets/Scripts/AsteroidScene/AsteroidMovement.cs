@@ -62,6 +62,8 @@ public class AsteroidMovement : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        // Destroy the asteroid after its lifespan expires
+        Destroy(gameObject, asteroidLifespan);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
