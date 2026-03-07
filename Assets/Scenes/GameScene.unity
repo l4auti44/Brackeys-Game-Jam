@@ -10093,10 +10093,10 @@ MonoBehaviour:
     maxRotation: 500
   speedDecreaseRateWhenGameOver: 0.1
   radarWaveIntervalLVS:
-  - 5
+  - 5.2
+  - 3.9
   - 3
-  - 2
-  - 0.9
+  - 1.9
   positionLVS:
   - {fileID: 2125261609}
   - {fileID: 300244156}
@@ -10124,15 +10124,15 @@ MonoBehaviour:
   cameraZoomOutSpeed: 1.1
   energy: 1000
   maxEnergy: 1000
-  radarModEnergyDecreaseLV1: 22
-  radarModEnergyDecreaseLV2: 15
-  radarModEnergyDecreaseLV3: 10
-  radarModEnergyDecreaseLV4: 8
+  radarModEnergyDecreaseLV1: 10
+  radarModEnergyDecreaseLV2: 30
+  radarModEnergyDecreaseLV3: 20
+  radarModEnergyDecreaseLV4: 15
   shieldModEnergyDecrease: 10
-  positionModEnergyDecreaseLV1: 70
-  positionModEnergyDecreaseLV2: 2
+  positionModEnergyDecreaseLV1: 72
+  positionModEnergyDecreaseLV2: 3
   positionModEnergyDecreaseLV3: 2
-  positionModEnergyDecreaseLV4: 1
+  positionModEnergyDecreaseLV4: 2
   positionModEnergyDecreaseLV5: 1
   arrowModEnergyDecrease: 2
   energySlider: {fileID: 1053437755}
