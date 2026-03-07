@@ -10125,11 +10125,11 @@ MonoBehaviour:
   energy: 1000
   maxEnergy: 1000
   radarModEnergyDecreaseLV1: 22
-  radarModEnergyDecreaseLV2: 9
-  radarModEnergyDecreaseLV3: 8
-  radarModEnergyDecreaseLV4: 7
+  radarModEnergyDecreaseLV2: 15
+  radarModEnergyDecreaseLV3: 10
+  radarModEnergyDecreaseLV4: 8
   shieldModEnergyDecrease: 10
-  positionModEnergyDecreaseLV1: 51
+  positionModEnergyDecreaseLV1: 70
   positionModEnergyDecreaseLV2: 2
   positionModEnergyDecreaseLV3: 2
   positionModEnergyDecreaseLV4: 1
