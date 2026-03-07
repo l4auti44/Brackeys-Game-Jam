@@ -322,7 +322,7 @@ public class GameManager : MonoBehaviour
     private void UpdateEnergy()
     {
         energyDecreaseSpeed = CalculateEnergyDecreaseSpeed();
-        energy -= energyDecreaseSpeed * 0.01f;
+        energy -= energyDecreaseSpeed * 0.01f * Time.deltaTime;
         energySlider.value = energy * 0.01f;
         if (energy <= 0 && !dead)
         {
@@ -341,8 +341,7 @@ public class GameManager : MonoBehaviour
                 positionModEnergyDecreaseLV2 +
                 positionModEnergyDecreaseLV3 +
                 positionModEnergyDecreaseLV4 +
-                positionModEnergyDecreaseLV5 +
-                arrowModEnergyDecrease_original) * 0.1f;
+                positionModEnergyDecreaseLV5) * 0.1f;
     }
 
     private void HandleGameOver()
