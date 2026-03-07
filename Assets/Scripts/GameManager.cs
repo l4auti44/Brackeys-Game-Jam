@@ -150,6 +150,8 @@ public class GameManager : MonoBehaviour
 
     private float scoreTimer = 0f;
 
+    [HideInInspector] public float EnergyMod;
+
     enum Levels
     {
         Lv1,
@@ -399,7 +401,7 @@ public class GameManager : MonoBehaviour
 
     public void IncreaseEnergy(float energyToIncrease)
     {
-        energy += energyToIncrease;
+        energy += energyToIncrease + EnergyMod;
     }
 
     public void DecreaseMaxEnergy(float amount)

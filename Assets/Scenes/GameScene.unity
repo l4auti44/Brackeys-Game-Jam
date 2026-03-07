@@ -4622,7 +4622,7 @@ MonoBehaviour:
   repairtime_perk_decayrate: 2
   repairtime_pickup_perk_startN: 30
   magnetism_perk_decayrate: 1
-  magnetism_perk_startN: 2
+  magnetism_perk_startN: 1.5
   magnetism_perks: 1
   perkSys: {fileID: 1029981141}
   inputBlocker: {fileID: 1663939394}
@@ -6673,7 +6673,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1257503199}
@@ -10150,6 +10150,7 @@ MonoBehaviour:
   perkController: {fileID: 431494701}
   EngineModuleMeterImage: {fileID: 1968072637}
   RadarModuleMeterImage: {fileID: 1780542493}
+  EnergyMod: 0
 --- !u!4 &1017901626
 Transform:
   m_ObjectHideFlags: 0
@@ -12300,9 +12301,8 @@ MonoBehaviour:
   shakeTimeWhenHitEnemy: 0.1
   cabinUI_gameObject: {fileID: 1270160456}
   frame_asteriodsUI: {fileID: 670505312}
-  EnergyMod: 2
   energyCollectable: 5
-  energyDecreaseEnemyHit: 50
+  energyDecreaseEnemyHit: 25
   moveSpeed: 7
   moveDuration: 1
   isMoving: 0
@@ -19356,37 +19356,37 @@ MonoBehaviour:
     minSpawnInterval: 0.01
     maxSpawnInterval: 0.8
     arrowYOffset: -6.5
-    asteroidsBeforeFollow: 5
+    asteroidsBeforeFollow: 6
   - moveSpeed: 3
     minSpawnInterval: 0.0095
     maxSpawnInterval: 0.75
     arrowYOffset: -6.5
-    asteroidsBeforeFollow: 4
+    asteroidsBeforeFollow: 6
   - moveSpeed: 3
     minSpawnInterval: 0.009
     maxSpawnInterval: 0.7
     arrowYOffset: -6.5
-    asteroidsBeforeFollow: 3
+    asteroidsBeforeFollow: 5
   - moveSpeed: 3
     minSpawnInterval: 0.008
     maxSpawnInterval: 0.65
     arrowYOffset: -6.5
-    asteroidsBeforeFollow: 2
+    asteroidsBeforeFollow: 5
   - moveSpeed: 3
     minSpawnInterval: 0.0075
     maxSpawnInterval: 0.6
     arrowYOffset: -6.5
-    asteroidsBeforeFollow: 2
+    asteroidsBeforeFollow: 5
   - moveSpeed: 3
     minSpawnInterval: 0.0073
     maxSpawnInterval: 0.5
     arrowYOffset: -6.5
-    asteroidsBeforeFollow: 2
+    asteroidsBeforeFollow: 4
   - moveSpeed: 3
     minSpawnInterval: 0.0071
     maxSpawnInterval: 0.4
     arrowYOffset: -6.5
-    asteroidsBeforeFollow: 2
+    asteroidsBeforeFollow: 4
   pos1: {fileID: 456080113}
   pos2: {fileID: 32938073}
   asteroidPrefabs:

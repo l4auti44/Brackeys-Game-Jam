@@ -201,7 +201,7 @@ public class PerkController : MonoBehaviour
 
         float f = (b * eC) / (d * m);
 
-        gameManager.ship_script.EnergyMod += f;
+        gameManager.EnergyMod += f;
     }
 
 

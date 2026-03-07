@@ -26,9 +26,6 @@ public class MagnetismField : MonoBehaviour
 
         float n = new_size;
 
-        Debug.Log(s);
-
-        Debug.Log(n);
 
         
         
