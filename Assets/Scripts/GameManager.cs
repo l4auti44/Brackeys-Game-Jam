@@ -322,7 +322,7 @@ public class GameManager : MonoBehaviour
     private void UpdateEnergy()
     {
         energyDecreaseSpeed = CalculateEnergyDecreaseSpeed();
-        energy -= energyDecreaseSpeed * 0.01f * Time.deltaTime;
+        energy -= energyDecreaseSpeed * Time.deltaTime;
         energySlider.value = energy * 0.01f;
         if (energy <= 0 && !dead)
         {
