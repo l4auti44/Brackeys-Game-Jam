@@ -104,7 +104,7 @@ MonoBehaviour:
   energyToIncrease: 100
   timeToEnableCol: 2
   timeToDestroy: 2.6
-  scoreToAdd: 400
+  scoreToAdd: 200
 --- !u!58 &6359922510465915423
 CircleCollider2D:
   m_ObjectHideFlags: 0

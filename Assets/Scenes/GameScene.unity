@@ -9973,7 +9973,7 @@ MonoBehaviour:
   repairSys: {fileID: 0}
   flashButton: {fileID: 0}
   subSystemsController: {fileID: 0}
-  energyCost: 5
+  energyCost: 2
   cooldown: 2
   missile_mod: 0
   text: {fileID: 1393428186}
@@ -10056,8 +10056,8 @@ MonoBehaviour:
   shipSpeed: 0
   radarLV: 0
   positionLV: 0
-  minX: 0.8
-  maxX: 11.8
+  minX: 0.448
+  maxX: 12.12
   asteroidFadeLightSpeed: 0.51
   speedLVS:
   - 4
@@ -10129,10 +10129,10 @@ MonoBehaviour:
   radarModEnergyDecreaseLV3: 20
   radarModEnergyDecreaseLV4: 15
   shieldModEnergyDecrease: 10
-  positionModEnergyDecreaseLV1: 72
-  positionModEnergyDecreaseLV2: 3
-  positionModEnergyDecreaseLV3: 2
-  positionModEnergyDecreaseLV4: 2
+  positionModEnergyDecreaseLV1: 65
+  positionModEnergyDecreaseLV2: 2
+  positionModEnergyDecreaseLV3: 1
+  positionModEnergyDecreaseLV4: 1
   positionModEnergyDecreaseLV5: 1
   arrowModEnergyDecrease: 2
   energySlider: {fileID: 1053437755}
@@ -10146,7 +10146,7 @@ MonoBehaviour:
   magnetic_field: {fileID: 727522365}
   isOverload: 0
   overloadDuration: 5
-  timerForGameOver: 10
+  timerForGameOver: 2
   perkController: {fileID: 431494701}
   EngineModuleMeterImage: {fileID: 1968072637}
   RadarModuleMeterImage: {fileID: 1780542493}
@@ -12302,7 +12302,7 @@ MonoBehaviour:
   cabinUI_gameObject: {fileID: 1270160456}
   frame_asteriodsUI: {fileID: 670505312}
   energyCollectable: 5
-  energyDecreaseEnemyHit: 25
+  energyDecreaseEnemyHit: 15
   moveSpeed: 7
   moveDuration: 1
   isMoving: 0
