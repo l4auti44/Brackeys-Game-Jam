@@ -28,19 +28,36 @@ public class Login : MonoBehaviour
     public void LoginAndEnsureDisplayName()
     {
         EventManager.Login.OnLoginLoading?.Invoke();
-        customID = GetOrCreateCustomId();
+
+        // WebGL builds don’t have a device id, and the PlayerPrefs storage
+        // can be cleared by the browser between sessions. Instead of
+        // generating a GUID we simply reuse the string that the player
+        // types in – this makes the "user name" act as the login key.
+        //
+        // For native platforms you may still want a persistent id (device
+        // id or generated GUID) so players aren’t forced to remember one.
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+            customID = customNameInput?.text?.Trim();
+        }
+        else
+        {
+            customID = GetOrCreateCustomId();
+        }
+
+        // fall back if input was empty for whatever reason
+        if (string.IsNullOrEmpty(customID))
+            customID = GetOrCreateCustomId();
 
         LoginWithCustomIDRequest request = new LoginWithCustomIDRequest
-         { 
+        {
             CustomId = customID,
             CreateAccount = true,
             InfoRequestParameters = new GetPlayerCombinedInfoRequestParams
             {
                 GetPlayerProfile = true
             }
-         };
-
-        
+        };
 
         PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccessWithPlayerInput, OnLoginFailure);
     }
