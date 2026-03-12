@@ -8,12 +8,15 @@ public class UIPauseMenuController : MonoBehaviour
     private GameObject resumeButton;
     private bool diedOrWinConditions = false;
     private TMPro.TMP_Text titleText;
+    private TMPro.TMP_Text scoreText;
 
     private void Awake()
     {
         //pauseMenu = transform.Find("PauseMenu").gameObject;
         resumeButton = pauseMenu.transform.Find("ResumeButton").gameObject;
         titleText = pauseMenu.transform.Find("Title").GetComponent<TMPro.TMP_Text>();
+        scoreText = pauseMenu.transform.Find("ScoreText").GetComponent<TMPro.TMP_Text>();
+        scoreText.gameObject.SetActive(false);
         pauseMenu.SetActive(false);
     }
 
@@ -59,6 +62,8 @@ public class UIPauseMenuController : MonoBehaviour
         titleText.text = "YOU DIED!";
         diedOrWinConditions = true;
         yield return new WaitForSeconds(2f);
+        scoreText.gameObject.SetActive(true);
+        scoreText.text = "Score: \n" + ScoreManager.GetScore().ToString();
         SwitchPauseMenu();
     }
     private void SwitchPauseMenuOnWin(Component comp)

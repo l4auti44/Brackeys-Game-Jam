@@ -11322,22 +11322,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6566153549512095468, guid: 7d779d91143eda444ac5a1ada05cd660, type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6566153549512095468, guid: 7d779d91143eda444ac5a1ada05cd660, type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1196609712}
-    - target: {fileID: 6566153549512095468, guid: 7d779d91143eda444ac5a1ada05cd660, type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ChangeMusicVolume
-      objectReference: {fileID: 0}
-    - target: {fileID: 6566153549512095468, guid: 7d779d91143eda444ac5a1ada05cd660, type: 3}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 6944126065636266604, guid: 7d779d91143eda444ac5a1ada05cd660, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -11517,17 +11501,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.2973833, y: 0.49237394}
   m_EdgeRadius: 0
---- !u!114 &1196609712 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 954549787218668018, guid: 7d779d91143eda444ac5a1ada05cd660, type: 3}
-  m_PrefabInstance: {fileID: 1152279557}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aca0a6a23e42dbe44bc2592bfc925330, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1198210112
 GameObject:
   m_ObjectHideFlags: 0
