@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Perk6
   m_EditorClassIdentifier: 
   title: repair efficiency
-  description: repair efficiency
+  description: Using the repair subsystem costs less energy. This perk stacks.
   sprite: {fileID: 0}
   action: 5

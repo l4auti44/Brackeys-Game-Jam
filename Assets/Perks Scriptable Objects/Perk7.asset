@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Perk7
   m_EditorClassIdentifier: 
   title: decrease repair time
-  description: decrease repair time
+  description: Decrease the time needed for the repair subsystem to cool down. This
+    perk stacks.
   sprite: {fileID: 0}
   action: 6

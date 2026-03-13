@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Perk2
   m_EditorClassIdentifier: 
   title: decrease missile cooldown
-  description: decrease missile cooldown
+  description: Decrease time required for the missile subsystem to cool down. This
+    perk stacks.
   sprite: {fileID: 0}
   action: 1

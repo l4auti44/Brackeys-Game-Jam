@@ -9974,7 +9974,7 @@ MonoBehaviour:
   flashButton: {fileID: 0}
   subSystemsController: {fileID: 0}
   energyCost: 2
-  cooldown: 2
+  cooldown: 10
   missile_mod: 0
   text: {fileID: 1393428186}
 --- !u!114 &1004026307
