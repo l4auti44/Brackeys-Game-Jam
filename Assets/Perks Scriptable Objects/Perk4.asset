@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: magnetism
   description: Magnetic field that pulls in green pickups. Radius will increase each
-    time this perk is selected.
+    time this is selected.
   sprite: {fileID: 0}
   action: 3
