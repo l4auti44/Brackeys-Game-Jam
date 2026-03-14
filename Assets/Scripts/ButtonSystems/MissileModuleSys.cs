@@ -57,8 +57,8 @@ private IEnumerator StartCooldown()
             }
 
             currentCooldown -= Time.deltaTime;
-            int secondsLeft = Mathf.CeilToInt(Mathf.Clamp(currentCooldown, 0f, cooldown));
-            text.text = secondsLeft.ToString();
+            float secondsLeft = Mathf.Clamp(currentCooldown, 0f, cooldown);
+            text.text = secondsLeft.ToString("F1");
             yield return null;
         }
 

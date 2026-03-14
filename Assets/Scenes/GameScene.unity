@@ -4616,7 +4616,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missile_perk_decayrate: 2
-  missile_perk_startN: 1
+  missile_perk_startN: 2
   energy_pickup_perk_decayrate: 2
   energy_pickup_perk_startN: 1
   repairtime_perk_decayrate: 2
@@ -9974,7 +9974,7 @@ MonoBehaviour:
   flashButton: {fileID: 0}
   subSystemsController: {fileID: 0}
   energyCost: 2
-  cooldown: 10
+  cooldown: 3
   missile_mod: 0
   text: {fileID: 1393428186}
 --- !u!114 &1004026307
