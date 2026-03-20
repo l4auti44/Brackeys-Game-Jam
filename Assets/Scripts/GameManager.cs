@@ -288,7 +288,7 @@ public class GameManager : MonoBehaviour
     private void HandleDialogEvents()
     {
         if (!eventFlag) eventTimer -= Time.deltaTime;
-        else eventTimer = 20f;
+        else eventTimer = 26f;
 
 
         if (gameProgress > 8f && !eventFlag && eventTimer <= 0)
