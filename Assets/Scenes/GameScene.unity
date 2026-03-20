@@ -10129,7 +10129,7 @@ MonoBehaviour:
   radarModEnergyDecreaseLV3: 20
   radarModEnergyDecreaseLV4: 15
   shieldModEnergyDecrease: 10
-  positionModEnergyDecreaseLV1: 68
+  positionModEnergyDecreaseLV1: 69
   positionModEnergyDecreaseLV2: 2
   positionModEnergyDecreaseLV3: 1
   positionModEnergyDecreaseLV4: 1
@@ -12274,7 +12274,7 @@ MonoBehaviour:
   shakeTimeWhenHitEnemy: 0.1
   cabinUI_gameObject: {fileID: 1270160456}
   frame_asteriodsUI: {fileID: 670505312}
-  energyCollectable: 5
+  energyCollectable: 8
   energyDecreaseEnemyHit: 16
   moveSpeed: 7
   moveDuration: 1
