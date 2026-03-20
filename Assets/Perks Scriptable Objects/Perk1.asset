@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Perk1
   m_EditorClassIdentifier: 
   title: energy restore
-  description: Refill energy to the current maxiumum + restore the original maximum
-    energy.
+  description: Restore the original maximum energy.
   sprite: {fileID: 0}
   action: 0

@@ -383,7 +383,6 @@ public class GameManager : MonoBehaviour
 
     public void EnergyToMax()
     {
-        energy = maxEnergy;
         RestartMaxEnergy();
     }
     
