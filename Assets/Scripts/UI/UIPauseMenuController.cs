@@ -57,13 +57,13 @@ public class UIPauseMenuController : MonoBehaviour
 
     private IEnumerator Loose()
     {
+        scoreText.gameObject.SetActive(true);
+        scoreText.text = "Score: \n" + ScoreManager.GetScore().ToString();
         yield return new WaitForSeconds(2f);
         resumeButton.SetActive(false);
         titleText.text = "YOU DIED!";
         diedOrWinConditions = true;
         yield return new WaitForSeconds(2f);
-        scoreText.gameObject.SetActive(true);
-        scoreText.text = "Score: \n" + ScoreManager.GetScore().ToString();
         SwitchPauseMenu();
     }
     private void SwitchPauseMenuOnWin(Component comp)

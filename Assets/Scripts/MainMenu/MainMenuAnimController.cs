@@ -5,11 +5,11 @@ using UnityEngine;
 public class MainMenuAnimController : MonoBehaviour
 {
 
-    [SerializeField] private Animator mainMenuAnim;
+    private Animator mainMenuAnim;
     // Start is called before the first frame update
     void Start()
     {
-        
+        mainMenuAnim = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
