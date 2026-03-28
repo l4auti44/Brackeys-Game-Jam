@@ -2568,8 +2568,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 530, y: -375}
-  m_SizeDelta: {x: 470.6, y: 50}
+  m_AnchoredPosition: {x: 508, y: -371}
+  m_SizeDelta: {x: 441.4915, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1837694201
 MonoBehaviour:
@@ -2591,7 +2591,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: global  leader  board
+  m_text: global  leaderboard
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5165b27e27684bc45a6215713b9cd4c7, type: 2}
   m_sharedMaterial: {fileID: 5318227907519349231, guid: 5165b27e27684bc45a6215713b9cd4c7, type: 2}
