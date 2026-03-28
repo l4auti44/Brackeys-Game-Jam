@@ -6545,8 +6545,8 @@ MonoBehaviour:
   repairSys: {fileID: 0}
   flashButton: {fileID: 0}
   subSystemsController: {fileID: 0}
-  energyCost: 99
-  cooldown: 70
+  energyCost: 35
+  cooldown: 79
   text: {fileID: 179032553}
 --- !u!114 &702659395
 MonoBehaviour:
@@ -10224,7 +10224,7 @@ MonoBehaviour:
     minSpeed: 5.5
     maxSpeed: 6.5
     minRotation: 300
-    maxRotation: 500
+    maxRotation: 600
   speedDecreaseRateWhenGameOver: 0.1
   radarWaveIntervalLVS:
   - 5.2
@@ -14985,7 +14985,7 @@ MonoBehaviour:
   repairSys: {fileID: 0}
   flashButton: {fileID: 0}
   subSystemsController: {fileID: 0}
-  cooldown: 20
+  cooldown: 30
   text: {fileID: 657339072}
 --- !u!114 &1525640170
 MonoBehaviour:
