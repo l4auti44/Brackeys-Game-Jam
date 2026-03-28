@@ -19714,6 +19714,16 @@ MonoBehaviour:
     maxSpawnInterval: 0.4
     arrowYOffset: -6.5
     asteroidsBeforeFollow: 4
+  - moveSpeed: 3
+    minSpawnInterval: 0.0069
+    maxSpawnInterval: 0.39
+    arrowYOffset: -6.5
+    asteroidsBeforeFollow: 4
+  - moveSpeed: 3
+    minSpawnInterval: 0.0067
+    maxSpawnInterval: 0.38
+    arrowYOffset: -6.5
+    asteroidsBeforeFollow: 4
   pos1: {fileID: 456080113}
   pos2: {fileID: 32938073}
   asteroidPrefabs:
