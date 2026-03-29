@@ -13,10 +13,7 @@ public class PerkController : MonoBehaviour
     [Tooltip("The base number of the calculation, starting at 1")]
     [SerializeField] float missile_perk_startN = 0;
 
-    [Tooltip("Determines how steep of a decline the benefits are for the perk effectiveness")]
-    [SerializeField] float energy_pickup_perk_decayrate=0;
-    [Tooltip("Base number of the calc, it represents the percentage of ShipMovement's energyCollectable")]
-    [SerializeField] float energy_pickup_perk_startN = 0;
+
 
     int energy_perks=0;
 
@@ -191,17 +188,9 @@ public class PerkController : MonoBehaviour
 
     void EnergyCollectionModCalc()
     {
+        float f = 1 + energy_perks;
         energy_perks++;
-
-        float eC = gameManager.ship_script.energyCollectable;
-
-        float b = energy_pickup_perk_startN;
-        float d = energy_pickup_perk_decayrate;
-        int m = energy_perks; 
-
-        float f = (b * eC) / (d * m);
-
-        gameManager.EnergyMod += f;
+        gameManager.EnergyMod = f;
     }
 
 
