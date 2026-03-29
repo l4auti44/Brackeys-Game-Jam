@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Perk1
   m_EditorClassIdentifier: 
   title: repair hull
-  description: Undo damage done to the ship. Restores the maximum possible energy
-    to its original value.
+  description: Restores 55% of the damage dealt to the ship. This restores energy
+    capacity.
   sprite: {fileID: 0}
   action: 0
