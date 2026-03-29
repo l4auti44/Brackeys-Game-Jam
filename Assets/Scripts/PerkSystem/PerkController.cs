@@ -100,7 +100,7 @@ public class PerkController : MonoBehaviour
         switch (perk_yuh)
         {
             case PerkScriptableObject.Perks.MaxEnergyRestore:
-                gameManager.FixEnergyDamageByPorcent(0.5f); // Restore 50% of energy damage
+                gameManager.FixEnergyDamageByPorcent(0.55f); // Restore 55% of energy damage
                 break;
             case PerkScriptableObject.Perks.DecreaseMissileCoolDown:
                 if (missileModule.cooldown > 0.15f)
