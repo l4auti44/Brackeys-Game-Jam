@@ -385,6 +385,12 @@ public class GameManager : MonoBehaviour
     {
         RestartMaxEnergy();
     }
+
+    public void FixEnergyDamageByPorcent(float percent)
+    {
+        IncreaseMaxEnergy((maxEnergy * percent) + 50);
+
+    }
     
 
     #endregion
@@ -411,6 +417,17 @@ public class GameManager : MonoBehaviour
         }
         energyMax.value += amount * 0.01f;
     }
+
+    private void IncreaseMaxEnergy(float amount)
+    {
+        maxEnergy += amount;
+        energyMax.value -= amount * 0.01f;
+        if (energyMax.value <= 0)
+        {
+            energyMax.gameObject.SetActive(false);
+        }
+    }
+
     public void RestartMaxEnergy()
     {
         maxEnergy = 1000;
