@@ -10284,6 +10284,7 @@ MonoBehaviour:
   perkController: {fileID: 431494701}
   EngineModuleMeterImage: {fileID: 1968072637}
   RadarModuleMeterImage: {fileID: 1780542493}
+  commandTimeMod: 0
   EnergyMod: 0
 --- !u!4 &1017901626
 Transform:

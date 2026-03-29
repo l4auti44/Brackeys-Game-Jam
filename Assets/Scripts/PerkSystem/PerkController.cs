@@ -120,9 +120,19 @@ public class PerkController : MonoBehaviour
                     ManageMagnetism();
                 }
                 break;
+            case PerkScriptableObject.Perks.DecreaseHALComands:
+                {
+                    HandleHALCommandDecrease();
+                }
+                break;
         }
     }
 
+
+    private void HandleHALCommandDecrease()
+    {
+        gameManager.commandTimeMod += 1.5f;
+    }
    public void ReInitializeCards()
     {
         ResetPool();

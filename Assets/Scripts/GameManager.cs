@@ -150,6 +150,8 @@ public class GameManager : MonoBehaviour
 
     private float scoreTimer = 0f;
 
+    [HideInInspector]public float commandTimeMod = 0f;
+
     [HideInInspector] public float EnergyMod;
 
     enum Levels
@@ -288,7 +290,7 @@ public class GameManager : MonoBehaviour
     private void HandleDialogEvents()
     {
         if (!eventFlag) eventTimer -= Time.deltaTime;
-        else eventTimer = 26f;
+        else eventTimer = Random.Range(24f, 28f) + commandTimeMod;
 
 
         if (gameProgress > 8f && !eventFlag && eventTimer <= 0)

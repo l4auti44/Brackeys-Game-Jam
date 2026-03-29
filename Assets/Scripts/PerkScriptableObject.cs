@@ -22,7 +22,8 @@ public class PerkScriptableObject : ScriptableObject
         ArrowEffeciency,
         RepairEffeciency,
         DecreaseRepairTime,
-        PlusOneMissiles
+        PlusOneMissiles,
+        DecreaseHALComands
 
     }
     //public EventManager.PerkEvents action;
