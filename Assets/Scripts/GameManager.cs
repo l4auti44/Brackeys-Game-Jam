@@ -390,7 +390,7 @@ public class GameManager : MonoBehaviour
 
     public void FixEnergyDamageByPorcent(float percent)
     {
-        IncreaseMaxEnergy((maxEnergy * percent) + 50);
+        IncreaseMaxEnergy(((1000 -maxEnergy) * percent) + 50);
 
     }
     
