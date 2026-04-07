@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -543,16 +545,27 @@ public class GameManager : MonoBehaviour
         Debug.Log("Shield Activated");
         isShieldActive = true;
         isShieldCooldown = true;
+        float timerShield = shieldDuration; 
+        float timerCooldown = shieldCooldown;
 
         // Activate the shield
         shieldObject.GetComponent<CapsuleCollider2D>().enabled = true;
         shieldObject.GetComponent<SpriteRenderer>().enabled = true;
 
         shieldModEnergyDecrease = shieldModEnergyDecrease_original;
+          
 
+        while (timerShield > 0)
+        {
+            if (SceneController.isGameStopped)
+            {
+                yield return null;
+                continue;
+            }
 
-        // Wait for the shield duration
-        yield return new WaitForSeconds(shieldDuration);
+            timerShield -= Time.deltaTime;
+            yield return null;
+        }
 
         // Deactivate the shield
         shieldObject.GetComponent<CapsuleCollider2D>().enabled = false;
@@ -561,9 +574,17 @@ public class GameManager : MonoBehaviour
         isShieldActive = false;
         shieldModEnergyDecrease = 0;
 
+        while (timerCooldown > 0)
+        {
+            if (SceneController.isGameStopped)
+            {
+                yield return null;
+                continue;
+            }
 
-        // Start the cooldown
-        yield return new WaitForSeconds(shieldCooldown);
+            timerCooldown -= Time.deltaTime;
+            yield return null;
+        }
 
         // Allow shield to be reactivated after cooldown
         isShieldCooldown = false;
