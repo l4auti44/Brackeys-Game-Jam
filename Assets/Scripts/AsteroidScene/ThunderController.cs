@@ -18,22 +18,43 @@ public class ThunderController : MonoBehaviour
     private CircleCollider2D _collider;
     private GameObject lightning;
     private SpriteRenderer crosshair;
+    private SpriteRenderer lightningSprite;
+
+    private Animator lightningAnimator;
+    private Animator crosshairAnimator;
 
     private void Start()
     {
         crosshair = GetComponent<SpriteRenderer>();
+        lightningAnimator = transform.GetChild(0).GetComponent<Animator>();
+        lightningSprite = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        crosshairAnimator = GetComponent<Animator>();
         lightning = transform.GetChild(0).gameObject;
         lightning.SetActive(false);
         gameManager = FindObjectOfType<GameManager>();  // Find the GameManager in the scene
         _collider = GetComponent<CircleCollider2D>();
         _collider.enabled = false;
-        Destroy(gameObject, timeToDestroy);
-        // Start the state change process
-        //StartCoroutine(ChangeState());
+        StartCoroutine(DestroyAfterTime());
     }
 
     private void Update()
     {
+        if (SceneController.isGameStopped)
+        {
+            lightningAnimator.speed = 0;
+            crosshairAnimator.speed = 0;
+            lightningSprite.enabled = false;
+            crosshair.enabled = false;
+            return;
+        }
+        
+        if (lightningAnimator.speed == 0)
+        {
+            lightningAnimator.speed = 1;
+            crosshairAnimator.speed = 1;
+            lightningSprite.enabled = true;
+            crosshair.enabled = true;
+        }
         timeToEnableCol -= Time.deltaTime;
         if (timeToEnableCol < 0)
         {
@@ -60,6 +81,22 @@ public class ThunderController : MonoBehaviour
                 //Give player feedback
             }
         }
+    }
+
+    private IEnumerator DestroyAfterTime()
+    {
+        float timer = timeToDestroy;
+        while (timer > 0)
+        {
+            if (SceneController.isGameStopped)
+            {
+                yield return null;
+                continue;
+            }
+            timer -= Time.deltaTime;
+            yield return null;
+        }
+        Destroy(gameObject);
     }
 
 
