@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 
 public class Missile_Movement : MonoBehaviour
 {
     public float missileSpeed = 10f; // Speed of the missile
     public float destroyDelay = 5f; // Time after which missile is destroyed if it doesn't hit anything
+    private MMF_Player feedback;
 
     // Start is called before the first frame update
     void Start()
     {
+        feedback = GetComponent<MMF_Player>();
+        feedback?.PlayFeedbacks();
         // Destroy the missile after a delay to avoid clutter if it goes off-screen
         Destroy(gameObject, destroyDelay);
     }
