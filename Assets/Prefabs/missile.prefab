@@ -112,7 +112,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3700389, y: 0.3700389, z: 0.3700389}
+  m_LocalScale: {x: 0.37430978, y: 0.36027887, z: 1.6344981}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 72369905856599145}
@@ -338,7 +338,7 @@ MonoBehaviour:
   KeepPlayModeChanges: 0
   PerformanceMode: 0
   StopFeedbacksOnDisable: 0
-  PlayCount: 34
+  PlayCount: 76
   references:
     version: 2
     RefIds:
@@ -363,7 +363,7 @@ MonoBehaviour:
           NumberOfRepeats: 0
           RepeatForever: 0
           DelayBetweenRepeats: 1
-          PlayCount: 9
+          PlayCount: 49
           LimitPlayCount: 0
           MaxPlayCount: 3
           SetPlayCountToZeroOnReset: 0
@@ -418,9 +418,9 @@ MonoBehaviour:
         DebugActive: 0
         Mode: 0
         AnimateScaleTarget: {fileID: 8996953684141251595}
-        AnimateScaleDuration: 0.3
+        AnimateScaleDuration: 0.2
         RemapCurveZero: 0.3700389
-        RemapCurveOne: 0.4
+        RemapCurveOne: 0.49
         Offset: 0
         AnimateX: 1
         AnimateScaleTweenX:
@@ -430,8 +430,8 @@ MonoBehaviour:
             serializedVersion: 2
             m_Curve:
             - serializedVersion: 3
-              time: 0
-              value: 0
+              time: 0.012500763
+              value: -0.3360901
               inSlope: 0
               outSlope: 0
               tangentMode: 0
@@ -469,7 +469,7 @@ MonoBehaviour:
             m_Curve:
             - serializedVersion: 3
               time: 0
-              value: 0
+              value: -0.08135986
               inSlope: 0
               outSlope: 0
               tangentMode: 0
@@ -668,7 +668,7 @@ MonoBehaviour:
           NumberOfRepeats: 0
           RepeatForever: 0
           DelayBetweenRepeats: 1
-          PlayCount: 9
+          PlayCount: 44
           LimitPlayCount: 0
           MaxPlayCount: 3
           SetPlayCountToZeroOnReset: 0
@@ -723,10 +723,10 @@ MonoBehaviour:
         DebugActive: 0
         SquashAndStretchTarget: {fileID: 8996953684141251595}
         Mode: 0
-        Axis: 2
+        Axis: 5
         AnimateScaleDuration: 0.2
         RemapCurveZero: 0.3700389
-        RemapCurveOne: 0.6
+        RemapCurveOne: 0.46
         Offset: 0
         AnimateCurve:
           serializedVersion: 2
@@ -785,7 +785,7 @@ MonoBehaviour:
           NumberOfRepeats: 0
           RepeatForever: 0
           DelayBetweenRepeats: 1
-          PlayCount: 0
+          PlayCount: 42
           LimitPlayCount: 0
           MaxPlayCount: 3
           SetPlayCountToZeroOnReset: 0
