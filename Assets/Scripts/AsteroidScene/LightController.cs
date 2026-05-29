@@ -32,7 +32,7 @@ public class LightController : MonoBehaviour
         if (isFading && !(SceneController.isGameStopped || SceneController.isGamePaused))
         {
             Color color = spriteRenderer.color; // Get the current color
-            color.a -= fadeSpeed * 0.01f; // Set the alpha to 1
+            color.a -= fadeSpeed * Time.deltaTime; // Set the alpha to 1
             spriteRenderer.color = color; // Apply the updated color back to the SpriteRenderer
         }
     }

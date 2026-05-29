@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 
 public class HALAnimatorController : MonoBehaviour
@@ -7,6 +6,7 @@ public class HALAnimatorController : MonoBehaviour
 
     Animator _animator;
     [SerializeField] private float timerToSwitch = 2f;
+    [SerializeField] private GameObject staticObject;
     private float _timerToSwitch;
     private int randomNum = 0;
     private bool isTalking = false;
@@ -18,6 +18,15 @@ public class HALAnimatorController : MonoBehaviour
         _timerToSwitch = timerToSwitch;
     }
 
+    void Awake()
+    {
+        EventManager.Player.OnImpact += OnHit;
+    }
+
+    void OnDestroy()
+    {
+        EventManager.Player.OnImpact -= OnHit;
+    }
     private void Update()
     {
         if (!(SceneController.isGamePaused || SceneController.isGameStopped))
@@ -75,5 +84,10 @@ public class HALAnimatorController : MonoBehaviour
         EventManager.Game.OnDialog -= DisableCicling;
         EventManager.Game.OnGameStopped -= Restart;
 
+    }
+
+    private void OnHit(Component component)
+    {
+        staticObject.GetComponent<MMF_Player>()?.PlayFeedbacks();
     }
 }

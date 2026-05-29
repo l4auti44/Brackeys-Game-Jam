@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using MoreMountains.Feedbacks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Analytics;
@@ -551,6 +552,7 @@ public class GameManager : MonoBehaviour
         // Activate the shield
         shieldObject.GetComponent<CapsuleCollider2D>().enabled = true;
         shieldObject.GetComponent<SpriteRenderer>().enabled = true;
+        shieldObject.GetComponent<MMF_Player>()?.PlayFeedbacks();
 
         shieldModEnergyDecrease = shieldModEnergyDecrease_original;
           
